@@ -1,0 +1,30 @@
+<h1>Edit leasing contract number <%= @contract.number %></h1>
+
+<%= form_tag "/contracts/#{@contract.id}", :method => :put do %>
+  <fieldset >
+    <legend>Main contract information</legend>
+    <p>Contract number:
+      <input type="text" name="number" value="<%= @contract.number %>" autofocus required>* &nbsp &nbsp
+        Type of contract:
+      <select name="category_id">
+        <% @categories.each do |c| %>
+        <option value="<%= c.id %>" <%="selected" if c.id == @contract.category_id %>><%= c.name %></option>
+        <% end %>
+      </select>*</p>
+      <p>Starting Date: <input type="date" name="start_date" value="<%= @contract.start_date %>" required>*</p>
+      <p>Duration (in months): <input type="number" name="month_duration" min="1" value="<%= @contract.month_duration %>" required>*</p>
+      <p>Total value: <input type="text" name="total_value" value="<%= number_to_currency(@contract.total_value) %>" required>*</p>
+      <p>Buying Option? <input type="checkbox" name="option_to_buy" <%= "checked" if @contract.option_to_buy%>> &nbsp &nbsp Last date to excercise the option: <input type="date" name="last_date_to_option" <%= "value=#{@contract.last_date_to_option}" if @contract.option_to_buy %>></p>
+      <p>How many assets does this contract have? <input type="number" name="asset_count" min="1" value="<%= @contract.asset_count %>" required>*</p>
+      <p>Where are the assets going to be located? <input type="text" name="location_of_assets" value="<%= @contract.location_of_assets %>" required>*</p>
+      <h6 class="right">* Required fields</h6>
+    </fieldset>
+    <fieldset>
+      <legend>Leesse Information</legend>
+    </fieldset>
+    <fieldset>
+      <legend>Assets Information</legend>
+    </fieldset>
+    <input class="button right" type="submit" name="submit" value="Submit Changes"></input>
+<% end %>
+

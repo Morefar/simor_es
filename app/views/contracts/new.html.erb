@@ -1,0 +1,28 @@
+<h1>create a new leasing contract</h1>
+<%= form_tag "/contracts" do %>
+  <fieldset >
+    <legend>Main contract information</legend>
+    <p>Contract number <input type="text" name="number" autofocus required>
+        Type of contract:
+        <select name="category_id">
+        <% @categories.each do |c| %>
+        <option value="<%= c.id %>"><%= c.name %></option>
+        <% end %>
+      </select></p>
+      <p>Starting Date: <input type="date" name="start_date" required></p>
+      <p>Duration (in months): <input type="number" name="month_duration" min="1" required></p>
+      <p>Total value: <input type="text" name="total_value" required></p>
+      <p>Buying Option? <input type="checkbox" name="option_to_buy" checked> Last date to excercise the option: <input type="date" name="last_date_to_option"></p>
+      <p>How many assets does this contract have? <input type="number" name="asset_count" min="1" required></p>
+      <p>Where are the assets going to be located? <input type="text" name="location_of_assets" required></p>
+    </fieldset>
+    <fieldset>
+      <legend>Leesse Information</legend>
+    </fieldset>
+    <fieldset>
+      <legend>Assets Information</legend>
+    </fieldset>
+<% end %>
+</form>
+
+<%= link_to "< Back to contracts", "/contracts" %>

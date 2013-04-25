@@ -1,0 +1,15 @@
+<h1>contract number <%= @contract.number %></h1>
+
+<p> <strong>Contract number:</strong> <%= @contract.number %> &nbsp &nbsp <strong>Category:</strong> <%= @contract.category.name %></p>
+<p> <strong>Starting date:</strong> <%= @contract.start_date %>&nbsp &nbsp <strong>Expiration date:</strong> <%= @contract.expiration_date %></p>
+<p> <strong>Duration:</strong> <%= @contract.month_duration %> months</p>
+<br>
+<p> <strong>Total value:</strong> <%= number_to_currency(@contract.total_value) %></p>
+<% if @contract.option_to_buy %>
+<p> Client has option to buy? <strong>yes</strong> &nbsp &nbsp
+ Client's last date to exercise his buying option: <%= @contract.last_date_to_option %></p>
+<% end %>
+<p> <strong>Total number of assets:</strong> <%= @contract.asset_count %> &nbsp&nbsp
+  <strong>Location of assets:</strong> <%= @contract.location_of_assets %></p>
+
+<a href="/contracts" class="button">Back to Contract list</a>
