@@ -49,7 +49,7 @@ def update
   contract = Contract.find_by_id(params[:id])
 
   contract.number = params[:number]
-  contract.category_id = Category.find(params[:category_id])
+  contract.category_id = params[:category_id].to_i #Category.find(params[:category_id])
   contract.start_date = Date.parse(params[:start_date])
   contract.month_duration = params[:month_duration].to_i
   contract.expiration_date = Date.parse(params[:start_date]) >> contract.month_duration
