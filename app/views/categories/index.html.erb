@@ -1,0 +1,16 @@
+<h1>Contract Categories</h1>
+
+<h2>Available Contract Categories</h2>
+
+<ul>
+  <% @categories.each do |cat|%>
+  <li>
+    <%= cat.name %>
+     &nbsp
+    <%= link_to "Edit", "/categories/#{cat.id}/edit" %> |
+    <%= link_to "Delete", "/categories/#{cat.id}", :method => :delete, :confirm => "Are you completely sure you want to erase #{cat.name} category?" %>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Create a new category', '/categories/new'  %>

@@ -22,6 +22,8 @@
     <fieldset>
       <legend>Assets Information</legend>
     </fieldset>
+    <%= link_to "Cancel", "/contracts", :confirm => "Are you sure you don't to save this contract's information?", :class => "right" %>
+    <input class="button right" type="submit" name="submit" value="Submit"></input>
 <% end %>
 </form>
 
