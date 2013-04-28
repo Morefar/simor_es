@@ -1,33 +1,48 @@
 <h1>Edit leasing contract number <%= @contract.number %></h1>
 
-<%= form_tag "/contracts/#{@contract.id}", :method => :put do %>
-  <fieldset >
-    <legend>Main contract information</legend>
-    <p>Contract number:
-      <input type="text" name="number" value="<%= @contract.number %>" autofocus required>* &nbsp &nbsp
-        Type of contract:
-      <select name="category_id">
-        <% @categories.each do |c| %>
-        <option value="<%= c.id %>" <%="selected" if c.id == @contract.category_id %>><%= c.name %></option>
-        <% end %>
-      </select>*</p>
-      <p>Starting Date: <input type="date" name="start_date" value="<%= @contract.start_date %>" required>*</p>
-      <p>Duration (in months): <input type="number" name="month_duration" min="1" value="<%= @contract.month_duration %>" required>*</p>
-      <p>Total value: <input type="text" name="total_value" value="<%= @contract.total_value.round(2) %>" required>*</p>
-      <p>Buying Option? <input type="checkbox" name="option_to_buy" <%= "checked" if @contract.option_to_buy%>> &nbsp &nbsp Last date to excercise the option: <input type="date" name="last_date_to_option" <%= "value=#{@contract.last_date_to_option}" if @contract.option_to_buy %>></p>
-      <p>How many assets does this contract have? <input type="number" name="asset_count" min="1" value="<%= @contract.asset_count %>" required>*</p>
-      <p>Where are the assets going to be located? <input type="text" name="location_of_assets" value="<%= @contract.location_of_assets %>" required>*</p>
-      <h6 class="right">* Required fields</h6>
-    </fieldset>
-    <fieldset>
-      <legend>Leesse Information</legend>
-    </fieldset>
-    <fieldset>
-      <legend>Assets Information</legend>
-    </fieldset>
-    <%= link_to "Cancel", "/contracts", :confirm => "Are you sure?", :class => "right" %>
-    <input class="button right" type="submit" name="submit" value="Submit Changes"></input>
+<%= form_tag contract_url(@contract.id), :method => :put do %>
+  <%= field_set_tag "Main contract information" do %>
+    <p>
+      <%= label_tag :number, "Contract number:" %>
+      <%= text_field_tag :number, @contract.number %>
+      <%= label_tag :category_id, "Type of contract:" %>
+      <%= select_tag :category_id, options_from_collection_for_select(@categories, "id", "name", @contract.category_id), :prompt => "Choose a category" %>
+    </p>
+    <p>
+      <%= label_tag :start_date, "Starting date:" %>
+      <%= date_select :contract, :start_date, :order => [:day, :month, :year], :default => @contract.start_date %>
+    </p>
+    <p>
+      <%= label_tag :month_duration, "Duration (months):" %>
+      <%= select_tag :month_duration, options_for_select((1..120), @contract.month_duration), :prompt => "Choose duration of the contract" %>
+        Expiration Date:
+        <%= @contract.expiration_date.readable_inspect %>
+    </p>
+    <p>
+      <%= label_tag :total_value, "Total value:" %>
+      <%= text_field_tag :total_value, @contract.total_value.round(2) %>
+    </p>
+    <p>
+      <%= label_tag :option_to_buy, "Buying option?" %>
+      <%= check_box_tag :option_to_buy, @contract.option_to_buy, @contract.option_to_buy %>
+      <%= label_tag :last_date_to_option, "Last date to excercise option: " %>
+      <%= date_select :contract, :last_date_to_option, :order => [:day, :month, :year], :value => (@contract.last_date_to_option << 3) if @contract.option_to_buy %>
+    </p>
+    <p>
+      <%= label_tag :asset_count, "How many assets does this contract have?" %>
+      <%= select_tag :asset_count, options_for_select((1..50), @contract.asset_count), :prompt => "Choose number of assets" %>
+    </p>
+    <p>
+      <%= label_tag :location_of_assets, "Where are the assets going to be located?" %>
+      <%= text_field_tag :location_of_assets, @contract.location_of_assets, :placeholder => "e.g. City, Region, Country",  :style => "width:350px" %>
+    </p>
+  <% end %>
+  <%= field_set_tag "Leesse Information" do %>
+  <% end %>
+  <%= field_set_tag "Assets Information" do %>
+  <% end %>
+  <%= link_to "Cancel", contracts_url, :confirm => "Are you sure?", :class => "right" %>
+  <%= submit_tag "Edit contract information", :confirm => "Edit contract #{@contract.number}", :disable_with => "Editing contract #{@contract.number}...", :class => "right" %>
 <% end %>
-
 
 

@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     cat = Category.new
     cat.name = params[:name]
     cat.save
-    redirect_to '/categories'
+    redirect_to categories_url
   end
 #READ ACTIONS
   def index
@@ -24,13 +24,13 @@ class CategoriesController < ApplicationController
     cat = Category.find(params[:id])
     cat.name = params[:name]
     cat.save
-    redirect_to "/categories"
+    redirect_to categories_url
   end
 #DESTROY ACTIONS
   def destroy
     cat = Category.find(params[:id])
     cat.destroy
-    redirect_to "/categories"
+    redirect_to categories_url
   end
 
 end

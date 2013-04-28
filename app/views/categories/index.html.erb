@@ -1,5 +1,6 @@
 <h1>Contract Categories</h1>
 
+<%= link_to "Home", "/index" %>
 <h2>Available Contract Categories</h2>
 
 <ul>
@@ -7,10 +8,10 @@
   <li>
     <%= cat.name %>
      &nbsp
-    <%= link_to "Edit", "/categories/#{cat.id}/edit" %> |
-    <%= link_to "Delete", "/categories/#{cat.id}", :method => :delete, :confirm => "Are you completely sure you want to erase #{cat.name} category?" %>
+    <%= link_to "Edit", edit_category_url(cat.id) %> |
+    <%= link_to "Delete", category_url(cat.id), :method => :delete, :confirm => "Are you completely sure you want to erase #{cat.name} category?" %>
   </li>
   <% end %>
 </ul>
 
-<%= link_to 'Create a new category', '/categories/new'  %>
+<%= link_to 'Create a new category', new_category_url  %>

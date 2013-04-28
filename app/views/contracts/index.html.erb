@@ -1,5 +1,6 @@
+<%= link_to "Home", "/index" %>
 <h1>Active Lease Contracts</h1>
-<p><%= link_to "+ Add a new contract", "/contracts/new" %></p>
+<p><%= link_to "+ Add a new contract", new_contract_url %></p>
 <table>
   <thead>
     <tr>
@@ -24,9 +25,9 @@
       <td><%= contract.category.name %></td>
       <td><%= contract.asset_count %></td>
       <td>
-        <%= link_to "View", "/contracts/#{contract.id}" %> |
-        <%= link_to "Edit", "/contracts/#{contract.id}/edit" %> |
-        <%= link_to "Delete", "/contracts/#{contract.id}", :method => :delete, :confirm => "Are you completely sure you want to erase contract #{contract.number}?" %>
+        <%= link_to "View", contract_url(contract.id) %> |
+        <%= link_to "Edit", edit_contract_url(contract.id) %> |
+        <%= link_to "Delete", contract_url(contract.id), :method => :delete, :confirm => "Are you completely sure you want to erase contract #{contract.number}?" %>
       </td>
     </tr>
     <% end %>
