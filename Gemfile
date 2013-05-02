@@ -11,6 +11,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'starter_generators'
 end
 
 # Gems used only for assets and not required
@@ -26,6 +27,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'dynamic_form'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

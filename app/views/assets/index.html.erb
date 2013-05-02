@@ -1,0 +1,40 @@
+<h1>Assets</h1>
+
+<p><%= link_to 'Add a New Asset', new_asset_url %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Inventory number</th>
+      <th>Invoice number</th>
+      <th>Value</th>
+      <th>Invoice date</th>
+      <th>Description</th>
+      <th>Scanned invoice</th>
+      <th>Contract</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @assets.each do |asset| %>
+    <tr>
+      <td><%= asset.inventory_number %></td>
+      <td><%= asset.invoice_number %></td>
+      <td><%= asset.value %></td>
+      <td><%= asset.invoice_date %></td>
+      <td><%= asset.description %></td>
+      <td><%= asset.scanned_invoice %></td>
+      <td><%= asset.contract_id %></td>
+  
+      <td><%= link_to 'Show', asset_url(asset) %></td>
+      <td><%= link_to 'Edit', edit_asset_url(asset) %></td>
+      <td><%= link_to 'Destroy', asset_url(asset), method: 'delete', data: { confirm: "Do you really want to delete this asset?" } %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

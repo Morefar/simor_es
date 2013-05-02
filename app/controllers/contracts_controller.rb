@@ -24,7 +24,7 @@ class ContractsController < ApplicationController
 
     contract.save
 
-    redirect_to contracts_url
+    redirect_to new_asset_from_parent_url(contract)
   end
 
 #READ ACTIONS

@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421230753) do
+ActiveRecord::Schema.define(:version => 20130430153256) do
+
+  create_table "assets", :force => true do |t|
+    t.string   "inventory_number"
+    t.integer  "invoice_number"
+    t.float    "value"
+    t.string   "invoice_date"
+    t.text     "description"
+    t.string   "scanned_invoice"
+    t.integer  "contract_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string "name"

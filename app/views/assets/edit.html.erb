@@ -1,0 +1,46 @@
+<h1>Editing Asset #<%= @asset.id %></h1>
+
+
+<%= form_tag(asset_url(@asset), method: 'put') do %>
+
+  <div>
+    <%= label_tag :inventory_number %><br />
+    <%= text_field_tag :inventory_number, @asset.inventory_number %>
+  </div>
+
+  <div>
+    <%= label_tag :invoice_number %><br />
+    <%= number_field_tag :invoice_number, @asset.invoice_number %>
+  </div>
+
+  <div>
+    <%= label_tag :value %><br />
+    <%= text_field_tag :value, @asset.value %>
+  </div>
+
+  <div>
+    <%= label_tag :invoice_date %><br />
+    <%= text_field_tag :invoice_date, @asset.invoice_date %>
+  </div>
+
+  <div>
+    <%= label_tag :description %><br />
+    <%= text_area_tag :description, @asset.description %>
+  </div>
+
+  <div>
+    <%= label_tag :scanned_invoice %><br />
+    <%= text_field_tag :scanned_invoice, @asset.scanned_invoice %>
+  </div>
+
+  <div>
+    <%= label_tag :contract_id %><br />
+    <%= number_field_tag :contract_id, @asset.contract_id %>
+  </div>
+
+  
+  <div>
+    <%= submit_tag "Update Asset" %>
+  </div>
+
+<% end %>

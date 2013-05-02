@@ -1,0 +1,53 @@
+<h1>New Asset</h1>
+<% if !@contract.nil? %>
+  <p><%= @contract.number %></p>
+<% else %>
+  <p> Please choose the contract number this asset belongs to.
+  </p>
+  <p>
+    <%= select_tag  :category_id, options_from_collection_for_select(Contract.all, "id", "number"), :prompt => "Choose a contract number" %>
+  </p>
+<% end %>
+<%= form_tag(assets_url, method: 'post') do %>
+
+
+  <div>
+    <%= label_tag :inventory_number %><br />
+    <%= text_field_tag :inventory_number %>
+  </div>
+
+    <div>
+    <%= label_tag :invoice_number %><br />
+    <%= number_field_tag :invoice_number %>
+  </div>
+
+    <div>
+    <%= label_tag :value %><br />
+    <%= text_field_tag :value %>
+  </div>
+
+    <div>
+    <%= label_tag :invoice_date %><br />
+    <%= text_field_tag :invoice_date %>
+  </div>
+
+    <div>
+    <%= label_tag :description %><br />
+    <%= text_area_tag :description %>
+  </div>
+
+    <div>
+    <%= label_tag :scanned_invoice %><br />
+    <%= text_field_tag :scanned_invoice %>
+  </div>
+
+    <div>
+    <%= label_tag :contract_id %><br />
+    <%= number_field_tag :contract_id %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Create Asset" %>
+  </div>
+<% end %>

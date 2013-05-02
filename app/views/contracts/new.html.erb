@@ -9,13 +9,17 @@
     <p>
       <%= label_tag :start_date, "Starting date:" %>
       <%= date_select :contract, :start_date, :order => [:day, :month, :year] %>
-    </p>
-    <p>
+
+
       <%= label_tag :month_duration, "Duration (months):" %>
-      <%= select_tag :month_duration, options_for_select((1..120)), :prompt => "Choose duration of the contract" %>
+      <%= select_tag :month_duration, options_for_select((1..120)), :prompt => "Choose duration" %>
+
+
+      <%= label_tag :expiration_date, "Expiration date:" %>
+      <%= date_select :contract, :expiration_date, :order => [:day, :month, :year] %>
     </p>
     <p>
-      <%= label_tag :total_value, "Total value:" %>
+      <%= label_tag :total_value, "Total value: $" %>
       <%= text_field_tag :total_value, nil, :placeholder => "120500000.25" %>
     </p>
     <p>
@@ -33,10 +37,10 @@
       <%= text_field_tag :location_of_assets, nil, :placeholder => "e.g. City, Region, Country",  :style => "width:350px" %>
     </p>
   <% end %>
-  <%= field_set_tag "Leesse Information" do %>
-  <% end %>
-  <%= field_set_tag "Assets Information" do %>
-  <% end %>
+  <%#= field_set_tag "Leesse Information" do %>
+  <%# end %>
+  <%#= field_set_tag "Assets Information" do %>
+  <%# end %>
   <%= link_to "Cancel", contracts_url, :confirm => "Are you sure you want to cancel?", :disable_with => "Creating a new contract...", :class => "right" %>
   <%= submit_tag "Add a contract", :class => "right" %>
 <% end %>

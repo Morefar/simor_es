@@ -13,6 +13,8 @@ cities = ['Chicago', 'Bogota', 'New York', 'Panama', 'Sidney',
     {:name => "Leaseback"},
   ]
 
+  vehicles = ['Mazda', 'Reanult', 'Kia', 'Hyundai', 'Chevrolet', ]
+
 Category.destroy_all
 category_names.each do |cat|
   c = Category.new
@@ -40,8 +42,26 @@ puts "#{Category.count} categories created"
 
   c.save
  end
+contract_array = Contract.count
+puts "#{contract_array.size} contracts created"
+random = Random.new
+inventory_numbers = (500..5000).to_a
+invoice_number = random(2000..5000)
 
-puts "15 contracts created"
+contract_array.each do |contract|
+  remaining_value = contract.total_value
+  contract.asset_count.times do |asset|
+    asset.inventory_number = inventory_numbers.sample
+    asset.invoice_number = random(2000..5000)
+    asset.value = random(0.0..remaning_value)
+    remaining_value -= asset.value
+    asset.invoice_date = contract.start_date << (random(-5..0))
+
+    asset.save
+  end
+end
+
+
 
 
 

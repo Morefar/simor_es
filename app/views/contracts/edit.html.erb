@@ -11,15 +11,15 @@
     <p>
       <%= label_tag :start_date, "Starting date:" %>
       <%= date_select :contract, :start_date, :order => [:day, :month, :year], :default => @contract.start_date %>
-    </p>
-    <p>
+
       <%= label_tag :month_duration, "Duration (months):" %>
-      <%= select_tag :month_duration, options_for_select((1..120), @contract.month_duration), :prompt => "Choose duration of the contract" %>
-        Expiration Date:
-        <%= @contract.expiration_date.readable_inspect %>
+      <%= select_tag :month_duration, options_for_select((1..120), @contract.month_duration), :prompt => "Choose duration" %>
+
+      <%= label_tag :expiration_date, "Expiration date:" %>
+      <%= date_select :contract, :expiration_date, :order => [:day, :month, :year], :default => @contract.expiration_date %>
     </p>
     <p>
-      <%= label_tag :total_value, "Total value:" %>
+      <%= label_tag :total_value, "Total value: $" %>
       <%= text_field_tag :total_value, @contract.total_value.round(2) %>
     </p>
     <p>
@@ -37,10 +37,10 @@
       <%= text_field_tag :location_of_assets, @contract.location_of_assets, :placeholder => "e.g. City, Region, Country",  :style => "width:350px" %>
     </p>
   <% end %>
-  <%= field_set_tag "Leesse Information" do %>
-  <% end %>
-  <%= field_set_tag "Assets Information" do %>
-  <% end %>
+  <%#= field_set_tag "Leesse Information" do %>
+  <%# end %>
+  <%#= field_set_tag "Assets Information" do %>
+  <%# end %>
   <%= link_to "Cancel", contracts_url, :confirm => "Are you sure?", :class => "right" %>
   <%= submit_tag "Edit contract information", :confirm => "Edit contract #{@contract.number}", :disable_with => "Editing contract #{@contract.number}...", :class => "right" %>
 <% end %>
