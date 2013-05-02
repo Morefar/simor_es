@@ -8,7 +8,26 @@
 </head>
 <body>
 <div class="container">
-<%= yield %>
+    <header>
+        <nav>
+            <ul>
+                <li><%= link_to_unless_current 'Home', root_url %></li> &nbsp | &nbsp
+                <li><%= link_to_unless_current 'Contracts', contracts_url %></li> &nbsp | &nbsp
+                <li><%= link_to_unless_current 'Contract Categories', categories_url %></li> &nbsp | &nbsp
+                <li><%= link_to_unless_current 'Assets', assets_url %></li>
+            </ul>
+        </nav>
+    </header>
+
+<div class="content">
+    <%= yield %>
+    <p>
+      <%= link_to "Go back", :back %>
+    </p>
+</div>
+<footer>
+  &copy; <%= link_to "Morefar S. A. S.", 'http://www.morefar.co'  %> 2013
+</footer>
 </div>
 </body>
 </html>

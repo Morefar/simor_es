@@ -64,6 +64,30 @@ fieldset {
 .right {
   float: right;
 }
+nav {
+  /*position: fixed;*/
+}
 
+header {
+  position: fixed;
+  width: 100%;
+}
+
+nav li{
+  list-style: none;
+  display: inline;
+}
+
+li{
+  list-style: none;
+}
+.content {
+  padding-top: 50px;
+}
+
+footer {
+  width:100%;
+  text-align: center;
+}
 
 
