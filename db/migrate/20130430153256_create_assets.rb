@@ -2,12 +2,14 @@ class CreateAssets < ActiveRecord::Migration
   def change
     create_table :assets do |t|
       t.string :inventory_number
-      t.integer :invoice_number
-      t.float :value
-      t.string :invoice_date
-      t.text :description
-      t.string :scanned_invoice
-      t.integer :contract_id
+      t.string :licence_plate
+      t.string :chassis_number
+      t.string :cylinder_cap
+      t.string :motor_number
+      t.integer :capacity
+      t.string :color
+      t.float :book_value
+      t.integer :year
       t.timestamps
     end
   end
