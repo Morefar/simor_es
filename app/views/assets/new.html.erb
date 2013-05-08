@@ -1,53 +1,65 @@
 <h1>New Asset</h1>
-<% if !@contract.nil? %>
-  <p><%= @contract.number %></p>
-<% else %>
-  <p> Please choose the contract number this asset belongs to.
-  </p>
-  <p>
-    <%= select_tag  :category_id, options_from_collection_for_select(Contract.all, "id", "number"), :prompt => "Choose a contract number" %>
-  </p>
-<% end %>
-<%= form_tag(assets_url, method: 'post') do %>
 
 
+<%= form_for @asset, method: 'post' do |asset_form| %>
   <div>
-    <%= label_tag :inventory_number %><br />
-    <%= text_field_tag :inventory_number %>
+    <%= asset_form.label :contract_id %>
+    <%= asset_form.collection_select :contract_id, Contract.all, :id, :number, prompt: 'Select contract number' %>
   </div>
-
-    <div>
-    <%= label_tag :invoice_number %><br />
-    <%= number_field_tag :invoice_number %>
-  </div>
-
-    <div>
-    <%= label_tag :value %><br />
-    <%= text_field_tag :value %>
-  </div>
-
-    <div>
-    <%= label_tag :invoice_date %><br />
-    <%= text_field_tag :invoice_date %>
-  </div>
-
-    <div>
-    <%= label_tag :description %><br />
-    <%= text_area_tag :description %>
-  </div>
-
-    <div>
-    <%= label_tag :scanned_invoice %><br />
-    <%= text_field_tag :scanned_invoice %>
-  </div>
-
-    <div>
-    <%= label_tag :contract_id %><br />
-    <%= number_field_tag :contract_id %>
-  </div>
-
-
+  <%= field_set_tag 'Basic Information' do %>
   <div>
-    <%= submit_tag "Create Asset" %>
+    <%= asset_form.label :inventory_number %>
+    <%= asset_form.text_field :inventory_number %>
+    <%= asset_form.label :licence_plate %>
+    <%= asset_form.text_field :licence_plate %>
   </div>
+  <div>
+    <%= asset_form.label :chassis_number %>
+    <%= asset_form.text_field :chassis_number %>
+    <%= asset_form.label :motor_number %>
+    <%= asset_form.text_field :motor_number %>
+  </div>
+  <div>
+    <%= asset_form.label :cylinder_cap, 'Cylinder Capacity' %>
+    <%= asset_form.text_field :cylinder_cap %>
+    <%= asset_form.label :capacity %>
+    <%= asset_form.text_field :capacity %>
+    <%= asset_form.select_tag :capacity_unit, %w(Passengers Tons), {:index => nil} %>
+  </div>
+  <div>
+    <%= asset_form.label :make %>
+    <%= asset_form.text_field :make %>
+    <%= asset_form.label :model %>
+    <%= asset_form.text_field :model %>
+
+    <%= asset_form.label :year %>
+    <%= asset_form.text_field :year %>
+    <%= asset_form.select :year, (2000..Date.current.year).to_a, {:index => nil} %>
+    <%= asset_form.label :color %>
+    <%= asset_form.select :color, %w[White Blue Red Green Black], {:index => nil, :selected => false} %>
+    <%= asset_form.label :build %>
+    <%= asset_form.text_field :build %>
+  </div>
+  <div>
+    <%= asset_form.label :service_type %>
+    <%= asset_form.select :service_type, %w(Private Public Diplomatic Official Special Other), {:index => nil} %>
+    <%= asset_form.label :service_mode %>
+    <%= asset_form.select :service_mode, %w[Passengers Cargo Mixed], {:index => nil} %>
+    <%= asset_form.label :fuel_type %>
+    <%= asset_form.select :fuel_type, %w[Gasoline GNV GNV-Gasoline Electric Hidrogen Ethanol Biodiesel], {:index => nil} %>
+  </div>
+  <div>
+    <%= asset_form.label :book_value %>
+    <%= asset_form.text_field :book_value %>
+  </div>
+
+PARTÍCULAR
+PÚBLICO
+DIPLOMÁTICO
+OFICIAL
+OTROS
+ESPECIAL
+  <% end %>
+
+  <%= asset_form.submit "Create Asset" %>
 <% end %>

@@ -59,6 +59,8 @@ legend {
 
 fieldset {
   margin-bottom: 20px;
+  -webkit-border-radius: 7px;
+          border-radius: 7px;
 }
 
 .right {

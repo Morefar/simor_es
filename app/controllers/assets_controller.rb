@@ -10,15 +10,10 @@ class AssetsController < ApplicationController
 
   def new
     @asset = Asset.new
-    if params.nil?
-     @contract = Contract.find(params[:id])
-    else
-      @contract = nil
-    end
   end
 
   def create
-    @asset = Asset.new
+    # @asset = Asset.new
     @asset.inventory_number = params[:inventory_number]
     @asset.invoice_number = params[:invoice_number]
     @asset.value = params[:value]
