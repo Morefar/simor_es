@@ -1,38 +1,25 @@
-<h1>Asset #<%= @asset.id %></h1>
+<h1>Asset #<%= @asset.inventory_number %></h1>
 
-<p>
-  <b>Inventory number:</b>
-  <%= @asset.inventory_number %>
-</p>
+<div>
+<h2>Contract Information</h2>
 
-<p>
-  <b>Invoice number:</b>
-  <%= @asset.invoice_number %>
-</p>
+<p><b>Contract number: </b> <%= link_to @asset.contract.number, contract_url(@asset.contract.id) %>&nbsp&nbsp
+<b>Leesee: </b> Missing Data</p>
+<p><b>Duration: </b> <%= @asset.contract.month_duration %>&nbsp&nbsp<b>Expiration date: </b><%= @asset.contract.expiration_date %></p>
+<p><b>Total contract value: </b><%= number_to_currency(@asset.contract.total_value) %> </p>
+</div>
+<div>
+<h2>Asset Information</h2>
+<p><b>Inventory number: </b> <%=@asset.inventory_number  %>&nbsp&nbsp<b>Licence plate: </b><%=@asset.licence_plate  %></p>
+<p></p>
+<p><b>Chassis number: </b><%=@asset.chassis_number  %>&nbsp&nbsp<b>Motor number: </b><%=@asset.motor_number  %>&nbsp&nbsp<b>Cylinder capacity: </b><%=@asset.cylinder_cap  %></p>
 
-<p>
-  <b>Value:</b>
-  <%= @asset.value %>
-</p>
-
-<p>
-  <b>Invoice date:</b>
-  <%= @asset.invoice_date %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @asset.description %>
-</p>
-
-<p>
-  <b>Scanned invoice:</b>
-  <%= @asset.scanned_invoice %>
-</p>
-
-<p>
-  <b>Contract:</b>
-  <%= @asset.contract_id %>
-</p>
-
+<p><b>Capacity: </b><%= "#{@asset.capacity} #{@asset.capacity_unit}" %> </p>
+<p><b>Make: </b><%= @asset.make %> <b>Model: </b><%= @asset.model %> <b>Year: </b> <%= @asset.year %></p>
+<p><b>Color: </b><%=@asset.color  %></p>
+<p><b>Build: </b><%=@asset.build  %></p>
+<p><b>Service type: </b><%= @asset.service_type%>
+  &nbsp&nbsp<b>Service mode: </b><%= @asset.service_mode %>&nbsp&nbsp<b>Fuel type: </b><%= @asset.fuel_type %></p>
+<p><b>Book value: </b><%= @asset.book_value %></p>
+</div>
 

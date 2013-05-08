@@ -5,26 +5,27 @@
 <table>
   <thead>
     <tr>
+      <th>Contract number</th>
       <th>Inventory number</th>
       <th>Licence Plate</th>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Year</th>
-      <th>Color</th>
-      <th>Book_value</th>
+      <th>Chassis Number</th>
+      <th>Motor Number</th>
+      <th>Book value</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
   <% @assets.each do |asset| %>
     <tr>
+      <td><%= asset.contract.number %></td>
       <td><%= asset.inventory_number %></td>
       <td><%= asset.licence_plate %></td>
       <td><%= asset.chassis_number %></td>
       <td><%= asset.motor_number %></td>
-      <td><%= asset.color %></td>
-      <td><%= asset.book_value %></td>
-
+      <td><%= number_to_currency(asset.book_value) %></td>
       <td><%= link_to 'Show', asset_url(asset) %></td>
       <td><%= link_to 'Edit', edit_asset_url(asset) %></td>
       <td><%= link_to 'Destroy', asset_url(asset), method: 'delete', data: { confirm: "Do you really want to delete this asset?" } %></td>

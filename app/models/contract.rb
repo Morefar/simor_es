@@ -1,6 +1,7 @@
 class Contract < ActiveRecord::Base
   belongs_to :category
   has_many :assets, inverse_of: :contract
+  accepts_nested_attributes_for :assets
   # validates_asociated :assets
   #has_many :inspections, :through => :assets
   validates_presence_of :category, :start_date, :month_duration, :total_value, :expiration_date,:asset_count, :location_of_assets

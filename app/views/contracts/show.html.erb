@@ -1,16 +1,47 @@
 <h1>contract number <%= @contract.number %></h1>
 
-<p> <strong>Contract number:</strong> <%= @contract.number %> &nbsp &nbsp <strong>Category:</strong> <%= @contract.category.name %></p>
-<p> <strong>Starting date:</strong> <%= @contract.start_date %>&nbsp &nbsp <strong>Expiration date:</strong> <%= @contract.expiration_date %></p>
-<p> <strong>Duration:</strong> <%= @contract.month_duration %> months</p>
+<p> <b>Contract number:</b> <%= @contract.number %> &nbsp &nbsp <b>Category:</b> <%= @contract.category.name %></p>
+<p> <b>Starting date:</b> <%= @contract.start_date %>&nbsp &nbsp <b>Expiration date:</b> <%= @contract.expiration_date %></p>
+<p> <b>Duration:</b> <%= @contract.month_duration %> months</p>
 <br>
-<p> <strong>Total value:</strong> <%= number_to_currency(@contract.total_value) %></p>
+<p> <b>Total value:</b> <%= number_to_currency(@contract.total_value) %></p>
 <% if @contract.option_to_buy %>
-<p> Client has option to buy? <strong>yes</strong> &nbsp &nbsp
+<p> Client has option to buy? <b>yes</b> &nbsp &nbsp
  Client's last date to exercise his buying option: <%= @contract.last_date_to_option %></p>
 <% end %>
-<p> <strong>Total number of assets:</strong> <%= @contract.asset_count %> &nbsp&nbsp
-  <strong>Location of assets:</strong> <%= @contract.location_of_assets %></p>
+<p> <b>Total number of assets:</b> <%= @contract.asset_count %> &nbsp&nbsp
+  <b>Location of assets:</b> <%= @contract.location_of_assets %></p>
+<h2>Assets: </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Inventory number</th>
+      <th>Licence plate</th>
+      <th>Book value</th>
+      <th>Number of inspections</th>
+      <th>Last Inspection</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <% @contract.assets.each do |asset| %>
+      <td>
+        <%= link_to asset.inventory_number, asset_url(asset.id) %>
+      </td>
+      <td>
+        <%= asset.licence_plate %>
+      </td>
+      <td>
+        <%= number_to_currency(asset.book_value) %>
+      </td>
+      <td>0</td>
+      <td>None</td>
+    <% end %>
+    </tr>
+  </tbody>
+</table>
+<ul>
 
-<%= link_to "Back to Contract list", contracts_url %>
+</ul>
+
 

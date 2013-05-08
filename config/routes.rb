@@ -1,23 +1,18 @@
 Simor::Application.routes.draw do
-  # Routes for the Asset resource:
-  # CREATE
 
-  root to: "contracts#index"
-
-  get '/assets/new', controller: 'assets', action: 'new', as: 'new_asset'
-  get '/assets/new/:id', controller: 'assets', action: 'new', as: 'new_asset_from_parent'
-  post '/assets', controller: 'assets', action: 'create'
-
-  # READ
-  get '/assets', controller: 'assets', action: 'index', as: 'assets'
-  get '/assets/:id', controller: 'assets', action: 'show', as: 'asset'
-
-  # UPDATE
-  get '/assets/:id/edit', controller: 'assets', action: 'edit', as: 'edit_asset'
-  put '/assets/:id', controller: 'assets', action: 'update'
-
-  # DELETE
-  delete '/assets/:id', controller: 'assets', action: 'destroy'
+root to: "contracts#index"
+# Routes for the Asset resource:
+# CREATE
+  get 'assets/new' => 'Assets#new', as: 'new_asset'
+  post '/assets/' => 'Assets#create', as: 'assets'
+#READ
+  get '/assets' => 'Assets#index'
+  get '/assets/:id' => 'Assets#show', as:  'asset'
+#UPDATE
+  get '/assets/:id/edit' => 'Assets#edit', as: 'edit_asset'
+  put '/assets/:id/' => 'Assets#update'
+#DESTROY
+  delete '/assets/:id' => 'Assets#destroy'
   #------------------------------
 
 ## CONTRACTS
@@ -44,5 +39,7 @@ Simor::Application.routes.draw do
   put '/categories/:id/' => 'Categories#update', :as => "category"
 #DESTROY
   delete '/categories/:id' => 'Categories#destroy'
+
+  # resources :assets
 
 end

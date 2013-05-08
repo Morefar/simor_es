@@ -13,16 +13,12 @@ class AssetsController < ApplicationController
   end
 
   def create
-    # @asset = Asset.new
-    @asset.inventory_number = params[:inventory_number]
-    @asset.invoice_number = params[:invoice_number]
-    @asset.value = params[:value]
-    @asset.invoice_date = params[:invoice_date]
-    @asset.description = params[:description]
-    @asset.scanned_invoice = params[:scanned_invoice]
-    @asset.contract_id = params[:contract_id]
+    asset = Asset.new(params[:asset])
+    asset.licence_plate.upcase!
+    asset.chassis_number.upcase!
+    asset.motor_number.upcase!
 
-    if @asset.save
+    if asset.save
             redirect_to assets_url
           else
       render 'new'
@@ -35,14 +31,7 @@ class AssetsController < ApplicationController
 
   def update
     @asset = Asset.find_by_id(params[:id])
-    @asset.inventory_number = params[:inventory_number]
-    @asset.invoice_number = params[:invoice_number]
-    @asset.value = params[:value]
-    @asset.invoice_date = params[:invoice_date]
-    @asset.description = params[:description]
-    @asset.scanned_invoice = params[:scanned_invoice]
-    @asset.contract_id = params[:contract_id]
-
+    @asset.update_attributes(params[:asset])
     if @asset.save
             redirect_to assets_url
           else
