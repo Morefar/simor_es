@@ -10,6 +10,7 @@ class AssetsController < ApplicationController
 
   def new
     @asset = Asset.new
+    @asset.contract = Contract.find_by_id(session[:contract_id])
   end
 
   def create

@@ -41,12 +41,16 @@ ActiveRecord::Schema.define(:version => 20130430153256) do
   end
 
   create_table "contracts", :force => true do |t|
+    t.integer  "client_id"
     t.string   "number"
     t.integer  "category_id"
     t.date     "start_date"
-    t.integer  "month_duration"
+    t.date     "first_canon_date"
+    t.integer  "duration"
+    t.integer  "periodicity"
     t.date     "expiration_date"
     t.float    "total_value"
+    t.string   "currency"
     t.integer  "asset_count"
     t.text     "location_of_assets"
     t.boolean  "option_to_buy"

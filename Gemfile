@@ -14,7 +14,18 @@ group :development, :test do
   gem 'starter_generators'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'debugger'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+end
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +37,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'

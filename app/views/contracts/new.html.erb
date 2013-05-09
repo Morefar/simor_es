@@ -8,7 +8,7 @@
       <%= select_tag :category_id, options_from_collection_for_select(@categories, "id", "name"), :prompt => "Choose a category" %></p>
     <p>
       <%= label_tag :start_date, "Starting date:" %>
-      <%= date_select :contract, :start_date, :order => [:day, :month, :year] %>
+      <%= text_field_tag :start_date %>
 
 
       <%= label_tag :month_duration, "Duration (months):" %>
@@ -16,7 +16,8 @@
 
 
       <%= label_tag :expiration_date, "Expiration date:" %>
-      <%= date_select :contract, :expiration_date, :order => [:day, :month, :year] %>
+      <%= text_field_tag :expiration_date %>
+
     </p>
     <p>
       <%= label_tag :total_value, "Total value: $" %>
@@ -26,7 +27,7 @@
       <%= label_tag :option_to_buy, "Buying option?" %>
       <%= check_box_tag :option_to_buy, nil, false %>
       <%= label_tag :last_date_to_option, "Last date to excercise option: " %>
-      <%= date_select :contract, :last_date_to_option, :order => [:day, :month, :year] %>
+      <%= text_field_tag :last_date_to_option %>
     </p>
     <p>
       <%= label_tag :asset_count, "How many assets does this contract have?" %>
