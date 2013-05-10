@@ -15,12 +15,12 @@ class ContractsController < ApplicationController
     contract.total_value = params[:total_value].to_f
     if params[:option_to_buy].eql?('on')
       contract.option_to_buy = params[:option_to_buy]
-      contract.last_date_to_option = Date.parse(params[:last_date_to_option]) rescue contract.errors.add 'Invalid date'
+      contract.last_date_to_option = Date.parse(params[:last_date_to_option])
     end
     contract.asset_count = params[:asset_count]
     contract.location_of_assets = params[:location_of_assets]
 
-    contract.start_date = Date.parse(params[:start_date]) rescue contract.errors.add 'Invalid date format.'
+    contract.start_date = Date.parse(params[:start_date])
     contract.expiration_date = contract.start_date >> contract.month_duration
 
 
