@@ -3,7 +3,15 @@ class Contract < ActiveRecord::Base
   has_many :assets, inverse_of: :contract
   #has_many :inspections, :through => :assets
 
-  validates :category, :start_date, :duration, :total_value, :expiration_date,:asset_count, :location_of_assets, :first_canon_date, :presence => true
+  attr_accessible :number, :start_date, :first_canon_date,
+            :expiration_date, :duration, :periodicity,
+            :total_value, :currency, :asset_count, :location_of_assets,
+            :option_to_buy, :last_date_to_option
+
+
+  validates :category, :start_date, :duration, :total_value,
+            :expiration_date,:asset_count, :location_of_assets,
+            :first_canon_date, :presence => true
   validates :number, :uniqueness => { :case_sensitive => false }
   validates :duration, :numericality => { :only_integer => true,
                                           :greater_than => 0 }
@@ -30,6 +38,14 @@ class Contract < ActiveRecord::Base
   def non_valid_first_canon_date
     if !first_canon_date.blank?
       errors.add(:first_canon_date, "can't be earlier than the contract's start date") unless start_date < first_canon_date
+    end
+  end
+
+  def non_valid_last_date_to_option
+    if !last_date_to_option.blank? && option_to_buy
+      errors.add(:last_date_to_option, "can't be later than the expiration date") unless last_date_to_option > expiration_date
+    elsif !option_to_buy
+      errors.add(:last_date_to_option, "can't exist because there is no option to buy")
     end
   end
 
