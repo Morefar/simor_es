@@ -3,29 +3,33 @@ class ContractsController < ApplicationController
 #CREATE ACTIONS
   def new
     @categories = Category.all
+    @contract = Contract.new
   end
 
   def create
 
     contract = Contract.new
-    debugger
     contract.number = params[:number]
     contract.category_id = params[:category_id].to_i
-    contract.month_duration = params[:month_duration].to_i
+    contract.duration = params[:duration].to_i
+    contract.periodicity = params[:periodicity].to_i
     contract.total_value = params[:total_value].to_f
     if params[:option_to_buy].eql?('on')
       contract.option_to_buy = params[:option_to_buy]
       contract.last_date_to_option = Date.parse(params[:last_date_to_option])
     end
-    contract.asset_count = params[:asset_count]
     contract.location_of_assets = params[:location_of_assets]
 
     contract.start_date = Date.parse(params[:start_date])
-    contract.expiration_date = contract.start_date >> contract.month_duration
+    contract.expiration_date = contract.start_date >> contract.duration
 
+    if contract.save
+      redirect_to contracts_url
+    else
 
-    contract.save
-    redirect_to contracts_url
+      render 'new'
+    end
+
   end
 
 #READ ACTIONS
@@ -52,14 +56,13 @@ def update
   contract.number = params[:number]
   contract.category_id = params[:category_id].to_i
   contract.start_date = Date.parse("#{params["contract"]["start_date(1i)"]}-#{params["contract"]["start_date(2i)"]}-#{params["contract"]["start_date(3i)"]}")
-  contract.month_duration = params[:month_duration].to_i
-  contract.expiration_date = contract.start_date >> contract.month_duration
+  contract.duration = params[:duration].to_i
+  contract.expiration_date = contract.start_date >> contract.duration
   contract.total_value = params[:total_value].to_f
   if params[:option_to_buy].eql?('on')
     contract.option_to_buy = true
     contract.last_date_to_option = Date.parse("#{params["contract"]["last_date_to_option(1i)"]}-#{params["contract"]["last_date_to_option(2i)"]}-#{params["contract"]["last_date_to_option(3i)"]}")
   end
-  contract.asset_count = params[:asset_count]
   contract.location_of_assets = params[:location_of_assets]
 
   contract.save

@@ -9,7 +9,7 @@
 <p> Client has option to buy? <b>yes</b> &nbsp &nbsp
  Client's last date to exercise his buying option: <%= @contract.last_date_to_option %></p>
 <% end %>
-<p> <b>Total number of assets:</b> <%= @contract.asset_count %> &nbsp&nbsp
+<p> <b>Total number of assets:</b> <%= @contract.assets.count %> &nbsp&nbsp
   <b>Location of assets:</b> <%= @contract.location_of_assets %></p>
 <h2>Assets: </h2>
 <table>

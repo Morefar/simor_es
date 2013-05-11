@@ -23,7 +23,7 @@
       <td><%= contract.expiration_date %></td>
       <td><%= contract %></td>
       <td><%= contract.category.name %></td>
-      <td><%= contract.asset_count %></td>
+      <td><%= contract.assets.count %></td>
       <td>
         <%= link_to "View", contract_url(contract.id) %> |
         <%= link_to "Edit", edit_contract_url(contract.id) %> |

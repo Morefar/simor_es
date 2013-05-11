@@ -6,13 +6,11 @@ class Contract < ActiveRecord::Base
   attr_accessible :number, :start_date, :first_canon_date,
             :expiration_date, :duration, :periodicity,
             :total_value, :currency, :asset_count, :location_of_assets,
-            :option_to_buy, :last_date_to_option
-
-
+            :option_to_buy, :last_date_to_option, :category, :client_id
   validates :category, :start_date, :duration, :total_value,
-            :expiration_date,:asset_count, :location_of_assets,
+            :expiration_date, :location_of_assets,
             :first_canon_date, :presence => true
-  validates :number, :uniqueness => { :case_sensitive => false }
+  validates :number, :uniqueness => { :case_sensitive => false, scope: :client_id }
   validates :duration, :numericality => { :only_integer => true,
                                           :greater_than => 0 }
   validate :total_value, :numericality => { :greater_than => 0 }
@@ -27,7 +25,6 @@ class Contract < ActiveRecord::Base
     end
   end
 
-
   def non_valid_expiration_date
     if !expiration_date.blank?
       errors.add(:expiration_date, "can't be in the past") if expiration_date < Date.today
@@ -37,7 +34,7 @@ class Contract < ActiveRecord::Base
 
   def non_valid_first_canon_date
     if !first_canon_date.blank?
-      errors.add(:first_canon_date, "can't be earlier than the contract's start date") unless start_date < first_canon_date
+      errors.add(:first_canon_date, "can't be earlier than the contract's start date") if start_date > first_canon_date
     end
   end
 
@@ -48,5 +45,4 @@ class Contract < ActiveRecord::Base
       errors.add(:last_date_to_option, "can't exist because there is no option to buy")
     end
   end
-
 end

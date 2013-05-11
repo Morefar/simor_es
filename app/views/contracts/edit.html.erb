@@ -12,8 +12,8 @@
       <%= label_tag :start_date, "Starting date:" %>
       <%= date_select :contract, :start_date, :order => [:day, :month, :year], :default => @contract.start_date %>
 
-      <%= label_tag :month_duration, "Duration (months):" %>
-      <%= select_tag :month_duration, options_for_select((1..120), @contract.month_duration), :prompt => "Choose duration" %>
+      <%= label_tag :duration, "Duration (months):" %>
+      <%= select_tag :duration, options_for_select((1..120), @contract.duration), :prompt => "Choose duration" %>
 
       <%= label_tag :expiration_date, "Expiration date:" %>
       <%= date_select :contract, :expiration_date, :order => [:day, :month, :year], :default => @contract.expiration_date %>
@@ -27,10 +27,6 @@
       <%= check_box_tag :option_to_buy, @contract.option_to_buy, @contract.option_to_buy %>
       <%= label_tag :last_date_to_option, "Last date to excercise option: " %>
       <%= date_select :contract, :last_date_to_option, :order => [:day, :month, :year], :value => (@contract.last_date_to_option << 3) if @contract.option_to_buy %>
-    </p>
-    <p>
-      <%= label_tag :asset_count, "How many assets does this contract have?" %>
-      <%= select_tag :asset_count, options_for_select((1..50), @contract.asset_count), :prompt => "Choose number of assets" %>
     </p>
     <p>
       <%= label_tag :location_of_assets, "Where are the assets going to be located?" %>

@@ -1,0 +1,7 @@
+<% if @contract.errors.any? %>
+  <div class="error-messages">
+    <% @contract.errors.full_messages.each do |error| %>
+      <%= error %>
+    <% end %>
+  </div>
+<% end %>
