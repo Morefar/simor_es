@@ -1,11 +1,15 @@
 class AssetsController < ApplicationController
+  before_filter :find_asset :except[:new, :create, :index]
+
+  def find_asset
+    @asset = Asset.find_by_id(params[:id])
+  end
 
   def index
     @assets = Asset.all
   end
 
   def show
-    @asset = Asset.find_by_id(params[:id])
   end
 
   def new
@@ -18,20 +22,17 @@ class AssetsController < ApplicationController
     asset.licence_plate.upcase!
     asset.chassis_number.upcase!
     asset.motor_number.upcase!
-
     if asset.save
-            redirect_to assets_url
-          else
+      redirect_to assets_url
+    else
       render 'new'
     end
   end
 
   def edit
-    @asset = Asset.find_by_id(params[:id])
   end
 
   def update
-    @asset = Asset.find_by_id(params[:id])
     @asset.update_attributes(params[:asset])
     if @asset.save
             redirect_to assets_url
@@ -41,8 +42,7 @@ class AssetsController < ApplicationController
   end
 
   def destroy
-    @asset = Asset.find_by_id(params[:id])
     @asset.destroy
-        redirect_to assets_url
-      end
+    redirect_to assets_url
+  end
 end

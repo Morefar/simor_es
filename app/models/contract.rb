@@ -13,11 +13,12 @@ class Contract < ActiveRecord::Base
   validates :number, :uniqueness => { :case_sensitive => false, scope: :client_id }
   validates :duration, :numericality => { :only_integer => true,
                                           :greater_than => 0 }
-  validate :total_value, :numericality => { :greater_than => 0 }
+  validates :total_value, :numericality => { :greater_than => 0 }
   validate :non_valid_start_date
   validate :non_valid_expiration_date
   validate :non_valid_first_canon_date
-  # validate :valid_dates
+  validate :option_to_buy_validations
+  validate :non_valid_option_to_buy_date
 
   def non_valid_start_date
     if !self.start_date.blank? && !self.expiration_date.blank?
@@ -28,7 +29,7 @@ class Contract < ActiveRecord::Base
   def non_valid_expiration_date
     if !expiration_date.blank?
       errors.add(:expiration_date, "can't be in the past") if expiration_date < Date.today
-      errors.add(:expiration_date, "can't be less that the duration of the contract") if (expiration_date <= (start_date >> (duration*periodicity)))
+      errors.add(:expiration_date, "can't be less that the duration of the contract") if (expiration_date < (first_canon_date >> (duration*periodicity)))
     end
   end
 
@@ -38,11 +39,16 @@ class Contract < ActiveRecord::Base
     end
   end
 
-  def non_valid_last_date_to_option
-    if !last_date_to_option.blank? && option_to_buy
-      errors.add(:last_date_to_option, "can't be later than the expiration date") unless last_date_to_option > expiration_date
-    elsif !option_to_buy
-      errors.add(:last_date_to_option, "can't exist because there is no option to buy")
+  def option_to_buy_validations
+    errors.add(:last_date_to_option, "can't have a date to excercise option to buy") if ( !option_to_buy && last_date_to_option.present?)
+    errors.add(:last_date_to_option, "can't be empty") if (option_to_buy && !last_date_to_option.present?)
+  end
+
+  def non_valid_option_to_buy_date
+    if option_to_buy && last_date_to_option
+      errors.add(:last_date_to_option, "can't be greater than the expiration date") if (last_date_to_option > expiration_date)
     end
   end
+
+
 end
