@@ -49,10 +49,12 @@ h1 {
   text-align: center;
   text-transform: uppercase;
 }
+
 .container {
   width: 960px;
   margin: auto;
 }
+
 legend {
   color: #bebebe; 
 }
@@ -92,4 +94,23 @@ footer {
   text-align: center;
 }
 
+.ui-datepicker-trigger {
+  width: 10px;
+}
 
+.form-errors {
+  color: white;
+  border: thick ridge red;
+  border-radius: 5px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  background: orangered;
+}
+
+.error-msgs {
+  background: white;
+  color: orangered;
+  padding: 20px;
+  margin-right: 20px;
+  border-radius: 5px;
+}

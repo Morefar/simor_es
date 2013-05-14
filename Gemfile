@@ -6,12 +6,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.15.1'
 end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'xray-rails'
   gem 'starter_generators'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -38,11 +37,11 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-ui-rails'
+  gem 'jquery-ui-rails', '~> 4.0.2'
 end
 
-gem 'jquery-rails'
-gem 'dynamic_form'
+gem 'jquery-rails', '~> 2.2.1'
+
 
 
 # To use ActiveModel has_secure_password

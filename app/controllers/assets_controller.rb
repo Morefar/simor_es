@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  before_filter :find_asset :except[:new, :create, :index]
+  before_filter :find_asset :except [:new, :create, :index]
 
   def find_asset
     @asset = Asset.find_by_id(params[:id])

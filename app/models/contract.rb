@@ -6,6 +6,7 @@ class Contract < ActiveRecord::Base
   attr_accessible :number, :start_date, :first_canon_date,
             :expiration_date, :duration, :periodicity,
             :total_value, :currency, :asset_count, :location_of_assets,
+            :client_id, :category_id,
             :option_to_buy, :last_date_to_option, :category, :client_id
   validates :category, :start_date, :duration, :total_value,
             :expiration_date, :location_of_assets,
@@ -29,7 +30,7 @@ class Contract < ActiveRecord::Base
   def non_valid_expiration_date
     if !expiration_date.blank?
       errors.add(:expiration_date, "can't be in the past") if expiration_date < Date.today
-      errors.add(:expiration_date, "can't be less that the duration of the contract") if (expiration_date < (first_canon_date >> (duration*periodicity)))
+      errors.add(:expiration_date, "can't be earlier that the duration of the contract. Starting from the first canon payment.") if (expiration_date < (first_canon_date >> (duration*periodicity)))
     end
   end
 
@@ -46,7 +47,7 @@ class Contract < ActiveRecord::Base
 
   def non_valid_option_to_buy_date
     if option_to_buy && last_date_to_option
-      errors.add(:last_date_to_option, "can't be greater than the expiration date") if (last_date_to_option > expiration_date)
+      errors.add(:last_date_to_option, "can't be earlier than the expiration date") if (last_date_to_option < expiration_date)
     end
   end
 
