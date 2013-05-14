@@ -19,7 +19,7 @@ class AssetsController < ApplicationController
 
   def create
     asset = Asset.new(params[:asset])
-    asset.licence_plate.upcase!
+    asset.license_plate.upcase!
     asset.chassis_number.upcase!
     asset.motor_number.upcase!
     if asset.save

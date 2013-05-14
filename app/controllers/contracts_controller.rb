@@ -13,7 +13,7 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(params[:contract])
-    if @gcontract.save
+    if @contract.save
       redirect_to contracts_url
     else
       render 'new'

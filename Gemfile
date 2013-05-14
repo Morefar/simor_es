@@ -14,6 +14,7 @@ group :development, :test do
   gem 'starter_generators'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'meta_request'
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

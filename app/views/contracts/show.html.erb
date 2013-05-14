@@ -1,47 +1,86 @@
 <h1>contract details</h1>
 
-<p> <b>Contract number:</b> <%= @contract.number %> &nbsp &nbsp <b>Category:</b> <%= @contract.category.name %></p>
-<p> <b>Starting date:</b> <%= @contract.start_date %>&nbsp &nbsp <b>Expiration date:</b> <%= @contract.expiration_date %></p>
-<p> <b>Duration:</b> <%= @contract.month_duration %> months</p>
-<br>
-<p> <b>Total value:</b> <%= number_to_currency(@contract.total_value) %></p>
-<% if @contract.option_to_buy %>
-<p> Client has option to buy? <b>yes</b> &nbsp &nbsp
- Client's last date to exercise his buying option: <%= @contract.last_date_to_option %></p>
+<div>
+  <b>Contract number: </b>
+  <%= @contract.number %>
+  <b>Contract category: </b>
+  <%= @contract.category.name %>
+</div>
+<div>
+  <b>Contract start date: </b>
+  <%= @contract.start_date %>
+</div>
+<div>
+  <b>Contract first canon payment date: </b>
+  <%= @contract.first_canon_date %>
+</div>
+<div>
+  <b>Contract expiration date: </b>
+  <%= @contract.expiration_date %>
+</div>
+<div>
+  <% if @contract.option_to_buy %>
+  <b>Last date to excercise option to buy assets: </b>
+  <%= @contract.last_date_to_option %>
+  <% end %>
+</div>
+<div>
+  <b>Contract Duration: </b>
+  <%= @contract.duration %>
+  <b>
+    <%= case @contract.periodicity
+        when 1
+          " months"
+        when 3
+          " quarters"
+        when 6
+          " semesters"
+        when 12
+          " years"
+      end %>
+  </b>
+</div>
+<div>
+  <b>Total contract value: </b>
+  <b><%= @contract.currency %></b>
+  <%= number_to_currency @contract.total_value, unit: '' %>
+</div>
+<div>
+  <b>Assets in this contract: </b>
+  <%= @contract.assets.count %>
+</div>
+<div>
+ <b>Location of assets: </b>
+  <%= @contract.location_of_assets %>
+</div>
+
+<% if @contract.assets.count > 0 %>
+<div class="contract-assets table">
+  <table>
+    <thead>
+      <tr>
+        <th>Inventory number</th>
+        <th>Licence plate</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Service type</th>
+        <th>Initial Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contract.assets.each do |asset| %>
+        <tr>
+          <td> <%= link_to asset.inventory_number, asset_url(asset.id) %> </td>
+          <td> <%= asset.license_plate %> </td>
+          <td> <%= asset.make %> </td>
+          <td> <%= asset.model %> </td>
+          <td> <%= asset.year %> </td>
+          <td> <%= asset.service_type %> </td>
+          <td> <%= "#{@contract.currency} #{number_to_currency asset.book_value, unit: ''}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <% end %>
-<p> <b>Total number of assets:</b> <%= @contract.assets.count %> &nbsp&nbsp
-  <b>Location of assets:</b> <%= @contract.location_of_assets %></p>
-<h2>Assets: </h2>
-<table>
-  <thead>
-    <tr>
-      <th>Inventory number</th>
-      <th>Licence plate</th>
-      <th>Book value</th>
-      <th>Number of inspections</th>
-      <th>Last Inspection</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    <% @contract.assets.each do |asset| %>
-      <td>
-        <%= link_to asset.inventory_number, asset_url(asset.id) %>
-      </td>
-      <td>
-        <%= asset.licence_plate %>
-      </td>
-      <td>
-        <%= number_to_currency(asset.book_value) %>
-      </td>
-      <td>0</td>
-      <td>None</td>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
-<ul>
-
-</ul>
-
-
