@@ -18,11 +18,10 @@
       <%= form.text_field :motor_number %>
     </div>
     <div class='field'>
-      <%= form.label :cylinder_cap, 'Cylinder Capacity' %>
-      <%= form.text_field :cylinder_cap %>
-      <%= form.label :capacity %>
+      <%= form.label :horse_power, 'Horse Power' %>
+      <%= form.text_field :horse_power %>
+      <%= form.label :capacity, 'Capacity Kg/PSJ' %>
       <%= form.text_field :capacity %>
-      <%= form.select :capacity_unit, %w(Passengers Tons), {:index => nil} %>
     </div>
     <div class='field'>
       <%= form.label :make %>
@@ -40,8 +39,6 @@
     <div class='field'>
       <%= form.label :service_type %>
       <%= form.select :service_type, %w(Private Public Diplomatic Official Special Other), {:index => nil} %>
-      <%= form.label :service_mode %>
-      <%= form.select :service_mode, %w[Passengers Cargo Mixed], {:index => nil} %>
       <%= form.label :fuel_type %>
       <%= form.select :fuel_type, %w[Gasoline GNV GNV-Gasoline Electric Hidrogen Ethanol Biodiesel], {:index => nil} %>
     </div>
