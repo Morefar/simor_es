@@ -5,8 +5,8 @@ describe Contract do
   it 'has a valid factory' do
     expect(build(:contract)).to be_valid
   end
-  it 'is valid with a unique contract number' do
 
+  it 'is valid with a unique contract number' do
     create(:contract, number: '10980984-9873')
     contract = build(:contract, number: '10980984-9874')
     expect(contract).to be_valid

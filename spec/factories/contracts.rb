@@ -12,5 +12,4 @@ FactoryGirl.define do
     currency %w(COP USD EUR YEN CAN RMB RPE).sample
     location_of_assets %w(Chicago Bogota Medellin Cali Oakland).sample
   end
-
 end

@@ -56,6 +56,3 @@ gem 'jquery-ui-rails', '~> 4.0.2'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
