@@ -33,8 +33,8 @@
       <%= form.select :year, (2000..Date.current.year).to_a, {:index => nil} %>
       <%= form.label :color %>
       <%= form.select :color, %w[White Blue Red Green Black], {:index => nil, :selected => false} %>
-      <%= form.label :build %>
-      <%= form.text_field :build %>
+      <%#= form.label :build %>
+      <%#= form.text_field :build %>
     </div>
     <div class='field'>
       <%= form.label :service_type %>
