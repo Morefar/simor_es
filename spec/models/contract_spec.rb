@@ -107,5 +107,13 @@ describe Contract do
         last_date_to_option: nil)).to have(1).errors_on(:last_date_to_option)
   end
 
-
+  describe '#asset_count' do
+    it 'should return the correct number of assets included in this contract' do
+      contract = create(:contract, number: 'lo123')
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM863')
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM864')
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM865')
+      expect(contract.asset_count).to eq(3)
+    end
+  end
 end

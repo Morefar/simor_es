@@ -1,13 +1,14 @@
 class Contract < ActiveRecord::Base
-  belongs_to :category
-  has_many :assets, inverse_of: :contract
-  #has_many :inspections, :through => :assets
 
   attr_accessible :number, :start_date, :first_canon_date,
             :expiration_date, :duration, :periodicity,
             :total_value, :currency, :asset_count, :location_of_assets,
             :client_id, :category_id,
             :option_to_buy, :last_date_to_option, :category, :client_id
+
+  belongs_to :category
+  has_many :assets, inverse_of: :contract
+
   validates :category, :start_date, :duration, :total_value,
             :expiration_date, :location_of_assets,
             :first_canon_date, :presence => true
@@ -51,5 +52,7 @@ class Contract < ActiveRecord::Base
     end
   end
 
-
+  def asset_count
+    assets.count
+  end
 end
