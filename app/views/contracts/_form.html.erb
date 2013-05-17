@@ -1,43 +1,69 @@
 <%= form_for @contract do |form| %>
 
   <%= render 'shared/error_messages', target: @contract %>
-  <%  %>
+
   <%= form.hidden_field :asset_count, value: !@contract.asset_count ? 0 : @contract.asset_count %>
   <%= field_set_tag "Main contract information" do %>
-    <div class="field">
-      <%= form.label :client_id, "Client"%>
-      <%= form.text_field :client_id, placeholder: 'i.e. Bank of America'%>
-      <%= form.label :number, 'Contract number' %>
-      <%= form.text_field :number, placeholder: 'i.e. 1189719-989' %>
-      <%= form.label :category_id, 'Contract type' %>
-      <%= form.collection_select :category_id, Category.all, :id, :name,
+    <div class="field-group">
+      <div class='field'>
+        <%= form.label :client_id, 'Client' %>
+        <%= form.text_field :client_id, placeholder: 'i.e. Bank of America'%>
+      </div>
+      <div class='field'>
+        <%= form.label :number, 'Contract number' %>
+        <%= form.text_field :number, placeholder: 'i.e. 1189719-989' %>
+      </div>
+      <div class='field'>
+        <%= form.label :category_id, 'Contract type' %>
+        <%= form.collection_select :category_id, Category.all, :id, :name,
           prompt: 'Select type' %>
+      </div>
     </div>
-    <div class="field">
-      <%= form.label :start_date, 'Contract start date' %>
-      <%= form.text_field :start_date, placeholder: 'yyyy-mm-dd' %>
-      <%= form.label :first_canon_date, 'First canon payment' %>
-      <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd' %>
-      <%= form.label :periodicity %>
-      <%= form.select :periodicity, [['Month',1], ['Quarter',3], ['Semester',6], ['Year',12]] %>
-      <%= form.label :duration %>
-      <%= form.number_field :duration, placeholder: 'number of periods' %>
-      <%= form.label :expiration_date, 'Contract expiration date' %>
-      <%= form.text_field :expiration_date, placeholder: 'yyyy-mm-dd' %>
+    <div class="field-group">
+      <div class='field'>
+        <%= form.label :start_date, 'Contract start date' %>
+        <%= form.text_field :start_date, placeholder: 'yyyy-mm-dd' %>
+      </div>
+      <div class='field'>
+        <%= form.label :first_canon_date, 'First canon payment' %>
+        <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd' %>
+      </div>
+      <div class='field'>
+        <%= form.label :periodicity %>
+        <%= form.select :periodicity, [['Month',1], ['Quarter',3], ['Semester',6], ['Year',12]] %>
+      </div>
+      <div class='field'>
+        <%= form.label :duration %>
+        <%= form.number_field :duration, placeholder: 'number of periods' %>
+      </div>
+      <div class='field'>
+        <%= form.label :expiration_date, 'Contract expiration date' %>
+        <%= form.text_field :expiration_date, placeholder: 'yyyy-mm-dd' %>
+      </div>
     </div>
-    <div class="field">
+    <div class="field-group">
+      <div class='field'>
       <%= form.label :total_value, 'Inicial value' %>
       <%= form.number_field :total_value, placeholder: 'i.e. 12000000' %>
+      </div>
+      <div class='field'>
       <%= form.label :currency %>
       <%= form.select :currency, %w(COP$ USD$ EUR€ PND£ RPE₨) %>
+      </div>
     </div>
-    <div class="field">
-      <%= form.label :option_to_buy %>
-      <%= form.check_box :option_to_buy %>
-      <%= form.label :last_date_to_option %>
-      <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd' %>
-      <%= form.label :location_of_assets %>
-      <%= form.text_field :location_of_assets, placeholder: "e.g. City, Region, Country",  :style => "width:350px" %>
+    <div class="field-group">
+      <div class='field'>
+        <%= form.label :option_to_buy %>
+        <%= form.check_box :option_to_buy %>
+      </div>
+      <div class='field'>
+        <%= form.label :last_date_to_option %>
+        <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd' %>
+      </div>
+      <div class='field'>
+        <%= form.label :location_of_assets %>
+        <%= form.text_field :location_of_assets, placeholder: "e.g. City, Region, Country",  :style => "width:350px" %>
+      </div>
     </div>
   <% end %>
 

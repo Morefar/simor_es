@@ -1,19 +1,9 @@
 <%= form_for(@model) do |f| %>
-  <% if @model.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
-
-      <ul>
-      <% @model.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_messages', target: @model %>
 
   <div class="field">
-    <%= f.label :make_id %><br />
-    <%= f.number_field :make_id %>
+    <%= f.label :make_id, 'To which make does this model belong to: ' %><br />
+    <%= f.collection_select :make_id, Make.all, :name, :id, prompt: 'Choose a make' %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

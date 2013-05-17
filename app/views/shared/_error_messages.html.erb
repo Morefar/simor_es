@@ -1,7 +1,7 @@
 <% if target.errors.any? %>
-<div class="form-errors">
-  <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this record to be saved: </h2>
-  <ul class='error-msgs'>
+<div id="error_explanation">
+  <h2><%= pluralize target.errors.count, "error" %> prohibited this record to be saved: </h2>
+  <ul>
   <% target.errors.full_messages.each do |error_msg| %>
     <li><%= error_msg %></li>
   <% end %>

@@ -1,6 +1,6 @@
-class CreateBuildRestrictions < ActiveRecord::Migration
+class CreateBuilds < ActiveRecord::Migration
   def change
-    create_table :build_restrictions do |t|
+    create_table :builds do |t|
       t.integer :kind_id
       t.integer :body_id
 

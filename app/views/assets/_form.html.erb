@@ -4,49 +4,70 @@
     <%= form.label :contract_id, 'Contract this asset belongs to:' %>
     <%= form.collection_select :contract_id, Contract.all, :id, :number, prompt: 'Select contract number' %>
   </div>
-    <%= field_set_tag 'Asset\'s Basic Information' do %>
-    <div class='field'>
-      <%= form.label :inventory_number %>
-      <%= form.text_field :inventory_number %>
-      <%= form.label :license_plate %>
-      <%= form.text_field :license_plate %>
+  <%= field_set_tag 'Asset\'s Basic Information' do %>
+    <div class='field-group'>
+      <div class='field'>
+        <%= form.label :inventory_number %>
+        <%= form.text_field :inventory_number %>
+      </div>
+      <div class='field'>
+        <%= form.label :license_plate %>
+        <%= form.text_field :license_plate %>
+      </div>
     </div>
-    <div class='field'>
-      <%= form.label :chassis_number %>
-      <%= form.text_field :chassis_number %>
-      <%= form.label :motor_number %>
-      <%= form.text_field :motor_number %>
+    <div class='field-group'>
+      <div class='field'>
+        <%= form.label :chassis_number %>
+        <%= form.text_field :chassis_number %>
+      </div>
+      <div class='field'>
+        <%= form.label :motor_number %>
+        <%= form.text_field :motor_number %>
+      </div>
     </div>
-    <div class='field'>
-      <%= form.label :horse_power, 'Horse Power' %>
-      <%= form.text_field :horse_power %>
-      <%= form.label :capacity, 'Capacity Kg/PSJ' %>
-      <%= form.text_field :capacity %>
+    <div class='field-group'>
+      <div class='field'>
+        <%= form.label :horse_power, 'Horse Power' %>
+        <%= form.text_field :horse_power %>
+      </div>
+      <div class='field'>
+        <%= form.label :capacity, 'Capacity Kg/PSJ' %>
+        <%= form.text_field :capacity %>
+      </div>
     </div>
-    <div class='field'>
-      <%= form.label :make %>
-      <%= form.text_field :make %>
-      <%= form.label :model %>
-      <%= form.text_field :model %>
-
-      <%= form.label :year %>
-      <%= form.select :year, (2000..Date.current.year).to_a, {:index => nil} %>
-      <%= form.label :color %>
-      <%= form.select :color, %w[White Blue Red Green Black], {:index => nil, :selected => false} %>
-      <%#= form.label :build %>
-      <%#= form.text_field :build %>
+    <div class='field-group'>
+      <div class='field'>
+        <%= form.label :make %>
+        <%= form.text_field :make %>
+      </div>
+      <div class='field'>
+        <%= form.label :model %>
+        <%= form.text_field :model %>
+      </div>
+      <div>
+        <%= form.label :year %>
+        <%= form.select :year, (2000..Date.current.year).to_a, {:index => nil} %>
+      </div>
+      <div class='field'>
+        <%= form.label :color %>
+        <%= form.select :color, %w[White Blue Red Green Black], {:index => nil, :selected => false} %>
+      </div>
     </div>
-    <div class='field'>
-      <%= form.label :service_type %>
-      <%= form.select :service_type, %w(Private Public Diplomatic Official Special Other), {:index => nil} %>
-      <%= form.label :fuel_type %>
-      <%= form.select :fuel_type, %w[Gasoline GNV Diesel GNV-Gasoline Electric Hidrogen Ethanol Biodiesel], {:index => nil} %>
+    <div class='field-group'>
+      <div class='field'>
+        <%= form.label :service_type %>
+        <%= form.select :service_type, %w(Private Public Diplomatic Official Special Other), {:index => nil} %>
+      </div>
+      <div class='field'>
+        <%= form.label :fuel_type %>
+        <%= form.select :fuel_type, %w[Gasoline GNV Diesel GNV-Gasoline Electric Hidrogen Ethanol Biodiesel], {:index => nil} %>
+      </div>
     </div>
     <div class='field'>
       <%= form.label :book_value %>
       <%= form.text_field :book_value %>
     </div>
-    <% end %>
+  <% end %>
 
     <div class="actions">
       <%= form.submit %>

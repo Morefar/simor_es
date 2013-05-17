@@ -9,8 +9,8 @@ class Contract < ActiveRecord::Base
   belongs_to :category
   has_many :assets, inverse_of: :contract
 
-  validates :category, :start_date, :duration, :total_value,
-            :expiration_date, :location_of_assets,
+  validates :client_id, :number, :category, :start_date, :duration, :total_value,
+            :expiration_date, :location_of_assets, :periodicity,
             :first_canon_date, :presence => true
   validates :number, :uniqueness => { :case_sensitive => false, scope: :client_id }
   validates :duration, :numericality => { :only_integer => true,

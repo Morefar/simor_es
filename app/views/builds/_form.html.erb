@@ -1,0 +1,16 @@
+<%= form_for(@build) do |f| %>
+
+  <%= render 'shared/error_messages', target: @build %>
+
+  <div class="field">
+    <%= f.label :kind_id %><br />
+    <%= f.collection_select :kind_id, Kind.all, :name, :id, prompt: 'Choose a kind' %>
+  </div>
+  <div class="field">
+    <%= f.label :body_id %><br />
+    <%= f.collection_select :body_id, Body.all, :name, :id, prompt: 'Choose a body type' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
-class BuildRestriction < ActiveRecord::Base
+
+class Build < ActiveRecord::Base
   attr_accessible :body_id, :kind_id
 
   belongs_to :kind

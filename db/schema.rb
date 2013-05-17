@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20130517201710) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "build_restrictions", :force => true do |t|
+  create_table "builds", :force => true do |t|
     t.integer  "kind_id"
     t.integer  "body_id"
     t.datetime "created_at", :null => false

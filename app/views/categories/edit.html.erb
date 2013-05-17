@@ -2,10 +2,6 @@
 
 <h1>Edit Contract Category</h1>
 
-<%= form_tag category_url(@category.id), :method => :put do %>
-  <%= label_tag 'Category name: ' %>
-  <%= text_field_tag 'name', @category.name %>
-  <%= submit_tag 'Edit Category', :confirm => 'Are you sure there is not another category with that name?', :disable_with => 'Creating new category...' %>
-<% end %>
+<%= render 'form', target: @category %>
 
 <p><%= link_to "< Back to categories", categories_url %></p>

@@ -1,8 +1,9 @@
+
 class Body < ActiveRecord::Base
   attr_accessible :name
 
-  has_many :build_restrictions
-  has_many :kinds, through: :bodies
+  has_many :builds
+  has_many :kinds, through: :builds
 
   validates :name, presence: true
   validates :name, uniqueness: true
