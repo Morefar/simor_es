@@ -32,6 +32,6 @@ class Asset < ActiveRecord::Base
   validates :serial_number, :motor_number, :chassis_number, :vin, :length => { is: 17 }
   # validates :serial_number, :motor_number, :chassis_number,  :vin, uniqueness: true
   validates :vin, :format => { with: /\A[^_iIoOqQ\W]+\Z/,
-    message: "has an incorrect format. 'I', 'O', 'Q', 'Ñ', or non-word characters are not allowed."
+    message: "has an incorrect format. 'I', 'O', 'Q', or non-word characters are not allowed."
   }
 end
