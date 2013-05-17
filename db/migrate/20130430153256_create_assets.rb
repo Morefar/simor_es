@@ -5,14 +5,14 @@ class CreateAssets < ActiveRecord::Migration
       t.integer :invoice_id
       t.string :inventory_number
       t.string :license_plate
-      t.string :make
-      t.string :model
+      t.integer :make_id
+      t.integer :model_id
       t.integer :year
       t.integer :cylinder_cap
-      t.string :color
+      t.string :color_id
       t.string :service_type
-      t.string :kind
-      t.string :body
+      t.integer :kind_id
+      t.integer :body_id
       t.string :fuel_type
       t.integer :capacity
       t.string :motor_number

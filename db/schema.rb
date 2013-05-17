@@ -11,21 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430153256) do
+ActiveRecord::Schema.define(:version => 20130517201710) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
     t.integer  "invoice_id"
     t.string   "inventory_number"
     t.string   "license_plate"
-    t.string   "make"
-    t.string   "model"
+    t.integer  "make_id"
+    t.integer  "model_id"
     t.integer  "year"
     t.integer  "cylinder_cap"
-    t.string   "color"
+    t.string   "color_id"
     t.string   "service_type"
-    t.string   "kind"
-    t.string   "body"
+    t.integer  "kind_id"
+    t.integer  "body_id"
     t.string   "fuel_type"
     t.integer  "capacity"
     t.string   "motor_number"
@@ -52,8 +52,27 @@ ActiveRecord::Schema.define(:version => 20130430153256) do
     t.datetime "updated_at",           :null => false
   end
 
+  create_table "bodies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "build_restrictions", :force => true do |t|
+    t.integer  "kind_id"
+    t.integer  "body_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "categories", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "colors", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "contracts", :force => true do |t|
@@ -73,6 +92,25 @@ ActiveRecord::Schema.define(:version => 20130430153256) do
     t.date     "last_date_to_option"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "kinds", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "makes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "models", :force => true do |t|
+    t.integer  "make_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
