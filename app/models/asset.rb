@@ -1,13 +1,21 @@
+#encoding: UTF-8
 class Asset < ActiveRecord::Base
   attr_accessible :contract_id, :invoice_id,:inventory_number,:license_plate,
-    :make,:model, :year, :cylinder_cap,:color,:service_type,:kind,:body,
+    :make_id,:model_id, :year, :cylinder_cap,:color,:service_type,:kind_id,:body_id,
     :fuel_type, :capacity,:motor_number, :rerecorded_motor,:vin,:serial_number,
     :rerecorded_serial,:chassis_number, :rerecorded_chassis,:mobility_restriction,
-    :shield_level,:horse_power, :importd_assembld,:import_statement,
+    :shield_level,:horse_power, :importd_assembld,:import_statement, :color_id,
     :import_date, :number_of_doors,:property_limitation,:registration_date,
     :tp_issue_date,:tp_expiration_date,:transit_authority,:book_value
 
   belongs_to :contract, inverse_of: :assets
+  # belongs_to :invoice, inverse_of: :assets
+  belongs_to :make
+  belongs_to :model
+  belongs_to :kind
+  belongs_to :body
+  belongs_to :color
+
   validates :inventory_number, :license_plate, :make, :model, :year, :registration_date,
     :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, presence: true
   validates :license_plate, :length => { is: 6 }
@@ -32,6 +40,11 @@ class Asset < ActiveRecord::Base
   validates :serial_number, :motor_number, :chassis_number, :vin, :length => { is: 17 }
   # validates :serial_number, :motor_number, :chassis_number,  :vin, uniqueness: true
   validates :vin, :format => { with: /\A[^_iIoOqQ\W]+\Z/,
-    message: "has an incorrect format. 'I', 'O', 'Q', or non-word characters are not allowed."
+    message: "has an incorrect format. 'I', 'O', 'Q', 'Ñ' or non-word characters are not allowed."
   }
+  # validate :authorized_build
+
+  def authorized_build
+    errors.add(:kind, 'The build combination isn\'t authorized') unless Build.authorized_build?(kind_id, body_id)
+  end
 end

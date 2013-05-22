@@ -26,19 +26,17 @@
 </div>
 <div>
   <b>Contract Duration: </b>
-  <%= @contract.duration %>
-  <b>
-    <%= case @contract.periodicity
+    <%= pluralize @contract.duration,
+    case @contract.periodicity
         when 1
-          " months"
+          "month"
         when 3
-          " quarters"
+          "quarter"
         when 6
-          " semesters"
+          "semester"
         when 12
-          " years"
+          "years"
       end %>
-  </b>
 </div>
 <div>
   <b>Total contract value: </b>
@@ -55,6 +53,7 @@
 </div>
 
 <% if @contract.assets.count > 0 %>
+<br />
 <div class="contract-assets table">
   <table>
     <thead>
@@ -73,8 +72,8 @@
         <tr>
           <td> <%= link_to asset.inventory_number, asset_url(asset.id) %> </td>
           <td> <%= asset.license_plate %> </td>
-          <td> <%= asset.make %> </td>
-          <td> <%= asset.model %> </td>
+          <td> <%= asset.make.name %> </td>
+          <td> <%= asset.model.name %> </td>
           <td> <%= asset.year %> </td>
           <td> <%= asset.service_type %> </td>
           <td> <%= "#{@contract.currency} #{number_to_currency asset.book_value, unit: ''}" %></td>

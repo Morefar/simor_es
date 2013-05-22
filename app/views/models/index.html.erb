@@ -11,7 +11,7 @@
 
 <% @models.each do |model| %>
   <tr>
-    <td><%= model.make_id %></td>
+    <td><%= model.make.name %></td>
     <td><%= model.name %></td>
     <td><%= link_to 'Show', model %></td>
     <td><%= link_to 'Edit', edit_model_path(model) %></td>

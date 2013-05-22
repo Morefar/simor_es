@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :color do
-    name "MyString"
+    name %w(white black blue yellow pink red green gray purpule).sample
   end
 end

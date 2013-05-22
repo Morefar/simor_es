@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :make do
-    name "MyString"
+    name %w(Chevrolet Subaru Hyndai Nissan Susuki JingChen).sample
   end
 end

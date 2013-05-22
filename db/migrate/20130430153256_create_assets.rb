@@ -1,18 +1,19 @@
 class CreateAssets < ActiveRecord::Migration
   def change
     create_table :assets do |t|
-      t.integer :contract_id
-      t.integer :invoice_id
+      t.references :contract
+      t.references :invoice
       t.string :inventory_number
+      t.string :transit_permit
       t.string :license_plate
-      t.integer :make_id
-      t.integer :model_id
+      t.references :make
+      t.references :model
       t.integer :year
       t.integer :cylinder_cap
-      t.string :color_id
+      t.references :color
       t.string :service_type
-      t.integer :kind_id
-      t.integer :body_id
+      t.references :kind
+      t.references :body
       t.string :fuel_type
       t.integer :capacity
       t.string :motor_number

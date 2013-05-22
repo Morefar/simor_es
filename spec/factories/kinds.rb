@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :kind do
-    name "MyString"
+    name %w(car truck suv bus minibus motorcycle).sample
   end
 end

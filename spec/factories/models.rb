@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :model do
-    make_id 1
-    name "MyString"
+    make {FactoryGirl.build(:make)}
+    name %w(model1 model2 model3 model4 model5 model6 model7).sample
   end
 end

@@ -3,7 +3,7 @@
 
   <div class="field">
     <%= f.label :make_id, 'To which make does this model belong to: ' %><br />
-    <%= f.collection_select :make_id, Make.all, :name, :id, prompt: 'Choose a make' %>
+    <%= f.collection_select :make_id, Make.all, :id, :name, prompt: 'Choose a make' %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

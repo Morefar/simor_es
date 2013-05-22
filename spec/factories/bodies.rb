@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :body do
-    name "MyString"
+    name %w(Estacas Furgon Cisterna Volco Tolva SRS Cerrada Sedan Estibas Pickup Platon).sample
   end
 end

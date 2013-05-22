@@ -1,17 +1,17 @@
 FactoryGirl.define do
   factory :asset do
-    contract_id {FactoryGirl.build(:contract).id}
-    invoice_id  Random.rand(1000..5000)
+    contract {FactoryGirl.build(:contract)}
+    invoice_id Random.rand(1000..5000)
     sequence(:inventory_number) { |n| n }
     license_plate 'CDV797'
-    make 'Chevrolet'
-    model 'Swift'
+    make {FactoryGirl.build(:make)}
+    model {FactoryGirl.build(:model, make: make)}
     year  Random.rand(2000..(Date.current >> 12).year)
     cylinder_cap Random.rand(50..7500)
-    color %w(blue red white green black orange purpule yellow).sample
+    color {FactoryGirl.build(:color)}
     service_type %w(Private Public Diplomatic Official Special Other).sample
-    kind %w(car suv motorcycle).sample
-    body %w(tank none).sample
+    kind {FactoryGirl.build(:kind)}
+    body {FactoryGirl.build(:body)}
     fuel_type %w(Gasoline GNV Diesel GNV-Gasoline Electric Hidrogen Ethanol Biodiesel).sample
     capacity Random.rand(2..3500)
     motor_number '908980985AWDOI345'

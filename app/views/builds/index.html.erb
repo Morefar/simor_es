@@ -11,8 +11,8 @@
 
 <% @builds.each do |build| %>
   <tr>
-    <td><%= build.kind_id %></td>
-    <td><%= build.body_id %></td>
+    <td><%= build.kind.name %></td>
+    <td><%= build.body.name %></td>
     <td><%= link_to 'Show', build %></td>
     <td><%= link_to 'Edit', edit_build_path(build) %></td>
     <td><%= link_to 'Destroy', build, method: :delete, data: { confirm: 'Are you sure?' } %></td>

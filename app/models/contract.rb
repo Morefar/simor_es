@@ -3,9 +3,8 @@ class Contract < ActiveRecord::Base
   attr_accessible :number, :start_date, :first_canon_date,
             :expiration_date, :duration, :periodicity,
             :total_value, :currency, :asset_count, :location_of_assets,
-            :client_id, :category_id,
+            :client_id, :category_id, :make, :model, :kind, :body,
             :option_to_buy, :last_date_to_option, :category, :client_id
-
   belongs_to :category
   has_many :assets, inverse_of: :contract
 

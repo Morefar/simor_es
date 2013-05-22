@@ -18,81 +18,81 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe BuildRestrictionsController do
+describe BuildsController do
 
   # This should return the minimal set of attributes required to create a valid
-  # BuildRestriction. As you add validations to BuildRestriction, be sure to
+  # Build. As you add validations to Build, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { "kind_id" => "1" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # BuildRestrictionsController. Be sure to keep this updated too.
+  # BuildsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all build_restrictions as @build_restrictions" do
-      build_restriction = BuildRestriction.create! valid_attributes
+    it "assigns all builds as @builds" do
+      build = Build.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:build_restrictions).should eq([build_restriction])
+      assigns(:builds).should eq([build])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested build_restriction as @build_restriction" do
-      build_restriction = BuildRestriction.create! valid_attributes
-      get :show, {:id => build_restriction.to_param}, valid_session
-      assigns(:build_restriction).should eq(build_restriction)
+    it "assigns the requested build as @build" do
+      build = Build.create! valid_attributes
+      get :show, {:id => build.to_param}, valid_session
+      assigns(:build).should eq(build)
     end
   end
 
   describe "GET new" do
-    it "assigns a new build_restriction as @build_restriction" do
+    it "assigns a new build as @build" do
       get :new, {}, valid_session
-      assigns(:build_restriction).should be_a_new(BuildRestriction)
+      assigns(:build).should be_a_new(Build)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested build_restriction as @build_restriction" do
-      build_restriction = BuildRestriction.create! valid_attributes
-      get :edit, {:id => build_restriction.to_param}, valid_session
-      assigns(:build_restriction).should eq(build_restriction)
+    it "assigns the requested build as @build" do
+      build = Build.create! valid_attributes
+      get :edit, {:id => build.to_param}, valid_session
+      assigns(:build).should eq(build)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new BuildRestriction" do
+      it "creates a new Build" do
         expect {
-          post :create, {:build_restriction => valid_attributes}, valid_session
-        }.to change(BuildRestriction, :count).by(1)
+          post :create, {:build => valid_attributes}, valid_session
+        }.to change(Build, :count).by(1)
       end
 
-      it "assigns a newly created build_restriction as @build_restriction" do
-        post :create, {:build_restriction => valid_attributes}, valid_session
-        assigns(:build_restriction).should be_a(BuildRestriction)
-        assigns(:build_restriction).should be_persisted
+      it "assigns a newly created build as @build" do
+        post :create, {:build => valid_attributes}, valid_session
+        assigns(:build).should be_a(Build)
+        assigns(:build).should be_persisted
       end
 
-      it "redirects to the created build_restriction" do
-        post :create, {:build_restriction => valid_attributes}, valid_session
-        response.should redirect_to(BuildRestriction.last)
+      it "redirects to the created build" do
+        post :create, {:build => valid_attributes}, valid_session
+        response.should redirect_to(Build.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved build_restriction as @build_restriction" do
+      it "assigns a newly created but unsaved build as @build" do
         # Trigger the behavior that occurs when invalid params are submitted
-        BuildRestriction.any_instance.stub(:save).and_return(false)
-        post :create, {:build_restriction => { "kind_id" => "invalid value" }}, valid_session
-        assigns(:build_restriction).should be_a_new(BuildRestriction)
+        Build.any_instance.stub(:save).and_return(false)
+        post :create, {:build => { "kind_id" => "invalid value" }}, valid_session
+        assigns(:build).should be_a_new(Build)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        BuildRestriction.any_instance.stub(:save).and_return(false)
-        post :create, {:build_restriction => { "kind_id" => "invalid value" }}, valid_session
+        Build.any_instance.stub(:save).and_return(false)
+        post :create, {:build => { "kind_id" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -100,60 +100,60 @@ describe BuildRestrictionsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested build_restriction" do
-        build_restriction = BuildRestriction.create! valid_attributes
-        # Assuming there are no other build_restrictions in the database, this
-        # specifies that the BuildRestriction created on the previous line
+      it "updates the requested build" do
+        build = Build.create! valid_attributes
+        # Assuming there are no other builds in the database, this
+        # specifies that the Build created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        BuildRestriction.any_instance.should_receive(:update_attributes).with({ "kind_id" => "1" })
-        put :update, {:id => build_restriction.to_param, :build_restriction => { "kind_id" => "1" }}, valid_session
+        Build.any_instance.should_receive(:update_attributes).with({ "kind_id" => "1" })
+        put :update, {:id => build.to_param, :build => { "kind_id" => "1" }}, valid_session
       end
 
-      it "assigns the requested build_restriction as @build_restriction" do
-        build_restriction = BuildRestriction.create! valid_attributes
-        put :update, {:id => build_restriction.to_param, :build_restriction => valid_attributes}, valid_session
-        assigns(:build_restriction).should eq(build_restriction)
+      it "assigns the requested build as @build" do
+        build = Build.create! valid_attributes
+        put :update, {:id => build.to_param, :build => valid_attributes}, valid_session
+        assigns(:build).should eq(build)
       end
 
-      it "redirects to the build_restriction" do
-        build_restriction = BuildRestriction.create! valid_attributes
-        put :update, {:id => build_restriction.to_param, :build_restriction => valid_attributes}, valid_session
-        response.should redirect_to(build_restriction)
+      it "redirects to the build" do
+        build = Build.create! valid_attributes
+        put :update, {:id => build.to_param, :build => valid_attributes}, valid_session
+        response.should redirect_to(build)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the build_restriction as @build_restriction" do
-        build_restriction = BuildRestriction.create! valid_attributes
+      it "assigns the build as @build" do
+        build = Build.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        BuildRestriction.any_instance.stub(:save).and_return(false)
-        put :update, {:id => build_restriction.to_param, :build_restriction => { "kind_id" => "invalid value" }}, valid_session
-        assigns(:build_restriction).should eq(build_restriction)
+        Build.any_instance.stub(:save).and_return(false)
+        put :update, {:id => build.to_param, :build => { "kind_id" => "invalid value" }}, valid_session
+        assigns(:build).should eq(build)
       end
 
       it "re-renders the 'edit' template" do
-        build_restriction = BuildRestriction.create! valid_attributes
+        build = Build.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        BuildRestriction.any_instance.stub(:save).and_return(false)
-        put :update, {:id => build_restriction.to_param, :build_restriction => { "kind_id" => "invalid value" }}, valid_session
+        Build.any_instance.stub(:save).and_return(false)
+        put :update, {:id => build.to_param, :build => { "kind_id" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested build_restriction" do
-      build_restriction = BuildRestriction.create! valid_attributes
+    it "destroys the requested build" do
+      build = Build.create! valid_attributes
       expect {
-        delete :destroy, {:id => build_restriction.to_param}, valid_session
-      }.to change(BuildRestriction, :count).by(-1)
+        delete :destroy, {:id => build.to_param}, valid_session
+      }.to change(Build, :count).by(-1)
     end
 
-    it "redirects to the build_restrictions list" do
-      build_restriction = BuildRestriction.create! valid_attributes
-      delete :destroy, {:id => build_restriction.to_param}, valid_session
-      response.should redirect_to(build_restrictions_url)
+    it "redirects to the builds list" do
+      build = Build.create! valid_attributes
+      delete :destroy, {:id => build.to_param}, valid_session
+      response.should redirect_to(builds_url)
     end
   end
 

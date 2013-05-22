@@ -1,6 +1,8 @@
+#encoding: UTF-8
+
 require 'spec_helper'
 
-describe Asset do
+describe Asset, focus: true do
 
   it 'has a valid factory' do
     expect(build(:asset)).to be_valid
@@ -142,4 +144,19 @@ describe Asset do
     #   # end
     # end
   end
+
+  describe 'valid kind - body combination' do
+      it 'is invalid if the build is not authorized' do
+        kind = create(:kind, name: 'Vehiculo')
+        body = create(:body, name: 'Grua')
+        expect(build(:asset, kind: kind, body: body)).to have(1).errors_on(:kind)
+      end
+
+      it 'is valid if the build is authorized' do
+        kind = create(:kind, name: 'Vehiculo')
+        body = create(:body, name: 'Grua')
+        create(:build, kind: kind, body: body)
+        expect(build(:asset, kind: kind, body: body)).to be_valid
+      end
+    end
 end

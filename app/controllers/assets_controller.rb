@@ -1,48 +1,90 @@
 class AssetsController < ApplicationController
-  before_filter :find_asset, except: [:new, :create, :index]
-
-  def find_asset
-    @asset = Asset.find_by_id(params[:id])
-  end
-
+  # GET /assets
+  # GET /assets.json
   def index
     @assets = Asset.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @assets }
+    end
   end
 
+  # GET /assets/1
+  # GET /assets/1.json
   def show
+    @asset = Asset.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @asset }
+    end
   end
 
+  # GET /assets/new
+  # GET /assets/new.json
   def new
     @asset = Asset.new
-    @asset.contract = Contract.find_by_id(session[:contract_id])
-  end
 
-  def create
-    asset = Asset.new(params[:asset])
-    asset.license_plate.upcase!
-    asset.chassis_number.upcase!
-    asset.motor_number.upcase!
-    if asset.save
-      redirect_to assets_url
-    else
-      render 'new'
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @asset }
     end
   end
 
+  # GET /assets/1/edit
   def edit
+    @asset = Asset.find(params[:id])
   end
 
-  def update
-    @asset.update_attributes(params[:asset])
-    if @asset.save
-            redirect_to assets_url
-          else
-      render 'edit'
+  # POST /assets
+  # POST /assets.json
+  def create
+    @asset = Asset.new
+    @asset.make = Make.find_by_name(params[:asset][:make_id])
+    @asset.model = Model.find_by_name(params[:asset][:model_id])
+    @asset.color = Color.find_by_name(params[:asset][:color_id])
+    @asset.kind = Color.find_by_name(params[:asset][:kind_id])
+    @asset.body = Color.find_by_name(params[:asset][:body_id])
+    @asset.attributes = params[:asset].except(:make_id, :model_id,
+                                  :color_id, :kind_id, :body_id)
+
+    respond_to do |format|
+      if @asset.save
+        format.html { redirect_to @asset, notice: 'Asset was successfully created.' }
+        format.json { render json: @asset, status: :created, location: @asset }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @asset.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # PUT /assets/1
+  # PUT /assets/1.json
+  def update
+    @asset = Asset.find(params[:id])
+
+    respond_to do |format|
+      if @asset.update_attributes(params[:asset])
+        format.html { redirect_to @asset, notice: 'Asset was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @asset.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /assets/1
+  # DELETE /assets/1.json
   def destroy
+    @asset = Asset.find(params[:id])
     @asset.destroy
-    redirect_to assets_url
+
+    respond_to do |format|
+      format.html { redirect_to assets_url }
+      format.json { head :no_content }
+    end
   end
 end

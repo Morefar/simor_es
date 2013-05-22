@@ -11,13 +11,13 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'starter_generators'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'guard-rspec'
 end
 
 group :test do
@@ -41,7 +41,7 @@ group :assets do
 end
 
 gem 'jquery-rails', '~> 2.2.1'
-gem 'jquery-ui-rails', '~> 4.0.2'
+gem 'jquery-ui-rails', '~> 4.0.3'
 
 
 

@@ -6,4 +6,9 @@ class Build < ActiveRecord::Base
   belongs_to :body
 
   validates :body_id, :kind_id, presence: true
+
+
+  def self.authorized_build? (kind, body)
+    return Build.where(body_id: body, kind_id: kind).exists?
+  end
 end
