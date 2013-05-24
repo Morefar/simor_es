@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517201710) do
+ActiveRecord::Schema.define(:version => 20130522211408) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -93,6 +93,40 @@ ActiveRecord::Schema.define(:version => 20130517201710) do
     t.date     "last_date_to_option"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "inspections", :force => true do |t|
+    t.integer  "asset_id"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.time     "date"
+    t.float    "current_value"
+    t.integer  "appraiser_value"
+    t.string   "soat_number"
+    t.string   "soat_begin_date"
+    t.string   "soat_finish_date"
+    t.string   "gas_certificate"
+    t.string   "gas_begin_date"
+    t.string   "gas_finish_date"
+    t.string   "maintenance"
+    t.string   "repairs"
+    t.string   "security"
+    t.string   "exterior"
+    t.string   "interior"
+    t.string   "engine"
+    t.string   "accesories"
+    t.string   "insurance_number"
+    t.string   "insurance_company"
+    t.string   "insured_value"
+    t.string   "currency"
+    t.string   "insurance_start"
+    t.string   "insurance_finish"
+    t.string   "person_in_charge"
+    t.string   "pic_id"
+    t.string   "pic_job"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "kinds", :force => true do |t|

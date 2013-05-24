@@ -15,6 +15,7 @@ class Asset < ActiveRecord::Base
   belongs_to :kind
   belongs_to :body
   belongs_to :color
+  has_many :inspections
 
   validates :inventory_number, :license_plate, :make, :model, :year, :registration_date,
     :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, presence: true
@@ -42,9 +43,10 @@ class Asset < ActiveRecord::Base
   validates :vin, :format => { with: /\A[^_iIoOqQ\W]+\Z/,
     message: "has an incorrect format. 'I', 'O', 'Q', 'Ñ' or non-word characters are not allowed."
   }
-  # validate :authorized_build
+  validate :authorized_build
 
   def authorized_build
+    # debugger
     errors.add(:kind, 'The build combination isn\'t authorized') unless Build.authorized_build?(kind_id, body_id)
   end
 end
