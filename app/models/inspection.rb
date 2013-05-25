@@ -3,6 +3,6 @@ class Inspection < ActiveRecord::Base
 
   belongs_to :asset
   has_one :contract, through: :asset
-  # has_one :inventory
+  has_one :inventory
 
 end
