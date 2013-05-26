@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Contract do
-
   it 'has a valid factory' do
     expect(build(:contract)).to be_valid
   end

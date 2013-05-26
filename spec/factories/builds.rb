@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :build do
-    kind {FactoryGirl.build(:kind)}
-    body {FactoryGirl.build(:body)}
+    kind {create(:kind)}
+    body {create(:body)}
   end
 end

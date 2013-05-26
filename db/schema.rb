@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525180837) do
+ActiveRecord::Schema.define(:version => 20130525191014) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -112,7 +112,37 @@ ActiveRecord::Schema.define(:version => 20130525180837) do
     t.integer  "lessee_id"
   end
 
+  create_table "cosigners", :force => true do |t|
+    t.integer  "entity_id"
+    t.integer  "contract_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "cosigners", ["contract_id"], :name => "index_cosigners_on_contract_id"
+  add_index "cosigners", ["entity_id"], :name => "index_cosigners_on_entity_id"
+
+  create_table "entities", :force => true do |t|
+    t.string   "address"
+    t.string   "city"
+    t.string   "email"
+    t.string   "identification_number"
+    t.string   "mobile_phone"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "state"
+    t.integer  "identification_type_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
   create_table "id_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "identification_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

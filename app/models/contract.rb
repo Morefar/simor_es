@@ -4,9 +4,12 @@ class Contract < ActiveRecord::Base
             :expiration_date, :duration, :periodicity,
             :total_value, :currency, :asset_count, :location_of_assets,
             :client_id, :category_id, :make, :model, :kind, :body,
-            :option_to_buy, :last_date_to_option, :category, :client_id
+            :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id
   belongs_to :category
   has_many :assets, inverse_of: :contract
+  has_many :inspections, through: :assets
+  has_many :cosigners, inverse_of: :contract
+  has_many :entities, through: :cosigners
 
   validates :client_id, :number, :category, :start_date, :duration, :total_value,
             :expiration_date, :location_of_assets, :periodicity,
