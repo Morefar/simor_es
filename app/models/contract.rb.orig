@@ -8,8 +8,11 @@ class Contract < ActiveRecord::Base
   belongs_to :category
   has_many :assets, inverse_of: :contract
   has_many :inspections, through: :assets
+<<<<<<< HEAD
+=======
   has_many :cosigners, inverse_of: :contract
   has_many :entities, through: :cosigners
+>>>>>>> other_models
 
   validates :client_id, :number, :category, :start_date, :duration, :total_value,
             :expiration_date, :location_of_assets, :periodicity,
