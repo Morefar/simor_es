@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :asset do
-    contract {build(:contract)}
+    before(:create) do |asset|
+      create(:build, kind: asset.kind, body: asset.body)
+    end
+    contract
     invoice_id 12
     sequence(:inventory_number) { |n| n }
     license_plate 'ABC197'
@@ -10,8 +13,8 @@ FactoryGirl.define do
     cylinder_cap 3500
     color {build(:color)}
     service_type "private"
-    kind {create(:kind)}
-    body {create(:body)}
+    kind
+    body
     fuel_type 'Gasoline'
     capacity 5
     motor_number '908980985AWDOI345'

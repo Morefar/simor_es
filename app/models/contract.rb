@@ -6,18 +6,20 @@ class Contract < ActiveRecord::Base
             :client_id, :category_id, :make, :model, :kind, :body,
             :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id
   belongs_to :category
+  belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
   has_many :assets, inverse_of: :contract
   has_many :inspections, through: :assets
   has_many :cosigners, inverse_of: :contract
   has_many :entities, through: :cosigners
+  has_many :comments, as: :commentable
 
   validates :client_id, :number, :category, :start_date, :duration, :total_value,
             :expiration_date, :location_of_assets, :periodicity,
-            :first_canon_date, :presence => true
-  validates :number, :uniqueness => { :case_sensitive => false, scope: :client_id }
-  validates :duration, :numericality => { :only_integer => true,
-                                          :greater_than => 0 }
-  validates :total_value, :numericality => { :greater_than => 0 }
+            :first_canon_date, presence: true
+  validates :number, :uniqueness => { case_sensitive: false, scope: :client_id }
+  validates :duration, :numericality => { only_integer: true,
+                                          greater_than: 0 }
+  validates :total_value, :numericality => { greater_than: 0 }
   validate :non_valid_start_date
   validate :non_valid_expiration_date
   validate :non_valid_first_canon_date

@@ -1,7 +1,8 @@
 class CreateInspections < ActiveRecord::Migration
   def change
     create_table :inspections do |t|
-      t.integer :asset_id
+      t.string :inspection_number
+      t.references :asset
       t.string :address
       t.string :city
       t.string :state

@@ -6,7 +6,5 @@ class CreateCosigners < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :cosigners, :entity_id
-    add_index :cosigners, :contract_id
   end
 end

@@ -6,7 +6,7 @@ class Asset < ActiveRecord::Base
     :rerecorded_serial,:chassis_number, :rerecorded_chassis,:mobility_restriction,
     :shield_level,:horse_power, :importd_assembld,:import_statement, :color_id,
     :import_date, :number_of_doors,:property_limitation,:registration_date,
-    :tp_issue_date,:tp_expiration_date,:transit_authority,:book_value
+    :tp_issue_date,:tp_expiration_date,:transit_authority,:book_value, :asset_count, :last_inspection_date
 
   belongs_to :contract, inverse_of: :assets
   # belongs_to :invoice, inverse_of: :assets
@@ -16,6 +16,7 @@ class Asset < ActiveRecord::Base
   belongs_to :body
   belongs_to :color
   has_many :inspections
+  has_many :comments, as: :commentable
 
   validates :inventory_number, :license_plate, :make, :model, :year, :registration_date,
     :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, presence: true
@@ -46,7 +47,10 @@ class Asset < ActiveRecord::Base
   validate :authorized_build
 
   def authorized_build
-    # debugger
     errors.add(:kind, 'The build combination isn\'t authorized') unless Build.authorized_build?(kind_id, body_id)
+  end
+
+  def unique_identifier_present
+
   end
 end

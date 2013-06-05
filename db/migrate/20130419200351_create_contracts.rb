@@ -2,8 +2,9 @@ class CreateContracts < ActiveRecord::Migration
   def change
     create_table :contracts do |t|
       t.integer :client_id
+      t.integer :lessee_id
       t.string :number
-      t.integer :category_id
+      t.references :category
       t.date :start_date
       t.date :first_canon_date
       t.integer :duration

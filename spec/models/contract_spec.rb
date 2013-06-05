@@ -5,6 +5,13 @@ describe Contract do
     expect(build(:contract)).to be_valid
   end
 
+  it { should belong_to(:category) }
+  it { should have_many(:assets) }
+  it { should have_many(:inspections).through(:assets) }
+  it { should belong_to(:lessee) }
+  it { should have_many(:cosigners) }
+  it { should have_many(:entities).through(:cosigners) }
+
   it 'is valid with a unique contract number' do
     create(:contract, number: '10980984-9873')
     contract = build(:contract, number: '10980984-9874')
@@ -109,9 +116,12 @@ describe Contract do
   describe '#asset_count' do
     it 'should return the correct number of assets included in this contract' do
       contract = create(:contract, number: 'lo123')
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM863')
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM864')
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM865')
+      kind = create(:kind, name: 'Camion')
+      body = create(:body, name: 'Estacas')
+      create(:build, kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM863', kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM864', kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM865', kind: kind, body: body)
       expect(contract.asset_count).to eq(3)
     end
   end

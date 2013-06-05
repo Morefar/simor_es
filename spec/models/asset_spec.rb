@@ -3,13 +3,13 @@
 require 'spec_helper'
 
 
-describe Asset, focus: true do
+describe Asset do
 
   def create_build
       body = create(:body)
       kind = create(:kind)
-    create(:build, body: body, kind: kind)
-    hash = {body: body, kind: kind}
+      create(:build, body: body, kind: kind)
+      hash = {body: body, kind: kind}
   end
 
   before(:each) do
@@ -17,13 +17,16 @@ describe Asset, focus: true do
   end
 
   it 'has a valid factory' do
-    # build_hash = create_build
     expect(build(:asset, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
   end
 
   it { should belong_to(:contract) }
+  it { should belong_to(:make) }
+  it { should belong_to(:model) }
+  it { should belong_to(:kind) }
+  it { should belong_to(:body) }
+  it { should belong_to(:color) }
   it { should have_many(:inspections) }
-
 
   describe 'it invalid with an incorrectly formated license plate' do
 

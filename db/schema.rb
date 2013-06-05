@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525191014) do
+ActiveRecord::Schema.define(:version => 20130604001630) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -49,9 +49,18 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.string   "tp_expiration_date"
     t.string   "transit_authority"
     t.float    "book_value"
+    t.integer  "inspection_count"
+    t.date     "last_inspection_date"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  add_index "assets", ["body_id"], :name => "index_assets_on_body_id"
+  add_index "assets", ["color_id"], :name => "index_assets_on_color_id"
+  add_index "assets", ["contract_id"], :name => "index_assets_on_contract_id"
+  add_index "assets", ["kind_id"], :name => "index_assets_on_kind_id"
+  add_index "assets", ["make_id"], :name => "index_assets_on_make_id"
+  add_index "assets", ["model_id"], :name => "index_assets_on_model_id"
 
   create_table "bodies", :force => true do |t|
     t.string   "name"
@@ -66,6 +75,9 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "builds", ["body_id"], :name => "index_builds_on_body_id"
+  add_index "builds", ["kind_id"], :name => "index_builds_on_kind_id"
+
   create_table "categories", :force => true do |t|
     t.string "name"
   end
@@ -76,8 +88,19 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+
   create_table "contracts", :force => true do |t|
     t.integer  "client_id"
+    t.integer  "lessee_id"
     t.string   "number"
     t.integer  "category_id"
     t.date     "start_date"
@@ -93,8 +116,9 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.date     "last_date_to_option"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.integer  "lessee_id"
   end
+
+  add_index "contracts", ["category_id"], :name => "index_contracts_on_category_id"
 
   create_table "cosigners", :force => true do |t|
     t.integer  "entity_id"
@@ -120,11 +144,7 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.datetime "updated_at",             :null => false
   end
 
-  create_table "id_types", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_index "entities", ["identification_type_id"], :name => "index_entities_on_identification_type_id"
 
   create_table "identification_types", :force => true do |t|
     t.string   "name"
@@ -133,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
   end
 
   create_table "inspections", :force => true do |t|
+    t.string   "inspection_number"
     t.integer  "asset_id"
     t.string   "address"
     t.string   "city"
@@ -166,10 +187,10 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.datetime "updated_at",        :null => false
   end
 
+  add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"
+
   create_table "inventories", :force => true do |t|
     t.integer  "inspection_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
     t.boolean  "kilometers"
     t.boolean  "villare"
     t.boolean  "glove_compartment"
@@ -252,16 +273,11 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.boolean  "electric_antena"
     t.boolean  "antena"
     t.text     "observations"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   add_index "inventories", ["inspection_id"], :name => "index_inventories_on_inspection_id"
-
-  create_table "invoices", :force => true do |t|
-    t.string   "number"
-    t.string   "import_manifest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
 
   create_table "kinds", :force => true do |t|
     t.string   "name"
@@ -281,5 +297,7 @@ ActiveRecord::Schema.define(:version => 20130525191014) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "models", ["make_id"], :name => "index_models_on_make_id"
 
 end

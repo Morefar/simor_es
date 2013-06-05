@@ -84,3 +84,29 @@ makers_array.each do |maker|
 end
 puts "#{Model.count} models created"
 
+Contract.destroy_all
+100.times do
+  FactoryGirl.create(:contract, category: Category.all.sample)
+end
+puts "#{Contract.count} contracts created"
+
+Asset.destroy_all
+letter_array = ('A'..'Z').to_a
+digit_array = (0..9).to_a
+300.times do
+  build = Build.all.sample
+  FactoryGirl.create(:asset,
+    contract: Contract.all.sample,
+    kind: build.kind,
+    body: build.body,
+    make: Make.all.sample,
+    model: Model.all.sample,
+    color: Color.all.sample,
+    year: rand(2010..2014),
+    book_value: rand(100000000..500000000.0),
+    license_plate: "#{letter_array.sample}#{letter_array.sample}#{letter_array.sample}#{digit_array.sample}#{digit_array.sample}#{digit_array.sample}")
+end
+
+puts "#{Asset.count} assets created"
+
+

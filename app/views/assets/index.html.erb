@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Transit Permit</th>
+    <th>Contract</th>
     <th>license plate</th>
     <th>make</th>
     <th>model</th>
@@ -16,13 +16,13 @@
 
 <% @assets.each do |asset| %>
   <tr>
-    <td><%= asset.transit_permit %></td>
+    <td><%= link_to asset.contract.number, asset.contract %></td>
     <td><%= asset.license_plate %></td>
     <td><%= asset.make.name %></td>
     <td><%= asset.model.name %></td>
     <td><%= asset.year %></td>
     <td><%= asset.service_type %></td>
-    <td><%= asset.book_value %></td>
+    <td><%= number_to_currency asset.book_value %></td>
     <td><%= link_to 'Show', asset %></td>
     <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
     <td><%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>

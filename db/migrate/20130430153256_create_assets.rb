@@ -36,6 +36,8 @@ class CreateAssets < ActiveRecord::Migration
       t.string :tp_expiration_date
       t.string :transit_authority
       t.float :book_value
+      t.integer :inspection_count
+      t.date :last_inspection_date
       t.timestamps
     end
   end

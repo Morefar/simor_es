@@ -70,7 +70,7 @@
     <tbody>
       <% @contract.assets.each do |asset| %>
         <tr>
-          <td> <%= link_to asset.inventory_number, asset_url(asset.id) %> </td>
+          <td> <%= link_to asset.inventory_number, asset %> </td>
           <td> <%= asset.license_plate %> </td>
           <td> <%= asset.make.name %> </td>
           <td> <%= asset.model.name %> </td>
