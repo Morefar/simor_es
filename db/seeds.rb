@@ -109,4 +109,13 @@ end
 
 puts "#{Asset.count} assets created"
 
+InspectionOrder.destroy_all
+
+300.times do
+  FactoryGirl.create(:inspection_order)
+end
+
+puts "#{InspectionOrder.count} Inspection orders created."
+
+
 

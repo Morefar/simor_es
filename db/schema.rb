@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604001630) do
+ActiveRecord::Schema.define(:version => 20130604235050) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -150,6 +150,18 @@ ActiveRecord::Schema.define(:version => 20130604001630) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "inspection_orders", :force => true do |t|
+    t.string   "contract_url"
+    t.string   "asset_unique_identifier"
+    t.boolean  "recurring"
+    t.integer  "renew_period"
+    t.string   "current_status"
+    t.text     "notes"
+    t.integer  "asset_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "inspections", :force => true do |t|

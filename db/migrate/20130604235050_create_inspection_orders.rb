@@ -7,7 +7,7 @@ class CreateInspectionOrders < ActiveRecord::Migration
       t.integer :renew_period
       t.string :current_status
       t.text :notes
-
+      t.belongs_to :asset
       t.timestamps
     end
   end

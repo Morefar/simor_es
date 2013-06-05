@@ -21,8 +21,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers'
-  gem 'faker'
+  gem 'shoulda-matchers', '~> 2.1.0'
+  gem 'faker', '~> 1.1.2'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

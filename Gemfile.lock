@@ -208,7 +208,7 @@ DEPENDENCIES
   database_cleaner
   debugger
   factory_girl_rails
-  faker
+  faker (~> 1.1.2)
   guard-rspec
   haml-rails
   jquery-rails (~> 2.2.1)
@@ -219,6 +219,6 @@ DEPENDENCIES
   rails (= 3.2.13)
   rspec-rails
   sass-rails (~> 3.2.3)
-  shoulda-matchers
+  shoulda-matchers (~> 2.1.0)
   sqlite3
   uglifier (>= 1.0.3)
