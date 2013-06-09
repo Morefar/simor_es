@@ -1,44 +1,44 @@
 class MakesController < ApplicationController
-  # GET /makes
-  # GET /makes.json
+
+
   def index
     @makes = Make.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @makes }
     end
   end
 
-  # GET /makes/1
-  # GET /makes/1.json
+
+
   def show
     @make = Make.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @make }
     end
   end
 
-  # GET /makes/new
-  # GET /makes/new.json
+
+
   def new
     @make = Make.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @make }
     end
   end
 
-  # GET /makes/1/edit
+
   def edit
     @make = Make.find(params[:id])
   end
 
-  # POST /makes
-  # POST /makes.json
+
+
   def create
     @make = Make.new(params[:make])
 
@@ -53,8 +53,8 @@ class MakesController < ApplicationController
     end
   end
 
-  # PUT /makes/1
-  # PUT /makes/1.json
+
+
   def update
     @make = Make.find(params[:id])
 
@@ -69,8 +69,8 @@ class MakesController < ApplicationController
     end
   end
 
-  # DELETE /makes/1
-  # DELETE /makes/1.json
+
+
   def destroy
     @make = Make.find(params[:id])
     @make.destroy

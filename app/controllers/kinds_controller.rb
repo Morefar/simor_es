@@ -1,44 +1,44 @@
 class KindsController < ApplicationController
-  # GET /kinds
-  # GET /kinds.json
+
+
   def index
     @kinds = Kind.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @kinds }
     end
   end
 
-  # GET /kinds/1
-  # GET /kinds/1.json
+
+
   def show
     @kind = Kind.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @kind }
     end
   end
 
-  # GET /kinds/new
-  # GET /kinds/new.json
+
+
   def new
     @kind = Kind.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @kind }
     end
   end
 
-  # GET /kinds/1/edit
+
   def edit
     @kind = Kind.find(params[:id])
   end
 
-  # POST /kinds
-  # POST /kinds.json
+
+
   def create
     @kind = Kind.new(params[:kind])
 
@@ -53,8 +53,8 @@ class KindsController < ApplicationController
     end
   end
 
-  # PUT /kinds/1
-  # PUT /kinds/1.json
+
+
   def update
     @kind = Kind.find(params[:id])
 
@@ -69,8 +69,8 @@ class KindsController < ApplicationController
     end
   end
 
-  # DELETE /kinds/1
-  # DELETE /kinds/1.json
+
+
   def destroy
     @kind = Kind.find(params[:id])
     @kind.destroy

@@ -1,44 +1,44 @@
 class ColorsController < ApplicationController
-  # GET /colors
-  # GET /colors.json
+
+
   def index
     @colors = Color.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @colors }
     end
   end
 
-  # GET /colors/1
-  # GET /colors/1.json
+
+
   def show
     @color = Color.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @color }
     end
   end
 
-  # GET /colors/new
-  # GET /colors/new.json
+
+
   def new
     @color = Color.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @color }
     end
   end
 
-  # GET /colors/1/edit
+
   def edit
     @color = Color.find(params[:id])
   end
 
-  # POST /colors
-  # POST /colors.json
+
+
   def create
     @color = Color.new(params[:color])
 
@@ -53,8 +53,8 @@ class ColorsController < ApplicationController
     end
   end
 
-  # PUT /colors/1
-  # PUT /colors/1.json
+
+
   def update
     @color = Color.find(params[:id])
 
@@ -69,8 +69,8 @@ class ColorsController < ApplicationController
     end
   end
 
-  # DELETE /colors/1
-  # DELETE /colors/1.json
+
+
   def destroy
     @color = Color.find(params[:id])
     @color.destroy
