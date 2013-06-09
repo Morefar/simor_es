@@ -42,7 +42,6 @@ group :assets do
 end
 
 gem 'haml-rails'
-
 gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.3'
 
