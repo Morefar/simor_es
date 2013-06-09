@@ -41,7 +41,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'haml-rails'
+gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.3'
 
