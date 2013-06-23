@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :asset do
     before(:create) do |asset|
-      create(:build, kind: asset.kind, body: asset.body)
+    create(:build, kind: asset.kind, body: asset.body)
     end
     contract
     invoice_id 12
     sequence(:inventory_number) { |n| n }
     license_plate 'ABC197'
-    make {build(:make)}
+    make { build(:make) }
     model {build(:model, make: make)}
     year  2013
     cylinder_cap 3500
