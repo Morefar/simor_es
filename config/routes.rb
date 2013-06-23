@@ -1,5 +1,7 @@
 Simor::Application.routes.draw do
 root to: "assets#index"
 resources :contracts, :assets, :categories, :makes, :models,
-  :colors, :kinds, :bodies, :builds, :comments, :inspections, :inspection_orders
+  :colors, :kinds, :bodies, :builds, :inspections, :inspection_orders
+resources :comments, only: [:create, :update, :edit]
+
 end
