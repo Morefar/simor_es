@@ -12,19 +12,22 @@ class CreateInspections < ActiveRecord::Migration
       t.string :soat_number
       t.string  :soat_begin_date
       t.string :soat_finish_date
-      t.string :gas_certificate
-      t.string :gas_begin_date
-      t.string :gas_finish_date
-      t.string :maintenance
-      t.string :repairs
-      t.string :security
+      t.string :emissions_certificate
+      t.string :emissions_begin_date
+      t.string :emissions_finish_date
+      t.text :maintenance
+      t.text :repairs
+      t.text :security
       t.string :exterior
+      t.text :exterior_notes
       t.string :interior
+      t.text :interior_notes
       t.string :engine
-      t.string :accesories
+      t.text :engine_notes
+      t.text :accesories
       t.string :insurance_number
-      t.string :insurance_company
-      t.string :insured_value
+      t.belongs_to :insurance_company
+      t.integer :insured_value
       t.string :currency
       t.string :insurance_start
       t.string :insurance_finish
