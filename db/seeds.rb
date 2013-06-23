@@ -93,24 +93,24 @@ puts "#{Contract.count} contracts created"
 Asset.destroy_all
 letter_array = ('A'..'Z').to_a
 digit_array = (0..9).to_a
+number_id_array = Array(1..1000)
 300.times do
-  build = Build.all.sample
-  FactoryGirl.create(:asset,
-    contract: Contract.all.sample,
-    kind: build.kind,
-    body: build.body,
-    make: Make.all.sample,
-    model: Model.all.sample,
-    color: Color.all.sample,
-    year: rand(2010..2014),
-    book_value: rand(100000000..500000000.0),
-    license_plate: "#{letter_array.sample}#{letter_array.sample}#{letter_array.sample}#{digit_array.sample}#{digit_array.sample}#{digit_array.sample}")
+  build = Build.sample
+  a = Asset.new(contract: Contract.sample, invoice_id: number_id_array.shuffle!.shift, inventory_number: number_id_array.shuffle!.shift, cylinder_cap: 3500, service_type: %w(PUBLIC PRIVATE ESPECIAL DIPLOMATIC).sample, fuel_type: %w(GASOLINE GAS DIESEL BIODIESEL GAS-GASOLINE).sample, capacity: 5, motor_number: '908980985AWDOI345', rerecorded_motor: false, vin: "908NPR985AWDUA342", serial_number: "908980955AWDOI345", rerecorded_serial: false, chassis_number: "908950985AWDOI345", rerecorded_chassis: false, mobility_restriction: 'none', shield_level:  'none', horse_power: 1250, importd_assembld: false, import_statement: '12904AGH9089490', import_date: '2011-04-13', number_of_doors: 5, property_limitation: 'none', registration_date: '2013-02-01', tp_issue_date: '2013-01-01', tp_expiration_date: '2014-02-01', transit_authority: 'SMD Bogota', kind: build.kind, body: build.body, make: Make.sample, model: Model.sample, color: Color.sample, year: rand(2010..2014), book_value: rand(100000000..500000000.0), license_plate: "#{letter_array.sample}#{letter_array.sample}#{letter_array.sample}#{digit_array.sample}#{digit_array.sample}#{digit_array.sample}")
+  a.save
 end
 
-puts "#{Asset.count} assets created"
+puts "#{Asset.count} Assets created"
+puts "There are now #{Build.count} authorized builds"
+
+Inspection.destroy_all
+600.times do
+  FactoryGirl.create(:inspection, asset: Asset.sample)
+end
+
+puts "#{Inspection.count} Inspections created"
 
 InspectionOrder.destroy_all
-
 300.times do
   FactoryGirl.create(:inspection_order)
 end
