@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604235050) do
+ActiveRecord::Schema.define(:version => 20130612215605) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(:version => 20130604235050) do
     t.string   "tp_expiration_date"
     t.string   "transit_authority"
     t.float    "book_value"
-    t.integer  "inspection_count"
+    t.integer  "inspection_count",     :default => 0
     t.date     "last_inspection_date"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   add_index "assets", ["body_id"], :name => "index_assets_on_body_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130604235050) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
+    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at",       :null => false
@@ -176,30 +177,40 @@ ActiveRecord::Schema.define(:version => 20130604235050) do
     t.string   "soat_number"
     t.string   "soat_begin_date"
     t.string   "soat_finish_date"
-    t.string   "gas_certificate"
-    t.string   "gas_begin_date"
-    t.string   "gas_finish_date"
-    t.string   "maintenance"
-    t.string   "repairs"
-    t.string   "security"
+    t.string   "emissions_certificate"
+    t.string   "emissions_begin_date"
+    t.string   "emissions_finish_date"
+    t.text     "maintenance"
+    t.text     "repairs"
+    t.text     "security"
     t.string   "exterior"
+    t.text     "exterior_notes"
     t.string   "interior"
+    t.text     "interior_notes"
     t.string   "engine"
-    t.string   "accesories"
+    t.text     "engine_notes"
+    t.text     "accesories"
     t.string   "insurance_number"
-    t.string   "insurance_company"
-    t.string   "insured_value"
+    t.integer  "insurance_company_id"
+    t.integer  "insured_value"
     t.string   "currency"
     t.string   "insurance_start"
     t.string   "insurance_finish"
     t.string   "person_in_charge"
     t.string   "pic_id"
     t.string   "pic_job"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"
+
+  create_table "insurance_companies", :force => true do |t|
+    t.string   "name"
+    t.string   "nit"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "inventories", :force => true do |t|
     t.integer  "inspection_id"
