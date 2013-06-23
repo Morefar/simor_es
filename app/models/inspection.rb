@@ -1,7 +1,8 @@
 class Inspection < ActiveRecord::Base
-  attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date, :gas_certificate, :gas_begin_date, :gas_finish_date, :maintenance, :repairs, :security, :exterior, :interior, :engine, :accesories, :insurance_number, :insurance_company, :insured_value, :currency, :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job, :inspection_number
+  attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate, :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security, :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes, :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency, :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job, :inspection_number
 
   belongs_to :asset
+  belongs_to :insurance_company
   has_one :contract, through: :asset
   has_one :inventory
   has_many :comments, as: :commentable
@@ -10,7 +11,7 @@ class Inspection < ActiveRecord::Base
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
   validate :valid_insurance_data
   validate :valid_soat_dates
-  validate :valid_gas_certficate_dates
+  validate :valid_emissions_certficate_dates
 
   after_save :update_parent_asset_information
 
@@ -42,17 +43,17 @@ class Inspection < ActiveRecord::Base
     end
   end
 
-  def valid_gas_certficate_dates
-    if gas_certificate.present?
-      if gas_begin_date.present? && gas_finish_date.present?
-        errors.add(:gas_finish_date, 'cannot be sooner than the starting date') unless (Date.parse(gas_finish_date) >= (Date.parse(gas_begin_date) >> 12))
+  def valid_emissions_certficate_dates
+    if emissions_certificate.present?
+      if emissions_begin_date.present? && emissions_finish_date.present?
+        errors.add(:emissions_finish_date, 'cannot be sooner than the starting date') unless (Date.parse(emissions_finish_date) >= (Date.parse(emissions_begin_date) >> 12))
       else
-        errors.add(:gas_begin_date, 'cannot be empty') unless gas_begin_date.present?
-        errors.add(:gas_finish_date, 'cannot be empty') unless gas_finish_date.present?
+        errors.add(:emissions_begin_date, 'cannot be empty') unless emissions_begin_date.present?
+        errors.add(:emissions_finish_date, 'cannot be empty') unless emissions_finish_date.present?
       end
     else
-      errors.add(:gas_begin_date, 'must be empty') if gas_begin_date.present?
-      errors.add(:gas_finish_date, 'must be empty') if gas_finish_date.present?
+      errors.add(:emissions_begin_date, 'must be empty') if emissions_begin_date.present?
+      errors.add(:emissions_finish_date, 'must be empty') if emissions_finish_date.present?
     end
   end
 

@@ -1,0 +1,24 @@
+
+%h1 Listing inspections
+
+%table
+  %tr
+    %th Inspection Number
+    %th Inspection Date
+    %th Initial Asset Value
+    %th Current Asset Value
+    %th
+    %th
+
+  - @inspections.each do |inspection|
+    %tr
+      %td= link_to inspection.inspection_number, inspection
+      %td= inspection.date.strftime('%d-%m-%y %r %Z')
+      %td= number_to_currency inspection.asset.book_value
+      %td= number_to_currency inspection.current_value
+      %td= link_to 'Edit', edit_inspection_path(inspection)
+      %td= link_to 'Destroy', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Inspection', new_inspection_path

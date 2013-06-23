@@ -1,0 +1,106 @@
+= form_for @inspection do |f|
+  - if @inspection.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@inspection.errors.count, "error")} prohibited this inspection from being saved:"
+      %ul
+        - @inspection.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :inspection_number
+    = f.text_field :inspection_number
+  .field
+    = f.label :asset_id, "Asset"
+    = f.text_field :asset_id
+  .field
+    = f.label :address
+    = f.text_field :address
+  .field
+    = f.label :city
+    = f.text_field :city
+  .field
+    = f.label :state
+    = f.text_field :state
+  .field.date-field
+    = f.label :date
+    = f.text_field :date
+  .field
+    = f.label :current_value
+    = f.number_field :current_value
+  .field
+    = f.label :appraiser_value
+    = f.number_field :appraiser_value
+  .field
+    = f.label :soat_number, "Soat Number"
+    = f.text_field :soat_number
+  .field.date-field
+    = f.label :soat_begin_date
+    = f.text_field :soat_begin_date
+  .field.date-field
+    = f.label :soat_finish_date
+    = f.text_field :soat_finish_date
+  .field
+    = f.label :emissions_certificate
+    = f.text_field :emissions_certificate
+  .field
+    = f.label :emissions_begin_date
+    = f.text_field :emissions_finish_date
+  .field
+    = f.label :maintenance
+    = f.text_area :maintenance
+  .field
+    = f.label :repairs
+    = f.text_area :repairs
+  .field
+    = f.label :security
+    = f.text_area :security
+  .field
+    = f.label :exterior
+    = f.text_field :exterior
+  .field
+    = f.label :exterior_notes
+    = f.text_area :exterior_notes
+  .field
+    = f.label :interior
+    = f.text_field :interior
+  .field
+    = f.label :interior_notes
+    = f.text_area :interior_notes
+  .field
+    = f.label :engine
+    = f.text_field :engine
+  .field
+    = f.label :engine_notes
+    = f.text_area :engine_notes
+  .field
+    = f.label :accesories
+    = f.text_area :accesories
+  .field
+    = f.label :insurance_number
+    = f.text_field :insurance_number
+  .field
+    = f.label :insurance_company_id
+    = f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name
+  .field
+    = f.label :insured_value
+    = f.text_field :insured_value
+  .field
+    = f.label :currency
+    = f.text_field :currency
+  .field.date-field
+    = f.label :insurance_start, "Insurance Start Date"
+    = f.text_field :insurance_start
+  .field.date-field
+    = f.label :insurance_finish, "Insurance Finish Date"
+    = f.text_field :insurance_finish
+  .field
+    = f.label :person_in_charge, "Person in Charge"
+    = f.text_field :person_in_charge
+  .field
+    = f.label :pic_id, "Person in Charge Identification number"
+    = f.text_field :pic_id
+  .field
+    = f.label :pic_job, "Person in charge Job description"
+    = f.text_field :pic_job
+  .actions
+    = f.submit 'Save'
