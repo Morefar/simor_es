@@ -122,48 +122,48 @@ def create_asset
     end
   end
 
-  describe 'has valid gas certificate dates' do
-    context "gas cartificate doesn't exist" do
+  describe 'has valid emissions certificate dates' do
+    context "emissions cartificate doesn't exist" do
       it "is valid with empty dates" do
-        expect(build(:inspection, asset: @asset, gas_certificate: nil, gas_begin_date: nil, gas_finish_date: nil)).to be_valid
+        expect(build(:inspection, asset: @asset, emissions_certificate: nil, emissions_begin_date: nil, emissions_finish_date: nil)).to be_valid
       end
-      it "is invalid when gas certificate dates are present" do
-        inspection = build(:inspection, asset: @asset, gas_certificate: nil)
-        expect(inspection).to have(1).errors_on(:gas_begin_date)
-        expect(inspection).to have(1).errors_on(:gas_finish_date)
+      it "is invalid when emissions certificate dates are present" do
+        inspection = build(:inspection, asset: @asset, emissions_certificate: nil)
+        expect(inspection).to have(1).errors_on(:emissions_begin_date)
+        expect(inspection).to have(1).errors_on(:emissions_finish_date)
       end
     end
-    context 'gas certificate is present' do
-      it "is invalid when both gas certificate dates are nil" do
-        inspection = build(:inspection, asset: @asset, gas_certificate: 'OJ19294', gas_begin_date: nil, gas_finish_date: nil)
-        expect(inspection).to have(1).errors_on(:gas_begin_date)
-        expect(inspection).to have(1).errors_on(:gas_finish_date)
+    context 'emissions certificate is present' do
+      it "is invalid when both emissions certificate dates are nil" do
+        inspection = build(:inspection, asset: @asset, emissions_certificate: 'OJ19294', emissions_begin_date: nil, emissions_finish_date: nil)
+        expect(inspection).to have(1).errors_on(:emissions_begin_date)
+        expect(inspection).to have(1).errors_on(:emissions_finish_date)
       end
-      it 'is invalid when both gas certificate dates are empty' do
-        inspection = build(:inspection, asset: @asset, gas_certificate: 'OJ19294', gas_begin_date: '', gas_finish_date: '')
-        expect(inspection).to have(1).errors_on(:gas_begin_date)
-        expect(inspection).to have(1).errors_on(:gas_finish_date)
+      it 'is invalid when both emissions certificate dates are empty' do
+        inspection = build(:inspection, asset: @asset, emissions_certificate: 'OJ19294', emissions_begin_date: '', emissions_finish_date: '')
+        expect(inspection).to have(1).errors_on(:emissions_begin_date)
+        expect(inspection).to have(1).errors_on(:emissions_finish_date)
       end
       it 'is invalid when one of the dates is nil' do
-        inspection = build(:inspection, asset: @asset, gas_certificate: 'OJ19294', gas_begin_date: '2013-12-20', gas_finish_date: nil)
-        expect(inspection).to have(1).errors_on(:gas_finish_date)
-        inspection.gas_finish_date = ''
-        expect(inspection).to have(1).errors_on(:gas_finish_date)
-        inspection.gas_begin_date = nil
-        inspection.gas_finish_date = '2013-02-21'
-        expect(inspection).to have(1).errors_on(:gas_begin_date)
-        inspection.gas_begin_date = ''
-        expect(inspection).to have(1).errors_on(:gas_begin_date)
+        inspection = build(:inspection, asset: @asset, emissions_certificate: 'OJ19294', emissions_begin_date: '2013-12-20', emissions_finish_date: nil)
+        expect(inspection).to have(1).errors_on(:emissions_finish_date)
+        inspection.emissions_finish_date = ''
+        expect(inspection).to have(1).errors_on(:emissions_finish_date)
+        inspection.emissions_begin_date = nil
+        inspection.emissions_finish_date = '2013-02-21'
+        expect(inspection).to have(1).errors_on(:emissions_begin_date)
+        inspection.emissions_begin_date = ''
+        expect(inspection).to have(1).errors_on(:emissions_begin_date)
       end
       it 'is invalid if the expiration date is earlier than the start date' do
-        expect(build(:inspection, asset: @asset, gas_certificate: 'OJ19294',
-          gas_begin_date: '2013-12-20',
-          gas_finish_date: '2012-12-20')).to have(1).errors_on(:gas_finish_date)
+        expect(build(:inspection, asset: @asset, emissions_certificate: 'OJ19294',
+          emissions_begin_date: '2013-12-20',
+          emissions_finish_date: '2012-12-20')).to have(1).errors_on(:emissions_finish_date)
       end
       it 'is invalid if the expiration date is less than one year from the start date' do
-        expect(build(:inspection, asset: @asset, gas_certificate: 'OJ19294',
-          gas_begin_date: '2013-12-20',
-          gas_finish_date: '2014-10-20')).to have(1).errors_on(:gas_finish_date)
+        expect(build(:inspection, asset: @asset, emissions_certificate: 'OJ19294',
+          emissions_begin_date: '2013-12-20',
+          emissions_finish_date: '2014-10-20')).to have(1).errors_on(:emissions_finish_date)
       end
     end
   end
