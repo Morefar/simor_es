@@ -1,0 +1,8 @@
+.comment
+  .comment-from
+    Employee name
+  .comment-time
+    = time_ago_in_words comment.updated_at
+    ago
+  = comment.content
+  = link_to 'Edit', edit_comment_path(comment)
