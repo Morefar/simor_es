@@ -1,0 +1,20 @@
+%p#notice= notice
+
+= @asset.inventory_number
+= @asset.book_value
+= @asset.inspection_count
+
+= link_to 'Edit', edit_asset_path(@asset)
+|
+= link_to 'Back', assets_path
+
+%h2 Inspections
+
+Placeholder for inspection history, written in HAML
+
+%h2 Comments
+
+- @asset.comments.each do |comment|
+  = render 'comments/comment', comment: comment
+= render 'comments/form', comment: Comment.new, commentable: @asset
+

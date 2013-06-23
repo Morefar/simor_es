@@ -1,0 +1,6 @@
+%table
+  %thead
+    = render 'assets/asset_table_header'
+  %tbody
+    - assets.each do |asset|
+      = render 'assets/asset_row', asset: asset

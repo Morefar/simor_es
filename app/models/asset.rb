@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
     :shield_level,:horse_power, :importd_assembld,:import_statement, :color_id,
     :import_date, :number_of_doors,:property_limitation,:registration_date,
     :tp_issue_date,:tp_expiration_date,:transit_authority,:book_value, :asset_count,
-    :last_inspection_date
+    :last_inspection_date, :contract, :kind, :body, :make, :model
 
   belongs_to :contract, inverse_of: :assets
   # belongs_to :invoice, inverse_of: :assets
