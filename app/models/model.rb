@@ -4,4 +4,5 @@ class Model < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, uniqueness: {scope: :make_id}
+
 end

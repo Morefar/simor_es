@@ -6,6 +6,7 @@ class Build < ActiveRecord::Base
   belongs_to :body
 
   validates :body_id, :kind_id, presence: true
+  validates :kind_id, uniqueness: { scope: :body_id}
 
 
   def self.authorized_build? (kind, body)
