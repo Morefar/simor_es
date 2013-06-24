@@ -26,6 +26,7 @@
 </div>
 <div>
   <b>Contract Duration: </b>
+  <!-- FIXME Take logic out of here. Use helper method -->
     <%= pluralize @contract.duration,
     case @contract.periodicity
         when 1
@@ -52,34 +53,15 @@
   <%= @contract.location_of_assets %>
 </div>
 
-<% if @contract.assets.count > 0 %>
+<% if @contract.asset_count > 0 %>
 <br />
 <div class="contract-assets table">
-  <table>
-    <thead>
-      <tr>
-        <th>Inventory number</th>
-        <th>Licence plate</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Service type</th>
-        <th>Initial Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @contract.assets.each do |asset| %>
-        <tr>
-          <td> <%= link_to asset.inventory_number, asset %> </td>
-          <td> <%= asset.license_plate %> </td>
-          <td> <%= asset.make.name %> </td>
-          <td> <%= asset.model.name %> </td>
-          <td> <%= asset.year %> </td>
-          <td> <%= asset.service_type %> </td>
-          <td> <%= "#{@contract.currency} #{number_to_currency asset.book_value, unit: ''}" %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render 'assets/asset_index', assets: @contract.assets %>
 </div>
 <% end %>
+
+<h2>Comments</h2>
+<% @contract.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
+<%= render 'comments/form', comment: Comment.new, commentable: @contract %>
