@@ -14,7 +14,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'debugger'
+  gem 'debugger', '~> 1.6.0'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
