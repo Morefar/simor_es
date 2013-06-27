@@ -1,14 +1,14 @@
-
+require 'faker'
 FactoryGirl.define do
   factory :entity do
-    address "Avenida Jimenez 5 43 Oficina 1001"
-    city "Bogota"
-    email "info@morefar.co"
-    identification_number "289.988.930-5"
+    address Faker::Address.street_address
+    city Faker::Address.city
+    email Faker::Internet.email
+    sequence (:identification_number) { |n| "289.988.#{n}-5" }
     identification_type { create(:identification_type) }
-    mobile_phone "(321) 987-9840"
-    name "Pedro Perez Pinto"
-    phone "1 705-3403"
-    state "Cundinamarca"
+    mobile_phone Faker::PhoneNumber.cell_phone
+    name Faker::Company.name
+    phone Faker::PhoneNumber.phone_number
+    state Faker::Address.state
   end
 end
