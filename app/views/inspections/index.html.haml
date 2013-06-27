@@ -5,6 +5,8 @@
   %tr
     %th Inspection Number
     %th Inspection Date
+    %th city
+    %th Asset ID Number
     %th Initial Asset Value
     %th Current Asset Value
     %th
@@ -14,6 +16,8 @@
     %tr
       %td= link_to inspection.inspection_number, inspection
       %td= inspection.date.strftime('%d-%m-%y %r %Z')
+      %td= inspection.city
+      %td= link_to inspection.asset.inventory_number, inspection.asset
       %td= number_to_currency inspection.asset.book_value
       %td= number_to_currency inspection.current_value
       %td= link_to 'Edit', edit_inspection_path(inspection)
