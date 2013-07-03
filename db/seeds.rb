@@ -84,9 +84,23 @@ makers_array.each do |maker|
 end
 puts "#{Model.count} models created"
 
+IdentificationType.destroy_all
+id_type_array = %w(CC NIT CE PASSPORT OTHER)
+id_type_array.each do |type_name|
+  FactoryGirl.create(:identification_type, name: type_name)
+end
+puts "#{IdentificationType.count} Identification types created"
+
+Entity.destroy_all
+200.times do
+  name_array = [Faker::Name.name, "#{Faker::Company.name} #{Faker::Company.suffix}"]
+  FactoryGirl.create(:entity, name: name_array.sample, identification_type: IdentificationType.sample)
+end
+puts "#{Entity.count} entities created"
+
 Contract.destroy_all
 100.times do
-  FactoryGirl.create(:contract, category: Category.all.sample)
+  FactoryGirl.create(:contract, category: Category.sample, lessee: Entity.sample)
 end
 puts "#{Contract.count} contracts created"
 
@@ -101,11 +115,19 @@ number_id_array = Array(1..1000)
 end
 
 puts "#{Asset.count} Assets created"
-puts "There are now #{Build.count} authorized builds"
+
+InsuranceCompany.destroy_all
+50.times do
+  FactoryGirl.create(:insurance_company)
+end
+
+puts "#{InsuranceCompany.count} Insurance companies created"
 
 Inspection.destroy_all
 600.times do
-  FactoryGirl.create(:inspection, asset: Asset.sample)
+  asset = Asset.sample
+  FactoryGirl.create(:inspection, asset: asset, insurance_company: InsuranceCompany.sample, current_value: rand(0..asset.book_value), appraiser_value: rand(0..asset.book_value), insured_value: rand(0..asset.book_value),
+    date: Time.now)
 end
 
 puts "#{Inspection.count} Inspections created"
