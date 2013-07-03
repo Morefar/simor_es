@@ -22,9 +22,9 @@ def create_asset
   it { should have_one(:contract).through(:asset) }
 
   it { should validate_presence_of(:inspection_number) }
-  it { should validate_uniqueness_of(:inspection_number).scoped_to(:asset_id) }
-  it { should validate_uniqueness_of(:inspection_number).case_insensitive }
-
+  it { should validate_presence_of(:asset) }
+  it { should validate_uniqueness_of(:inspection_number).scoped_to(:asset).case_insensitive
+   }
   it { should validate_presence_of(:person_in_charge) }
   it { should validate_presence_of(:pic_id) }
   it { should validate_presence_of(:pic_job) }

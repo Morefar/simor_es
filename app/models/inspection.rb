@@ -1,4 +1,4 @@
-class Inspection < ActiveRecord::Base
+!class Inspection < ActiveRecord::Base
   attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate, :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security, :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes, :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency, :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job, :inspection_number
 
   belongs_to :asset
@@ -7,12 +7,11 @@ class Inspection < ActiveRecord::Base
   has_one :inventory
   has_many :comments, as: :commentable
 
-  validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :date, presence: true
+  validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :date, :asset,presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
   validate :valid_insurance_data
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
-
   after_save :update_parent_asset_information
 
   def valid_soat_dates
@@ -58,10 +57,12 @@ class Inspection < ActiveRecord::Base
   end
 
   def update_parent_asset_information
-    parent_asset = self.asset
-    parent_asset.inspection_count += 1
-    parent_asset.last_inspection_date = self.updated_at
-    parent_asset.save
+    if self.asset.present?
+      parent_asset = self.asset
+      parent_asset.inspection_count += 1
+      parent_asset.last_inspection_date = self.updated_at
+      parent_asset.save
+    end
   end
 
 end

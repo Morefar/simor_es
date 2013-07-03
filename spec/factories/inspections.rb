@@ -1,12 +1,12 @@
-require 'faker'
+!require 'faker'
 FactoryGirl.define do
   factory :inspection do
     asset {create(:asset)}
     sequence(:inspection_number) { |n| "V#{n}"}
-    address Faker::Address.street_address
-    city Faker::Address.city
-    state Faker::Address.state
-    date Time.now
+    address {Faker::Address.street_address}
+    city {Faker::Address.city}
+    state {Faker::Address.state}
+    date {Time.now}
     current_value 10500000
     appraiser_value 10000000
     soat_number 'AB98934'
@@ -18,9 +18,12 @@ FactoryGirl.define do
     maintenance Faker::Lorem.paragraph 10
     repairs Faker::Lorem.paragraph 5
     security Faker::Lorem.paragraph 5
-    exterior Faker::Lorem.paragraph 2
-    interior Faker::Lorem.paragraph 10
-    engine Faker::Lorem.paragraph 5
+    exterior %w(Good Regular Bad).sample
+    exterior_notes Faker::Lorem.paragraph 2
+    interior %w(Good Regular Bad).sample
+    interior_notes Faker::Lorem.paragraph 10
+    engine %w(Good Regular Bad).sample
+    engine_notes Faker::Lorem.paragraph 5
     accesories Faker::Lorem.paragraph 10
     insurance_number '123UNOI98'
     insurance_company

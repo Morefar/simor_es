@@ -1,6 +1,97 @@
 %p#notice= notice
 
+%h1 Inspection Record
+%h2
+  Inspection number
+  = @inspection.inspection_number
+.attribute-group
+  %h3 Time and Location
+  %b Date and Time:
+  = @inspection.date
+  .location-group
+    %b Location:
+    %br/
+    = @inspection.address
+    %br/
+    = @inspection.city
+    %br/
+    = @inspection.state
+    %br/
+.attribute-group
+  %h3 Asset Value
+  %b Initial value
+  = number_to_currency @inspection.asset.book_value
+  %b Current value
+  = number_to_currency @inspection.current_value
+  %b Appraiser's Value
+  = number_to_currency @inspection.appraiser_value
+.attribute-group
+  %h3 Documents
+  .group
+    %b Soat Number:
+    = @inspection.soat_number
+    %br/
+    %b Coverage begin date
+    = @inspection.soat_begin_date
+    %b Coverage finish date
+    = @inspection.soat_finish_date
+  .group
+    %b Emissions certificate number:
+    = @inspection.emissions_certificate
+    %br/
+    %b Issue date:
+    = @inspection.emissions_begin_date
+    %b Expiry date:
+    = @inspection.emissions_finish_date
+  - if @inspection.insurance_number
+    .group
+      %b Insurance Company
+      = @inspection.insurance_company.name
+      %b Insurance number
+      = @inspection.insurance_number
+      %b Insured value
+      = number_to_currency @inspection.insured_value
+      %br/
+      %b Coverage starting date:
+      = @inspection.insurance_start
+      %b Coverage expiry date:
+      = @inspection.insurance_finish
+.attribute-group
+  %h3 General Condition
+  %p
+    %h4 Maintenance
+    = @inspection.maintenance
+  %p
+    %h4 Repairs
+    = @inspection.repairs
+  %p
+    %h4 security
+    = @inspection.security
+  %p
+    %h4 Exterior
+    %b= @inspection.exterior
+    = @inspection.exterior_notes
+  %p
+    %h4 Interior
+    %b= @inspection.interior
+    = @inspection.interior_notes
+  %p
+    %h4 Engine
+    %b= @inspection.engine
+    = @inspection.engine_notes
+.attribute-group
+  %h3 Other Information
+  - if @inspection.accesories
+    %p
+      %h4 Accesories
+      = @inspection.accesories
+  - if @inspection.inventory
+    %p
+      %h4 Inventory
+      = link_to "Inventory", @inspection.inventory
 
+%br/
+%br/
 = link_to 'Edit', edit_inspection_path(@inspection)
 \|
 = link_to 'Back', inspections_path
