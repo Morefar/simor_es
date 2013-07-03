@@ -14,20 +14,20 @@ describe Contract do
 
   it 'is valid with a unique contract number' do
     create(:contract, number: '10980984-9873')
-    contract = build(:contract, number: '10980984-9874')
+    contract = build(:contract, number: '10980984-9874', lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
     expect(contract).to be_valid
   end
 
   it 'is valid with a duplicate contract number from diferent clients' do
 
     create(:contract, number: '10980984-9873', client_id: 1)
-    contract = build(:contract, number: '10980984-9873', client_id: 2)
+    contract = build(:contract, number: '10980984-9873', client_id: 2, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
     expect(contract).to be_valid
   end
 
   it  'is invalid with a duplicate contract number from the same client' do
     create(:contract, number: '10980984-9873', client_id: 1)
-    contract = build(:contract, number: '10980984-9873', client_id: 1)
+    contract = build(:contract, number: '10980984-9873', client_id: 1, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
     expect(contract).to have(1).errors_on(:number)
   end
 
@@ -50,6 +50,7 @@ describe Contract do
     expect(Contract.create(number: '10980984-9873',
     :category => Category.new(name: 'Financial'),
     :client_id => 1,
+    :lessee => create(:entity),
     :start_date => Date.current,
     :first_canon_date => Date.current << 1,
     :duration => 24,
@@ -61,6 +62,7 @@ describe Contract do
     :location_of_assets => 'Chicago')).to have(1).errors_on(:first_canon_date)
     expect(Contract.create(number: '10980984-9873',
     :category => Category.new(name: 'Operational'),
+    :lessee => create(:entity, identification_type: create(:identification_type, name: 'NIT')),
     :client_id => 1,
     :start_date => Date.current,
     :first_canon_date => Date.current,
@@ -118,7 +120,6 @@ describe Contract do
       contract = create(:contract, number: 'lo123')
       kind = create(:kind, name: 'Camion')
       body = create(:body, name: 'Estacas')
-      create(:build, kind: kind, body: body)
       create(:asset, contract: contract, vin: 'UHEB1287097SHM863', kind: kind, body: body)
       create(:asset, contract: contract, vin: 'UHEB1287097SHM864', kind: kind, body: body)
       create(:asset, contract: contract, vin: 'UHEB1287097SHM865', kind: kind, body: body)

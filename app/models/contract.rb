@@ -1,10 +1,6 @@
 class Contract < ActiveRecord::Base
 
-  attr_accessible :number, :start_date, :first_canon_date,
-            :expiration_date, :duration, :periodicity,
-            :total_value, :currency, :asset_count, :location_of_assets,
-            :client_id, :category_id, :make, :model, :kind, :body,
-            :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id
+  attr_accessible :number, :start_date, :first_canon_date, :expiration_date, :duration, :periodicity, :total_value, :currency, :asset_count, :location_of_assets, :client_id, :category_id, :make, :model, :kind, :body, :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id, :lessee
   belongs_to :category
   belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
   has_many :assets, inverse_of: :contract
@@ -13,9 +9,7 @@ class Contract < ActiveRecord::Base
   has_many :entities, through: :cosigners
   has_many :comments, as: :commentable
 
-  validates :client_id, :number, :category, :start_date, :duration, :total_value,
-            :expiration_date, :location_of_assets, :periodicity,
-            :first_canon_date, presence: true
+  validates :client_id, :number, :category, :start_date, :duration, :total_value, :lessee, :expiration_date, :location_of_assets, :periodicity, :first_canon_date, presence: true
   validates :number, :uniqueness => { case_sensitive: false, scope: :client_id }
   validates :duration, :numericality => { only_integer: true,
                                           greater_than: 0 }

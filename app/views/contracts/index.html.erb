@@ -21,7 +21,7 @@
       <td><%= contract.created_at.localtime %></td>
       <td><%= contract.start_date %></td>
       <td><%= contract.expiration_date %></td>
-      <td>Not implemented yet</td>
+      <td><%= link_to contract.lessee.name %></td>
       <td><%= contract.category.name %></td>
       <td><%= contract.assets.count %></td>
       <td>

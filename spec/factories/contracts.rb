@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :contract do
     sequence (:client_id) { |n| n }
+    lessee { create(:entity) }
     sequence (:number) { |n| "10980984-987#{n}"}
-    category {build(:category)}
+    category { build(:category) }
     start_date Date.current
     first_canon_date {start_date >> ([0, 1].sample)}
     duration [6, 12, 24, 48, 60].sample
