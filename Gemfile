@@ -11,19 +11,19 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'better_errors', '~> 0.9.0'
+  gem 'binding_of_caller', '~> 0.7.2'
   gem 'meta_request'
   gem 'debugger', '~> 1.6.0'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.13.2'
   gem 'factory_girl_rails'
-  gem 'guard-rspec'
+  gem 'guard-rspec', '~> 3.0.2'
   gem 'pry'
   gem 'pry-nav'
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 2.1.0'
+  gem 'shoulda-matchers', '~> 2.2.0'
   gem 'faker', '~> 1.1.2'
   gem 'capybara'
   gem 'database_cleaner'
@@ -34,7 +34,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

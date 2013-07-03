@@ -69,12 +69,14 @@ fieldset {
   float: right;
 }
 nav {
-  /*position: fixed;*/
+    /*position: fixed;*/
 }
 
 header {
   position: fixed;
+  background: black;
   width: 100%;
+  color: white;
 }
 
 nav li{
@@ -82,9 +84,22 @@ nav li{
   display: inline;
 }
 
+nav li a {
+  color: white
+}
+
+nav li a:visited {
+  color: darkgray;
+}
+
+nav li a:hover {
+  color: lightgray;
+}
+
 li{
   list-style: none;
 }
+
 .content {
   padding-top: 50px;
 }
