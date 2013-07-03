@@ -1,17 +1,19 @@
 FactoryGirl.define do
   factory :asset do
     before(:create) do |asset|
-    create(:build, kind: asset.kind, body: asset.body)
+        unless Build.where(kind_id: asset.kind, body_id: asset.body).first
+            create(:build, kind: asset.kind, body: asset.body)
+        end
     end
     contract
     invoice_id 12
     sequence(:inventory_number) { |n| n }
     license_plate 'ABC197'
     make { build(:make) }
-    model {build(:model, make: make)}
+    model { build(:model, make: make)}
     year  2013
     cylinder_cap 3500
-    color {build(:color)}
+    color { build(:color)}
     service_type "private"
     kind
     body

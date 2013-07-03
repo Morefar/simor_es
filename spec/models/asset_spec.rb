@@ -14,6 +14,9 @@ describe Asset do
 
   before(:each) do
     @build_hash = create_build
+    identification_type = create(:identification_type, name: 'NIT')
+    lessee = create(:entity, identification_type: identification_type)
+    @contract = create(:contract, lessee: lessee)
   end
 
   it 'has a valid factory' do
@@ -60,7 +63,7 @@ describe Asset do
     it 'is invalid with numbers in it\'s first two characters' do
       expect(build(:asset,
         license_plate: '2D3098', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:license_plate)
-      expect(build(:asset,
+      expect(build(:asset, contract: @contract,
         license_plate: 'D23098', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:license_plate)
     end
 
@@ -71,7 +74,7 @@ describe Asset do
       end
     end
 
-    context 'old lincense plate' do
+    context 'old license plate' do
       it 'is valid with 2 letters first and 4 digits afterwards' do
         expect(build(:asset,
           license_plate: 'EG3459', body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
@@ -80,26 +83,26 @@ describe Asset do
   end
 
   it 'is invalid if year is not between 2000 and 2014' do
-    expect(build(:asset, year: 1999, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:year)
-    expect(build(:asset, year: (Date.current >> 24).year, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:year)
-    expect(build(:asset, year: (Date.current >> 12).year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
-    expect(build(:asset, year: Date.current.year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
-    expect(build(:asset, year: (Date.current << 24).year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
+    expect(build(:asset, contract: @contract, year: 1999, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:year)
+    expect(build(:asset, contract: @contract, year: (Date.current >> 24).year, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:year)
+    expect(build(:asset, contract: @contract, year: (Date.current >> 12).year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
+    expect(build(:asset, contract: @contract, year: Date.current.year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
+    expect(build(:asset, contract: @contract, year: (Date.current << 24).year, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
   end
 
   describe 'must have a valid cylinder capacity' do
     it 'is invalid with a cylinder capacity greater than 8000' do
-      expect(build(:asset, cylinder_cap: 8001, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:cylinder_cap)
-      expect(build(:asset, cylinder_cap: 8000, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
+      expect(build(:asset, contract: @contract, cylinder_cap: 8001, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:cylinder_cap)
+      expect(build(:asset, contract: @contract, cylinder_cap: 8000, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
   end
 
     it 'is invalid with a cylinder capacity less than 50' do
-      expect(build(:asset, cylinder_cap: 49, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).error_on(:cylinder_cap)
-      expect(build(:asset, cylinder_cap: 50, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
+      expect(build(:asset, contract: @contract, cylinder_cap: 49, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).error_on(:cylinder_cap)
+      expect(build(:asset, contract: @contract, cylinder_cap: 50, body: @build_hash[:body], kind: @build_hash[:kind])).to be_valid
     end
 
     it 'is invalid with a negative cylinder capacity' do
-      expect(build(:asset, cylinder_cap: -1, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).error_on(:cylinder_cap)
+      expect(build(:asset, contract: @contract, cylinder_cap: -1, body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).error_on(:cylinder_cap)
     end
   end
 
@@ -119,17 +122,17 @@ describe Asset do
 
     context 'invalid size' do
       it 'is invalid if it\'s size is greater than 17 characters' do
-        expect(build(:asset, serial_number: 'UJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
-        expect(build(:asset, motor_number: 'EJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
-        expect(build(:asset, chassis_number: 'AJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
-        expect(build(:asset, vin: 'PJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, serial_number: 'UJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
+        expect(build(:asset, contract: @contract, motor_number: 'EJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
+        expect(build(:asset, contract: @contract, chassis_number: 'AJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
+        expect(build(:asset, contract: @contract, vin: 'PJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
       end
 
       it 'is invalid if it\'s size is smaller than 17 characters' do
-        expect(build(:asset, serial_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
-        expect(build(:asset, motor_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
-        expect(build(:asset, chassis_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
-        expect(build(:asset, vin: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, serial_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
+        expect(build(:asset, contract: @contract, motor_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
+        expect(build(:asset, contract: @contract, chassis_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
+        expect(build(:asset, contract: @contract, vin: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
       end
     end
 
@@ -142,10 +145,10 @@ describe Asset do
 
     context 'Vehicle Identification Number' do
       it "is invalid if the VIN contains the letters 'I', 'O', 'Q', or 'Ñ'" do
-        expect(build(:asset, vin: 'UHEB12I7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
-        expect(build(:asset, vin: 'UHEB12O7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
-        expect(build(:asset, vin: 'UHEB12Q7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
-        expect(build(:asset, vin: 'UHEB12Ñ7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, vin: 'UHEB12I7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, vin: 'UHEB12O7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, vin: 'UHEB12Q7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, vin: 'UHEB12Ñ7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
       end
 
       # it 'is invalid with a duplicate VIN' do
