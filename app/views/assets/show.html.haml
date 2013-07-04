@@ -4,9 +4,113 @@
 %h2
   Inventory Number
   = @asset.inventory_number
+.attribute-group
+  %h3 Contract Information
+  %p
+    %b Number:
+    = link_to @asset.contract.number, @asset.contract
+    %b Category:
+    = @asset.contract.category.name
+  %p
+    %b Start date:
+    = @asset.contract.start_date
+    %b First canon date:
+    = @asset.contract.first_canon_date
+    %b Expiration date:
+    = @asset.contract.first_canon_date
+  %p
+    %b Lessee:
+    = link_to @asset.contract.lessee.name, @asset.contract.lessee
+    %b Lessee Id:
+    = @asset.contract.lessee.identification_type.name
+    = @asset.contract.lessee.identification_number
 
-= @asset.book_value
-= @asset.inspection_count
+.attribute-group
+  %h3 Basic Asset Information
+  %p
+    %b License plate:
+    = @asset.license_plate
+    %b Make:
+    = @asset.make.name.upcase
+    %b Model:
+    = @asset.model.name.upcase
+    %b Year:
+    = @asset.year
+  %p
+    %b Cylinder Capacity
+    = @asset.cylinder_cap
+    %b Color
+    = @asset.color.name.upcase
+    %b Service type
+    = @asset.service_type
+  %p
+    %b Kind
+    = @asset.kind.name
+    %b Body
+    = @asset.body.name
+    %b Fuel Type:
+    = @asset.fuel_type
+    %b Capacity (Kg/PS)
+    = @asset.capacity
+  %p
+    %b Motor Number
+    = @asset.motor_number
+    %b REG
+    - if @asset.rerecorded_motor?
+      Yes
+    - else
+      No
+    %b VIN
+    = @asset.vin
+  %p
+    %b Serial Number
+    = @asset.serial_number
+    %b REG:
+    -if @asset.rerecorded_serial?
+      Yes
+    -else
+      No
+    %b Chassis Number
+    = @asset.chassis_number
+    %b REG:
+    - if @asset.rerecorded_chassis?
+      Yes
+    -else
+      No
+  .attribute-group
+    %h3 Additional Asset Information
+    %p
+      %b Mobility restriction
+      = @asset.mobility_restriction
+      %b Shield Level
+      = @asset.shield_level
+      %b Horse Power
+      = @asset.horse_power
+    %p
+      - if @asset.importd_assembld?
+        %b Importation Statement
+        = @asset.import_statement
+        %b Importation Date
+        = @asset.import_date
+      - else
+        %b Assembled
+    %p
+      %b Doors:
+      = @asset.number_of_doors
+      %b Property Limitation:
+      = @asset.property_limitation
+    %p
+      %b Registration Date:
+      = @asset.registration_date
+      %b Transit Permit Issue Date
+      = @asset.tp_issue_date
+      %b Transit Permit Expiration Date
+      = @asset.tp_expiration_date
+      %b Transit Authority
+      = @asset.transit_authority
+    %p
+      %b Initial Value:
+      = number_to_currency @asset.book_value
 
 = link_to 'Edit', edit_asset_path(@asset)
 |
@@ -14,8 +118,8 @@
 
 %h2 Inspections
 
-Placeholder for inspection history, written in HAML
-
+= render 'inspections/index_table', inspections: @asset.inspections
+%br/
 %h2 Comments
 
 - @asset.comments.each do |comment|
