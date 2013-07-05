@@ -7,5 +7,6 @@
   %td= asset.year
   %td= asset.service_type
   %td= number_to_currency asset.book_value, unit: ''
+  %td= asset.inspections.count
   %td= link_to 'Edit', edit_asset_path(asset)
   %td= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' }

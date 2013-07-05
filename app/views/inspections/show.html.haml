@@ -1,9 +1,11 @@
 %p#notice= notice
 
-%h1 Inspection Record
-%h2
-  Inspection number
+%h1
+  Inspection Record Nº
   = @inspection.inspection_number
+%h2
+  Inspected Asset Inventory number:
+  = link_to @inspection.asset.inventory_number, @inspection.asset
 .attribute-group
   %h3 Time and Location
   %b Date and Time:
@@ -19,11 +21,11 @@
     %br/
 .attribute-group
   %h3 Asset Value
-  %b Initial value
+  %b Initial value:
   = number_to_currency @inspection.asset.book_value
-  %b Current value
+  %b Current value:
   = number_to_currency @inspection.current_value
-  %b Appraiser's Value
+  %b Appraiser's Value:
   = number_to_currency @inspection.appraiser_value
 .attribute-group
   %h3 Documents
@@ -31,9 +33,9 @@
     %b Soat Number:
     = @inspection.soat_number
     %br/
-    %b Coverage begin date
+    %b Coverage begin date:
     = @inspection.soat_begin_date
-    %b Coverage finish date
+    %b Coverage finish date:
     = @inspection.soat_finish_date
   .group
     %b Emissions certificate number:
@@ -45,11 +47,11 @@
     = @inspection.emissions_finish_date
   - if @inspection.insurance_number
     .group
-      %b Insurance Company
+      %b Insurance Company:
       = @inspection.insurance_company.name
-      %b Insurance number
+      %b Insurance number:
       = @inspection.insurance_number
-      %b Insured value
+      %b Insured value:
       = number_to_currency @inspection.insured_value
       %br/
       %b Coverage starting date:
@@ -69,7 +71,7 @@
     = @inspection.security
   %p
     %h4 Exterior
-    %b= @inspection.exterior
+    %b= %@inspection.exterior
     = @inspection.exterior_notes
   %p
     %h4 Interior
