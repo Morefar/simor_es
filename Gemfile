@@ -10,7 +10,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'pg', '~> 0.15.1'
   gem 'better_errors', '~> 0.9.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'meta_request'
