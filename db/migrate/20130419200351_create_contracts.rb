@@ -12,7 +12,7 @@ class CreateContracts < ActiveRecord::Migration
       t.date :expiration_date
       t.float :total_value
       t.string :currency
-      t.integer :asset_count
+      t.integer :asset_count, default: 0
       t.text :location_of_assets
       t.boolean :option_to_buy
       t.date :last_date_to_option

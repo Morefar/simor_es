@@ -39,6 +39,7 @@ class Asset < ActiveRecord::Base
     message: "has an incorrect format. 'I', 'O', 'Q', 'Ñ' or non-word characters are not allowed."
   }
   validate :authorized_build
+  after_save :update_parent_contract_information
 
   def authorized_build
     errors.add(:kind, 'The build combination isn\'t authorized') unless Build.authorized_build?(kind_id, body_id)
@@ -47,4 +48,13 @@ class Asset < ActiveRecord::Base
   def unique_identifier_present
 
   end
+
+  def update_parent_contract_information
+    if self.contract.present?
+      parent_contract = self.contract
+      parent_contract.asset_count += 1
+      parent_contract.save
+    end
+  end
+
 end
