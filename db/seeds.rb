@@ -104,6 +104,11 @@ Contract.destroy_all
 end
 puts "#{Contract.count} contracts created"
 
+Cosigner.destroy_all
+600.times do
+  Cosigner.create(contract: Contract.sample, entity: Entity.sample)
+end
+
 Asset.destroy_all
 letter_array = ('A'..'Z').to_a
 digit_array = (0..9).to_a
