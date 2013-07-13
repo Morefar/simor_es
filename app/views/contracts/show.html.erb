@@ -1,32 +1,25 @@
-<h1>contract details</h1>
+<h1>contract number: <%= @contract.number %></h1>
 
+<h2>Contract Details</h2>
 <div>
-  <b>Contract number: </b>
-  <%= @contract.number %>
   <b>Contract category: </b>
   <%= @contract.category.name %>
 </div>
 <div>
   <b>Contract start date: </b>
   <%= @contract.start_date %>
-</div>
-<div>
   <b>Contract first canon payment date: </b>
   <%= @contract.first_canon_date %>
-</div>
-<div>
   <b>Contract expiration date: </b>
   <%= @contract.expiration_date %>
 </div>
 <div>
   <% if @contract.option_to_buy %>
-  <b>Last date to excercise option to buy assets: </b>
-  <%= @contract.last_date_to_option %>
+    <b>Last date to excercise option to buy assets: </b>
+    <%= @contract.last_date_to_option %>
   <% end %>
-</div>
-<div>
   <b>Contract Duration: </b>
-  <!-- FIXME Take logic out of here. Use helper method -->
+  <!-- FIXME Take logic out of here. Use presenter method -->
     <%= pluralize @contract.duration,
     case @contract.periodicity
         when 1
@@ -47,10 +40,42 @@
 <div>
   <b>Assets in this contract: </b>
   <%= @contract.assets.count %>
-</div>
-<div>
  <b>Location of assets: </b>
   <%= @contract.location_of_assets %>
+</div>
+
+  <h2>Lessee Information</h2>
+<div>
+  <h3>Lessee</h3>
+  <p>
+    <b>Name: </b>
+    <%= link_to @lessee.name, @lessee %>
+    <b>Identification Document: </b>
+    <%= @lessee.identification_type.name %> <%= @lessee.identification_number %>
+  </p>
+  <p>
+    <b>Address: </b>
+    <%= @lessee.address %>, <%= @lessee.city %>, <%= @lessee.state %>
+  </p>
+</div>
+<div>
+  <% unless @cosigners.empty? %>
+    <h3>Cosigners</h3>
+    <p>
+      <% @cosigners.map(&:entity).each do |cosigner| %>
+        <p>
+          <b>Name: </b>
+          <%= link_to cosigner.name, cosigner %>
+          <b>Identification Document: </b>
+          <%= cosigner.identification_type.name %> <%= cosigner.identification_number %>
+        </p>
+        <p>
+          <b>Address: </b>
+          <%= cosigner.address %>, <%= cosigner.city %>, <%= cosigner.state %>
+        </p>
+      <% end %>
+    </p>
+  <% end %>
 </div>
 
 <% if @contract.asset_count > 0 %>

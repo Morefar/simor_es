@@ -17,7 +17,7 @@
   <tbody>
     <% @contracts.each do |contract| %>
     <tr>
-      <td><%= contract.number %></td>
+      <td><%= link_to contract.number, contract %></td>
       <td><%= contract.created_at.localtime %></td>
       <td><%= contract.start_date %></td>
       <td><%= contract.expiration_date %></td>
@@ -25,7 +25,6 @@
       <td><%= contract.category.name %></td>
       <td><%= contract.assets.count %></td>
       <td>
-        <%= link_to "View", contract_url(contract.id) %> |
         <%= link_to "Edit", edit_contract_url(contract.id) %> |
         <%= link_to "Delete", contract_url(contract.id), :method => :delete, :confirm => "Are you completely sure you want to erase contract #{contract.number}?" %>
       </td>

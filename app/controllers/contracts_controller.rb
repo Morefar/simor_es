@@ -27,6 +27,8 @@ class ContractsController < ApplicationController
   end
 
   def show
+    @lessee = @contract.lessee
+    @cosigners = Array(@contract.cosigners)
   end
 
 #UPDATE ACTIONS
