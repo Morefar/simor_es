@@ -16,3 +16,9 @@
 
 #Ingnore gemset file
 .ruby-gemset
+
+#Ignore sublime project files
+AssetHound.subl*
+
+#Ignore tags file
+/tags
