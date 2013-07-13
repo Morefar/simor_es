@@ -1,5 +1,5 @@
 class Cosigner < ActiveRecord::Base
-  attr_accessible :entity_id, :contract_id
+  attr_accessible :entity_id, :contract_id, :entity, :contract
   belongs_to :entity
   belongs_to :contract
   validates :entity_id, :contract_id, presence: true
