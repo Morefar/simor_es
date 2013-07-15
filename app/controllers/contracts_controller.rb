@@ -24,9 +24,11 @@ class ContractsController < ApplicationController
 #READ ACTIONS
   def index
       @contracts = Contract.all
+      add_breadcrumb 'Contracts', :contracts_path
   end
 
   def show
+    add_breadcrumb "Contract: #{@contract.number}", @contract
     @lessee = @contract.lessee
     @cosigners = Array(@contract.cosigners)
   end

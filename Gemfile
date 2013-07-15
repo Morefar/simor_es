@@ -43,6 +43,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'breadcrumbs_on_rails', '~> 2.3.0'
 gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.3'
