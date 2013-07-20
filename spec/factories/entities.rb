@@ -10,5 +10,10 @@ FactoryGirl.define do
     name {Faker::Name.name}
     phone {Faker::PhoneNumber.phone_number}
     state {Faker::Address.state}
+      factory :invalid_entity do
+        name nil
+        identification_type_id nil
+        identification_number nil
+      end
   end
 end

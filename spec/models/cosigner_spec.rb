@@ -14,4 +14,11 @@ describe Cosigner do
     entity = create(:entity, identification_type: identification_type)
     expect(build(:cosigner, entity: entity)).to be_valid
   end
+
+  it 'only accepts cosigners that are not registered as lessee on the same contract' do
+    identification_type = create(:identification_type, name: 'CC')
+    entity = create(:entity, identification_type_id: identification_type.id)
+    contract = create(:contract, lessee: entity)
+    expect(build(:cosigner, entity: entity)).to have(1).errors_on(:entity_id)
+  end
 end
