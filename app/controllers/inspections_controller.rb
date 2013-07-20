@@ -1,9 +1,11 @@
 class InspectionsController < ApplicationController
   before_filter :find_inspection, except: [:new, :create, :index]
 
-  def index
-    @inspections = Inspection.all
 
+  def index
+    # add_breadcrumb 'Inspections',
+    @inspections = Inspection.all
+    add_breadcrumb "Inspections", :inspections_path
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @inspections }
@@ -11,6 +13,9 @@ class InspectionsController < ApplicationController
   end
 
   def show
+    add_breadcrumb "Contract: #{@inspection.contract.number}", @inspection.contract
+    add_breadcrumb "Asset: #{@inspection.asset.inventory_number}", @inspection.asset
+    add_breadcrumb "Inspection: #{@inspection.inspection_number}" , @inspection
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inspection }

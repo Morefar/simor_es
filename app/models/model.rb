@@ -3,6 +3,6 @@ class Model < ActiveRecord::Base
   belongs_to :make, inverse_of: :models
 
   validates :name, presence: true
-  validates :name, uniqueness: {scope: :make_id}
+  validates :name, uniqueness: { scope: :make_id }
 
 end

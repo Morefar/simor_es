@@ -1,0 +1,23 @@
+%h1 Lessees and Cosigners Directory
+
+%p= link_to "> Add a new Person", new_entity_path
+%table
+  %thead
+    %tr
+      %th Name
+      %th Identification
+      %th Email
+      %th City
+      %th Lease Contracts
+      %th Cosigner Contracts
+  %tbody
+    - @entities.each do |entity|
+      %tr
+        %td= link_to entity.name, entity
+        %td
+          = entity.identification_type.name
+          = entity.identification_number
+        %td= entity.email
+        %td= entity.city
+        %td= entity.contracts_as_lessee.count
+        %td= entity.contracts_as_cosigner.count

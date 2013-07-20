@@ -49,8 +49,4 @@ class Contract < ActiveRecord::Base
       errors.add(:last_date_to_option, "can't be earlier than the expiration date") if (last_date_to_option < expiration_date)
     end
   end
-
-  def asset_count
-    assets.count
-  end
 end

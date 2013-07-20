@@ -1,0 +1,41 @@
+%h1 Entity / Person Details
+
+%h2
+  Name:
+  = @entity.name
+%div
+  %b Identification:
+  = @entity.identification_type.name
+  = @entity.identification_number
+%div
+  %b Email:
+  = @entity.email
+%div
+  %b Contact Numbers
+  %p
+    %b Mobile Phone
+    = @entity.mobile_phone
+  %p
+    %b Work Phone
+    = @entity.phone
+%div
+  %b Contact Registered Address
+  %br/
+  = @entity.address
+  %br/
+  = @entity.city
+  %br/
+  = @entity.state
+%div
+  - if @entity.contracts_as_lessee
+    %b Holds the lease on these contracts:
+    %ul
+      - @entity.contracts_as_lessee.each do |contract|
+        %li= link_to contract.number, contract
+%div
+  - if @entity.contracts_as_cosigner
+    %b Cosigner in the following contracts:
+    %ul
+      - @entity.contracts_as_cosigner.each do |contract|
+        %li= link_to contract.number, contract
+

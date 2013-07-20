@@ -13,4 +13,8 @@ FactoryGirl.define do
     currency 'COP'
     location_of_assets 'CHICAGO'
   end
+
+  factory :invalid_contract do
+    lessee nil
+  end
 end

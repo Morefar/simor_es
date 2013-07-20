@@ -3,7 +3,7 @@ class AssetsController < ApplicationController
 
   def index
     @assets = Asset.all
-
+    add_breadcrumb 'Assets', :assets_path
     respond_to do |format|
       format.html
       format.json { render json: @assets }
@@ -14,7 +14,8 @@ class AssetsController < ApplicationController
 
   def show
     @asset = Asset.find(params[:id])
-
+    add_breadcrumb "Contract: #{@asset.contract.number}", @asset.contract
+    add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
     respond_to do |format|
       format.html
       format.json { render json: @asset }

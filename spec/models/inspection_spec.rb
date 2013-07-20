@@ -23,8 +23,12 @@ def create_asset
 
   it { should validate_presence_of(:inspection_number) }
   it { should validate_presence_of(:asset) }
-  it { should validate_uniqueness_of(:inspection_number).scoped_to(:asset).case_insensitive
-   }
+  it 'validates uniqueness of the inspection number scoped to the asset' do
+    create(:inspection, inspection_number: 1, asset: @asset)
+    expect(build(:inspection, inspection_number: 1, asset: @asset)).to have(1).errors_on(:inspection_number)
+    expect(build(:inspection, inspection_number: 2, asset: @asset)).to be_valid
+   end
+
   it { should validate_presence_of(:person_in_charge) }
   it { should validate_presence_of(:pic_id) }
   it { should validate_presence_of(:pic_job) }
