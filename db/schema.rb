@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612215605) do
+ActiveRecord::Schema.define(:version => 20130720071035) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -130,6 +130,19 @@ ActiveRecord::Schema.define(:version => 20130612215605) do
 
   add_index "cosigners", ["contract_id"], :name => "index_cosigners_on_contract_id"
   add_index "cosigners", ["entity_id"], :name => "index_cosigners_on_entity_id"
+
+  create_table "documents", :force => true do |t|
+    t.string   "file"
+    t.string   "title"
+    t.string   "description"
+    t.string   "category"
+    t.integer  "documentable_id"
+    t.string   "documentable_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "documents", ["documentable_id", "documentable_type"], :name => "index_documents_on_documentable_id_and_documentable_type"
 
   create_table "entities", :force => true do |t|
     t.string   "address"
