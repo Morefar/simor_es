@@ -1,0 +1,39 @@
+=form_for @entity do |f|
+  - if @entity.errors.any?
+    #error_explanation
+    %h2= "#{pluralize(@entity.errors.count, "error")} prohibited this entity from being saved:"
+    %ul
+      - @entity.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :identification_type_id
+    = f.collection_select :identification_type_id, IdentificationType.all, :id, :name
+    = f.label :identification_number
+    = f.text_field :identification_number
+  .field
+    = f.label :email
+    = f.email_field :email
+  .field
+    = f.label :mobile_phone
+    = f.phone_field :mobile_phone
+    = f.label :phone, 'Work phone'
+    = f.phone_field :phone
+  .field
+    %p
+      = f.label :address
+      = f.text_field :address
+    %p
+      = f.label :state
+      = f.text_field :state
+    %p
+      = f.label :city
+      = f.text_field :city
+  .action
+    = f.submit
+%br/
+
+
