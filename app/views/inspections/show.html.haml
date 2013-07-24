@@ -91,9 +91,16 @@
     %p
       %h4 Inventory
       = link_to "Inventory", @inspection.inventory
-
 %br/
+%h2 Documents
+- @inspection.documents.each do |document|
+  = render 'documents/document', document: document
+= render 'documents/form', document: Document.new, documentable: @inspection
 %br/
+%h2 Comments
+- @inspection.comments.each do |comment|
+  = render 'comments/comment', comment: comment
+= render 'comments/form', comment: Comment.new, commentable: @inspection
 = link_to 'Edit', edit_inspection_path(@inspection)
 \|
 = link_to 'Back', inspections_path

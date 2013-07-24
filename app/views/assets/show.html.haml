@@ -116,12 +116,17 @@
 |
 = link_to 'Back', assets_path
 
-%h2 Inspections
+- unless @asset.inspections.empty?
+  %h2 Inspections
 
-= render 'inspections/index_table', inspections: @asset.inspections
-%br/
+  = render 'inspections/index_table', inspections: @asset.inspections
+  %br/
+
+%h2 Documents
+- @asset.documents.each do |document|
+  = render 'documents/document', document: document
+= render 'documents/form', document: Document.new, documentable: @asset
 %h2 Comments
-
 - @asset.comments.each do |comment|
   = render 'comments/comment', comment: comment
 = render 'comments/form', comment: Comment.new, commentable: @asset
