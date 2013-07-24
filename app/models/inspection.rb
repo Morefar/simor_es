@@ -6,6 +6,7 @@ class Inspection < ActiveRecord::Base
   has_one :contract, through: :asset
   has_one :inventory
   has_many :comments, as: :commentable
+  has_many :documents, as: :documentable
 
   validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :date, :asset,presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }

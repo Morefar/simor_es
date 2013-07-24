@@ -11,6 +11,7 @@ class Asset < ActiveRecord::Base
   belongs_to :color
   has_many :inspections
   has_many :comments, as: :commentable
+  has_many :documents, as: :documentable
 
   validates :inventory_number, :license_plate, :make, :model, :year, :registration_date,
     :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, presence: true
