@@ -132,9 +132,11 @@ ActiveRecord::Schema.define(:version => 20130720071035) do
   add_index "cosigners", ["entity_id"], :name => "index_cosigners_on_entity_id"
 
   create_table "documents", :force => true do |t|
-    t.string   "file"
-    t.string   "title"
-    t.string   "description"
+    t.string   "content"
+    t.string   "slug"
+    t.string   "md5hash"
+    t.string   "content_type"
+    t.string   "file_size"
     t.string   "category"
     t.integer  "documentable_id"
     t.string   "documentable_type"
