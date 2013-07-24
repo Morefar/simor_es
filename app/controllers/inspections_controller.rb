@@ -3,7 +3,6 @@ class InspectionsController < ApplicationController
 
 
   def index
-    # add_breadcrumb 'Inspections',
     @inspections = Inspection.all
     add_breadcrumb "Inspections", :inspections_path
     respond_to do |format|
@@ -71,6 +70,6 @@ class InspectionsController < ApplicationController
 
 private
   def find_inspection
-    @inspection = Inspection.find_by_id(params[:id])
+    @inspection = Inspection.find_by_id(params[:id]) if params[:id]
   end
 end

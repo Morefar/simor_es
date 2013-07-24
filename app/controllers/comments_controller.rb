@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
+  before_filter :find_comment, except:  [:create]
 
   def edit
-    @comment = Comment.find(params[:id])
   end
 
   def create
@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully updated.' }
@@ -26,5 +25,9 @@ class CommentsController < ApplicationController
     end
   end
 
+  private
+  def find_comment
+    @comment = Comment.find(params[:id]) if params[:id]
+  end
 
 end

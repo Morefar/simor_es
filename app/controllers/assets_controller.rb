@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-
+  before_filter :find_asset, except: [:new, :create, :index]
 
   def index
     @assets = Asset.all
@@ -13,7 +13,6 @@ class AssetsController < ApplicationController
 
 
   def show
-    @asset = Asset.find(params[:id])
     add_breadcrumb "Contract: #{@asset.contract.number}", @asset.contract
     add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
     respond_to do |format|
@@ -35,10 +34,7 @@ class AssetsController < ApplicationController
 
 
   def edit
-    @asset = Asset.find(params[:id])
   end
-
-
 
   def create
     @asset = Asset.new
@@ -53,10 +49,8 @@ class AssetsController < ApplicationController
     respond_to do |format|
       if @asset.save
         format.html { redirect_to @asset, notice: 'Asset was successfully created.' }
-        format.json { render json: @asset, status: :created, location: @asset }
       else
         format.html { render action: "new" }
-        format.json { render json: @asset.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,15 +58,11 @@ class AssetsController < ApplicationController
 
 
   def update
-    @asset = Asset.find(params[:id])
-
     respond_to do |format|
       if @asset.update_attributes(params[:asset])
         format.html { redirect_to @asset, notice: 'Asset was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @asset.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,12 +70,14 @@ class AssetsController < ApplicationController
 
 
   def destroy
-    @asset = Asset.find(params[:id])
     @asset.destroy
-
     respond_to do |format|
       format.html { redirect_to assets_url }
-      format.json { head :no_content }
     end
+  end
+
+  private
+  def find_asset
+    @asset = Asset.find_by_id params[:id] if params[:id]
   end
 end
