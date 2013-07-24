@@ -120,7 +120,7 @@ GEM
       rack-contrib
       railties
     method_source (0.8.1)
-    mime-types (1.22)
+    mime-types (1.23)
     multi_json (1.7.2)
     nokogiri (1.5.9)
     pg (0.15.1)

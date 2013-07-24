@@ -22,3 +22,7 @@ AssetHound.subl*
 
 #Ignore tags file
 /tags
+
+#Ignore uploaded and temporary files.
+/public/uploads
+/public/documents
