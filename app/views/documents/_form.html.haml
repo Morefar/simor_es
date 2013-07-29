@@ -7,13 +7,13 @@
           %li= msg
   - unless document.documentable.present?
     = f.hidden_field :documentable_id, value: documentable.id
-    = f.hidden_field :documentable_type, value: documentable.class
+    = f.hidden_field :documentable_type, value: documentable.class.to_s
   .field
     = f.label :slug
     = f.text_field :slug
   .field
     = f.label :category
-    = f.text_field :category
+    = f.select :category, %W(Photo Document Contract Invoice Imprint Other)
   .field
     = f.label :content, 'Choose the image you wish to upload'
     = f.file_field :content

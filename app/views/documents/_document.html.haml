@@ -1,4 +1,7 @@
 .document
   %p
-    = link_to image_tag(document.content_url.to_s), document.content_url.to_s, target: '_blank'
+    = link_to image_tag(document.content_url(:thumb).to_s), document.content_url.to_s, target: '_blank'
   %b= document.slug
+  .actions
+    = link_to 'edit', edit_document_path(document)
+    = link_to 'remove', document, confirm: 'Are you sure?', method: :delete

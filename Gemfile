@@ -48,8 +48,13 @@ gem 'breadcrumbs_on_rails', '~> 2.3.0'
 gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.3'
+gem 'rmagick', '~> 2.13.2'
 gem 'carrierwave', '~> 0.9.0'
+gem 'carrierwave_direct', '~> 0.0.13'
+gem 'sidekiq'
+gem 'fog'
 
+# gem 'pg_search', '~> 0.7.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -19,7 +19,6 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -31,9 +30,9 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    docummentable = @document.docummentable
+    documentable = @document.documentable
     @document.destroy
-    redirect_to docummentable
+    redirect_to documentable
   end
 
   private

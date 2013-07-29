@@ -18,6 +18,12 @@
                 <li><%= link_to 'Admin Settings', '#' %>
             </ul>
         </nav>
+        <div class="searchbar">
+          <%= form_tag contracts_url, method: :get do %>
+            <%= text_field_tag :query, params[:query] %>
+            <%= submit_tag "Search", searchtext: nil %>
+          <% end %>
+        </div>
     </header>
     <div><%= render_breadcrumbs separator: ' > ' %></div>
 
