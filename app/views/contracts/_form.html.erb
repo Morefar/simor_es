@@ -21,12 +21,12 @@
     </div>
     <div class="field-group">
       <div class='field'>
-        <%= form.label :start_date, 'Contract start date' %>
-        <%= form.text_field :start_date, placeholder: 'yyyy-mm-dd' %>
+        <%= form.label :start_date, ' Contract start date', class: 'icon-calendar' %>
+        <%= form.text_field :start_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
       <div class='field'>
-        <%= form.label :first_canon_date, 'First canon payment' %>
-        <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd' %>
+        <%= form.label :first_canon_date, ' First canon payment', class: 'icon-calendar' %>
+        <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
       <div class='field'>
         <%= form.label :periodicity %>
@@ -37,13 +37,13 @@
         <%= form.number_field :duration, placeholder: 'number of periods' %>
       </div>
       <div class='field'>
-        <%= form.label :expiration_date, 'Contract expiration date' %>
-        <%= form.text_field :expiration_date, placeholder: 'yyyy-mm-dd' %>
+        <%= form.label :expiration_date, ' Contract expiration date', class: 'icon-calendar' %>
+        <%= form.text_field :expiration_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
     </div>
     <div class="field-group">
       <div class='field'>
-      <%= form.label :total_value, 'Inicial value' %>
+      <%= form.label :total_value, 'Inicial value'%>
       <%= form.number_field :total_value, placeholder: 'i.e. 12000000' %>
       </div>
       <div class='field'>
@@ -57,8 +57,8 @@
         <%= form.check_box :option_to_buy %>
       </div>
       <div class='field'>
-        <%= form.label :last_date_to_option %>
-        <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd' %>
+        <%= form.label :last_date_to_option, ' Last date to option', class: 'icon-calendar' %>
+        <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd', class: 'date-field' %>
       </div>
       <div class='field'>
         <%= form.label :location_of_assets %>

@@ -6,6 +6,11 @@
         - @inspection.errors.full_messages.each do |msg|
           %li= msg
 
+        = f.text_field :date, class: 'date-field', placeholder: 'yyyy-mm-dd'
+        = f.text_field :soat_begin_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
+        = f.text_field :soat_finish_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
+        = f.text_field :emissions_begin_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
+        = f.text_field :emissions_finish_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
   .field
     = f.label :inspection_number
     = f.text_field :inspection_number
