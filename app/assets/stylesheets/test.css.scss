@@ -1,0 +1,44 @@
+@import 'foundation_and_overrides';
+fieldset {
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  -moz-border-radius: 10px;
+ }
+
+.row {
+  padding-bottom: 15px;
+  //border: dashed thin black;
+}
+.field_with_errors {
+  input,
+  textarea,
+  select {
+    @include form-error-color;
+    margin-bottom: 0;
+  }
+
+  label,
+  label.error {
+    @include form-label-error-color;
+    display: block;
+    padding: $input-error-message-padding;
+    font-size: $input-error-message-font-size;
+    font-weight: $input-error-message-font-weight;
+  }
+
+  small.error {
+    @include form-error-message;
+  }
+
+  span.error-message {
+    display: block;
+  }
+}
+form input[type=submit] {
+  @include button;
+  @include button-size($button-sml);
+  @include single-transition;
+  @include button-style($success-color, true);
+  @include inset-shadow(true)
+}
+
