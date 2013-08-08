@@ -126,8 +126,9 @@
 - @asset.documents.each do |document|
   = render 'documents/document', document: document
 = render 'documents/form', document: Document.new, documentable: @asset
-%h2 Comments
-- @asset.comments.each do |comment|
-  = render 'comments/comment', comment: comment
-= render 'comments/form', comment: Comment.new, commentable: @asset
-
+%br/
+= render 'comments/index', commentable: @asset
+%p
+  = link_to ' Back', assets_path, class: 'icon-reply'
+  \|
+  = link_to ' Edit', edit_asset_path(@asset), class: 'icon-edit'

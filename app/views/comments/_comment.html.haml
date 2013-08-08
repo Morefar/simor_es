@@ -1,8 +1,15 @@
-.comment
-  .comment-from
-    Employee name
-  .comment-time
-    = time_ago_in_words comment.updated_at
-    ago
-  = comment.content
-  = link_to 'Edit', edit_comment_path(comment)
+.row.collapse{id: "comment-#{comment.id}"}
+  .comment.large-8.columns
+    .large-1.columns
+      %img{:src => "", :alt => "", style: "padding: 25px; background: gray; border-radius: 20px;"}
+    .large-10.push-1.columns
+      .row
+        .comment-from.small-6.large-3.columns
+          %b Employee name
+        .comment-time.small-6.large-4.pull-3.columns
+          = time_ago_in_words comment.updated_at
+          ago
+      .row
+        .comment-content.large-12.columns
+          = comment.content
+    = link_to "", edit_comment_path(comment), remote: true, class: 'icon-edit large-1 columns pull-2'

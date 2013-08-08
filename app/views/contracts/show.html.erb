@@ -87,12 +87,9 @@
 
 <h2>Documents</h2>
 <% @contract.documents.each do |document| %>
-  <%= render 'documents/document', document: document %>
-<% end %>
-<%= render 'documents/form', document: Document.new, documentable: @contract %>
-
-<h2>Comments</h2>
-<% @contract.comments.each do |comment| %>
-  <%= render 'comments/comment', comment: comment %>
-<% end %>
-<%= render 'comments/form', comment: Comment.new, commentable: @contract %>
+<br/>
+<%= render 'comments/index', commentable: @contract %>
+<p>
+  <%= link_to ' Back', contracts_path, class: 'icon-reply' %>
+  <%= link_to ' Edit', edit_contract_path(@contract), class: 'icon-edit' %>
+</p>

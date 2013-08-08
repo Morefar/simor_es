@@ -1,0 +1,2 @@
+var commentBox = $('#comment-<%= @comment.id %>');
+commentBox.replaceWith("<%= j render 'comments/form', comment: @comment, commentable: @comment.commentable %>");

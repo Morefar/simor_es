@@ -17,4 +17,10 @@
   });
 }).call(this);
 
+var hiddenCommentBox = $('.new_comment');
+$('#new-comment-button').on('click', function( event ) {
+  $(this).hide('fast');
+  hiddenCommentBox.show('slow');
+  hiddenCommentBox.find('textarea').focus();
+});
 

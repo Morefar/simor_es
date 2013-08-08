@@ -97,10 +97,9 @@
   = render 'documents/document', document: document
 = render 'documents/form', document: Document.new, documentable: @inspection
 %br/
-%h2 Comments
-- @inspection.comments.each do |comment|
-  = render 'comments/comment', comment: comment
-= render 'comments/form', comment: Comment.new, commentable: @inspection
-= link_to 'Edit', edit_inspection_path(@inspection)
-\|
-= link_to 'Back', inspections_path
+= render 'comments/index', commentable: @inspection
+%br/
+%p
+  = link_to 'Back', inspections_path, class: 'icon-reply'
+  \|
+  = link_to ' Edit', edit_inspection_path(@inspection), class: 'icon-edit'

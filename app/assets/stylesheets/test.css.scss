@@ -9,10 +9,19 @@ fieldset {
   padding-bottom: 15px;
   //border: dashed thin black;
 }
-.field_with_errors {
-  input,
-  textarea,
-  select {
+.new_comment {
+  display: none;
+}
+
+.comment-time {
+  font-size: 80%;
+  color: rgba(1,1,1,0.4);
+}
+
+.comment-content {
+  color: rgba(1,1,1,0.6)
+}
+
     @include form-error-color;
     margin-bottom: 0;
   }
