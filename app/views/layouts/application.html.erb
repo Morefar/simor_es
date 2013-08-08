@@ -93,5 +93,19 @@
       </nav>
       </a>
     </div>
+    <div class="workspace-container">
+      <nav class="breadcrumbs">
+        <%= render_breadcrumbs separator: '/ ' %>
+      </nav>
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <footer>
+      <small>
+      &copy; <%= link_to 'Morefar S.A.S.', 'http://morefar.co/' %> 2013. AssetHound&trade; & assethound.co&trade; son marcas registradas.</small>
+  </footer>
   <%= javascript_include_tag "application" %>
+</body>
 </html>
