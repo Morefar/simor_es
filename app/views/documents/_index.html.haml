@@ -1,0 +1,6 @@
+- unless documentable.documents.empty?
+  = field_set_tag 'Documents' do
+    %ul.documents.small-block-grid-2.large-block-grid-4
+      - documentable.documents.each do |document|
+        %li
+          = render 'documents/document', document: document

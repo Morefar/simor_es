@@ -1,0 +1,5 @@
+var documentElement = $("#document-<%= @document.id %>");
+documentElement.slideUp("slow", function(){ 
+  documentElement.parent().remove();
+});
+//documentElement.remove();

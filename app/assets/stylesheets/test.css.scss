@@ -22,6 +22,18 @@ fieldset {
   color: rgba(1,1,1,0.6)
 }
 
+.field_with_errors {
+  input,
+  textarea,
+  select {
+.field_with_errors {
+  input,
+  textarea,
+  select {
+.documents {
+  padding: 0px 20px;
+}
+
     @include form-error-color;
     margin-bottom: 0;
   }
@@ -50,4 +62,7 @@ form input[type=submit] {
   @include button-style($success-color, true);
   @include inset-shadow(true)
 }
-
+.thmbnail {
+  margin: auto;
+  width: 100%;
+}

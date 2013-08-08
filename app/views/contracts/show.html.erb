@@ -85,8 +85,8 @@
 </div>
 <% end %>
 
-<h2>Documents</h2>
-<% @contract.documents.each do |document| %>
+<%= render 'documents/index', documentable: @contract %>
+<%#= render 'documents/form', document: Document.new, documentable: @contract %>
 <br/>
 <%= render 'comments/index', commentable: @contract %>
 <p>

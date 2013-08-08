@@ -32,7 +32,10 @@ class DocumentsController < ApplicationController
   def destroy
     documentable = @document.documentable
     @document.destroy
-    redirect_to documentable
+    respond_to do |format|
+     format.html { redirect_to documentable}
+     format.js
+    end
   end
 
   private

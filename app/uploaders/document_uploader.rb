@@ -19,7 +19,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   version :thumb do
     process convert: :png
-    process resize_to_fill: [100, 100, Magick::CenterGravity]
+    process resize_to_fill: [200, 200, Magick::CenterGravity]
   end
 
   def extension_white_list

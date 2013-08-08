@@ -122,9 +122,7 @@
   = render 'inspections/index_table', inspections: @asset.inspections
   %br/
 
-%h2 Documents
-- @asset.documents.each do |document|
-  = render 'documents/document', document: document
+= render 'documents/index', documentable: @asset
 = render 'documents/form', document: Document.new, documentable: @asset
 %br/
 = render 'comments/index', commentable: @asset
