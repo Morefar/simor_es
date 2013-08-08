@@ -22,16 +22,32 @@ fieldset {
   color: rgba(1,1,1,0.6)
 }
 
-.field_with_errors {
-  input,
-  textarea,
-  select {
-.field_with_errors {
+footer {
+  text-align: center;
+  padding: 30px;
+}
+
   input,
   textarea,
   select {
 .documents {
   padding: 0px 20px;
+}
+
+tr:hover td {
+  background-color: #FFFAF0; color: #000;
+}
+
+table {
+  margin: auto;
+  width: 100%;
+}
+table thead tr th {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
 }
 
     @include form-error-color;

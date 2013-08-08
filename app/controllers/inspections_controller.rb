@@ -3,7 +3,7 @@ class InspectionsController < ApplicationController
 
 
   def index
-    @inspections = Inspection.all
+    @inspections = Inspection.order('date DESC')
     add_breadcrumb "Inspections", :inspections_path
     respond_to do |format|
       format.html # index.html.erb
@@ -35,7 +35,6 @@ class InspectionsController < ApplicationController
 
   def create
     @inspection = Inspection.new(params[:inspection])
-
     respond_to do |format|
       if @inspection.save
         format.html { redirect_to @inspection, notice: 'Inspection was successfully created.' }
@@ -61,7 +60,6 @@ class InspectionsController < ApplicationController
 
   def destroy
     @inspection.destroy
-
     respond_to do |format|
       format.html { redirect_to inspections_url }
       format.json { head :no_content }

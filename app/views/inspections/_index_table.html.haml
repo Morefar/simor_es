@@ -1,17 +1,18 @@
 %table
-  %tr
-    %th Inspection Number
-    %th Inspection Date
-    %th city
-    %th state
-    %th Initial Asset Value
-    %th Current Asset Value
-
-  - inspections.each do |inspection|
+  %thead
     %tr
-      %td= link_to inspection.inspection_number, inspection
-      %td= inspection.date.strftime('%d-%m-%y %r %Z')
-      %td= inspection.city
-      %td= inspection.state
-      %td= number_to_currency inspection.asset.book_value
-      %td= number_to_currency inspection.current_value
+      %th Number
+      %th Date
+      %th City
+      %th State
+      %th Initial Value
+      %th Current Value
+  %tbody
+    - inspections.each do |inspection|
+      %tr
+        %td.center= link_to inspection.inspection_number, inspection
+        %td= inspection.date.strftime('%d-%m-%y %r %Z')
+        %td= inspection.city
+        %td= inspection.state
+        %td= number_to_currency inspection.asset.book_value
+        %td= number_to_currency inspection.current_value
