@@ -1,130 +1,151 @@
-%p#notice= notice
+-if notice
+  %p#notice= notice
 
-%h1 Asset Information
-%h2
+%h1
   Inventory Number
   = @asset.inventory_number
-.attribute-group
-  %h3 Contract Information
-  %p
-    %b Number:
-    = link_to @asset.contract.number, @asset.contract
-    %b Category:
-    = @asset.contract.category.name
-  %p
-    %b Start date:
-    = @asset.contract.start_date
-    %b First canon date:
-    = @asset.contract.first_canon_date
-    %b Expiration date:
-    = @asset.contract.first_canon_date
-  %p
-    %b Lessee:
-    = link_to @asset.contract.lessee.name, @asset.contract.lessee
-    %b Lessee Id:
-    = @asset.contract.lessee.identification_type.name
-    = @asset.contract.lessee.identification_number
+= field_set_tag 'Contract Information' do
+  .row
+    %b.large-2.columns Number:
+    %span.large-2.columns
+      = link_to @asset.contract.number, @asset.contract
+    %b.large-2.columns Category:
+    %span.large-2.columns.pull-4
+      = @asset.contract.category.name
+  .row
+    %b.large-2.columns Start date:
+    %span.large-2.columns
+      = @asset.contract.start_date
+    %b.large-2.columns First canon date:
+    %span.large-2.columns
+      = @asset.contract.first_canon_date
+    %b.large-2.columns Expiration date:
+    %span.large-2.columns
+      = @asset.contract.first_canon_date
+  .row
+    %b.large-2.columns Lessee:
+    %span.large-2.columns
+      = link_to @asset.contract.lessee.name, @asset.contract.lessee
+    %b.large-2.columns Lessee Id:
+    %span.large-2.columns.pull-4
+      = @asset.contract.lessee.identification_type.name
+      = @asset.contract.lessee.identification_number
 
-.attribute-group
-  %h3 Basic Asset Information
-  %p
-    %b License plate:
-    = @asset.license_plate
-    %b Make:
-    = @asset.make.name.upcase
-    %b Model:
-    = @asset.model.name.upcase
-    %b Year:
-    = @asset.year
-  %p
-    %b Cylinder Capacity
-    = @asset.cylinder_cap
-    %b Color
-    = @asset.color.name.upcase
-    %b Service type
-    = @asset.service_type
-  %p
-    %b Kind
-    = @asset.kind.name
-    %b Body
-    = @asset.body.name
-    %b Fuel Type:
-    = @asset.fuel_type
-    %b Capacity (Kg/PS)
-    = @asset.capacity
-  %p
-    %b Motor Number
-    = @asset.motor_number
-    %b REG
-    - if @asset.rerecorded_motor?
-      Yes
-    - else
-      No
-    %b VIN
-    = @asset.vin
-  %p
-    %b Serial Number
-    = @asset.serial_number
-    %b REG:
-    -if @asset.rerecorded_serial?
-      Yes
-    -else
-      No
-    %b Chassis Number
-    = @asset.chassis_number
-    %b REG:
-    - if @asset.rerecorded_chassis?
-      Yes
-    -else
-      No
-  .attribute-group
-    %h3 Additional Asset Information
-    %p
-      %b Mobility restriction
+= field_set_tag 'Basic Information' do
+  .row
+    %b.large-2.columns License plate:
+    %span.large-2.columns.pull-8
+      = @asset.license_plate
+  .row
+    %b.large-2.columns Make:
+    %span.large-2.columns
+      = @asset.make.name.upcase
+    %b.large-2.columns Model:
+    %span.large-2.columns
+      = @asset.model.name.upcase
+    %b.large-2.columns Year:
+    %span.large-2.columns
+      = @asset.year
+  .row
+    %b.large-2.columns Cylinder Capacity:
+    %span.large-2.columns
+      = @asset.cylinder_cap
+    %b.large-2.columns Color:
+    %span.large-2.columns
+      = @asset.color.name.upcase
+    %b.large-2.columns Service type:
+    %span.large-2.columns
+      = @asset.service_type
+  .row
+    %b.large-2.columns Kind:
+    %span.large-2.columns
+      = @asset.kind.name
+    %b.large-2.columns Body:
+    %span.large-2.columns
+      = @asset.body.name
+    %b.large-2.columns Fuel Type:
+    %span.large-2.columns
+      = @asset.fuel_type
+  .row
+    %b.large-2.columns Capacity (Kg/PS):
+    %span.large-2.columns
+      = @asset.capacity
+    %b.large-2.columns Motor Number:
+    %span.large-2.columns
+      = @asset.motor_number
+    %b.large-2.columns Rerecorded?:
+    %span.large-2.columns
+      = @asset.rerecorded_motor? ? "Yes" : "No"
+  .row
+    %b.large-2.columns VIN:
+    %span.large-2.columns
+      = @asset.vin
+    %b.large-2.columns Serial Number
+    %span.large-2.columns
+      = @asset.serial_number
+    %b.large-2.columns Rerecorded?:
+    %span.large-2.columns
+      = @asset.rerecorded_serial? ? "Yes" : "No"
+  .row
+    %b.large-2.columns Chassis Number
+    %span.large-2.columns
+      = @asset.chassis_number
+    %b.large-2.columns Rerecorded?:
+    %span.large-2.columns.pull-4
+      = @asset.rerecorded_chassis? ? "Yes" : "No"
+= field_set_tag 'Additional Information' do
+  .row
+    %b.large-2.columns Mobility restriction:
+    %span.large-2.columns
       = @asset.mobility_restriction
-      %b Shield Level
+    %b.large-2.columns Shield Level:
+    %span.large-2.columns
       = @asset.shield_level
-      %b Horse Power
+    %b.large-2.columns Horse Power:
+    %span.large-2.columns
       = @asset.horse_power
-    %p
-      - if @asset.importd_assembld?
-        %b Importation Statement
+  .row
+    - if @asset.importd_assembld?
+      %b.large-4.columns Imported
+      %b.large-2.columns Importation Statement:
+      %span.large-2.columns
         = @asset.import_statement
-        %b Importation Date
+      %b.large-2.columns Importation Date:
+      %span.large-2.columns
         = @asset.import_date
-      - else
-        %b Assembled
-    %p
-      %b Doors:
+    - else
+      %b.columns Assembled
+  .row
+    %b.large-2.columns Doors:
+    %span.large-2.columns
       = @asset.number_of_doors
-      %b Property Limitation:
+    %b.large-2.columns Property Limitation:
+    %span.large-2.columns
       = @asset.property_limitation
-    %p
-      %b Registration Date:
-      = @asset.registration_date
-      %b Transit Permit Issue Date
-      = @asset.tp_issue_date
-      %b Transit Permit Expiration Date
-      = @asset.tp_expiration_date
-      %b Transit Authority
+    %b.large-2.columns Transit Authority:
+    %span.large-2.columns
       = @asset.transit_authority
-    %p
-      %b Initial Value:
+  .row
+    %b.large-2.columns Registration Date:
+    %span.large-2.columns
+      = @asset.registration_date
+    %b.large-2.columns Transit Permit Issue Date:
+    %span.large-2.columns
+      = @asset.tp_issue_date
+    %b.large-2.columns Transit Permit Expiration Date:
+    %span.large-2.columns
+      = @asset.tp_expiration_date
+  .row
+    %b.large-2.columns Initial Value:
+    %span.large-2.columns.pull-8
       = number_to_currency @asset.book_value
 
-= link_to 'Edit', edit_asset_path(@asset)
-|
-= link_to 'Back', assets_path
-
 - unless @asset.inspections.empty?
-  %h2 Inspections
-
-  = render 'inspections/index_table', inspections: @asset.inspections
-  %br/
+  = field_set_tag 'Inspections' do
+    = render 'inspections/index_table', inspections: @asset.inspections.order('date DESC')
 
 = render 'documents/index', documentable: @asset
 = render 'documents/form', document: Document.new, documentable: @asset
-%br/
 = render 'comments/index', commentable: @asset
 %p
   = link_to ' Back', assets_path, class: 'icon-reply'

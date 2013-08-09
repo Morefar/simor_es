@@ -44,7 +44,7 @@ class AssetsController < ApplicationController
     @asset.kind = Color.find_by_name(params[:asset][:kind_id])
     @asset.body = Color.find_by_name(params[:asset][:body_id])
     @asset.attributes = params[:asset].except(:make_id, :model_id,
-                                  :color_id, :kind_id, :body_id)
+                                  :color_id, :kind_id, :body_id, :transit_permit)
 
     respond_to do |format|
       if @asset.save

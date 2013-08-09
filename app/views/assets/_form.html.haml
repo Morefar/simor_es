@@ -1,0 +1,124 @@
+= form_for(@asset) do |form|
+  = render 'shared/error_messages', target: @asset
+  .field
+    = form.label :contract_id , 'Contract number'
+    = form.collection_select :contract_id, Contract.all, :id, :number
+  = field_set_tag 'Vehicle information' do
+    .row
+      .field.large-4.columns
+        = form.label :invoice_id
+        = form.text_field :invoice_id
+      .field.large-4.columns
+        = form.label :inventory_number
+        = form.text_field :inventory_number
+      .field.large-4.columns
+        = form.label :transit_permit
+        = form.text_field :transit_permit
+    .row
+      .field.large-3.columns
+        = form.label :license_plate
+        = form.text_field :license_plate
+      .field.large-3.columns
+        = form.label :make_id
+        = form.text_field :make_id
+      .field.large-3.columns
+        = form.label :model_id
+        = form.text_field :model_id
+      .field.large-3.columns
+        = form.label :year
+        = form.select :year, (2000..(Date.current >> 12).year), selected: Date.current.year
+    .row
+      .field.large-3.columns
+        = form.label :cylinder_cap
+        = form.number_field :cylinder_cap
+      .field.large-3.columns
+        = form.label :color_id
+        = form.text_field :color_id
+      .field.large-3.columns.pull-3
+        = form.label :service_type
+        = form.select :service_type, %w(Private Public Diplomatic Official Special others)
+    .row
+      .field.large-3.columns
+        = form.label :kind_id
+        = form.text_field :kind_id
+      .field.large-3.columns
+        = form.label :body_id
+        = form.text_field :body_id
+      .field.large-3.columns
+        = form.label :fuel_type
+        = form.select :fuel_type, %w(Gasoline GNV Diesel Gas-Gasoline Electric Hidrogen Ethanol Biodiesel)
+      .field.large-3.columns
+        = form.label :capacity, 'Capacity Kg/PSJ'
+        = form.number_field :capacity
+    .row
+      .field.large-5.columns
+        = form.label :motor_number
+        = form.text_field :motor_number
+      .field.large-1.columns
+        = form.label :rerecorded_motor, "REG?"
+        = form.check_box :rerecorded_motor
+      .field.large-6.columns
+        = form.label :vin, 'VIN'
+        = form.text_field :vin
+    .row
+      .field.large-5.columns
+        = form.label :serial_number
+        = form.text_field :serial_number
+      .field.large-1.columns
+        = form.label :rerecorded_serial, "REG?"
+        = form.check_box :rerecorded_serial
+      .field.large-5.columns
+        = form.label :chassis_number
+        = form.text_field :chassis_number
+      .field.large-1.columns
+        = form.label :rerecorded_chassis, "REG?"
+        = form.check_box :rerecorded_chassis
+  = field_set_tag 'Additional Information' do
+    .row
+      .field.large-3.columns
+        = form.label :mobility_restriction
+        = form.text_field :mobility_restriction
+      .field.large-3.columns
+        = form.label :shield_level
+        = form.number_field :shield_level
+      .field.large-3.columns.pull-3
+        = form.label :horse_power
+        = form.number_field :horse_power
+    .row
+      .field.large-3.columns
+        = form.label :import_statement
+        = form.text_field :import_statement
+      .field.large-3.columns
+        = form.label :importd_assembld, 'I/E'
+        = form.check_box :importd_assembld
+      .field.large-3.columns
+        = form.label :import_date, ' Importation Date', class: 'icon-calendar'
+        = form.text_field :import_date, class: 'date-field'
+      .field.large-3.columns
+        = form.label :number_of_doors
+        = form.number_field :number_of_doors
+    .row
+      .field.columns
+        = form.label :property_limitation
+        = form.text_field :property_limitation
+    .row
+      .field.large-3.columns
+        = form.label :registration_date,' Registration Date', class: 'icon-calendar'
+        = form.text_field :registration_date, class: 'date-field'
+      .field.large-3.columns
+        = form.label :tp_issue_date, ' Transit Permit Issue date', class: 'icon-calendar'
+        = form.text_field :tp_issue_date, class: 'date-field'
+      .field.large-3.columns.pull-3
+        = form.label :tp_expiration_date, ' Transit permit expiration date', class: 'icon-calendar'
+        = form.text_field :tp_expiration_date, class: 'date-field'
+    .row
+      .field.columns
+        = form.label :transit_authority
+        = form.text_field :transit_authority
+    .row
+      .field.large-6.columns
+        = form.label :book_value, 'Initial Value'
+        = form.number_field :book_value
+  .row.columns
+    .actions
+      = form.submit

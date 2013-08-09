@@ -1,12 +1,12 @@
 %tr
   %td= link_to asset.contract.number, asset.contract
-  %td= link_to asset.inventory_number, asset
+  %td.center= link_to asset.inventory_number, asset
   %td= asset.license_plate
   %td= asset.make.name
   %td= asset.model.name
   %td= asset.year
   %td= asset.service_type
   %td= number_to_currency asset.book_value, unit: ''
-  %td= asset.inspections.count
-  %td= link_to 'Edit', edit_asset_path(asset)
-  %td= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' }
+  %td.center= asset.inspections.count
+  %td.center= link_to '', edit_asset_path(asset), class: 'icon-edit'
+  %td.center= link_to '', asset, class: 'icon-trash',method: :delete, data: { confirm: 'Are you sure?' }
