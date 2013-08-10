@@ -1,5 +1,5 @@
 class Inspection < ActiveRecord::Base
-  attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate, :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security, :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes, :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency, :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job, :inspection_number
+  attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate, :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security, :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes, :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency, :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job, :inspection_number, :asset_id
 
   belongs_to :asset
   belongs_to :insurance_company
@@ -13,6 +13,7 @@ class Inspection < ActiveRecord::Base
   validate :valid_insurance_data
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
+  before_save :reformat_inspection_number
   after_save :update_parent_asset_information
 
   def valid_soat_dates
@@ -66,4 +67,7 @@ class Inspection < ActiveRecord::Base
     end
   end
 
+  def reformat_inspection_number
+    inspection_number = 'V'+inspection_number
+  end
 end

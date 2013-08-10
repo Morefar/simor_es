@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'factory_girl_helper'
 describe ContractsController do
 
   describe 'GET #index' do
@@ -7,6 +6,12 @@ describe ContractsController do
         contract = create(:contract)
         get :index
         expect(assigns(:contracts)).to match_array [contract]
+    end
+    it 'populates an array of contracts ordered by creation date' do
+      contract1 = create(:contract)
+      contract2 = create(:contract)
+      get :index
+      expect(assigns(:contracts)).to eql [contract2, contract1]
     end
     it 'renders the :index view' do
         get :index

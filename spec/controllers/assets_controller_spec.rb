@@ -48,6 +48,7 @@ describe AssetsController do
 
   describe "GET new" do
     it "assigns a new asset as @asset" do
+    :A
       get :new, {}, valid_session
       assigns(:asset).should be_a_new(Asset)
     end

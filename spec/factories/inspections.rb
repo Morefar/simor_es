@@ -2,7 +2,7 @@
 FactoryGirl.define do
   factory :inspection do
     asset {create(:asset)}
-    sequence(:inspection_number) { |n| "V#{n}"}
+    sequence(:inspection_number) { |n| "#{n}"}
     address {Faker::Address.street_address}
     city {Faker::Address.city}
     state {Faker::Address.state}
