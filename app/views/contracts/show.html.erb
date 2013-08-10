@@ -1,88 +1,80 @@
-<h1>contract number: <%= @contract.number %></h1>
-
-<h2>Contract Details</h2>
-<div>
-  <b>Contract category: </b>
-  <%= @contract.category.name %>
-</div>
-<div>
-  <b>Contract start date: </b>
-  <%= @contract.start_date %>
-  <b>Contract first canon payment date: </b>
-  <%= @contract.first_canon_date %>
-  <b>Contract expiration date: </b>
-  <%= @contract.expiration_date %>
-</div>
-<div>
-  <% if @contract.option_to_buy %>
-    <b>Last date to excercise option to buy assets: </b>
-    <%= @contract.last_date_to_option %>
-  <% end %>
-  <b>Contract Duration: </b>
-  <!-- FIXME Take logic out of here. Use presenter method -->
+<h1>Contract number: <%= @contract.number %></h1>
+<%= field_set_tag 'Details' do %>
+  <div class='row'>
+    <b class='large-3 columns'>Contract category: </b>
+    <span class='large-3 columns pull-6'>
+      <%= @contract.category.name %>
+    </span>
+  </div>
+  <div class='row'>
+    <b class='large-2 columns'>Start date: </b>
+    <span class='large-2 columns'>
+    <%= @contract.start_date %>
+    </span>
+    <b class='large-2 columns'>First canon payment date: </b>
+    <span class='large-2 columns'>
+    <%= @contract.first_canon_date %>
+    </span>
+    <b class='large-2 columns'>Expiration date: </b>
+    <span class='large-2 columns'>
+    <%= @contract.expiration_date %>
+    </span>
+  </div>
+  <div class='row'>
+    <b class='large-3 columns'>Contract Duration: </b>
+    <span class="large-3 columns">
     <%= pluralize @contract.duration,
-    case @contract.periodicity
-        when 1
-          "month"
-        when 3
-          "quarter"
-        when 6
-          "semester"
-        when 12
-          "years"
+      case @contract.periodicity
+      when 1
+        "month"
+      when 3
+        "quarter"
+      when 6
+        "semester"
+      when 12
+        "years"
       end %>
-</div>
-<div>
-  <b>Total contract value: </b>
-  <b><%= @contract.currency %></b>
-  <%= number_to_currency @contract.total_value, unit: '' %>
-</div>
-<div>
-  <b>Assets in this contract: </b>
-  <%= @contract.assets.count %>
- <b>Location of assets: </b>
-  <%= @contract.location_of_assets %>
-</div>
-
-  <h2>Lessee Information</h2>
-<div>
-  <h3>Lessee</h3>
-  <p>
-    <b>Name: </b>
-    <%= link_to @lessee.name, @lessee %>
-    <b>Identification Document: </b>
-    <%= @lessee.identification_type.name %> <%= @lessee.identification_number %>
-  </p>
-  <p>
-    <b>Address: </b>
-    <%= @lessee.address %>, <%= @lessee.city %>, <%= @lessee.state %>
-  </p>
-</div>
-<div>
-  <% unless @cosigners.empty? %>
-    <h3>Cosigners</h3>
-    <p>
-      <% @cosigners.map(&:entity).each do |cosigner| %>
-        <p>
-          <b>Name: </b>
-          <%= link_to cosigner.name, cosigner %>
-          <b>Identification Document: </b>
-          <%= cosigner.identification_type.name %> <%= cosigner.identification_number %>
-        </p>
-        <p>
-          <b>Address: </b>
-          <%= cosigner.address %>, <%= cosigner.city %>, <%= cosigner.state %>
-        </p>
-      <% end %>
-    </p>
+    </span>
+    <b class='large-3 columns'>Total contract value: </b>
+    <span class="large-3 columns">
+      <b><%= @contract.currency %></b>
+      <%= number_to_currency @contract.total_value %>
+    </span>
+  </div>
+  <div class='row'>
+    <b class='large-3 columns'>Assets in this contract: </b>
+    <span class="large-3 columns">
+    <%= @contract.assets.count %>
+    </span>
+    <b class='large-3 columns'>Location of assets: </b>
+    <span class="large-3 columns">
+    <%= @contract.location_of_assets %>
+  </span>
+  </div>
+  <% if @contract.option_to_buy? %>
+    <div class="row">
+      <b class='large-3 columns'>Last date to excercise option to buy assets: </b>
+      <span class='large-3 columns pull-6'>
+      <%= @contract.last_date_to_option %>
+      </span>
+    </div>
   <% end %>
-</div>
+<% end %>
+<%= field_set_tag "Lessee Information" do %>
+  <%= render 'entities/entity', entity: @lessee %>
+<% end %>
+<% unless @cosigners.empty? %>
+  <%= field_set_tag 'Cosigners' do %>
+    <% @cosigners.map(&:entity).each do |cosigner| %>
+      <%= render 'entities/entity', entity: cosigner %>
+    <% end %>
+  <% end %>
+<% end %>
 
 <% if @contract.asset_count > 0 %>
-<br />
-<div class="contract-assets table">
-  <%= render 'assets/asset_index', assets: @contract.assets %>
-</div>
+  <%= field_set_tag 'Assets' do %>
+    <%= render 'assets/asset_index', assets: @contract.assets %>
+  <% end %>
 <% end %>
 
 <%= render 'documents/index', documentable: @contract %>

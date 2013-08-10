@@ -86,14 +86,13 @@ form input[type=submit] {
   margin: auto;
   width: 100%;
 }
-#notice {
+.flash-notice {
   color: darkgreen;
   border: 1px solid green;
   background: lightgreen;
   @include radius;
   padding: 5px 5px 5px 15px;
   margin-bottom: 20px;
-  display: none;
 }
 #error_explanation {
   width: 450px;

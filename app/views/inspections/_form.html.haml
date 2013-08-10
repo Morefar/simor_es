@@ -1,11 +1,5 @@
 = form_for @inspection do |f|
-  - if @inspection.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@inspection.errors.count, "error")} prohibited this inspection from being saved:"
-      %ul
-        - @inspection.errors.full_messages.each do |msg|
-          %li= msg
-
+  = render 'shared/error_messages', target: @inspection
   = field_set_tag 'Inspection record', class: 'round' do
     .row
       .field.large-6.columns
