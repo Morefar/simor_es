@@ -7,7 +7,7 @@ def create_asset
     kind = create(:kind, name: 'Pickup')
     create(:build, body: body, kind: kind)
     create(:asset, body: body, kind: kind)
-  end
+end
 
   before (:each) do
     @asset = create_asset
@@ -38,11 +38,6 @@ def create_asset
     context "soat doesn't exist" do
       it "is valid with empty dates" do
         expect(build(:inspection, asset: @asset, soat_number: nil, soat_begin_date: nil, soat_finish_date: nil)).to be_valid
-      end
-      it "is invalid when soat dates are present" do
-        inspection = build(:inspection, asset: @asset, soat_number: nil)
-        expect(inspection).to have(1).errors_on(:soat_begin_date)
-        expect(inspection).to have(1).errors_on(:soat_finish_date)
       end
     end
     context 'soat is present' do
@@ -85,11 +80,6 @@ def create_asset
       it "is valid with empty dates" do
         expect(build(:inspection, asset: @asset, insurance_number: nil, insurance_start: nil, insurance_finish: nil)).to be_valid
       end
-      it "is invalid when insurance dates are present" do
-        inspection = build(:inspection, asset: @asset, insurance_number: nil)
-        expect(inspection).to have(1).errors_on(:insurance_start)
-        expect(inspection).to have(1).errors_on(:insurance_finish)
-      end
     end
     context 'insurance is present' do
       it "is invalid when both insurance dates are nil" do
@@ -130,11 +120,6 @@ def create_asset
     context "emissions cartificate doesn't exist" do
       it "is valid with empty dates" do
         expect(build(:inspection, asset: @asset, emissions_certificate: nil, emissions_begin_date: nil, emissions_finish_date: nil)).to be_valid
-      end
-      it "is invalid when emissions certificate dates are present" do
-        inspection = build(:inspection, asset: @asset, emissions_certificate: nil)
-        expect(inspection).to have(1).errors_on(:emissions_begin_date)
-        expect(inspection).to have(1).errors_on(:emissions_finish_date)
       end
     end
     context 'emissions certificate is present' do
