@@ -1,12 +1,12 @@
 = form_for @inspection do |f|
   = render 'shared/error_messages', target: @inspection
-  = field_set_tag 'Inspection record', class: 'round' do
+  = field_set_tag t('.fieldset.record'), class: 'round' do
     .row
       .field.large-6.columns
         = f.label :inspection_number
         = f.text_field :inspection_number, placeholder: 'Assigned inspection number'
       .field.large-6.columns
-        = f.label :asset_id, "Asset"
+        = f.label :asset_id
         = f.text_field :asset_id, placeholder: 'License Plate Number'
     .row
       .field.large-4.columns
@@ -23,7 +23,7 @@
         = f.label :date
         %a{name: 'vehicle-information', data: {magellan_destination: 'vehicle-information'} }
         = f.text_field :date, class: 'date-field', placeholder: 'yyyy-mm-dd'
-  = field_set_tag 'Vehicle Information' do
+  = field_set_tag t('.fieldset.information') do
     .row
       .field.large-4.columns
         = label_tag :odometer
@@ -35,10 +35,10 @@
         = f.label :appraiser_value
         = f.number_field :appraiser_value
   %a{name: 'documents', data: {magellan_destination: 'documents'} }
-  = field_set_tag 'Documents' do
+  = field_set_tag t('.fieldset.documents') do
     .row
       .field.large-4.columns
-        = f.label :soat_number, "Soat Number"
+        = f.label :soat_number
         = f.text_field :soat_number
       .field.large-4.columns
         = f.label :soat_begin_date
@@ -57,7 +57,7 @@
         = f.label :emissions_finish_date
         = f.text_field :emissions_finish_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
   %a{name: 'general', data: {magellan_destination: 'general'} }
-  = field_set_tag 'General Condition' do
+  = field_set_tag t('.fieldset.condition') do
     .row
       .field.small-6.large-2.columns
         = f.label :maintenance
@@ -69,13 +69,13 @@
         = f.label :exterior
         .row
           .radio.small-4.large-4.columns
-            = f.label :exterior_good, 'Good'
+            = f.label :exterior_good
             = f.radio_button :exterior, 'Good', checked: true
           .radio.small-4.large-4.columns
-            = f.label :exterior_regular, 'Regular'
+            = f.label :exterior_regular
             = f.radio_button :exterior, 'Regular'
           .radio.small-4.large-4.columns
-            = f.label :exterior_bad, 'Bad'
+            = f.label :exterior_bad
             = f.radio_button :exterior, 'Bad'
         .row
           .field
@@ -85,13 +85,13 @@
         = f.label :engine
         .row
           .radio.small-4.large-4.columns
-            = f.label :engine_good, 'Good'
+            = f.label :engine_good
             = f.radio_button :engine, 'Good', checked: true
           .radio.small-4.large-4.columns
-            = f.label :engine_regular, 'Regular'
+            = f.label :engine_regular
             = f.radio_button :engine, 'Regular'
           .radio.small-4.large-4.columns
-            = f.label :engine_bad, 'Bad'
+            = f.label :engine_bad
             = f.radio_button :engine, 'Bad'
         .row
           .field
@@ -108,13 +108,13 @@
         = f.label :interior
         .row
           .radio.small-4.large-4.columns
-            = f.label :interior_good, 'Good'
+            = f.label :interior_good
             = f.radio_button :interior, 'Good', checked: true
           .radio.small-4.large-4.columns
-            = f.label :interior_regular, 'Regular'
+            = f.label :interior_regular
             = f.radio_button :interior, 'Regular'
           .radio.small-4.large-4.columns
-            = f.label :interior_bad, 'Bad'
+            = f.label :interior_bad
             = f.radio_button :interior, 'Bad'
         .row
           .field
@@ -125,7 +125,7 @@
           = f.label :accesories
           = f.text_area :accesories
   %a{name: 'insurance', data: {magellan_destination: 'insurance'} }
-  = field_set_tag 'Insurance' do
+  = field_set_tag t('.fieldset.insurance') do
     .row
       .field.large-4.columns
         = f.label :insurance_number
@@ -141,26 +141,26 @@
         = f.label :insured_value
         = f.text_field :insured_value
       .field.small-6.large-4.columns
-        = f.label :insurance_start, "Insurance Start Date"
+        = f.label :insurance_start
         = f.text_field :insurance_start, class: 'date-field', placeholder: 'yyyy-mm-dd'
       .field.small-6.large-4.columns
-        = f.label :insurance_finish, "Insurance Finish Date"
+        = f.label :insurance_finish
         = f.text_field :insurance_finish, class: 'date-field', placeholder: 'yyyy-mm-dd'
   .row
     .field.columns
       = label_tag :observations
       = text_area_tag :observations, nil, placeholder: 'Enter your general impressions on this asset'
   %a{ name: 'signature', data: {magellan_destination: 'signature'} }
-  = field_set_tag 'Signature' do
+  = field_set_tag t('.fieldset.signature') do
     .row
       .field.large-4.columns
-        = f.label :person_in_charge, "Person in Charge"
+        = f.label :person_in_charge
         = f.text_field :person_in_charge
       .field.large-4.columns
-        = f.label :pic_id, "Person in Charge Identification number"
+        = f.label :pic_id
         = f.text_field :pic_id
       .field.large-4.columns
-        = f.label :pic_job, "Person in charge Job description"
+        = f.label :pic_job
         = f.text_field :pic_job
   .actions
     = f.submit

@@ -1,16 +1,16 @@
 .row
-  %h1 Listing inspections
+  %h1= t('.title')
 .row
-  = link_to ' New Inspection', new_inspection_path, class: 'icon-file button success radius'
+  = link_to t('.new'), new_inspection_path, class: 'icon-file button success radius'
 .row
   %table
     %thead
       %tr
-        %th Number
-        %th Date
-        %th Asset Number
-        %th Initial Value
-        %th Current Value
+        %th= t('.number')
+        %th= t('.date')
+        %th= t('.asset')
+        %th= t('.initial_value')
+        %th= t('.current_value')
         %th
         %th
     %tbody
@@ -24,4 +24,4 @@
           %td.center= link_to '', edit_inspection_path(inspection), class: 'icon-edit'
           %td.center= link_to '', inspection, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
 .row
-  = link_to ' New Inspection', new_inspection_path, class: 'icon-file button success radius'
+  = link_to t('.new'), new_inspection_path, class: 'icon-file button success radius'

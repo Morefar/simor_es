@@ -1,7 +1,9 @@
 = render 'sub_nav'
-%h1 Editing inspection
+%h1= t('.title')
 = render 'form'
 
-= link_to 'Show', @inspection
+= link_to t('.show'), @inspection, class: 'icon-mail-reply'
 \|
-= link_to 'Back', inspections_path
+= link_to t('.index'), inspections_path, class: 'icon-list-alt'
+\|
+= link_to t('.back'), :back, class: 'icon-mail-reply'

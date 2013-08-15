@@ -1,8 +1,8 @@
 = render 'sub_nav'
 
 %a{name: 'record', data: {magellan_destination: 'record'} }
-%h1 New inspection
+%h1= t('.title')
 
 = render 'form'
 
-= link_to 'Back', inspections_path
+= link_to t('.back'), inspections_path, class: 'icon-mail-reply'
