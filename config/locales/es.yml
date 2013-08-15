@@ -130,7 +130,7 @@ es:
         other: ! '%{model} no pudo guardarse debido a %{count} errores'
   helpers:
     select:
-      prompt: Por favor selecciona
+      prompt: Por favor seleccione
     submit:
       create: Crear %{model}
       submit: Guardar %{model}
@@ -140,7 +140,7 @@ es:
       format:
         delimiter: ! ','
         format: ! '%u%n'
-        precision: 0
+        precision: 2
         separator: .
         significant: false
         strip_insignificant_zeros: false
@@ -219,6 +219,8 @@ es:
         kinds: 'Clases de Vehículo'
         bodies: 'Carrocerías'
         insurance_companies: 'Compañías de Seguros'
+  shared:
+    back: ' Regresar'
   inspections:
     form:
       fieldset:
@@ -279,11 +281,40 @@ es:
         documents: 'Documentos'
         condition: 'Condición General'
         other_information: 'Otra Información'
+  assets:
+    form:
+      private: 'Privado'
+      public: 'Público'
+      diplomatic: 'Diplomático'
+      official: 'Oficial'
+      special: 'Especial'
+      others: 'Otros'
+      gasoline: 'Gasolina'
+      gnv: 'Gas Natual Vehícular'
+      diesel: 'Diesel'
+      gas_gasoline: 'Gas-Gasolina'
+      electric: 'Eléctricidad'
+      hidrogen: 'Hidrógeno'
+      ethanol: 'Etanol'
+      biodiesel: 'Biodiesel'
+      fieldset:
+        additional_info: 'Información Adicional'
+    new:
+      title: 'Nuevo Vehículo'
+    edit:
+      title: 'Editar Información del Vehículo'
+      show: ' Vehículo'
+      index: ' Activos'
+    index:
+      title: 'Listado de Activos'
+      new_btn: ' Agregar Activo'
+      inspections: 'Inspecciones'
   activerecord:
     errors:
       <<: *errors
     models:
       inspection: 'Inspección'
+      asset: 'Activo'
     attributes:
       inspection:
         inspection_number: 'Número de Inspección'
@@ -330,3 +361,41 @@ es:
         person_in_charge: 'Persona a Cargo'
         pic_id: 'Identificación Persona a Cargo'
         pic_job: 'Función Persona a Cargo'
+      asset:
+        contract_id: 'Número de Contrato'
+        invoice_id: 'Factura'
+        inventory_number: 'Número de Inventario'
+        transit_permit: 'Licencia de Tránsito'
+        license_plate: 'Placa'
+        make_id: 'Marca'
+        model_id: 'Línea'
+        year: 'Modelo'
+        cylinder_cap: 'Cilindraje'
+        color_id: 'Color'
+        service_type: 'Tipo de Servicio'
+        kind_id: 'Clase de Vehículo'
+        body_id: 'Tipo Carrocería'
+        fuel_type: 'Combustible'
+        capacity: 'Capacidad KG/PJS'
+        motor_number: 'Número de Motor'
+        rerecorded_motor: 'Regrabado?'
+        vin: 'VIN'
+        serial_number: 'Número de Serie'
+        rerecorded_serial: 'Regrabado?'
+        chassis_number: 'Número de Chasis'
+        rerecorded_chassis: 'Regrabado?'
+        mobility_restriction: 'Restricción Movilidad'
+        shield_level: 'Blindaje'
+        horse_power: 'Potencia HP'
+        importd_assembld: 'Importado/Ensamblado'
+        import_statement: 'Declaración de Importación'
+        import_date: ' Fecha de Importación'
+        number_of_doors: 'Puertas'
+        property_limitation: 'Limitación a la Propiedad'
+        registration_date: ' Fecha Matrícula'
+        tp_issue_date: ' Fecha Expedición Licencia de Tránsito'
+        tp_expiration_date: ' Fecha vencimiento'
+        transit_authority: 'Organismo de Tránsito'
+        book_value: 'Valor Inicial'
+        inspection_count: 'Número de Inspecciones'
+        last_inspection_date: ' Fecha de Última inspección'

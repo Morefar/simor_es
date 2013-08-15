@@ -1,12 +1,12 @@
 %tr
-  %th Contract
-  %th Inventory Number
-  %th License Plate
-  %th Make
-  %th Model
-  %th Year
-  %th Service Type
-  %th Initial Value
-  %th Inspections
+  %th= t(:contract_id, scope: [:activerecord,:attributes,:asset])
+  %th= t('activerecord.models.asset')
+  %th= t('activerecord.attributes.asset.license_plate')
+  %th= t('activerecord.attributes.asset.make_id')
+  %th= t('activerecord.attributes.asset.model_id')
+  %th= t('activerecord.attributes.asset.year')
+  %th= t('activerecord.attributes.asset.service_type')
+  %th= t('activerecord.attributes.asset.book_value')
+  %th= t('assets.index.inspections')
   %th
   %th

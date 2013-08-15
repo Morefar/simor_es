@@ -23,6 +23,8 @@ en:
         kinds: 'Kinds'
         bodies: 'Bodies'
         insurance_companies: 'Insurance Companies'
+  shared:
+    back: ' Back'
   inspections:
     form:
       fieldset:
@@ -83,9 +85,38 @@ en:
         documents: 'Documents'
         condition: 'General Condition'
         other_information: 'Other Information'
+  assets:
+    form:
+      private: 'Private'
+      public: 'Public'
+      diplomatic: 'Diplomatic'
+      official: 'Official'
+      special: 'Special'
+      others: 'Others'
+      gasoline: 'Gasoline'
+      gnv: 'Natural Gas'
+      diesel: 'Diesel'
+      gas_gasoline: 'Gas-Gasoline'
+      electric: 'Electricity'
+      hidrogen: 'Hidrogen'
+      ethanol: 'Ethanol'
+      biodiesel: 'Biodiesel'
+      fieldset:
+        additional_info: 'Additional Information'
+    new:
+      title: 'New Vehicle'
+    edit:
+      title: 'Edit Vehicle Information'
+      show: ' Vehicle'
+      index: ' Assets'
+    index:
+      title: 'Asset Listing'
+      new_btn: ' Add Asset'
+      inspections: 'Inspections'
   activerecord:
     models:
       inspection: 'Inspection'
+      asset: 'Asset'
     attributes:
       inspection:
         inspection_number: 'Inspection Number'
@@ -132,3 +163,41 @@ en:
         person_in_charge: 'Person in Charge'
         pic_id: 'Identification Number'
         pic_job: "Person's Job"
+      asset:
+        contract_id: 'Contract Number'
+        invoice_id: 'Invoice'
+        inventory_number: 'Inventory Number'
+        transit_permit: 'Transit Permit'
+        license_plate: 'License Plate'
+        make_id: 'Make'
+        model_id: 'Model'
+        year: 'Year'
+        cylinder_cap: 'Cylinder Capacity'
+        color_id: 'Color'
+        service_type: 'Service Type'
+        kind_id: 'Kind'
+        body_id: 'Body'
+        fuel_type: 'Fuel Type'
+        capacity: 'Capacity KG/PGS'
+        motor_number: 'Motor Number'
+        rerecorded_motor: 'Re-recorded?'
+        vin: 'VIN'
+        serial_number: 'Serial Number'
+        rerecorded_serial: 'Re-recorded?'
+        chassis_number: 'Chassis Number'
+        rerecorded_chassis: 'Re-recorded?'
+        mobility_restriction: 'Mobility Restriction'
+        shield_level: 'Shield Level'
+        horse_power: 'Horse Power'
+        importd_assembld: 'Imported/Assembled'
+        import_statement: 'Import Statement'
+        import_date: ' Importation Date'
+        number_of_doors: 'Number of Door'
+        property_limitation: 'Property Limitation'
+        registration_date: ' Registration Date'
+        tp_issue_date: ' Transit Permit Issue Date'
+        tp_expiration_date: ' Transit Permit Expiration Date'
+        transit_authority: 'Transit Authority'
+        book_value: 'Initial Value'
+        inspection_count: 'Inspection Count'
+        last_inspection_date: ' Last Inspection Date'

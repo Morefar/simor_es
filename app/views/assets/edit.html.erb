@@ -1,6 +1,7 @@
-<h1>Editing asset</h1>
+<h1><%= t('.title')%></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @asset %> |
-<%= link_to 'Back', assets_path %>
+<%= link_to t('.show'), @asset, class: 'icon-mail-reply'%> |
+<%= link_to t('.index'), assets_path, class: 'icon-list-alt'%> |
+<%= link_to t('shared.back'), :back, class: 'icon-mail-reply' %>

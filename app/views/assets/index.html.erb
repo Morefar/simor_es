@@ -1,10 +1,10 @@
-<h1>Listing assets</h1>
+<h1><%= t('.title') %></h1>
 <div class='row'>
-  <%= link_to ' New Asset', new_asset_path, class: 'icon-file button success radius' %>
+  <%= link_to t('.new_btn'), new_asset_path, class: 'icon-file button success radius' %>
 </div>
 <div class="row">
 <%= render 'asset_index', assets: @assets %>
 </div>
 <div class="row">
-  <%= link_to ' New Asset', new_asset_path, class: 'icon-file button success radius' %>
+  <%= link_to t('.new_btn'), new_asset_path, class: 'icon-file button success radius' %>
 </div>
