@@ -2,4 +2,24 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      title: 'Asset Hound'
+      home: 'Home'
+      search: 'Search'
+      settings: 'Settings'
+      nav:
+        home: 'Home'
+        assets: 'Assets'
+        contracts: 'Contracts'
+        inspections: 'Inspections'
+        inspection_orders: 'Inspection Orders'
+        entities: 'Entities Directory'
+        colors: 'Colors'
+        contract_categories: 'Contract Types'
+        makes: 'Makes'
+        models: 'Models'
+        builds: 'Authorized Builds'
+        kinds: 'Kinds'
+        bodies: 'Bodies'
+        insurance_companies: 'Insurance Companies'

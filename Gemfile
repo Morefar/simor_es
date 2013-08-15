@@ -53,6 +53,7 @@ gem 'carrierwave', '~> 0.9.0'
 gem 'carrierwave_direct', '~> 0.0.13'
 gem 'sidekiq'
 gem 'fog'
+gem 'twitter_cldr', '~> 2.4.2'
 
 # gem 'pg_search', '~> 0.7.0'
 

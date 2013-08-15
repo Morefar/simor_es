@@ -13,7 +13,7 @@
  <!-- Set the viewport width to device width for mobile -->
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
- <title><%= content_for?(:title) ? yield(:title) : "Asset Hound" %></title>
+ <title><%= content_for?(:title) ? yield(:title) : t('.title') %></title>
 
  <%= stylesheet_link_tag    "application" %>
  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <ul class="title-area">
           <!-- Title Area -->
           <li class="name">
-            <h1><%= link_to_unless_current 'Home', root_url %></h1>
+            <h1><%= link_to t('.home'), root_url %></h1>
           </li>
           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -39,32 +39,32 @@
           <!-- Left Nav Section -->
           <ul class="left">
             <li class="divider"></li>
-            <li class="active"><%= link_to 'Assets', assets_url %></li>
+            <li class="active"><%= link_to t('.nav.assets'), assets_url %></li>
             <li class="divider"></li>
-            <li><%= link_to 'Contracts', contracts_url %></li>
+            <li><%= link_to t('.nav.contracts'), contracts_url %></li>
             <li class="divider"></li>
-            <li><%= link_to 'Inspections', inspections_url %></li>
+            <li><%= link_to t('.nav.inspections'), inspections_url %></li>
             <li class="divider"></li>
-            <li> <%= link_to 'Inspection Orders', inspection_orders_url %></li>
+            <li> <%= link_to t('.nav.inspection_orders'), inspection_orders_url %></li>
             <li class="divider"></li>
           </ul>
 
           <!-- Right Nav Section -->
           <ul class="right">
             <li class="divider hide-for-small"></li>
-            <li class="has-dropdown"><a href="#">Settings</a>
+            <li class="has-dropdown"><a href="#"><%= t('.settings')%></a>
               <ul class="dropdown">
                 <% if true %>
                 <li><label>Params</label></li>
-                <li><%= link_to 'Entities', entities_url %></li>
-                <li><%= link_to 'Colors', colors_url %></li>
-                <li><%= link_to 'Contract categories', categories_url %></li>
-                <li><%= link_to 'Makes', makes_url %></li>
-                <li><%= link_to 'Models', models_url %></li>
-                <li><%= link_to 'Builds', builds_url %></li>
-                <li><%= link_to 'Kinds', kinds_url %></li>
-                <li><%= link_to 'Bodies', bodies_url %></li>
-                <li><%= link_to 'Insurance Companies', insurance_companies_url %></li>
+                <li><%= link_to t('.nav.entities'), entities_url %></li>
+                <li><%= link_to t('.nav.colors'), colors_url %></li>
+                <li><%= link_to t('.nav.contract_categories'), categories_url %></li>
+                <li><%= link_to t('.nav.makes'), makes_url %></li>
+                <li><%= link_to t('.nav.models'), models_url %></li>
+                <li><%= link_to t('.nav.builds'), builds_url %></li>
+                <li><%= link_to t('.nav.kinds'), kinds_url %></li>
+                <li><%= link_to t('.nav.bodies'), bodies_url %></li>
+                <li><%= link_to t('.nav.insurance_companies'), insurance_companies_url %></li>
                 <li class="divider"></li>
                 <% end %>
                 <li><label>User</label></li>
@@ -83,7 +83,7 @@
                     <input type="text">
                   </div>
                   <div class="small-4 columns">
-                    <a href="#" class="alert button">Search</a>
+                    <a href="#" class="alert button"><%= t('.search') %></a>
                   </div>
                 </div>
               </form>

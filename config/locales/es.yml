@@ -198,6 +198,27 @@ es:
   activemodel:
     errors:
       <<: *errors
+  layouts:
+    application:
+      title: 'Asset Hound'
+      home: 'Inicio'
+      search: 'Buscar'
+      settings: 'Configuración'
+      nav:
+        home: 'Inicio'
+        assets: 'Activos'
+        contracts: 'Contratos'
+        inspections: 'Inspecciones'
+        inspection_orders: 'Ordenes de Inspección'
+        entities: 'Directorio Personas'
+        colors: 'Colores'
+        contract_categories: 'Tipos de Contrato'
+        makes: 'Marcas'
+        models: 'Líneas'
+        builds: 'Carrocerías Permitidas'
+        kinds: 'Clases de Vehículo'
+        bodies: 'Carrocerías'
+        insurance_companies: 'Compañías de Seguros'
   activerecord:
     errors:
       <<: *errors
