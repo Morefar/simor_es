@@ -113,9 +113,42 @@ en:
       title: 'Asset Listing'
       new_btn: ' Add Asset'
       inspections: 'Inspections'
+  contracts:
+    form:
+      cancel: ' Cancel'
+      confirm: 'Are you sure you want to cancel the contract creation?'
+      disable: ' Cancelling creation...'
+      months: 'Months'
+      quarters: 'Quarters'
+      semesters: 'Semesters'
+      years: 'Years'
+      placeholder:
+        client: 'i.e. Bank of America'
+        location: 'i.e. City, Region, Country'
+      fieldset:
+        information: 'Basic Contract Information'
+    new:
+      title: 'New Leasing Contract'
+    edit:
+      title: 'Edit Leasing Contract'
+      show: ' Contract'
+      index: ' Contracts'
+    show:
+      edit: ' Editar'
+      fieldset:
+        information: 'Basic Information'
+        lessee: 'Lessee Information'
+        cosigners: 'Cosigners Information'
+        assets: 'Assets'
+    index:
+      title: 'Active Contracts'
+      new_btn: 'Add Contract'
+      created_at: 'Date Added'
+      assets: 'Assets'
   activerecord:
     models:
       inspection: 'Inspection'
+      contract: 'Contract'
       asset: 'Asset'
     attributes:
       inspection:
@@ -201,3 +234,19 @@ en:
         book_value: 'Initial Value'
         inspection_count: 'Inspection Count'
         last_inspection_date: ' Last Inspection Date'
+      contract:
+        client_id: 'Client'
+        lessee: 'Lessee'
+        number: 'Contract Number'
+        category_id: 'Contract Type'
+        start_date: ' Contract Start Date'
+        first_canon_date: ' First Canon Payment Date'
+        duration: 'Duration'
+        periodicity: 'Periodicity'
+        expiration_date: ' Expiration Date'
+        total_value: 'Total Contract Value'
+        currency: 'Currency'
+        asset_count: 'Assets'
+        location_of_assets: 'Location of Assets'
+        option_to_buy: 'Option to Buy'
+        last_date_to_option: ' Last Date to Exercise Option'

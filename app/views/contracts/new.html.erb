@@ -1,4 +1,4 @@
-<h1>create a new leasing contract</h1>
+<h1><%= t('.title') %></h1>
 
-<%= render 'form', object: @contract %>
-
+<%= render 'form' %>
+<%= link_to t('shared.back'), contracts_path, class: 'icon-mail-reply' %>

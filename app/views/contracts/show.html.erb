@@ -1,70 +1,60 @@
-<h1>Contract number: <%= @contract.number %></h1>
-<%= field_set_tag 'Details' do %>
+<h1><%= "#{t('activerecord.attributes.contract.number')}: #{@contract.number}" %></h1>
+<%= field_set_tag t('.fieldset.information') do %>
   <div class='row'>
-    <b class='large-3 columns'>Contract category: </b>
+    <b class='large-3 columns'><%= "#{t('activerecord.attributes.contract.category_id')}" %></b>
     <span class='large-3 columns pull-6'>
       <%= @contract.category.name %>
     </span>
   </div>
   <div class='row'>
-    <b class='large-2 columns'>Start date: </b>
+    <b class='large-2 columns'><%= t('activerecord.attributes.contract.start_date') %>: </b>
     <span class='large-2 columns'>
     <%= @contract.start_date %>
     </span>
-    <b class='large-2 columns'>First canon payment date: </b>
+    <b class='large-2 columns'><%= t('activerecord.attributes.contract.first_canon_date')%>: </b>
     <span class='large-2 columns'>
     <%= @contract.first_canon_date %>
     </span>
-    <b class='large-2 columns'>Expiration date: </b>
+    <b class='large-2 columns'><%= t 'activerecord.attributes.contract.expiration_date'%>: </b>
     <span class='large-2 columns'>
     <%= @contract.expiration_date %>
     </span>
   </div>
   <div class='row'>
-    <b class='large-3 columns'>Contract Duration: </b>
+    <b class='large-3 columns'><%= t 'activerecord.attributes.contract.duration'%>: </b>
     <span class="large-3 columns">
-    <%= pluralize @contract.duration,
-      case @contract.periodicity
-      when 1
-        "month"
-      when 3
-        "quarter"
-      when 6
-        "semester"
-      when 12
-        "years"
-      end %>
+    <%= "#{@contract.duration} #{contract_periodicity(@contract.periodicity)}"%>
     </span>
-    <b class='large-3 columns'>Total contract value: </b>
+    <b class='large-3 columns'><%= t 'activerecord.attributes.contract.total_value' %>: </b>
     <span class="large-3 columns">
       <b><%= @contract.currency %></b>
       <%= number_to_currency @contract.total_value %>
     </span>
   </div>
   <div class='row'>
-    <b class='large-3 columns'>Assets in this contract: </b>
+    <b class='large-3 columns'><%= t 'activerecord.attributes.contract.asset_count' %>: </b>
     <span class="large-3 columns">
     <%= @contract.assets.count %>
     </span>
-    <b class='large-3 columns'>Location of assets: </b>
+    <b class='large-3 columns'><%= t 'activerecord.attributes.contract.location_of_assets'%>: </b>
     <span class="large-3 columns">
     <%= @contract.location_of_assets %>
   </span>
   </div>
   <% if @contract.option_to_buy? %>
     <div class="row">
-      <b class='large-3 columns'>Last date to excercise option to buy assets: </b>
+      <b class='large-3 columns'><%= t 'activerecord.attributes.contract.last_date_to_option'%>: </b>
       <span class='large-3 columns pull-6'>
       <%= @contract.last_date_to_option %>
       </span>
     </div>
   <% end %>
 <% end %>
-<%= field_set_tag "Lessee Information" do %>
+<%= field_set_tag t('.fieldset.lessee') do %>
   <%= render 'entities/entity', entity: @lessee %>
 <% end %>
 <% unless @cosigners.empty? %>
-  <%= field_set_tag 'Cosigners' do %>
+  <%= field_set_tag t('.fieldset.cosigners') do %>
     <% @cosigners.map(&:entity).each do |cosigner| %>
       <%= render 'entities/entity', entity: cosigner %>
     <% end %>
@@ -72,7 +62,7 @@
 <% end %>
 
 <% if @contract.asset_count > 0 %>
-  <%= field_set_tag 'Assets' do %>
+  <%= field_set_tag t('.fieldset.assets') do %>
     <%= render 'assets/asset_index', assets: @contract.assets %>
   <% end %>
 <% end %>
@@ -82,6 +72,6 @@
 <br/>
 <%= render 'comments/index', commentable: @contract %>
 <p>
-  <%= link_to ' Back', contracts_path, class: 'icon-reply' %>
-  <%= link_to ' Edit', edit_contract_path(@contract), class: 'icon-edit' %>
+  <%= link_to t('shared.back'), contracts_path, class: 'icon-reply' %>
+  <%= link_to t('.edit'), edit_contract_path(@contract), class: 'icon-edit' %>
 </p>

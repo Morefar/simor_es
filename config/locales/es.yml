@@ -309,11 +309,44 @@ es:
       title: 'Listado de Activos'
       new_btn: ' Agregar Activo'
       inspections: 'Inspecciones'
+  contracts:
+    form:
+      cancel: ' Cancelar'
+      confirm: 'Está seguro que desea cancelar la creación de un nuevo contrato?'
+      disable: ' Cancelando creación...'
+      months: 'Meses'
+      quarters: 'Trimestres'
+      semesters: 'Semestres'
+      years: 'Años'
+      placeholder:
+        client: 'ej. BancoLeasing'
+        location: 'ej. Ciudad, Región, País'
+      fieldset:
+        information: 'Información Básica del Contrato'
+    new:
+      title: 'Nuevo Contrato de Leasing'
+    edit:
+      title: 'Editar Contrato de Leasing'
+      show: ' Contracto'
+      index: ' Contratos'
+    show:
+      edit: ' Editar'
+      fieldset:
+        information: 'Información Básica'
+        lessee: 'Información Arrendatario / Locatario'
+        cosigners: 'Información Codeudores'
+        assets: 'Activos en el Contrato'
+    index:
+      title: 'Contractos Activos'
+      new_btn: 'Agregar Contrato'
+      created_at: 'Fecha de Creación'
+      assets: 'Activos'
   activerecord:
     errors:
       <<: *errors
     models:
       inspection: 'Inspección'
+      contract: 'Contrato'
       asset: 'Activo'
     attributes:
       inspection:
@@ -399,3 +432,19 @@ es:
         book_value: 'Valor Inicial'
         inspection_count: 'Número de Inspecciones'
         last_inspection_date: ' Fecha de Última inspección'
+      contract:
+        client_id: 'Cliente'
+        lessee: 'Arrendatario'
+        number: 'Número de Contrato'
+        category_id: 'Tipo de Contrato'
+        start_date: ' Fecha de Inicio'
+        first_canon_date: ' Fecha de Pago Primer Cánon'
+        duration: 'Duración'
+        periodicity: 'Periodicidad'
+        expiration_date: ' Fecha de Finalización'
+        total_value: 'Valor Total del Contrato'
+        currency: 'Moneda'
+        asset_count: 'Número de Activos'
+        location_of_assets: 'Localización de los Activos'
+        option_to_buy: 'Opción de Compra'
+        last_date_to_option: ' Última Fecha para Ejercer Opción de Compra'

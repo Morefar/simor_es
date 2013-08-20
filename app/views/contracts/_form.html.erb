@@ -2,52 +2,52 @@
 
   <%= render 'shared/error_messages', target: @contract %>
 
-  <%= field_set_tag "Main contract information" do %>
+  <%= field_set_tag t('.fieldset.information') do %>
     <div class="row">
       <div class='large-4 columns'>
-        <%= form.label :client_id, 'Client' %>
-        <%= form.text_field :client_id, placeholder: 'i.e. Bank of America'%>
+        <%= form.label :client_id %>
+        <%= form.text_field :client_id, placeholder: t('.placeholder.client')%>
       </div>
       <div class='large-3 columns'>
-        <%= form.label :number, 'Contract number' %>
+        <%= form.label :number %>
         <%= form.text_field :number, placeholder: 'i.e. 1189719-989' %>
       </div>
       <div class='large-3 columns pull-2'>
-        <%= form.label :category_id, 'Contract type' %>
+        <%= form.label :category_id %>
         <%= form.collection_select :category_id, @categories, :id, :name,
-          prompt: 'Select type' %>
+          prompt: true %>
       </div>
     </div>
     <div class="row">
       <div class='large-3 columns'>
-        <%= form.label :start_date, ' Contract start date', class: 'icon-calendar' %>
+        <%= form.label :start_date, class: 'icon-calendar' %>
         <%= form.text_field :start_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
       <div class='large-3 columns'>
-        <%= form.label :first_canon_date, ' First canon payment', class: 'icon-calendar' %>
+        <%= form.label :first_canon_date, class: 'icon-calendar' %>
         <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
-      </div>
-      <div class='large-2 columns'>
-        <%= form.label :periodicity %>
-        <%= form.select :periodicity, [['Months',1], ['Quarters',3], ['Semesters',6], ['Years',12]] %>
       </div>
       <div class='large-1 columns'>
         <%= form.label :duration %>
-        <%= form.number_field :duration, placeholder: 'number of periods' %>
+        <%= form.number_field :duration, placeholder: '24' %>
+      </div>
+      <div class='large-2 columns'>
+        <%= form.label :periodicity %>
+        <%= form.select :periodicity, [[t('.months'),1], [t('.quarters'),3], [t('.semesters'),6], [t('.years'),12]] %>
       </div>
       <div class='large-3 columns'>
-        <%= form.label :expiration_date, ' Contract expiration date', class: 'icon-calendar' %>
+        <%= form.label :expiration_date, class: 'icon-calendar' %>
         <%= form.text_field :expiration_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
     </div>
     <div class="row">
       <div class='large-4 columns'>
-      <%= form.label :total_value, 'Inicial value'%>
+      <%= form.label :total_value%>
       <%= form.number_field :total_value, placeholder: 'i.e. 12000000' %>
       </div>
       <div class='large-3 columns pull-5'>
       <%= form.label :currency %>
-      <%= form.select :currency, %w(COP$ USD$ EUR€ PND£ RPE₨) %>
+      <%= form.select :currency, TwitterCldr::Shared::Currencies.currency_codes %>
       </div>
     </div>
     <div class="row">
@@ -57,19 +57,19 @@
       </div>
       <div class='large-3 columns'>
         <b>
-          <%= form.label :last_date_to_option, ' Last date to option', class: 'icon-calendar' %>
+          <%= form.label :last_date_to_option, class: 'icon-calendar' %>
         </b>
         <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd', class: 'date-field' %>
       </div>
       <div class='large-6 columns pull-2'>
         <%= form.label :location_of_assets %>
-        <%= form.text_field :location_of_assets, placeholder: "e.g. City, Region, Country"%>
+        <%= form.text_field :location_of_assets, placeholder: t('.placeholder.location')%>
       </div>
     </div>
   <% end %>
 
   <div class="actions">
     <%= form.submit %>
-    <%= link_to " Cancel", contracts_url, class: 'small button alert radius icon-remove-sign',:confirm => "Are you sure you want to cancel?", :disable_with => "Cancelling creation..." %>
+    <%= link_to t('.cancel'), contracts_url, class: 'small  button alert radius icon-remove-sign',confirm: t('.confirm'), disable_with: t('.disable') %>
   </div>
 <% end %>
