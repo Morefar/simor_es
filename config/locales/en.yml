@@ -155,11 +155,18 @@ en:
       new_btn: 'Add Contract'
       created_at: 'Date Added'
       assets: 'Assets'
+  comments:
+    index:
+      title: 'Comments'
+      add_comment: ' Add Comment'
+    form:
+      placeholder: 'Write the content of your comment here...'
   activerecord:
     models:
       inspection: 'Inspection'
       contract: 'Contract'
       asset: 'Asset'
+      comment: 'Comment'
     attributes:
       inspection:
         inspection_number: 'Inspection Number'
@@ -260,3 +267,6 @@ en:
         location_of_assets: 'Location of Assets'
         option_to_buy: 'Option to Buy'
         last_date_to_option: ' Last Date to Exercise Option'
+      comment:
+        content: 'Contenido'
+        user: 'Usuario'

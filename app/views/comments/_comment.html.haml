@@ -5,10 +5,9 @@
     .large-10.push-1.columns
       .row
         .comment-from.small-6.large-3.columns
-          %b Employee name
+          %b Nombre Empleado
         .comment-time.small-6.large-4.pull-3.columns
-          = time_ago_in_words comment.updated_at
-          ago
+          = localize_time_ago_in_words comment.updated_at
       .row
         .comment-content.large-12.columns
           = comment.content

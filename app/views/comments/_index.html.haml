@@ -1,8 +1,8 @@
 %a{name: '#comments', data: {magellan_destination: 'comments'}}
-  %h2 Comments
+  %h2= t('.title')
 .comments
   - commentable.comments.each do |comment|
     = render 'comments/comment', comment: comment
 #new-comment-button.small.button.success.radius.icon-comment
-  Add Comment
+  = t('.add_comment')
 = render 'comments/form', comment: Comment.new, commentable: commentable

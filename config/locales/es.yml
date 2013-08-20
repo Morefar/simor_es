@@ -221,6 +221,8 @@ es:
         insurance_companies: 'Compañías de Seguros'
   shared:
     back: ' Regresar'
+    yes: 'Si'
+    no: 'No'
   inspections:
     form:
       fieldset:
@@ -238,7 +240,7 @@ es:
       show: ' Inspección'
       index: ' Inspecciones'
       back: ' Regresar'
-    index:
+    index: &inspection_index
       title: 'Inspecciones'
       new: ' Agregar Inspección'
       number: 'Acta'
@@ -246,6 +248,10 @@ es:
       asset: 'Activo'
       initial_value: 'Valor Inicial'
       current_value: 'Valor Actual'
+    index_table:
+      <<: *inspection_index
+      city: 'Ciudad'
+      state: 'Departamento'
     show:
       record: 'Acta de Inspección No.'
       asset_number: 'Número del Activo Inspeccionado'
@@ -309,6 +315,13 @@ es:
       title: 'Listado de Activos'
       new_btn: ' Agregar Activo'
       inspections: 'Inspecciones'
+    show:
+      title: 'Áctivo Número: '
+      lessee_id: 'Identificación del Arrendatario'
+      imported: 'Importado'
+      assembled: 'Ensamblado'
+      fieldset:
+        inspections: 'Inspecciones'
   contracts:
     form:
       cancel: ' Cancelar'
@@ -341,6 +354,12 @@ es:
       new_btn: 'Agregar Contrato'
       created_at: 'Fecha de Creación'
       assets: 'Activos'
+  comments:
+    index:
+      title: 'Notas'
+      add_comment: ' Agregar Nota'
+    form:
+      placeholder: 'Agregue su nota...'
   activerecord:
     errors:
       <<: *errors
@@ -348,6 +367,7 @@ es:
       inspection: 'Inspección'
       contract: 'Contrato'
       asset: 'Activo'
+      comment: 'Comentario'
     attributes:
       inspection:
         inspection_number: 'Número de Inspección'
@@ -448,3 +468,6 @@ es:
         location_of_assets: 'Localización de los Activos'
         option_to_buy: 'Opción de Compra'
         last_date_to_option: ' Última Fecha para Ejercer Opción de Compra'
+      comment:
+        content: 'Contenido'
+        user: 'Usuario'
