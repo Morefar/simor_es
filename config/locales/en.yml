@@ -1,6 +1,3 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   layouts:
     application:
@@ -25,6 +22,8 @@ en:
         insurance_companies: 'Insurance Companies'
   shared:
     back: ' Back'
+    yes: 'Yes'
+    no: 'No'
   inspections:
     form:
       fieldset:
@@ -42,7 +41,7 @@ en:
       show: ' Inspection'
       index: ' Inspections'
       back: ' Back'
-    index:
+    index: &inspection_index
       title: 'Inspections'
       new: ' Add Inspection'
       number: 'Inspection'
@@ -50,6 +49,10 @@ en:
       asset: 'Asset Number'
       initial_value: 'Initial Value'
       current_value: 'Current Value'
+    index_table:
+      <<: *inspection_index
+      city: 'City'
+      state: 'State'
     show:
       record: 'Inspection Record No.'
       asset_number: 'Inspected Asset Inventory number'
@@ -113,6 +116,13 @@ en:
       title: 'Asset Listing'
       new_btn: ' Add Asset'
       inspections: 'Inspections'
+    show:
+      title: 'Inventory Number'
+      lessee_id: 'Lessee Id'
+      imported: 'Imported'
+      assembled: 'Assembled'
+      fieldset:
+        inspections: 'Inspections'
   contracts:
     form:
       cancel: ' Cancel'

@@ -1,12 +1,12 @@
 %table
   %thead
     %tr
-      %th Number
-      %th Date
-      %th City
-      %th State
-      %th Initial Value
-      %th Current Value
+      %th= t('.number')
+      %th= t('.date')
+      %th= t('.city')
+      %th= t('.state')
+      %th= t('.initial_value')
+      %th= t('.current_value')
   %tbody
     - inspections.each do |inspection|
       %tr
