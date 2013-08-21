@@ -1,10 +1,5 @@
 = form_for document, html: { multipart: true } do |f|
-  -if document.errors.any?
-    #error_explanation
-      %h2= "#{ pluralize(document.errors.count, "error") } prohibited this document from being saved:"
-      %ul
-        - document.errors.full_messages.each do |mgs|
-          %li= msg
+  = render 'shared/error_messages', target: document
   - unless document.documentable.present?
     = f.hidden_field :documentable_id, value: documentable.id
     = f.hidden_field :documentable_type, value: documentable.class.to_s
@@ -15,7 +10,7 @@
     = f.label :category
     = f.select :category, %W(Photo Document Contract Invoice Imprint Other)
   .field
-    = f.label :content, 'Choose the image you wish to upload'
+    = f.label :content
     = f.file_field :content
   .action
     = f.submit

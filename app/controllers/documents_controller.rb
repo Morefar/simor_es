@@ -14,16 +14,20 @@ class DocumentsController < ApplicationController
     if @document.save
       redirect_to @document.documentable, notice: 'Document was succesfully created.'
     else
-      redirect_to @document.documentable, notice: 'Document could not be uploaded'
+      redirect_to @document.documentable, alert: 'Document could not be uploaded'
     end
   end
 
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
     if @document.update_attributes(params[:document])
-      redirect_to @document.documentable, notice: "Document was successfully created."
+      format.js
+      format.html { redirect_to @document.documentable, notice: "Document was successfully updated." }
     else
       render 'edit'
     end

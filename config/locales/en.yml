@@ -166,6 +166,7 @@ en:
       inspection: 'Inspection'
       contract: 'Contract'
       asset: 'Asset'
+      document: 'Document'
       comment: 'Comment'
     attributes:
       inspection:
@@ -270,3 +271,10 @@ en:
       comment:
         content: 'Contenido'
         user: 'Usuario'
+      document:
+        content: 'Document to Upload'
+        slug: 'Description'
+        md5hash: 'md5hash'
+        content_type: 'Content Type'
+        file_size: 'File Size'
+        category: 'Category'
