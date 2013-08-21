@@ -1,0 +1,2 @@
+var editableDocumentPanel = $('#document-<%= @document.id %> p');
+editableDocumentPanel.replaceWith("<%= j render 'documents/edit_form', document: @document, documentable: @document.documentable %>");

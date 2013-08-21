@@ -1,0 +1,10 @@
+%p
+  = form_for document, remote: true do |f|
+    .field
+      = f.label :category
+      = f.select :category, %W(Photo Document Contract Invoice Imprint Other)
+    .field
+      = f.label :slug
+      = f.text_field :slug
+    .action
+      = f.submit
