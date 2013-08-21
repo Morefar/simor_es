@@ -166,7 +166,21 @@ en:
       inspection: 'Inspection'
       contract: 'Contract'
       asset: 'Asset'
+      entity: 'Entity'
+      category: 'Category'
+      make: 'Make'
+      model: 'Model'
+      year: 'Year'
+      body: 'Body'
+      build: 'Build'
+      kind: 'Kind'
+      inspection_order: 'Inspection Order'
+      insurance_company: 'Insurance Company'
+      inventory: 'Inventory'
+      indentification_type: 'Identification Type'
+      cosigner: 'Cosigner'
       document: 'Document'
+      color: 'Color'
       comment: 'Comment'
     attributes:
       inspection:
@@ -269,8 +283,8 @@ en:
         option_to_buy: 'Option to Buy'
         last_date_to_option: ' Last Date to Exercise Option'
       comment:
-        content: 'Contenido'
-        user: 'Usuario'
+        content: 'Content'
+        user: 'User'
       document:
         content: 'Document to Upload'
         slug: 'Description'

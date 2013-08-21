@@ -1,16 +1,18 @@
-<div class='row'>
-  <b class='large-3 columns'>Name: </b>
-  <span class='large-3 columns'>
-    <%= link_to entity.name, entity %>
-  </span>
-  <b class='large-3 columns'>Identification Document: </b>
-  <span class='large-3 columns'>
-    <%= entity.identification_type.name %> <%= entity.identification_number %>
-  </span>
-</div>
-<div class='row'>
-  <b class='large-3 columns'>Address: </b>
-  <span  class='large-6 columns pull-3'>
-    <%= entity.address %>, <%= entity.city %>, <%= entity.state %>
-  </span>
+<div class='entity'>
+  <div class='row'>
+    <b class='large-1 columns'>Name: </b>
+    <span class='large-3 columns'>
+      <%= link_to entity.name, entity %>
+    </span>
+    <b class='large-3 columns push-2'>Identification Document: </b>
+    <span class='large-3 columns'>
+      <%= entity.identification_type.name %> <%= entity.identification_number %>
+    </span>
+  </div>
+  <div class='row'>
+    <b class='large-1 columns'>Address: </b>
+    <span  class='large-6 columns pull-5'>
+      <%= entity.address %>, <%= entity.city %>, <%= entity.state %>
+    </span>
+  </div>
 </div>

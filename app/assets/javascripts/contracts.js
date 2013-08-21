@@ -64,12 +64,15 @@ Date.prototype.addMonths = function (value) {
   return this;
 };
 
-// Update expiration date based on first canon date and number of periods.
-$('#contract_duration').on('blur', function(){
-  var $duration = $(this).val();
-  var $periods = $('#contract_periodicity').val();
-  var $startDate = new Date($("#contract_first_canon_date").val());
+var updateExpirationField = function(){
+  var $duration = parseInt($('#contract_duration').val());
+  var $periods = parseInt($('#contract_periodicity').val());
+  var $startDate = new Date($('#contract_first_canon_date').val());
   var $months = ($duration * $periods);
-  var $endDate = $startDate.addMonths($months);
-  $('#contract_expiration_date').val($endDate.getFullYear()+'-'+$endDate.getMonth()+'-'+$endDate.getDate());
-});
+  $startDate.addMonths($months);
+  $('#contract_expiration_date').val($startDate.getFullYear()+'-'+($startDate.getMonth()+1)+'-'+$startDate.getDate());
+};
+
+// Update expiration date based on first canon date and number of periods.
+$('#contract_periodicity').change(function() {updateExpirationField()});
+$('#contract_duration').change(function() {updateExpirationField()});
