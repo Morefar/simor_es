@@ -223,6 +223,11 @@ es:
     back: ' Regresar'
     yes: 'Si'
     no: 'No'
+    error_messages:
+      error:
+        one: 'error'
+        other: 'errores'
+      header: 'impidieron que este registro fuera guardado.'
   inspections:
     form:
       fieldset:

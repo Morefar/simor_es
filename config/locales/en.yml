@@ -24,6 +24,11 @@ en:
     back: ' Back'
     yes: 'Yes'
     no: 'No'
+    error_messages:
+      error:
+        one: 'error'
+        other: 'errors'
+      header: 'prohibited this record to be saved:'
   inspections:
     form:
       fieldset:
