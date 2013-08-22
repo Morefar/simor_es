@@ -22,8 +22,12 @@ class ContractsController < ApplicationController
 
 #READ ACTIONS
   def index
-    @contracts = Contract.order('created_at DESC')
     add_breadcrumb 'Contracts', :contracts_path
+    @contracts = Contract.order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: @contracts.search_number("%#{params[:term]}%").limit(10).pluck(:number) }
+    end
   end
 
   def show

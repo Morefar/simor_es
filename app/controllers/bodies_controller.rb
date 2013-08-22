@@ -6,7 +6,7 @@ class BodiesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @bodies }
+      format.json { render json: Body.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
 

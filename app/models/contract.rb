@@ -22,6 +22,8 @@ class Contract < ActiveRecord::Base
   validate :option_to_buy_validations
   validate :non_valid_option_to_buy_date
 
+  scope :search_number, ->(number) { where("number like ?", number) }
+
   def non_valid_start_date
     if !self.start_date.blank? && !self.expiration_date.blank?
       self.errors.add(:start_date, 'must be less than the expiration date') unless (self.start_date < self.expiration_date)

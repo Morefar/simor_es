@@ -6,7 +6,7 @@ class KindsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @kinds }
+      format.json { render json: Kind.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
 

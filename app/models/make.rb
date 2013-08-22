@@ -4,4 +4,6 @@ class Make < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, uniqueness: true
+
+  scope :search_name, ->(name) { where("name ilike ?", name) }
 end

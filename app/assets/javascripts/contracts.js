@@ -2,9 +2,6 @@
 (function() {
   $(function() {
     $.datepicker.setDefaults({
-      // showOn: "button",
-      // buttonImageOnly: true,
-      // buttonImage: "/assets/calendar.png",
       regional: "es",
       changeMonth: true,
       changeYear: true,
@@ -76,3 +73,11 @@ var updateExpirationField = function(){
 // Update expiration date based on first canon date and number of periods.
 $('#contract_periodicity').change(function() {updateExpirationField()});
 $('#contract_duration').change(function() {updateExpirationField()});
+
+// Autocomplete behaviour for the asset form.
+$('#asset_contract_number').autocomplete({source: $('#asset_contract_number').data('autocomplete-source'), minLength: 4});
+$('#asset_make_name').autocomplete({source: $('#asset_make_name').data('autocomplete-source'), minLength: 3});
+$('#asset_model_name').autocomplete({source: $('#asset_model_name').data('autocomplete-source'), minLength: 3});
+$('#asset_color_name').autocomplete({source: $('#asset_color_name').data('autocomplete-source'), minLength: 3});
+$('#asset_kind_name').autocomplete({source: $('#asset_kind_name').data('autocomplete-source'), minLength: 3})
+$('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomplete-source'), minLength: 3});

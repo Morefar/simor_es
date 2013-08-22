@@ -6,7 +6,7 @@ class MakesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @makes }
+      format.json { render json: Make.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
 

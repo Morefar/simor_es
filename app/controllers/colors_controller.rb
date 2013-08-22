@@ -6,7 +6,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @colors }
+      format.json { render json: Color.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
 

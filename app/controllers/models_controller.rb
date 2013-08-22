@@ -6,11 +6,9 @@ class ModelsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @models }
+      format.json { render json: Model.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
-
-
 
   def show
     @model = Model.find(params[:id])

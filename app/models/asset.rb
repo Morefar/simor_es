@@ -1,9 +1,8 @@
 #encoding: UTF-8
 class Asset < ActiveRecord::Base
-  attr_accessible :contract_id, :invoice_id, :inventory_number, :license_plate, :make_id, :model_id, :year, :cylinder_cap, :color, :service_type, :kind_id, :body_id, :fuel_type, :capacity, :motor_number, :rerecorded_motor, :vin, :serial_number, :rerecorded_serial, :chassis_number, :rerecorded_chassis, :mobility_restriction, :shield_level, :horse_power, :importd_assembld, :import_statement, :color_id, :import_date, :number_of_doors, :property_limitation, :registration_date, :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, :last_inspection_date, :contract, :kind, :body, :make, :model
+  attr_accessible :invoice_id, :inventory_number, :license_plate, :make_name, :model_name, :year, :cylinder_cap, :color_name, :service_type, :kind_name, :body_name, :fuel_type, :capacity, :motor_number, :rerecorded_motor, :vin, :serial_number, :rerecorded_serial, :chassis_number, :rerecorded_chassis, :mobility_restriction, :shield_level, :horse_power, :importd_assembld, :import_statement, :color_id, :import_date, :number_of_doors, :property_limitation, :registration_date, :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, :last_inspection_date, :contract_number
 
   belongs_to :contract, inverse_of: :assets
-  # belongs_to :invoice, inverse_of: :assets
   belongs_to :make
   belongs_to :model
   belongs_to :kind
@@ -13,8 +12,7 @@ class Asset < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
 
-  validates :inventory_number, :license_plate, :make, :model, :year, :registration_date,
-    :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, presence: true
+  validates :contract_number, :inventory_number, :license_plate, :make_name, :model_name, :year, :registration_date, :tp_issue_date, :tp_expiration_date, :transit_authority, :book_value, :transit_permit, :color_name, :kind_name, :body_name, presence: true
   validates :license_plate, :length => { is: 6 }
   validates :license_plate, :format => { with: /\A[a-z]{2}[a-z0-9]\d{3}\Z/i,
     message: 'incorrect format. Try (AAA000)'
@@ -46,10 +44,6 @@ class Asset < ActiveRecord::Base
     errors.add(:kind, 'The build combination isn\'t authorized') unless Build.authorized_build?(kind_id, body_id)
   end
 
-  def unique_identifier_present
-
-  end
-
   def update_parent_contract_information
     if self.contract.present?
       parent_contract = self.contract
@@ -58,4 +52,45 @@ class Asset < ActiveRecord::Base
     end
   end
 
+  def contract_number
+    contract.try(:number)
+  end
+  def contract_number=(contract_number)
+    self.contract = Contract.find_by_number(contract_number) if contract_number.present?
+  end
+
+  def make_name
+    make.try(:name)
+  end
+  def make_name=(make_name)
+    self.make = Make.find_by_name(make_name) if make_name.present?
+  end
+
+  def model_name
+    make.try(:name)
+  end
+  def model_name=(model_name)
+    self.model = Model.find_by_name(model_name) if model_name.present?
+  end
+
+  def color_name
+    color.try(:name)
+  end
+  def color_name=(color_name)
+    self.color = Color.find_by_name(model_name) if model_name.present?
+  end
+
+  def kind_name
+    kind.try(:name)
+  end
+  def kind_name=(kind_name)
+    self.kind = Kind.find_by_name(kind_name) if kind_name.present?
+  end
+
+  def body_name
+    body.try(:name)
+  end
+  def body_name=(body_name)
+    self.body = Body.find_by_name(body_name) if body_name.present?
+  end
 end
