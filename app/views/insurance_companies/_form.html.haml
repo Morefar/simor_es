@@ -1,0 +1,11 @@
+= form_for @insurance_company do |f|
+  .row
+    .field.large-7.columns
+      = f.label :name
+      = f.text_field :name
+    .field.large-3.columns.pull-2
+      = f.label :nit
+      = f.text_field :nit
+  .row
+    .actions
+      = f.submit

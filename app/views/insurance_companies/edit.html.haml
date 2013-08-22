@@ -1,0 +1,10 @@
+.row
+  %h1= t('.title')
+.row
+  = render 'form'
+.row
+  = link_to t('.show'), @insurance_company, class: 'icon-mail-reply'
+  \|
+  = link_to t('.index'), insurance_companies_path, class: 'icon-list-alt'
+  \|
+  = link_to t('shared.back'), :back, class: 'icon-mail-reply'

@@ -161,6 +161,23 @@ en:
       add_comment: ' Add Comment'
     form:
       placeholder: 'Write the content of your comment here...'
+  insurance_companies:
+    shared: &insurance_company
+      name: 'Insurance Company Name'
+      nit: 'Insurance Company Identification'
+    show:
+      title: 'Insurance Company'
+      <<: *insurance_company
+    index:
+      title: 'Insurance Companies'
+      new_btn: ' Add Insurance Company'
+      <<: *insurance_company
+    new:
+      title: 'New Insurance Company'
+    edit:
+      title: 'Edit Insurance Company'
+      show: ' Insurance Company'
+      index: ' Insurance Companies'
   activerecord:
     models:
       inspection: 'Inspection'
@@ -292,3 +309,5 @@ en:
         content_type: 'Content Type'
         file_size: 'File Size'
         category: 'Category'
+      insurance_company:
+        <<: *insurance_company

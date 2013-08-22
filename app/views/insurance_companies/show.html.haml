@@ -1,0 +1,11 @@
+.row
+  %h1= t('.title')
+.row
+  %b.large-3.columns= t('.name')
+  .large-3.columns
+    = @insurance_company.name
+  %b.large-1.columns= t('.nit')
+  .large-3.columns.pull-2
+    = @insurance_company.nit
+= link_to t('shared.back'), insurance_companies_path, class: 'icon-mail-reply'
+

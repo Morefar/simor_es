@@ -360,6 +360,23 @@ es:
       add_comment: ' Agregar Nota'
     form:
       placeholder: 'Agregue su nota...'
+  insurance_companies:
+    shared: &insurance_company
+      name: 'Compañía de Seguros'
+      nit: 'NIT'
+    show:
+      title: 'Compañía de Aseguramiento'
+      <<: *insurance_company
+    index:
+      title: 'Compañías de Seguros'
+      new_btn: ' Agregar Compañía de Seguros'
+      <<: *insurance_company
+    new:
+      title: 'Nueva Compañía de Seguros'
+    edit:
+      title: 'Editar Compañía de Seguros'
+      show: ' Compañía de Seguros'
+      index: ' Compañías de Seguros'
   activerecord:
     errors:
       <<: *errors
@@ -493,3 +510,5 @@ es:
         content_type: 'Tipo de Contenido'
         file_size: 'Tamaño Archivo'
         category: 'Categoría'
+      insurance_company:
+        <<: *insurance_company
