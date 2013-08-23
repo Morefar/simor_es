@@ -21,6 +21,7 @@ group :development, :test do
   gem 'guard-rspec', '~> 3.0.2'
   gem 'pry'
   gem 'pry-nav'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
@@ -54,8 +55,6 @@ gem 'carrierwave_direct', '~> 0.0.13'
 gem 'sidekiq'
 gem 'fog'
 gem 'twitter_cldr', '~> 2.4.2'
-
-# gem 'pg_search', '~> 0.7.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

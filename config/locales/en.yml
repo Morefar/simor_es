@@ -184,6 +184,10 @@ en:
       show: ' Insurance Company'
       index: ' Insurance Companies'
   activerecord:
+    errors:
+      messages:
+        unauthorized_build: 'combination with selected Body, not authorized.'
+        invalid_vin: "has incorrect format. 'I', 'O', 'Q', 'Ñ', or non-word characters are not allowed."
     models:
       inspection: 'Inspection'
       contract: 'Contract'

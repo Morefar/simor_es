@@ -37,8 +37,7 @@ class AssetsController < ApplicationController
   end
 
   def create
-    @asset = Asset.new
-    @asset.attributes = params[:asset].except(:transit_permit)
+    @asset = Asset.new params[:asset]
     respond_to do |format|
       if @asset.save
         format.html { redirect_to @asset, notice: 'Asset was successfully created.' }
