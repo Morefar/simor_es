@@ -3,7 +3,7 @@ class InspectionsController < ApplicationController
 
 
   def index
-    @inspections = Inspection.order('date DESC')
+    @inspections = Inspection.includes(:asset).order('date DESC')
     add_breadcrumb "Inspections", :inspections_path
     respond_to do |format|
       format.html # index.html.erb

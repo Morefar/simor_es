@@ -2,7 +2,7 @@ class AssetsController < ApplicationController
   before_filter :find_asset, except: [:new, :create, :index]
 
   def index
-    @assets = Asset.all
+    @assets = Asset.includes(:contract, :make, :model).all
     add_breadcrumb 'Assets', :assets_path
     respond_to do |format|
       format.html

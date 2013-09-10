@@ -34,7 +34,7 @@
   <div class='row'>
     <b class='large-3 columns'><%= t 'activerecord.attributes.contract.asset_count' %>: </b>
     <span class="large-3 columns">
-    <%= @contract.assets.count %>
+    <%= @contract.asset_count %>
     </span>
     <b class='large-3 columns'><%= t 'activerecord.attributes.contract.location_of_assets'%>: </b>
     <span class="large-3 columns">
@@ -63,7 +63,7 @@
 
 <% if @contract.asset_count > 0 %>
   <%= field_set_tag t('.fieldset.assets') do %>
-    <%= render 'assets/asset_index', assets: @contract.assets %>
+    <%= render 'assets/asset_index', assets: @contract.assets.includes(:make, :model) %>
   <% end %>
 <% end %>
 

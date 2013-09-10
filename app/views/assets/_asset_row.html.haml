@@ -7,6 +7,6 @@
   %td= asset.year
   %td= asset.service_type
   %td= number_to_currency asset.book_value, unit: ''
-  %td.center= asset.inspections.count
+  %td.center= asset.inspection_count
   %td.center= link_to '', edit_asset_path(asset), class: 'icon-edit'
   %td.center= link_to '', asset, class: 'icon-trash',method: :delete, data: { confirm: 'Are you sure?' }

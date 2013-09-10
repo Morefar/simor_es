@@ -23,7 +23,7 @@ class ContractsController < ApplicationController
 #READ ACTIONS
   def index
     add_breadcrumb 'Contracts', :contracts_path
-    @contracts = Contract.order('created_at DESC')
+    @contracts = Contract.includes(:category, :lessee).order('created_at DESC')
     respond_to do |format|
       format.html
       format.json { render json: @contracts.search_number("%#{params[:term]}%").limit(10).pluck(:number) }
@@ -33,7 +33,7 @@ class ContractsController < ApplicationController
   def show
     add_breadcrumb "Contract:#{@contract.number}", @contract
     @lessee = @contract.lessee
-    @cosigners = Array(@contract.cosigners)
+    @cosigners = Array(@contract.cosigners.includes(entity: [:identification_type]))
   end
 
 #UPDATE ACTIONS

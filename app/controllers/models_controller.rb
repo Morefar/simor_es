@@ -2,7 +2,7 @@ class ModelsController < ApplicationController
 
 
   def index
-    @models = Model.all
+    @models = Model.includes(:make).all
 
     respond_to do |format|
       format.html
