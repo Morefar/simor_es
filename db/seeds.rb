@@ -1,10 +1,6 @@
 require 'rubygems'
 require 'factory_girl_rails'
 
-cities = ['Chicago', 'Bogota', 'New York', 'Panama', 'Sidney',
-    'Medellin', 'Bucaramanga', 'Cali']
-
-
  category_names = [
     "Financial",
     "Importation",
@@ -116,8 +112,10 @@ digit_array = (0..9).to_a
 number_id_array = Array(1..1000)
 300.times do
   build = Build.sample
-  a = Asset.new(contract: Contract.sample, invoice_id: number_id_array.shuffle!.shift, inventory_number: number_id_array.shuffle!.shift, cylinder_cap: 3500, service_type: %w(PUBLIC PRIVATE ESPECIAL DIPLOMATIC).sample, fuel_type: %w(GASOLINE GAS DIESEL BIODIESEL GAS-GASOLINE).sample, capacity: 5, motor_number: '908980985AWDOI345', rerecorded_motor: false, vin: "908NPR985AWDUA342", serial_number: "908980955AWDOI345", rerecorded_serial: false, chassis_number: "908950985AWDOI345", rerecorded_chassis: false, mobility_restriction: 'none', shield_level:  'none', horse_power: 1250, importd_assembld: false, import_statement: '12904AGH9089490', import_date: '2011-04-13', number_of_doors: 5, property_limitation: 'none', registration_date: '2013-02-01', tp_issue_date: '2013-01-01', tp_expiration_date: '2014-02-01', transit_authority: 'SMD Bogota', kind: build.kind, body: build.body, make: Make.sample, model: Model.sample, color: Color.sample, year: rand(2010..2014), book_value: rand(100000000..500000000.0), license_plate: "#{letter_array.sample}#{letter_array.sample}#{letter_array.sample}#{digit_array.sample}#{digit_array.sample}#{digit_array.sample}")
-  a.save
+  asset = Asset.new(contract: Contract.sample, invoice_id: number_id_array.shuffle!.shift, inventory_number: number_id_array.shuffle!.shift, transit_permit: rand(10_000_000_000..99_999_999_999), cylinder_cap: 3500, service_type: %w(PUBLIC PRIVATE ESPECIAL DIPLOMATIC).sample, fuel_type: %w(GASOLINE GAS DIESEL BIODIESEL GAS-GASOLINE).sample, capacity: 5, motor_number: '908980985AWDOI345', rerecorded_motor: false, vin: "908NPR985AWDUA342", serial_number: "908980955AWDOI345", rerecorded_serial: false, chassis_number: "908950985AWDOI345", rerecorded_chassis: false, mobility_restriction: 'none', shield_level:  'none', horse_power: 1250, importd_assembld: false, import_statement: '12904AGH9089490', import_date: '2011-04-13', number_of_doors: 5, property_limitation: 'none', registration_date: '2013-02-01', tp_issue_date: '2013-01-01', tp_expiration_date: '2014-02-01', transit_authority: 'SMD Bogota', kind: build.kind, body: build.body, make: Make.sample, model: Model.sample, color: Color.sample, year: rand(2010..2014), book_value: rand(100000000..500000000.0), license_plate: "#{letter_array.sample}#{letter_array.sample}#{letter_array.sample}#{digit_array.sample}#{digit_array.sample}#{digit_array.sample}")
+  if asset.valid?
+    asset.save
+  end
 end
 
 puts "#{Asset.count} Assets created"
@@ -131,9 +129,11 @@ puts "#{InsuranceCompany.count} Insurance companies created"
 
 Inspection.destroy_all
 600.times do
-  asset = Asset.sample
-  FactoryGirl.create(:inspection, asset: asset, insurance_company: InsuranceCompany.sample, current_value: rand(0..asset.book_value), appraiser_value: rand(0..asset.book_value), insured_value: rand(0..asset.book_value),
-    date: Time.now)
+  if Asset.count > 0
+    asset = Asset.sample
+    FactoryGirl.create(:inspection, asset: asset, insurance_company: InsuranceCompany.sample, current_value: rand(0..asset.book_value), appraiser_value: rand(0..asset.book_value), insured_value: rand(0..asset.book_value),
+      date: Time.now)
+  end
 end
 
 puts "#{Inspection.count} Inspections created"
