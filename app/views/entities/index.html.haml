@@ -1,15 +1,14 @@
-%h1 Lessees and Cosigners Directory
-
-%p= link_to "> Add a new Person", new_entity_path
+%h1= t('.title')
+%p= link_to t('.new_btn'), new_entity_url, class: "button radius success"
 %table
   %thead
     %tr
-      %th Name
-      %th Identification
-      %th Email
-      %th City
-      %th Lease Contracts
-      %th Cosigner Contracts
+      %th= t('entities.shared.name')
+      %th= t('entities.shared.identification_number')
+      %th= t('entities.shared.email')
+      %th= t('entities.shared.city')
+      %th= t('entities.shared.lease_contracts')
+      %th= t('entities.shared.cosigner_contracts')
   %tbody
     - @entities.each do |entity|
       %tr

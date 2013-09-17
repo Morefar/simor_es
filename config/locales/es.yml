@@ -384,6 +384,31 @@ es:
       title: 'Editar Compañía de Seguros'
       show: ' Compañía de Seguros'
       index: ' Compañías de Seguros'
+  entities:
+    shared: &entity
+      name: 'Nombre'
+      identification_number: 'Número de Identificación'
+      identification_type_id: 'Tipo de Identificación'
+      email: 'Correo Electrónico'
+      address: 'Dirección'
+      state: 'Departamento'
+      city: 'Ciudad'
+      mobile_phone: 'Número Celular'
+      phone: 'Número Telefónico'
+      lease_contracts: 'Arrendatario'
+      cosigner_contracts: 'Codeudor'
+    index:
+      title: 'Directorio de Personas y Entidades'
+      new_btn: 'Agregar Persona'
+    show:
+      title: 'Información Persona / Entidad'
+      contact_numbers: 'Números de contacto Registrados'
+      contact_address: 'Dirección de Contacto Registrada'
+      contracts_as_lessee: 'Arrendatario / Locatario en los siguientes contratos:'
+      contracts_as_cosigner: 'Codeudor de los siguientes contratos: '
+    new:
+      title: 'Crear Nueva Persona Natural o Jurídica'
+      edit: 'Editar Información de Persona Natural o Jurídica'
   activerecord:
     errors:
       <<: *errors
@@ -441,7 +466,7 @@ es:
         engine_good: 'Buena'
         engine_regular: 'Regular'
         engine_bad: 'Mala'
-        engine_notes: 'Observaciones Estado Interior'
+        engine_notes: 'Observaciones Estado Maquinaria'
         accesories: 'Accesorios'
         insurance_number: 'Número de Seguro'
         insurance_company_id: 'Compañía de Seguros'
@@ -525,3 +550,5 @@ es:
         category: 'Categoría'
       insurance_company:
         <<: *insurance_company
+      entity:
+        <<: *entity

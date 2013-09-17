@@ -183,6 +183,32 @@ en:
       title: 'Edit Insurance Company'
       show: ' Insurance Company'
       index: ' Insurance Companies'
+  entities:
+    shared: &entity
+    name: 'Name'
+    identification_number: 'Identification Number'
+    identification_type_id: 'Identification Type'
+    email: 'Email'
+    address: 'Address'
+    state: 'State'
+    city: 'City'
+    mobile_phone: 'Mobile Phone'
+    phone: 'Phone'
+    lease_contracts: 'Lease Contracts'
+    cosigner_contracts: 'Cosigner Contracts'
+  index:
+    title: 'Lessees and Cosigners Directory'
+    new_btn: 'Add Person or Entity'
+  show:
+    title: "Person / Entity Details"
+    contact_numbers: 'Registered Contact Numbers'
+    contact_address: 'Registered Contact Address'
+    contracts_as_lessee: 'Holds the lease on these contracts:'
+    contracts_as_cosigner: 'Cosigner on the following contracts:'
+  new:
+    title: 'New Entity / Person'
+  edit:
+    title: 'Edit Entity / Person'
   activerecord:
     errors:
       messages:
