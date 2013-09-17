@@ -39,7 +39,7 @@ class Asset < ActiveRecord::Base
     message: I18n.t('errors.messages.invalid_vin')
   }
   validate :authorized_build
-  after_save :update_parent_contract_information
+  after_create :update_parent_contract_information
 
   def authorized_build
     errors.add(:kind_name, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)

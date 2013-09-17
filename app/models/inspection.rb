@@ -17,7 +17,7 @@ class Inspection < ActiveRecord::Base
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
   before_save :clean_unwanted_dates
-  after_save :update_parent_asset_information
+  after_create :update_parent_asset_information
 
   private
   def valid_soat_dates
