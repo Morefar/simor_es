@@ -39,16 +39,26 @@ class Asset < ActiveRecord::Base
     message: I18n.t('errors.messages.invalid_vin')
   }
   validate :authorized_build
-  after_create :update_parent_contract_information
+  after_create :increase_asset_count_on_contract
+  around_destroy :decrease_asset_count_on_contract
 
   def authorized_build
     errors.add(:kind_name, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)
   end
 
-  def update_parent_contract_information
+  def increase_asset_count_on_contract
     if self.contract.present?
       parent_contract = self.contract
       parent_contract.asset_count += 1
+      parent_contract.save
+    end
+  end
+
+  def decrease_asset_count_on_contract
+    if self.contract.present?
+      parent_contract = self.contract
+      yield
+      parent_contract.asset_count -= 1
       parent_contract.save
     end
   end

@@ -17,7 +17,8 @@ class Inspection < ActiveRecord::Base
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
   before_save :clean_unwanted_dates
-  after_create :update_parent_asset_information
+  after_create :increase_inspection_count_on_asset
+  around_destroy :decrease_inspection_count_on_asset
 
   private
   def valid_soat_dates
@@ -38,11 +39,20 @@ class Inspection < ActiveRecord::Base
     end
   end
 
-  def update_parent_asset_information
+  def increase_inspection_count_on_asset
     if self.asset.present?
       parent_asset = self.asset
       parent_asset.inspection_count += 1
       parent_asset.last_inspection_date = self.updated_at
+      parent_asset.save
+    end
+  end
+
+  def decrease_inspection_count_on_asset
+    if self.asset.present?
+      parent_asset = self.asset
+      yield
+      parent_asset.inspection_count -= 1
       parent_asset.save
     end
   end
