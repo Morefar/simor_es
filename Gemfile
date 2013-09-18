@@ -55,6 +55,7 @@ gem 'carrierwave_direct', '~> 0.0.13'
 gem 'sidekiq'
 gem 'fog'
 gem 'twitter_cldr', '~> 2.4.2'
+gem 'kaminari', '~> 0.14.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

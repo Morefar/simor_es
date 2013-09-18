@@ -140,3 +140,32 @@ ul.ui-autocomplete {
     }
   }
 }
+.pagination {
+  padding:.3em;
+  margin:.3em;
+  font: 13.34px helvetica, arial, freesans, clean, sans-serif;
+  a {
+    padding: .3em .2em .1em;
+    margin: .2em;
+    border: 1px solid #aad;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    border: 1px solid #369;
+    color: #000;
+  }
+  span.current {
+    padding:.3em .2em .1em;
+    margin:.2em;
+    border:1px solid #369;
+    font-weight:bold;
+    background-color:#369;
+    color:#FFF;
+  }
+  span.disabled {
+    padding:.1em .3em;
+    margin:.2em;
+    border:1px solid #eee;
+    color:#ddd;
+  }
+}
