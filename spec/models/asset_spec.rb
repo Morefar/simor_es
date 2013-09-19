@@ -9,7 +9,7 @@ describe Asset do
       body = create(:body)
       kind = create(:kind)
       create(:build, body: body, kind: kind)
-      hash = {body: body, kind: kind}
+      hash = { body: body, kind: kind }
   end
 
   before(:each) do

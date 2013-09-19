@@ -19,6 +19,6 @@ describe Cosigner do
     identification_type = create(:identification_type, name: 'CC')
     entity = create(:entity, identification_type_id: identification_type.id)
     contract = create(:contract, lessee: entity)
-    expect(build(:cosigner, entity: entity)).to have(1).errors_on(:entity_id)
+    expect(build(:cosigner, entity: entity, contract: contract)).to have(1).errors_on(:entity_id)
   end
 end

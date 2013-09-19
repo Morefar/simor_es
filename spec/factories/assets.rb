@@ -9,6 +9,7 @@ FactoryGirl.define do
     invoice_id 12
     sequence(:inventory_number) { |n| n }
     license_plate 'ABC197'
+    transit_permit '79379879845'
     make { build(:make) }
     model { build(:model, make: make)}
     year  2013
