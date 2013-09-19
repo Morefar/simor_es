@@ -5,11 +5,13 @@
     %thead
       %tr
         %th= t('entities.shared.name')
-        %th= t('entities.shared.identification_number')
+        %th= t("entities.shared.identification_number")
         %th= t('entities.shared.email')
         %th= t('entities.shared.city')
         %th= t('entities.shared.lease_contracts')
         %th= t('entities.shared.cosigner_contracts')
+        %th
+        %th
     %tbody
       - @entities.each do |entity|
         %tr
@@ -21,5 +23,7 @@
           %td= entity.city
           %td= entity.contracts_as_lessee.count
           %td= entity.contracts_as_cosigner.count
+          %td= link_to '', edit_entity_path(entity), class: 'icon-edit'
+          %td= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
 .row
   = paginate @entities
