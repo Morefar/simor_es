@@ -222,6 +222,7 @@ es:
         bodies: 'Carrocerías'
         insurance_companies: 'Compañías de Seguros'
   shared:
+    name: 'Nombre'
     back: ' Regresar'
     yes: 'Si'
     no: 'No'
@@ -408,7 +409,54 @@ es:
       contracts_as_cosigner: 'Codeudor de los siguientes contratos: '
     new:
       title: 'Crear Nueva Persona Natural o Jurídica'
-      edit: 'Editar Información de Persona Natural o Jurídica'
+    edit:
+      title: 'Editar Información de Persona Natural o Juridica'
+  builds:
+    index:
+      title: 'Configuraciones Autorizadas'
+      new_btn: 'Agregar Configuración'
+  categories:
+    index:
+      title: 'Tipos de Contrato'
+      new_btn: 'Crear Nuevo Tipo'
+  colors:
+    index:
+      title: Colores
+      new_btn: 'Crear Nuevo Color'
+  makes:
+    index:
+      title: Marcas
+      new_btn: 'Agregar Marca'
+  models:
+    index:
+      title: 'Líneas por Marca'
+      new_btn: 'Agregar Línea'
+  kinds:
+    index:
+      title: 'Clases de Vehículos'
+      new_btn: 'Agregar Clase'
+  bodies:
+    index:
+      title: 'Carrocerías de Vehículo'
+      new_btn: 'Agregar Carrocería'
+  views:
+    pagination:
+      first: '&laquo; Primero'
+      last: 'Último &raquo;'
+      newer: '&lsaquo; Recientes'
+      older: 'Antiguos &rsaquo;'
+      previous: '&lsaquo; Anterior'
+      next: 'Siguiente &rsaquo;'
+      truncate: '&hellip;'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nsbp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
   activerecord:
     errors:
       <<: *errors

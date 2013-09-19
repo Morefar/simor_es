@@ -185,30 +185,76 @@ en:
       index: ' Insurance Companies'
   entities:
     shared: &entity
-    name: 'Name'
-    identification_number: 'Identification Number'
-    identification_type_id: 'Identification Type'
-    email: 'Email'
-    address: 'Address'
-    state: 'State'
-    city: 'City'
-    mobile_phone: 'Mobile Phone'
-    phone: 'Phone'
-    lease_contracts: 'Lease Contracts'
-    cosigner_contracts: 'Cosigner Contracts'
-  index:
-    title: 'Lessees and Cosigners Directory'
-    new_btn: 'Add Person or Entity'
-  show:
-    title: "Person / Entity Details"
-    contact_numbers: 'Registered Contact Numbers'
-    contact_address: 'Registered Contact Address'
-    contracts_as_lessee: 'Holds the lease on these contracts:'
-    contracts_as_cosigner: 'Cosigner on the following contracts:'
-  new:
-    title: 'New Entity / Person'
-  edit:
-    title: 'Edit Entity / Person'
+      name: 'Name'
+      identification_number: 'Identification Number'
+      identification_type_id: 'Identification Type'
+      email: 'Email'
+      address: 'Address'
+      state: 'State'
+      city: 'City'
+      mobile_phone: 'Mobile Phone'
+      phone: 'Phone'
+      lease_contracts: 'Lease Contracts'
+      cosigner_contracts: 'Cosigner Contracts'
+    index:
+      title: 'Lessees and Cosigners Directory'
+      new_btn: 'Add Person or Entity'
+    show:
+      title: "Person / Entity Details"
+      contact_numbers: 'Registered Contact Numbers'
+      contact_address: 'Registered Contact Address'
+      contracts_as_lessee: 'Holds the lease on these contracts:'
+      contracts_as_cosigner: 'Cosigner on the following contracts:'
+    new:
+      title: 'New Entity / Person'
+    edit:
+      title: 'Edit Entity / Person'
+  builds:
+    index:
+      title: 'Authorized Builds'
+      new_btn: 'Add Authorized Build'
+  categories:
+    index:
+      title: 'Contract Categories'
+      new_btn: 'Add new Category'
+  colors:
+    index:
+      title: 'Colors'
+      new_btn: 'Add New Color'
+  makes:
+    index:
+      title: 'Vehicle Makes'
+      new_btn: 'Add Make'
+  models:
+    index:
+      title: 'Vehicle Models'
+      new_btn: 'Add Model'
+  kinds:
+    index:
+      title: 'Vehicle Kinds'
+      new_btn: 'Add Vehicle Kind'
+  bodies:
+    index:
+      title: 'Vehicle Bodies'
+      new_btn: 'Add Body'
+  views:
+    pagination:
+      first: '&laquo; First'
+      last: 'Last &raquo;'
+      newer: '&lsaquo Newer'
+      older: 'Older &rsaquo'
+      previous: '&lsaquo; Prev'
+      next: 'Next &rsaquo;'
+      truncate: '&hellip;'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nsbp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
   activerecord:
     errors:
       messages:
