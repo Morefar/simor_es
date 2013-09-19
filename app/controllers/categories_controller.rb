@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
   end
 #READ ACTIONS
   def index
-    @categories = Category.all
+    @categories = Category.order(:name)
   end
 #EDIT ACTIONS
   def edit
@@ -36,5 +36,4 @@ class CategoriesController < ApplicationController
     @category.destroy
     redirect_to categories_url
   end
-
 end

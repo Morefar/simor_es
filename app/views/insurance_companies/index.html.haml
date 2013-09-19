@@ -4,18 +4,20 @@
   =link_to t('.new_btn'), new_insurance_company_path, class: 'icon-file button success radius'
 .row
   %table
-    %tr
-      %th= t('.name')
-      %th= t('.nit')
-      %th
-      %th
-
-    - @insurance_companies.each do |insurance_company|
+    %thead
       %tr
-        %td= link_to insurance_company.name, insurance_company
-        %td.center= insurance_company.nit
-        %td= link_to '', edit_insurance_company_path(insurance_company), class: 'icon-edit'
-        %td= link_to '', insurance_company, class: 'icon-trash', :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+        %th= t('.name')
+        %th= t('.nit')
+        %th
+        %th
+    %tbody
+      - @insurance_companies.each do |insurance_company|
+        %tr
+          %td= link_to insurance_company.name, insurance_company
+          %td.center= insurance_company.nit
+          %td= link_to '', edit_insurance_company_path(insurance_company), class: 'icon-edit'
+          %td= link_to '', insurance_company, class: 'icon-trash', :method => :delete, :data => { :confirm => 'Are you sure?' }
+.row
+  = paginate @insurance_companies
 .row
   =link_to t('.new_btn'), new_insurance_company_path, class: 'icon-file button success radius'

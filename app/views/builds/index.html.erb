@@ -1,25 +1,27 @@
-<h1>Listing builds</h1>
+<h1><%= t('.title') %></h1>
 
 <table>
-  <tr>
-    <th>Kind</th>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.models.kind')%></th>
+      <th><%= t('activerecord.models.body')%></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @builds.each do |build| %>
-  <tr>
+  <tbody>
+  <% @builds.each do |build| %>
+    <tr>
     <td><%= build.kind.name %></td>
     <td><%= build.body.name %></td>
-    <td><%= link_to 'Show', build %></td>
-    <td><%= link_to 'Edit', edit_build_path(build) %></td>
-    <td><%= link_to 'Destroy', build, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '', edit_build_path(build), class: 'icon-edit' %></td>
+    <td><%= link_to '', build, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
-
 <br />
-
+<%= paginate @builds %>
+<br />
 <%= link_to 'New Build type', new_build_path %>

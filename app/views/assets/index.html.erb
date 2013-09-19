@@ -6,5 +6,8 @@
 <%= render 'asset_index', assets: @assets %>
 </div>
 <div class="row">
+  <%= paginate @assets %>
+</div>
+<div class="row">
   <%= link_to t('.new_btn'), new_asset_path, class: 'icon-file button success radius' %>
 </div>

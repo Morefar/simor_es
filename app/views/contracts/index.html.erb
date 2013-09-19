@@ -37,4 +37,8 @@
     </tbody>
   </table>
 </div>
+
+<div class='row'>
+  <%= paginate @contracts %>
+</div>
 <p><%= link_to t('.new_btn'), new_contract_url, class: 'icon-file button success radius' %></p>

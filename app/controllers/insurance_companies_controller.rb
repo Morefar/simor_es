@@ -3,7 +3,7 @@ class InsuranceCompaniesController < ApplicationController
   before_filter :find_insurance_company, except: [:index, :new, :create]
 
   def index
-    @insurance_companies = InsuranceCompany.all
+    @insurance_companies = InsuranceCompany.order(:name).page params[:page]
   end
 
   def show

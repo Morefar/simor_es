@@ -2,7 +2,7 @@ class BodiesController < ApplicationController
 
 
   def index
-    @bodies = Body.all
+    @bodies = Body.order(:name).page params[:page]
 
     respond_to do |format|
       format.html

@@ -1,23 +1,24 @@
-<h1>Listing makes</h1>
+<h1><%= t('.title') %></h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @makes.each do |make| %>
-  <tr>
-    <td><%= make.name %></td>
-    <td><%= link_to 'Show', make %></td>
-    <td><%= link_to 'Edit', edit_make_path(make) %></td>
-    <td><%= link_to 'Destroy', make, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.models.make') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @makes.each do |make| %>
+    <tr>
+      <td><%= make.name %></td>
+      <td><%= link_to '', edit_make_path(make), class: 'icon-edit' %></td>
+      <td><%= link_to '', make, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
-
 <br />
-
-<%= link_to 'New Make', new_make_path %>
+<%= paginate @makes %>
+<br />
+<%= link_to 'New Make', new_make_path, class: 'button success radius' %>

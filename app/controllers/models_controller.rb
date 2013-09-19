@@ -1,9 +1,8 @@
 class ModelsController < ApplicationController
-
+  before_filter :find_model, except: [:index, :new, :create]
 
   def index
-    @models = Model.includes(:make).all
-
+    @models = Model.includes(:make).order(:make_id, :name).page params[:page]
     respond_to do |format|
       format.html
       format.json { render json: Model.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
@@ -11,35 +10,25 @@ class ModelsController < ApplicationController
   end
 
   def show
-    @model = Model.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @model }
     end
   end
-
-
 
   def new
     @model = Model.new
-
     respond_to do |format|
       format.html
       format.json { render json: @model }
     end
   end
 
-
   def edit
-    @model = Model.find(params[:id])
   end
-
-
 
   def create
     @model = Model.new(params[:model])
-
     respond_to do |format|
       if @model.save
         format.html { redirect_to @model, notice: 'Model was successfully created.' }
@@ -51,11 +40,7 @@ class ModelsController < ApplicationController
     end
   end
 
-
-
   def update
-    @model = Model.find(params[:id])
-
     respond_to do |format|
       if @model.update_attributes(params[:model])
         format.html { redirect_to @model, notice: 'Model was successfully updated.' }
@@ -67,15 +52,16 @@ class ModelsController < ApplicationController
     end
   end
 
-
-
   def destroy
-    @model = Model.find(params[:id])
     @model.destroy
-
     respond_to do |format|
       format.html { redirect_to models_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def find_model
+    @model = Model.find(params[:id]) if params[:id]
   end
 end

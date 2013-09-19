@@ -2,7 +2,7 @@ class EntitiesController < ApplicationController
   before_filter :find_entity, except: [:index, :new, :create]
 
 def index
-  @entities = Entity.includes(:identification_type).all
+  @entities = Entity.includes(:identification_type).order(:name).page params[:page]
 end
 
 def show

@@ -1,47 +1,34 @@
 class ColorsController < ApplicationController
-
+  before_filter :find_color, except: [:index, :new, :create]
 
   def index
-    @colors = Color.all
-
+    @colors = Color.order(:name).page params[:page]
     respond_to do |format|
       format.html
       format.json { render json: Color.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
     end
   end
 
-
-
   def show
-    @color = Color.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @color }
     end
   end
-
-
 
   def new
     @color = Color.new
-
     respond_to do |format|
       format.html
       format.json { render json: @color }
     end
   end
 
-
   def edit
-    @color = Color.find(params[:id])
   end
-
-
 
   def create
     @color = Color.new(params[:color])
-
     respond_to do |format|
       if @color.save
         format.html { redirect_to @color, notice: 'Color was successfully created.' }
@@ -53,11 +40,7 @@ class ColorsController < ApplicationController
     end
   end
 
-
-
   def update
-    @color = Color.find(params[:id])
-
     respond_to do |format|
       if @color.update_attributes(params[:color])
         format.html { redirect_to @color, notice: 'Color was successfully updated.' }
@@ -69,15 +52,16 @@ class ColorsController < ApplicationController
     end
   end
 
-
-
   def destroy
-    @color = Color.find(params[:id])
     @color.destroy
-
     respond_to do |format|
       format.html { redirect_to colors_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def find_color
+    @color = Color.find_by_id(params[:id]) if params[:id]
   end
 end

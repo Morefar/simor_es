@@ -1,25 +1,27 @@
-<h1>Listing models</h1>
+<h1><%= t('.title') %></h1>
 
 <table>
-  <tr>
-    <th>Make</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.models.make') %></th>
+      <th><%= t('activerecord.models.model') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @models.each do |model| %>
-  <tr>
+  <tbody>
+  <% @models.each do |model| %>
+    <tr>
     <td><%= model.make.name %></td>
     <td><%= model.name %></td>
-    <td><%= link_to 'Show', model %></td>
-    <td><%= link_to 'Edit', edit_model_path(model) %></td>
-    <td><%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '', edit_model_path(model), class: 'icon-edit' %></td>
+    <td><%= link_to '', model, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
-
 <br />
-
-<%= link_to 'New Model', new_model_path %>
+<%= paginate @models %>
+<br />
+<%= link_to t('.new_btn'), new_model_path, class: 'button success radius' %>

@@ -24,4 +24,6 @@
           %td.center= link_to '', edit_inspection_path(inspection), class: 'icon-edit'
           %td.center= link_to '', inspection, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
 .row
+  = paginate @inspections, window: 3
+.row
   = link_to t('.new'), new_inspection_path, class: 'icon-file button success radius'

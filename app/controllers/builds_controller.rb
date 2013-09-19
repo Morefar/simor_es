@@ -2,7 +2,7 @@ class BuildsController < ApplicationController
 
 
   def index
-    @builds = Build.includes(:kind, :body).all
+    @builds = Build.includes(:kind, :body).page params[:page]
 
     respond_to do |format|
       format.html

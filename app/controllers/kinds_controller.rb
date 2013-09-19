@@ -1,8 +1,8 @@
 class KindsController < ApplicationController
-
+  before_filter :find_kind, except: [:index, :new, :create]
 
   def index
-    @kinds = Kind.all
+    @kinds = Kind.order(:name).page params[:page]
 
     respond_to do |format|
       format.html
@@ -13,8 +13,6 @@ class KindsController < ApplicationController
 
 
   def show
-    @kind = Kind.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @kind }
@@ -25,7 +23,6 @@ class KindsController < ApplicationController
 
   def new
     @kind = Kind.new
-
     respond_to do |format|
       format.html
       format.json { render json: @kind }
@@ -34,14 +31,12 @@ class KindsController < ApplicationController
 
 
   def edit
-    @kind = Kind.find(params[:id])
   end
 
 
 
   def create
     @kind = Kind.new(params[:kind])
-
     respond_to do |format|
       if @kind.save
         format.html { redirect_to @kind, notice: 'Kind was successfully created.' }
@@ -56,8 +51,6 @@ class KindsController < ApplicationController
 
 
   def update
-    @kind = Kind.find(params[:id])
-
     respond_to do |format|
       if @kind.update_attributes(params[:kind])
         format.html { redirect_to @kind, notice: 'Kind was successfully updated.' }
@@ -72,12 +65,15 @@ class KindsController < ApplicationController
 
 
   def destroy
-    @kind = Kind.find(params[:id])
     @kind.destroy
-
     respond_to do |format|
       format.html { redirect_to kinds_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def find_kind
+    @kind = Kind.find_by_id(params[:id]) if params[:id]
   end
 end
