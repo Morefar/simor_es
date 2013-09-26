@@ -81,3 +81,6 @@ $('#asset_model_name').autocomplete({source: $('#asset_model_name').data('autoco
 $('#asset_color_name').autocomplete({source: $('#asset_color_name').data('autocomplete-source'), minLength: 3});
 $('#asset_kind_name').autocomplete({source: $('#asset_kind_name').data('autocomplete-source'), minLength: 3})
 $('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomplete-source'), minLength: 3});
+
+//Autocomplete for the contract form
+$('#contract_lessee_name').autocomplete({source: $('#contract_lessee_name').data('autocomplete-source'), minLength: 4});

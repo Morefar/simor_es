@@ -8,11 +8,11 @@
         <%= form.label :client_id %>
         <%= form.text_field :client_id, placeholder: t('.placeholder.client')%>
       </div>
-      <div class='large-3 columns'>
+      <div class='large-4 columns'>
         <%= form.label :number %>
         <%= form.text_field :number, placeholder: 'i.e. 1189719-989' %>
       </div>
-      <div class='large-3 columns pull-2'>
+      <div class='large-4 columns'>
         <%= form.label :category_id %>
         <%= form.collection_select :category_id, @categories, :id, :name,
           prompt: true %>
@@ -27,11 +27,7 @@
         <%= form.label :first_canon_date, class: 'icon-calendar' %>
         <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
-      <div class='large-1 columns'>
-        <%= form.label :duration %>
-        <%= form.number_field :duration, placeholder: '24' %>
-      </div>
-      <div class='large-2 columns'>
+      <div class='large-3 columns'>
         <%= form.label :periodicity %>
         <%= form.select :periodicity, [[t('.months'),1], [t('.quarters'),3], [t('.semesters'),6], [t('.years'),12]] %>
       </div>
@@ -45,27 +41,39 @@
       <%= form.label :total_value%>
       <%= form.number_field :total_value, placeholder: 'i.e. 12000000' %>
       </div>
-      <div class='large-3 columns pull-5'>
+      <div class='large-3 columns'>
       <%= form.label :currency %>
       <%= form.select :currency, TwitterCldr::Shared::Currencies.currency_codes %>
       </div>
+      <div class="large-5 columns">
+        <%= form.label :lessee_name %>
+        <%= form.text_field :lessee_name, data: { autocomplete_source: entities_path } %>
+      </div>
     </div>
     <div class="row">
-      <div class='large-1 columns center'>
+      <div class='large-2 columns center'>
         <%= form.label :option_to_buy %>
         <%= form.check_box :option_to_buy %>
       </div>
-      <div class='large-3 columns'>
+      <div class='large-4 columns'>
         <b>
           <%= form.label :last_date_to_option, class: 'icon-calendar' %>
         </b>
         <%= form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd', class: 'date-field' %>
       </div>
-      <div class='large-6 columns pull-2'>
+      <div class='large-6 columns'>
         <%= form.label :location_of_assets %>
         <%= form.text_field :location_of_assets, placeholder: t('.placeholder.location')%>
       </div>
     </div>
+  <% end %>
+
+  <%= form.fields_for :cosigners do |cf| %>
+    <%= field_set_tag t('activerecord.models.cosigner') do %>
+      <%= cf.label :entity_id %>
+      <%= cf.collection_select :entity_id, Entity.all, :id, :name %>
+      <%= cf.hidden_field :contract_id, value: @contract.id %>
+    <% end %>
   <% end %>
 
   <div class="actions">

@@ -43,7 +43,7 @@ class ContractsController < ApplicationController
   def update
     @contract.update_attributes(params[:contract])
     if @contract.save
-      redirect_to contract_url(contract.id)
+      redirect_to @contract
     else
       render 'edit'
     end

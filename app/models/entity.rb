@@ -10,7 +10,7 @@ class Entity < ActiveRecord::Base
   validates :email, uniqueness: { scope: :identification_type_id, case_sensitive: true }
   validates :email, format: { with: /\A[a-zA-Z_.]+@[.a-zA-Z\-_]+\Z/ }
 
-
+  scope :search_name, ->(term) { where("name ilike ?", term) }
   def contracts_as_lessee
     Array( Contract.where(lessee_id: id) )
   end
