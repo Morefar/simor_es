@@ -573,6 +573,7 @@ es:
       contract:
         client_id: 'Cliente'
         lessee: 'Arrendatario'
+        lessee_name: 'Locatario / Arrendatario'
         number: 'Número de Contrato'
         category_id: 'Tipo de Contrato'
         start_date: ' Fecha de Inicio'
