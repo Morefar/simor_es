@@ -22,20 +22,20 @@ class Inspection < ActiveRecord::Base
 
   private
   def valid_soat_dates
-    if soat_number.present? && soat_begin_date.present? && soat_finish_date.present?
-      errors.add(:soat_finish_date, 'cannot be sooner than the starting date') unless (Date.parse(soat_finish_date) >= (Date.parse(soat_begin_date) >> 12))
+    if soat_number? && soat_begin_date? && soat_finish_date?
+      errors.add(:soat_finish_date, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(soat_finish_date) >= (Date.parse(soat_begin_date) >> 12))
     end
   end
 
   def valid_insurance_data
-    if insurance_number.present? && insurance_start.present? && insurance_finish.present?
-      errors.add(:insurance_finish, 'cannot be sooner than the starting date') unless (Date.parse(insurance_finish) >= (Date.parse(insurance_start) >> 12))
+    if insurance_number? && insurance_start? && insurance_finish?
+      errors.add(:insurance_finish, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(insurance_finish) >= (Date.parse(insurance_start) >> 12))
     end
   end
 
   def valid_emissions_certficate_dates
-    if emissions_certificate.present? && emissions_begin_date.present? && emissions_finish_date.present?
-      errors.add(:emissions_finish_date, 'cannot be sooner than the starting date') unless (Date.parse(emissions_finish_date) >= (Date.parse(emissions_begin_date) >> 12))
+    if emissions_certificate? && emissions_begin_date? && emissions_finish_date?
+      errors.add(:emissions_finish_date, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(emissions_finish_date) >= (Date.parse(emissions_begin_date) >> 12))
     end
   end
 
@@ -64,17 +64,17 @@ class Inspection < ActiveRecord::Base
   end
 
   def clean_insurance_dates
-    unless insurance_number.present?
+    unless insurance_number?
      remove_dates(insurance_start, insurance_finish)
     end
   end
   def clean_soat_dates
-    unless soat_number.present?
+    unless soat_number?
      remove_dates(soat_begin_date, soat_finish_date)
     end
   end
   def clean_emissions_certificate_dates
-    unless emissions_certificate.present?
+    unless emissions_certificate?
       remove_dates(emissions_begin_date, emissions_finish_date)
     end
   end

@@ -17,10 +17,9 @@ class Contract < ActiveRecord::Base
   validates :duration, :numericality => { only_integer: true,
                                           greater_than: 0 }
   validates :total_value, :numericality => { greater_than: 0 }
-  validate :non_valid_start_date
+  validates :last_date_to_option, presence: true, if: "option_to_buy?"
   validate :non_valid_expiration_date
   validate :non_valid_first_canon_date
-  validate :option_to_buy_validations
   validate :non_valid_option_to_buy_date
 
   scope :search_number, ->(number) { where("number like ?", number) }
@@ -32,33 +31,22 @@ class Contract < ActiveRecord::Base
     lessee.try(:name)
   end
 
-  def non_valid_start_date
-    if !self.start_date.blank? && !self.expiration_date.blank?
-      self.errors.add(:start_date, 'must be less than the expiration date') unless (self.start_date < self.expiration_date)
-    end
-  end
-
   def non_valid_expiration_date
-    if !expiration_date.blank?
-      errors.add(:expiration_date, "can't be in the past") if expiration_date < Date.today
-      errors.add(:expiration_date, "can't be earlier that the duration of the contract. Starting from the first canon payment.") if (expiration_date < (first_canon_date >> (duration*periodicity)))
+    if expiration_date?
+      errors.add(:expiration_date, I18n.t("errors.messages.expiration_in_past")) if expiration_date < Date.today
+      errors.add(:expiration_date, I18n.t("errors.messages.expiration_shorter_than_contract")) if (expiration_date < (first_canon_date >> (duration*periodicity)))
     end
   end
 
   def non_valid_first_canon_date
-    if !first_canon_date.blank?
-      errors.add(:first_canon_date, "can't be earlier than the contract's start date") if start_date > first_canon_date
+    if first_canon_date?
+      errors.add(:first_canon_date, I18n.t("errors.messages.earlier_than_start_date")) if (start_date > first_canon_date)
     end
-  end
-
-  def option_to_buy_validations
-    errors.add(:last_date_to_option, "can't have a date to excercise option to buy") if ( !option_to_buy && last_date_to_option.present?)
-    errors.add(:last_date_to_option, "can't be empty") if (option_to_buy && !last_date_to_option.present?)
   end
 
   def non_valid_option_to_buy_date
     if option_to_buy && last_date_to_option
-      errors.add(:last_date_to_option, "can't be earlier than the expiration date") if (last_date_to_option < expiration_date)
+      errors.add(:last_date_to_option, I18n.t("errors.messages.later_than_expiration_date")) if (last_date_to_option > expiration_date)
     end
   end
 end

@@ -14,7 +14,7 @@
 /log/*.log
 /tmp
 
-#Ingnore gemset file
+#Ignore gemset file
 .ruby-gemset
 
 #Ignore sublime project files
@@ -26,3 +26,6 @@ AssetHound.subl*
 #Ignore uploaded and temporary files.
 /public/uploads
 /public/documents
+
+#Ignore foreman procfile
+/Procfile

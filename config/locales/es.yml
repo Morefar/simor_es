@@ -116,6 +116,10 @@ es:
       taken: ya ha sido tomado
       unauthorized_build: 'Combinación con Carrocería no permitida.'
       invalid_vin: "tiene el formato incorrecto. Los carácteres 'I', 'O', 'Q', 'Ñ' no son permitidos."
+      expiration_in_past: "Fecha de expiración no puede ser en el pasado"
+      expiration_shorter_than_contract: "Fecha de expiración más corta que la duración del contrato contada a partir del pago del primer canon."
+      earlier_than_start_date: "Fecha anterior a la fecha de inicio"
+      later_than_expiration_date: "Fecha posterior a la fecha de expiración"
       too_long:
         one: es demasiado largo (máximo 1 caracter)
         other: es demasiado largo (máximo %{count} caracteres)
@@ -206,6 +210,9 @@ es:
       home: 'Inicio'
       search: 'Buscar'
       settings: 'Configuración'
+      sign_out: 'Salir'
+      sign_in: 'Ingresar'
+      sign_up: 'Registrarse'
       nav:
         home: 'Inicio'
         assets: 'Activos'

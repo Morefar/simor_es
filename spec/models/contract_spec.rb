@@ -80,8 +80,6 @@ describe Contract do
     expect(contract).to be_invalid
     expect(contract).to have(1).errors_on(:duration)
     expect(contract).to have(1).errors_on(:expiration_date)
-    expect(contract).to have(1).errors_on(:start_date)
-
   end
 
   describe 'is invalid with a float duration' do
@@ -106,10 +104,6 @@ describe Contract do
         total_value: -12_000_000)).to have(1).errors_on(:total_value)
   end
 
-  it 'is invalid with an option date when there is no option to buy' do
-    expect(build(:contract, option_to_buy: false,
-        last_date_to_option: Date.current)).to have(1).errors_on(:last_date_to_option)
-  end
   it 'is invalid without a date when there is an option to buy' do
     expect(build(:contract, option_to_buy: true,
         last_date_to_option: nil)).to have(1).errors_on(:last_date_to_option)
