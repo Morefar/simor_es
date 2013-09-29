@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 
 group :production do
   gem 'pg', '~> 0.17.0'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
