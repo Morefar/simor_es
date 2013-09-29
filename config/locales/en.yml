@@ -260,10 +260,10 @@ en:
       messages:
         unauthorized_build: 'combination with selected Body, not authorized.'
         invalid_vin: "has incorrect format. 'I', 'O', 'Q', 'Ñ', or non-word characters are not allowed."
-        expiration_in_past: 'Expiration date is in the past.'
-        expiration_shorter_than_contract: 'Expiration date is shorter than duration of the contract starting from the first canon payment.'
-        earlier_than_start_date: "Date is earlier than the starting date."
-        later_than_expiration_date: "Date is later than the expiration date."
+        expiration_in_past: "can't be in the past."
+        expiration_shorter_than_contract: 'is shorter than duration of the contract starting from the first canon payment.'
+        earlier_than_start_date: "is earlier than the starting date."
+        later_than_expiration_date: "is later than the expiration date."
     models:
       inspection: 'Inspection'
       contract: 'Contract'

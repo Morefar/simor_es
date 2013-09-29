@@ -27,7 +27,11 @@
         <%= form.label :first_canon_date, class: 'icon-calendar' %>
         <%= form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd', class: 'date-field'%>
       </div>
-      <div class='large-3 columns'>
+      <div class='large-1 columns'>
+        <%= form.label :duration %>
+        <%= form.number_field :duration %>
+      </div>
+      <div class='large-2 columns'>
         <%= form.label :periodicity %>
         <%= form.select :periodicity, [[t('.months'),1], [t('.quarters'),3], [t('.semesters'),6], [t('.years'),12]] %>
       </div>

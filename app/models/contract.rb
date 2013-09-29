@@ -1,6 +1,6 @@
 class Contract < ActiveRecord::Base
 
-  attr_accessible :number, :start_date, :first_canon_date, :expiration_date, :duration, :periodicity, :total_value, :currency, :asset_count, :location_of_assets, :client_id, :category_id, :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id, :lessee, :documents_attributes, :cosigners_attributes, :entity_name
+  attr_accessible :number, :start_date, :first_canon_date, :expiration_date, :duration, :periodicity, :total_value, :currency, :asset_count, :location_of_assets, :client_id, :category_id, :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id, :lessee_name, :lessee, :documents_attributes, :cosigners_attributes, :entity_name
   belongs_to :category
   belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
   has_many :assets, inverse_of: :contract
@@ -25,7 +25,7 @@ class Contract < ActiveRecord::Base
   scope :search_number, ->(number) { where("number like ?", number) }
 
   def lessee_name=(lessee_name)
-      self.lesse = Entity.find_by_name(lessee_name) if lessee_name.present?
+      self.lessee = Entity.find_by_name(lessee_name) if lessee_name.present?
   end
   def lessee_name
     lessee.try(:name)
@@ -34,7 +34,7 @@ class Contract < ActiveRecord::Base
   def non_valid_expiration_date
     if expiration_date?
       errors.add(:expiration_date, I18n.t("errors.messages.expiration_in_past")) if expiration_date < Date.today
-      errors.add(:expiration_date, I18n.t("errors.messages.expiration_shorter_than_contract")) if (expiration_date < (first_canon_date >> (duration*periodicity)))
+      errors.add(:expiration_date, I18n.t("errors.messages.expiration_shorter_than_contract")) if (expiration_date < (first_canon_date >> ((duration-1)*periodicity)))
     end
   end
 
