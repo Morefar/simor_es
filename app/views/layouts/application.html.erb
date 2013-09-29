@@ -22,6 +22,30 @@
 </head>
 
 <body>
+
+<header>
+  <section class="utilities">
+    <% if user_signed_in? %>
+      <%= "#{current_user.first_name} #{current_user.last_name}" %>
+      &nbsp;&nbsp;
+      <%= link_to edit_user_registration_path, title: t(".settings"), rel: 'tooltip' do %>
+        <i class="icon-cog icon-large"></i> <small><%= t(".settings") %></small>
+      <% end %>
+      &nbsp;&nbsp;
+      <%= link_to destroy_user_session_path, title: t(".sign_out"), rel: 'tooltip', method: :delete do %>
+        <i class="icon-signout icon-large"></i> <small><%= t(".sign_out") %></small>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, title: t(".sign_in"), rel: 'tooltip' do %>
+        <i class="icon-signin icon-large"></i> <small><%= t(".sign_in") %></small>
+      <% end %>
+      &nbsp;&nbsp;
+      <%= link_to new_user_registration_path, title: t(".sign_up"), rel: 'tooltip' do %>
+        <i class="icon-group icon-large"></i> <small><%= t(".sign_up") %></small>
+      <% end %>
+    <% end %>
+  </section>
+</header>
   <div class="container-with-nav">
     <div>
       <a href="#top" data-magellan-destination='top'>
@@ -29,7 +53,11 @@
         <ul class="title-area">
           <!-- Title Area -->
           <li class="name">
-            <h1><%= link_to t('.home'), root_url %></h1>
+          <h1>
+            <%= link_to root_url, title: t(".home"), rel: "tooltip" do %>
+              <i class="icon-home"></i> <%= t('.home') %>
+            <% end %>
+          </h1>
           </li>
           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -97,11 +125,8 @@
       <nav class="breadcrumbs">
         <%= render_breadcrumbs separator: '/ ' %>
       </nav>
-      <% if flash[:alert] %>
-            <p class="flash-error"><%= flash[:alert] %></p>
-      <% end %>
-      <% if flash[:notice] %>
-        <p class="flash-notice"><%= flash[:notice] %></p>
+      <% flash.each do |k,v| %>
+          <div class='flash <%= k %>'><%= v %></div>
       <% end %>
       <div class="row">
         <%= yield %>

@@ -83,13 +83,24 @@ form input[type=submit] {
   margin: auto;
   width: 100%;
 }
-.flash-notice {
-  color: darkgreen;
-  border: 1px solid green;
-  background: lightgreen;
+.flash {
+  border: 1px solid;
   @include radius;
   padding: 5px 5px 5px 15px;
-  margin-bottom: 20px;
+  margin: 5px 15px 20px 15px;
+}
+.notice {
+  color: darkgreen;
+  border-color: green;
+  background: lightgreen;
+}
+.alert {
+  color: darkred;
+  border-color: red;
+  background: lightcoral;
+}
+.timedout {
+  display: none;
 }
 #error_explanation {
   width: 450px;
@@ -167,5 +178,16 @@ ul.ui-autocomplete {
     margin:.2em;
     border:1px solid #eee;
     color:#ddd;
+  }
+}
+header {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 15px;
+  section {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 80%;
   }
 }
