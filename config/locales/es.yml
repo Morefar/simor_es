@@ -205,7 +205,7 @@ es:
     errors:
       <<: *errors
   layouts:
-    application:
+    application: &layout
       title: 'Asset Hound'
       home: 'Inicio'
       search: 'Buscar'
@@ -228,11 +228,16 @@ es:
         kinds: 'Clases de Vehículo'
         bodies: 'Carrocerías'
         insurance_companies: 'Compañías de Seguros'
+    static:
+      <<: *layout
   shared:
     name: 'Nombre'
     back: ' Regresar'
     yes: 'Si'
     no: 'No'
+    sign_out: 'Salir'
+    sign_in: 'Ingresar'
+    sign_up: 'Registrarse'
     error_messages:
       error:
         one: 'error'
@@ -487,6 +492,7 @@ es:
       document: 'Documento'
       color: 'Color'
       comment: 'Comentario'
+      user: 'Usuario'
     attributes:
       inspection:
         inspection_number: 'Número de Inspección'
@@ -608,3 +614,12 @@ es:
         <<: *insurance_company
       entity:
         <<: *entity
+      user:
+        email: 'Correo electrónico'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación de la Contraseña'
+        current_password: 'Contraseña actual'
+        first_name: 'Nombre'
+        last_name: 'Apellido'
+        account_name: 'Cuenta'
+        remember_me: 'Recordarme'
