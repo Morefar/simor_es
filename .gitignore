@@ -29,3 +29,6 @@ AssetHound.subl*
 
 #Ignore foreman procfile
 /Procfile
+
+#Ignore environment variables file
+/.env
