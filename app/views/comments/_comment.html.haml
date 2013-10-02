@@ -4,9 +4,9 @@
       %img{:src => "", :alt => "", style: "padding: 25px; background: gray; border-radius: 20px;"}
     .large-10.push-1.columns
       .row
-        .comment-from.small-6.large-3.columns
-          %b Nombre Empleado
-        .comment-time.small-6.large-4.pull-3.columns
+        .comment-from.small-6.large-4.columns
+          %b= comment.user.full_name
+        .comment-time.small-6.large-3.pull-3.columns
           = localize_time_ago_in_words comment.updated_at
       .row
         .comment-content.large-12.columns
