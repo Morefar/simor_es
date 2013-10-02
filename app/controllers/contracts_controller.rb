@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
   before_filter :find_contract, except: [:new, :create, :index]
-  before_filter :get_categories, only: [:new, :create, :edit, :update]
+  before_filter :get_categories, only: [:new, :edit]
 
 #CREATE ACTIONS
   def new
@@ -23,17 +23,18 @@ class ContractsController < ApplicationController
 #READ ACTIONS
   def index
     add_breadcrumb 'Contracts', :contracts_path
-    @contracts = Contract.includes(:category, :lessee).order('created_at DESC').page params[:page]
+    @contracts = Contract.includes(:category, :lessee).page params[:page]
     respond_to do |format|
       format.html
-      format.json { render json: @contracts.search_number("%#{params[:term]}%").limit(10).pluck(:number) }
+      format.json { render json: @contracts.search_number("%#{params[:term]}%")
+                                           .limit(10).pluck(:number) }
     end
   end
 
   def show
     add_breadcrumb "Contract:#{@contract.number}", @contract
     @lessee = @contract.lessee
-    @cosigners = Array(@contract.cosigners.includes(entity: [:identification_type]))
+    @cosigners = Array(@contract.cosigners)
   end
 
 #UPDATE ACTIONS
@@ -57,7 +58,10 @@ class ContractsController < ApplicationController
 
   private
   def find_contract
-    @contract = Contract.find_by_id(params[:id]) if params[:id]
+    @contract = Contract.includes(:documents, :lessee, comments: :user,
+                                  cosigners: {entity: :identification_type},
+                                  assets: [:make, :model])
+        .find_by_id(params[:id]) if params[:id]
   end
   def get_categories
       @categories = Category.all
