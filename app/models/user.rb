@@ -10,9 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :account
 
   def account_name=(account_name)
-    self.account = Account.find_by_name(account_name) if account_name?
   end
   def account_name
-    account.try(:name)
   end
 end
