@@ -1,0 +1,7 @@
+<p><%= "#{t('.greeting')} #{@resource.first_name} #{@resource.last_name}" %>!</p>
+
+<p><%= t(".lock_message") %></p>
+
+<p><%= t(".unlock_message") %></p>
+
+<p><%= link_to t(".unlock_link"), unlock_url(@resource, :unlock_token => @token) %></p>

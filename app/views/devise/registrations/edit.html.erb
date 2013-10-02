@@ -1,0 +1,37 @@
+<h2><%= "#{t '.title'} #{t("activerecord.models.#{resource_name}").humanize}" %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :first_name %><br/>
+    <%= f.text_field :first_name %>
+  </div>
+  <div>
+    <%= f.label :last_name %><br/>
+    <%= f.text_field :last_name %>
+  </div>
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div><%= t '.awaiting_confirmation' %> <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div><%= f.label :password %> <i>(<%= t '.dont_change_instruction' %>)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+<div><%= f.label :current_password %> <i>(<%= t '.confirm_current_password' %>)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit t(".update") %></div>
+<% end %>
+
+<h3><%= t '.cancel_title' %></h3>
+
+<p><%= button_to t(".cancel_title"), registration_path(resource_name), class: "alert-box alert", :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+
+<%= link_to t("shared.back"), :back, class: "icon-reply" %>

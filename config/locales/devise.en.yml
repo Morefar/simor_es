@@ -7,6 +7,9 @@ en:
       confirmed_and_signed_in: "Your account was successfully confirmed. You are now signed in."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+      new:
+        title: "Resend confirmation instructions"
+        send_reset_instructions: "Send me password reset instructions"
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
@@ -20,10 +23,22 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
+        welcome: "Welcome"
+        content: "You can confirm your account email through the link below:"
+        confirm_link: "Confirm my account"
       reset_password_instructions:
         subject: "Reset password instructions"
+        greeting: "Hello"
+        request_message: "Someone has requested a link to change your password. You can do this through the link below."
+        change_link: "Change my password"
+        warning_message: "If you didn't request this, please ignore this email."
+        end_message: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: "Unlock Instructions"
+        greeting: "Hello"
+        lock_message: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        unlock_message: "Click the link below to unlock your account:"
+        unlock_link: "Unlock my account"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
@@ -33,6 +48,12 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password was changed successfully. You are now signed in."
       updated_not_active: "Your password was changed successfully."
+      new:
+        title: "Forgot your password?"
+        send_reset_instructions: "Send me password reset instructions"
+      edit:
+        title: "Change your password"
+        submit: "Change your password"
     registrations:
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -41,13 +62,31 @@ en:
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "You updated your account successfully."
+      new:
+        title: "Sign Up"
+        sign_up: "Sign Up"
+      edit:
+        title:
+        awaiting_confirmation: "Currently waiting confirmation for:"
+        dont_change_instruction: "leave blank if you don't want to change it"
+        confirm_current_password: "we need your current password to confirm your changes"
+        update: "Update"
+        cancel_title: "Cancel my account"
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
+      title: "Sign in"
     unlocks:
       send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      new:
+        title: "Resend unlock instructions"
+    shared:
+      links:
+        forgot_password: "Forgot your password?"
+        confirmation_instructions: "Didn't receive confirmation instructions?"
+        unlock_instructions: "Didn't receive unlock instructions?"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
