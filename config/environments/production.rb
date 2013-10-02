@@ -66,7 +66,7 @@ Simor::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Action mailer configuration.
-  config.action_mailer.default_url_options = { host: 'asseth-staging.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: ENV['PRODUCTION_HOST'] }
   config.action_mailer.delivery_metho = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
@@ -74,7 +74,7 @@ Simor::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "morefar.co",
+    domain: ENV['GMAIL_DOMAIN'],
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV['GMAIL_USERNAME'],
