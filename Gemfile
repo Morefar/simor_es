@@ -58,6 +58,7 @@ gem 'fog', '~> 1.15.0'
 gem 'twitter_cldr', '~> 2.4.2'
 gem 'kaminari', '~> 0.14.1'
 gem 'devise', '~> 3.1.0'
+gem 'dotenv-rails', '~> 0.9.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
