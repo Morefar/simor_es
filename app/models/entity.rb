@@ -5,10 +5,10 @@ class Entity < ActiveRecord::Base
   has_many :cosigners
   has_many :contracts, through: :cosigners
 
-  validates :address, :city, :state, :phone, :identification_number, :identification_type_id, :name, :email, presence: true
+  validates :address, :city, :state, :identification_number, :identification_type_id, :name, presence: true
   validates :identification_number, uniqueness: { scope: :identification_type_id }
-  validates :email, uniqueness: { scope: :identification_type_id, case_sensitive: true }
-  validates :email, format: { with: /\A[a-zA-Z_.]+@[.a-zA-Z\-_]+\Z/ }
+  validates :email, uniqueness: { scope: :identification_type_id, case_sensitive: false }, if: "email.present?"
+  validates :email, format: { with: /\A[a-zA-Z_.]+@[.a-zA-Z\-_]+\Z/ }, if: "email.present?"
 
   scope :search_name, ->(term) { where("name ilike ?", term) }
   def contracts_as_lessee
