@@ -9,7 +9,7 @@ describe Asset do
       body = create(:body)
       kind = create(:kind)
       create(:build, body: body, kind: kind)
-      hash = { body: body, kind: kind }
+      { body: body, kind: kind }
   end
 
   before(:each) do
@@ -129,19 +129,10 @@ describe Asset do
       end
 
       it 'is invalid if it\'s size is smaller than 17 characters' do
-        expect(build(:asset, contract: @contract, serial_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
-        expect(build(:asset, contract: @contract, motor_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
         expect(build(:asset, contract: @contract, chassis_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
         expect(build(:asset, contract: @contract, vin: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
       end
     end
-
-    # context 'Serial number' do
-    #   it 'is invalid with a duplicate serial number' do
-    #     create(:asset, serial_number: 'UHEB1287097SHM863')
-    #     expect(build(:asset, serial_number: 'UHEB1287097SHM863')).to have(1).errors_on(:serial_number)
-    #   end
-    # end
 
     context 'Vehicle Identification Number' do
       it "is invalid if the VIN contains the letters 'I', 'O', 'Q', or 'Ñ'" do
@@ -150,23 +141,7 @@ describe Asset do
         expect(build(:asset, contract: @contract, vin: 'UHEB12Q7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
         expect(build(:asset, contract: @contract, vin: 'UHEB12Ñ7097SHM863', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
       end
-
-      # it 'is invalid with a duplicate VIN' do
-      #   create(:asset, vin: 'UHEB1287097SHM863')
-      #   expect(build(:asset, vin: 'UHEB1287097SHM863')).to have(1).errors_on(:vin)
-      # end
-
-      it 'is invalid with a nil VIN' do
-        expect(build(:asset, vin: nil, body: @build_hash[:body], kind: @build_hash[:kind])).to have(2).errors_on(:vin)
-      end
     end
-
-    # context 'Chassis Number' do
-    #   # it 'is invalid with a duplicate chassis number' do
-    #   #   create(:asset, chassis_number: 'UHEB1287097SHM863')
-    #   #   expect(build(:asset, chassis_number: 'UHEB1287097SHM863')).to have(1).errors_on(:chassis_number)
-    #   # end
-    # end
   end
 
   describe 'valid kind - body combination' do
