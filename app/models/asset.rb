@@ -42,6 +42,8 @@ class Asset < ActiveRecord::Base
   after_create :increase_asset_count_on_contract
   around_destroy :decrease_asset_count_on_contract
 
+  default_scope order("created_at DESC")
+
   def authorized_build
     errors.add(:kind_name, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)
   end
@@ -78,7 +80,7 @@ class Asset < ActiveRecord::Base
   end
 
   def model_name
-    make.try(:name)
+    model.try(:name)
   end
   def model_name=(model_name)
     self.model = Model.find_by_name(model_name) if model_name.present?
@@ -88,7 +90,7 @@ class Asset < ActiveRecord::Base
     color.try(:name)
   end
   def color_name=(color_name)
-    self.color = Color.find_by_name(model_name) if model_name.present?
+    self.color = Color.find_by_name(color_name) if color_name.present?
   end
 
   def kind_name
