@@ -70,6 +70,9 @@ class AssetsController < ApplicationController
 
   private
   def find_asset
-    @asset = Asset.find_by_id params[:id] if params[:id]
+    @asset = Asset.includes(:make, :model, :color, :kind, :body, :documents, :inspections,
+                            contract: [:category, { lessee: :identification_type }],
+                           comments: :user)
+                            .find_by_id params[:id] if params[:id]
   end
 end

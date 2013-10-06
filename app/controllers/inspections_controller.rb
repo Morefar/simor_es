@@ -68,6 +68,8 @@ class InspectionsController < ApplicationController
 
 private
   def find_inspection
-    @inspection = Inspection.find_by_id(params[:id]) if params[:id]
+    @inspection = Inspection.includes(:insurance_company, :documents, :contract,
+                                      asset: [:make, :model], comments: :user)
+                  .find_by_id(params[:id]) if params[:id]
   end
 end
