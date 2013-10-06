@@ -28,19 +28,19 @@
     <% if user_signed_in? %>
       <%= "#{current_user.first_name} #{current_user.last_name}" %>
       &nbsp;&nbsp;
-      <%= link_to edit_user_registration_path, title: t(".settings"), rel: 'tooltip' do %>
+      <%= link_to edit_user_registration_path, title: t(".settings") do %>
         <i class="icon-cog icon-large"></i> <small><%= t(".settings") %></small>
       <% end %>
       &nbsp;&nbsp;
-      <%= link_to destroy_user_session_path, title: t(".sign_out"), rel: 'tooltip', method: :delete do %>
+      <%= link_to destroy_user_session_path, title: t(".sign_out"), method: :delete do %>
         <i class="icon-signout icon-large"></i> <small><%= t(".sign_out") %></small>
       <% end %>
     <% else %>
-      <%= link_to new_user_session_path, title: t(".sign_in"), rel: 'tooltip' do %>
+      <%= link_to new_user_session_path, title: t(".sign_in") do %>
         <i class="icon-signin icon-large"></i> <small><%= t(".sign_in") %></small>
       <% end %>
       &nbsp;&nbsp;
-      <%= link_to new_user_registration_path, title: t(".sign_up"), rel: 'tooltip' do %>
+      <%= link_to new_user_registration_path, title: t(".sign_up") do %>
         <i class="icon-group icon-large"></i> <small><%= t(".sign_up") %></small>
       <% end %>
     <% end %>
@@ -50,7 +50,6 @@
     <div>
       <nav>
       </nav>
-      </a>
     </div>
     <div class="workspace-container">
       <% flash.each do |k,v| %>
