@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926195321) do
+ActiveRecord::Schema.define(:version => 20131003154709) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20130926195321) do
     t.string   "pic_job"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.text     "observations"
   end
 
   add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"
