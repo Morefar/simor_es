@@ -191,3 +191,24 @@ header {
     font-size: 80%;
   }
 }
+.form_hint {
+  background: #d45252;
+  @include radius;
+  color: white;
+  margin-left: 8px;
+  padding: 3px 8px;
+  z-index: 999;
+  position: absolute;
+  display: none;
+}
+.form_hint::before {
+  content: "\25B2";
+  color: #d45252;
+  position: absolute;
+  z-index: -1;
+  top: -9px;
+  left: 6px;
+}
+.field input:focus ~ .form_hint { display: inline; }
+.field input:required:valid ~ .form_hint { background: #28921f; }
+.field input:required:valid ~ .form_hint::before { color: #28921f; }

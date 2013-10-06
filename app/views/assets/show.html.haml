@@ -18,7 +18,7 @@
       = @asset.contract.first_canon_date
     %b.large-2.columns= "#{t('activerecord.attributes.contract.expiration_date')}:"
     %span.large-2.columns
-      = @asset.contract.first_canon_date
+      = @asset.contract.expiration_date
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.contract.lessee')}:"
     %span.large-2.columns

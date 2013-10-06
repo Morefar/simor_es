@@ -2,28 +2,32 @@
   = render 'shared/error_messages', target: @asset
   .field
     = form.label :contract_number
-    = form.text_field :contract_number, data: {autocomplete_source: contracts_path}
+    = form.text_field :contract_number, data: {autocomplete_source: contracts_path},
+          placeholder: "Número del contrato", autofocus: true, required: true
+    %span.form_hint= t(".contract_number_hint")
   = field_set_tag t('inspections.form.fieldset.information') do
     .row
       .field.large-4.columns
         = form.label :invoice_id
-        = form.text_field :invoice_id
+        = form.text_field :invoice_id, required: true
       .field.large-4.columns
         = form.label :inventory_number
-        = form.text_field :inventory_number
+        = form.text_field :inventory_number, required: true
       .field.large-4.columns
         = form.label :transit_permit
-        = form.text_field :transit_permit
+        = form.text_field :transit_permit, required: true
+        %span.form_hint= t(".transit_permit_hint")
     .row
       .field.large-3.columns
         = form.label :license_plate
-        = form.text_field :license_plate
+        = form.text_field :license_plate, placeholder: "AAA123", required: true
+        %span.form_hint= t(".license_plate_hint")
       .field.large-3.columns
         = form.label :make_name
-        = form.text_field :make_name, data: {autocomplete_source: makes_path}
+        = form.text_field :make_name, data: {autocomplete_source: makes_path}, required: true
       .field.large-3.columns
         = form.label :model_name
-        = form.text_field :model_name, data: {autocomplete_source: models_path}
+        = form.text_field :model_name, data: {autocomplete_source: models_path}, required: true
       .field.large-3.columns
         = form.label :year
         = form.select :year, (2000..(Date.current >> 12).year), selected: Date.current.year
@@ -31,19 +35,20 @@
       .field.large-3.columns
         = form.label :cylinder_cap
         = form.number_field :cylinder_cap
+        %span.form_hint= t(".cylinder_cap_hint")
       .field.large-3.columns
         = form.label :color_name
-        = form.text_field :color_name, data: {autocomplete_source: colors_path}
+        = form.text_field :color_name, data: {autocomplete_source: colors_path}, required: true
       .field.large-3.columns.pull-3
         = form.label :service_type
         = form.select :service_type, [t('.private'),t('.public'),t('.diplomatic'),t('.official'),t('.special'),t('.others')]
     .row
       .field.large-3.columns
         = form.label :kind_name
-        = form.text_field :kind_name, data: {autocomplete_source: kinds_path}
+        = form.text_field :kind_name, data: {autocomplete_source: kinds_path}, required: true
       .field.large-3.columns
         = form.label :body_name
-        = form.text_field :body_name, data: {autocomplete_source: bodies_path}
+        = form.text_field :body_name, data: {autocomplete_source: bodies_path}, required: true
       .field.large-3.columns
         = form.label :fuel_type
         = form.select :fuel_type, [t('.gasoline'),t('.gnv'),t('.diesel'),t('.gas_gasoline'),t('.electric'),t('.hidrogen'),t('.ethanol'),t('.biodiesel')]
@@ -54,25 +59,30 @@
       .field.large-5.columns
         = form.label :motor_number
         = form.text_field :motor_number
-      .field.large-1.columns.center
+      .field.large-1.columns
         = form.label :rerecorded_motor
         = form.check_box :rerecorded_motor
+        %span.form_hint= t(".rerecorded_hint")
       .field.large-6.columns
         = form.label :vin
         = form.text_field :vin
+        %span.form_hint= t(".vin_hint")
     .row
       .field.large-5.columns
         = form.label :serial_number
         = form.text_field :serial_number
-      .field.large-1.columns.center
+      .field.large-1.columns
         = form.label :rerecorded_serial
         = form.check_box :rerecorded_serial
+        %span.form_hint= t(".rerecorded_hint")
       .field.large-5.columns
         = form.label :chassis_number
-        = form.text_field :chassis_number
-      .field.large-1.columns.center
+        = form.text_field :chassis_number, required: true
+        %span.form_hint= t(".vin_hint")
+      .field.large-1.columns
         = form.label :rerecorded_chassis
         = form.check_box :rerecorded_chassis
+        %span.form_hint= t(".rerecorded_hint")
   = field_set_tag t('.fieldset.additional_info') do
     .row
       .field.large-3.columns
@@ -81,6 +91,7 @@
       .field.large-3.columns
         = form.label :shield_level
         = form.number_field :shield_level
+        %span.form_hint= t(".shield_hint")
       .field.large-3.columns.pull-3
         = form.label :horse_power
         = form.number_field :horse_power
@@ -88,9 +99,10 @@
       .field.large-3.columns
         = form.label :import_statement
         = form.text_field :import_statement
-      .field.large-3.columns
+      .field.large-3.columns.center
         = form.label :importd_assembld
         = form.check_box :importd_assembld
+        %span.form_hint= t(".i_e_hint")
       .field.large-3.columns
         = form.label :import_date, class: 'icon-calendar'
         = form.text_field :import_date, class: 'date-field'
@@ -118,6 +130,7 @@
     .row
       .field.large-6.columns
         = form.label :book_value
-        = form.number_field :book_value
+        = form.number_field :book_value, placeholder: 'i.e. 15000000.50', required: true
+        %span.form_hint= t(".value_hint")
   .actions
     = form.submit

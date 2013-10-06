@@ -110,11 +110,12 @@ es:
       less_than: debe ser menor que %{count}
       less_than_or_equal_to: debe ser menor o igual que %{count}
       not_a_number: no es un número
-      not_an_integer: debe ser un entero
+      not_an_integer: debe ser un numero entero
       odd: debe ser un número impar
       record_invalid: ! 'La validación falló: %{errors}'
-      taken: ya ha sido tomado
+      taken: "ya existe en el sistema. Debe ingresar uno nuevo."
       unauthorized_build: 'Combinación con Carrocería no permitida.'
+      model_dont_belong_make: "pertenece a otra marca. Cambie la línea o la marca"
       invalid_vin: "tiene el formato incorrecto. Los carácteres 'I', 'O', 'Q', 'Ñ' no son permitidos."
       expiration_in_past: "no puede ser en el pasado"
       expiration_shorter_than_contract: "más corta que la duración del contrato contada a partir del pago del primer canon."
@@ -309,6 +310,15 @@ es:
         other_information: 'Otra Información'
   assets:
     form:
+      contract_number_hint: 'Número del contrato al que pertenece este nuevo activo, si el contrato no existe debe crearlo primero'
+      transit_permit_hint: 'Debe contener 11 dígitos numéricos'
+      license_plate_hint: 'Debe tener 6 caracteres alfanuméricos sin espacios ni guiones'
+      cylinder_cap_hint: 'Debe ser un número positivo sin puntos ni comas'
+      rerecorded_hint: "Dejelo en blanco si no ha sido regrabado"
+      vin_hint: "Debe contener 17 caracteres alfanumericos pero no puede incluir las letras 'I', 'O', 'Q', 'Ñ'"
+      shield_hint: "Deje el campo en blanco si no tiene blindaje"
+      i_e_hint: "Marcado significa importado, en blanco significa ensamblado"
+      value_hint: "Debe ser un número positivo sin separador de miles. El punto indica el separador decimal"
       private: 'Privado'
       public: 'Público'
       diplomatic: 'Diplomático'

@@ -84,3 +84,14 @@ $('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomp
 
 //Autocomplete for the contract form
 $('#contract_lessee_name').autocomplete({source: $('#contract_lessee_name').data('autocomplete-source'), minLength: 4});
+
+// Toggle disable when imported/assembled is checked on the new asset form.
+$("#asset_importd_assembld").change(function() {
+    var $input = $(this);
+    var $datefield = $('#asset_import_date');
+    if ($input.prop('checked')){
+      $datefield.prop('disabled', false);
+    } else {
+      $datefield.prop('disabled', true)
+    }
+}).change();

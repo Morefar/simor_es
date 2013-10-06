@@ -95,6 +95,15 @@ en:
         other_information: 'Other Information'
   assets:
     form:
+      contract_number_hint: 'Contract number that this new asset belongs to'
+      transit_permit_hint: 'Must have 11 digits'
+      license_plata_hint: "Must be 6 characters long, can't have spaces or dashes"
+      cylinder_cap_hint: "Must be a positive number without dots or commas"
+      rerecorded_hint: "Leave blank if the number wasn't re-recorded"
+      vin_hint: "Must be 17 characters long but must not contain the letters 'I', 'O', 'Q', 'Ñ'"
+      shield_hint: "Leave blank if the car doesn't have any shield protection"
+      i_e_hint: "Checked means imported, blank means assembled"
+      value_hint: "Must be a positive number without thousands separator. The dot indicates the decimal separator"
       private: 'Private'
       public: 'Public'
       diplomatic: 'Diplomatic'
@@ -259,6 +268,7 @@ en:
     errors:
       messages:
         unauthorized_build: 'combination with selected Body, not authorized.'
+        model_dont_belong_make: 'The model belongs to a different maker. Change either the make or the model.'
         invalid_vin: "has incorrect format. 'I', 'O', 'Q', 'Ñ', or non-word characters are not allowed."
         expiration_in_past: "can't be in the past."
         expiration_shorter_than_contract: 'is shorter than duration of the contract starting from the first canon payment.'
