@@ -52,10 +52,13 @@ class Asset < ActiveRecord::Base
     message: I18n.t('errors.messages.invalid_vin')
   }, if: "vin.present?"
   validates :motor_number, length: { in: 1..17 }, if: "motor_number.present?"
+  validates :motor_number, uniqueness: true, if: "motor_number.present?"
   validates :serial_number, length: { in: 1..17 }, if: "serial_number.present?"
-  validates :serial_number, :motor_number, :chassis_number, :vin, uniqueness: true
+  validates :serial_number, uniqueness: true, if: "serial_number.present?"
+  validates  :chassis_number, :vin, uniqueness: true
   validates :book_value, numericality: { greater_than: 0 }
   validate :authorized_build
+  validate :model_belongs_to_make
   after_create :increase_asset_count_on_contract
   around_destroy :decrease_asset_count_on_contract
 
@@ -63,6 +66,10 @@ class Asset < ActiveRecord::Base
 
   def authorized_build
     errors.add(:kind, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)
+  end
+
+  def model_belongs_to_make
+    errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make.id
   end
 
   def increase_asset_count_on_contract
