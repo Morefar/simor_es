@@ -347,7 +347,6 @@ es:
       inspections: 'Inspecciones'
     show:
       title: 'Áctivo Número: '
-      lessee_id: 'Identificación del Arrendatario'
       imported: 'Importado'
       assembled: 'Ensamblado'
       fieldset:
