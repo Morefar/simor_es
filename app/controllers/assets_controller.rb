@@ -10,8 +10,6 @@ class AssetsController < ApplicationController
     end
   end
 
-
-
   def show
     add_breadcrumb "Contract: #{@asset.contract.number}", @asset.contract
     add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
@@ -21,8 +19,6 @@ class AssetsController < ApplicationController
     end
   end
 
-
-
   def new
     @asset = Asset.new
 
@@ -31,7 +27,6 @@ class AssetsController < ApplicationController
       format.json { render json: @asset }
     end
   end
-
 
   def edit
   end
