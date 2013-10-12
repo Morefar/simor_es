@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003154709) do
+ActiveRecord::Schema.define(:version => 20131007211925) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20131003154709) do
   end
 
   add_index "contracts", ["category_id"], :name => "index_contracts_on_category_id"
+  add_index "contracts", ["number"], :name => "index_contracts_on_number"
 
   create_table "cosigners", :force => true do |t|
     t.integer  "entity_id"
