@@ -26,8 +26,14 @@ class ContractsController < ApplicationController
     @contracts = Contract.includes(:category, :lessee).page params[:page]
     respond_to do |format|
       format.html
-      format.json { render json: @contracts.search_number("%#{params[:term]}%")
-                                           .limit(10).pluck(:number) }
+      format.json do
+        if params.has_key? :number
+          render json: Contract.where("number = ?", params[:number]).pluck(:id)
+        else
+          render json: @contracts.search_number("%#{params[:term]}%")
+                                           .limit(10).pluck(:number)
+        end
+      end
     end
   end
 
@@ -35,6 +41,10 @@ class ContractsController < ApplicationController
     add_breadcrumb "Contract:#{@contract.number}", @contract
     @lessee = @contract.lessee
     @cosigners = Array(@contract.cosigners)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 #UPDATE ACTIONS

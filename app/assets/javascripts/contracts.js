@@ -75,7 +75,21 @@ $('#contract_periodicity').change(function() {updateExpirationField()});
 $('#contract_duration').change(function() {updateExpirationField()});
 
 // Autocomplete behaviour for the asset form.
-$('#asset_contract_number').autocomplete({source: $('#asset_contract_number').data('autocomplete-source'), minLength: 4});
+$('#asset_contract_number').autocomplete({
+    source: $('#asset_contract_number').data('autocomplete-source'),
+    minLength: 4,
+});
+$('#asset_contract_number').on("autocompleteclose",
+    function( event, ui ){
+        var selectedContractNumber = $(this).val();
+        $.get("/es/contracts.json",
+            { number: selectedContractNumber },
+            function( data ) {
+              $.get("/es/contracts/" + data + ".js");
+            },
+            "json"
+        );
+    });
 $('#asset_make_name').autocomplete({source: $('#asset_make_name').data('autocomplete-source'), minLength: 3});
 $('#asset_model_name').autocomplete({source: $('#asset_model_name').data('autocomplete-source'), minLength: 3});
 $('#asset_color_name').autocomplete({source: $('#asset_color_name').data('autocomplete-source'), minLength: 3});
@@ -83,7 +97,10 @@ $('#asset_kind_name').autocomplete({source: $('#asset_kind_name').data('autocomp
 $('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomplete-source'), minLength: 3});
 
 //Autocomplete for the contract form
-$('#contract_lessee_name').autocomplete({source: $('#contract_lessee_name').data('autocomplete-source'), minLength: 4});
+$('#contract_lessee_name').autocomplete({
+    source: $('#contract_lessee_name').data('autocomplete-source'),
+    minLength: 4
+});
 
 // Toggle disable when imported/assembled is checked on the new asset form.
 $("#asset_importd_assembld").change(function() {
