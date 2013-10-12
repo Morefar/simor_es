@@ -1,32 +1,7 @@
 %h1
   = t('.title')
   = @asset.inventory_number
-= field_set_tag t('contracts.form.fieldset.information') do
-  .row
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.number')}:"
-    %span.large-2.columns
-      = link_to @asset.contract.number, @asset.contract
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.category_id')}:"
-    %span.large-2.columns.pull-4
-      = @asset.contract.category.name
-  .row
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.start_date')}:"
-    %span.large-2.columns
-      = @asset.contract.start_date
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.first_canon_date')}:"
-    %span.large-2.columns
-      = @asset.contract.first_canon_date
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.expiration_date')}:"
-    %span.large-2.columns
-      = @asset.contract.expiration_date
-  .row
-    %b.large-2.columns= "#{t('activerecord.attributes.contract.lessee')}:"
-    %span.large-2.columns
-      = link_to @asset.contract.lessee.name, @asset.contract.lessee
-    %b.large-2.columns= "#{t('.lessee_id')}:"
-    %span.large-2.columns.pull-4
-      = @asset.contract.lessee.identification_type.name
-      = @asset.contract.lessee.identification_number
+= render 'contracts/contract_info', contract: @asset.contract
 
 = field_set_tag t('inspections.form.fieldset.information') do
   .row

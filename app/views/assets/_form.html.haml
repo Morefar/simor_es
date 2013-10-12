@@ -5,6 +5,7 @@
     = form.text_field :contract_number, data: {autocomplete_source: contracts_path},
           placeholder: "Número del contrato", autofocus: true, required: true
     %span.form_hint= t(".contract_number_hint")
+  .contract_info
   = field_set_tag t('inspections.form.fieldset.information') do
     .row
       .field.large-4.columns
@@ -59,7 +60,7 @@
       .field.large-5.columns
         = form.label :motor_number
         = form.text_field :motor_number
-      .field.large-1.columns
+      .field.large-1.columns.center
         = form.label :rerecorded_motor
         = form.check_box :rerecorded_motor
         %span.form_hint= t(".rerecorded_hint")
@@ -71,7 +72,7 @@
       .field.large-5.columns
         = form.label :serial_number
         = form.text_field :serial_number
-      .field.large-1.columns
+      .field.large-1.columns.center
         = form.label :rerecorded_serial
         = form.check_box :rerecorded_serial
         %span.form_hint= t(".rerecorded_hint")
@@ -79,7 +80,7 @@
         = form.label :chassis_number
         = form.text_field :chassis_number, required: true
         %span.form_hint= t(".vin_hint")
-      .field.large-1.columns
+      .field.large-1.columns.center
         = form.label :rerecorded_chassis
         = form.check_box :rerecorded_chassis
         %span.form_hint= t(".rerecorded_hint")
