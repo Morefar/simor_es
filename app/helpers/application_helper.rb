@@ -3,6 +3,6 @@ module ApplicationHelper
     loc(number_attribute).to_currency.to_s(precision: 2)
   end
   def loc(attribute)
-    attribute.localize(I18n.locale)
+    attribute.localize("#{ I18n.locale }_co")
   end
 end

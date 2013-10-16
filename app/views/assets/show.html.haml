@@ -114,7 +114,7 @@
 
 - unless @asset.inspections.empty?
   = field_set_tag t('.fieldset.inspections') do
-    = render 'inspections/index_table', inspections: @asset.inspections.order('date DESC')
+    = render 'inspections/index_table', inspections: @asset.inspections
 .row
   = render 'documents/index', documentable: @asset
 = render 'documents/form', document: Document.new, documentable: @asset

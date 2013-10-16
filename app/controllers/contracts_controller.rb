@@ -30,7 +30,7 @@ class ContractsController < ApplicationController
         if params.has_key? :number
           render json: Contract.where("number = ?", params[:number]).pluck(:id)
         else
-          render json: @contracts.search_number("%#{params[:term]}%")
+          render json: Contract.search_number("%#{params[:term]}%")
                                            .limit(10).pluck(:number)
         end
       end
