@@ -38,6 +38,12 @@ en:
         condition: 'General Condition'
         insurance: 'Insurance Information'
         signature: 'Inspected Signature'
+      inspection_number_placeholder: 'i.e. V0001'
+      inspection_number_hint: 'Number on the physical inspection form'
+      license_plate_number_placeholder: 'i.e. AAA123'
+      asset_license_plate_hint: 'Identification number of the inspected asset'
+      address_hint: 'Address where the asset was fisically inspected.'
+      state_hint: 'Full state name or DC if it was on the capital.'
     new:
       title: 'New Inspection'
       back: ' Back'
