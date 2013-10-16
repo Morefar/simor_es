@@ -2,7 +2,7 @@
   %thead
     %tr
       %th= t('.number')
-      %th= t('.date')
+      %th= t('.inspection_date')
       %th= t('.city')
       %th= t('.state')
       %th= t('.initial_value')
@@ -11,7 +11,7 @@
     - inspections.each do |inspection|
       %tr
         %td.center= link_to inspection.inspection_number, inspection
-        %td= inspection.date.strftime('%d-%m-%y %r %Z')
+        %td= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
         %td= inspection.city
         %td= inspection.state
         %td= number_to_currency inspection.asset.book_value
