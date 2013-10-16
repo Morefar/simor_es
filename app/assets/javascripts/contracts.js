@@ -112,3 +112,15 @@ $("#asset_importd_assembld").change(function() {
       $datefield.prop('disabled', true)
     }
 }).change();
+
+// Time picker included on the inspections form.
+$('.datetime-field').datetimepicker({
+      timeFormat: 'hh:mm tt z',
+      controlType: 'select',
+      timeText: 'Hora:',
+      hourText: 'Hora',
+      minuteText: 'Minuto',
+      timezoneText: 'Zona',
+      currentText: 'Ahora',
+      closeText: 'Cerrar',
+});

@@ -3,7 +3,7 @@ class InspectionsController < ApplicationController
 
 
   def index
-    @inspections = Inspection.includes(:asset).order('date DESC').page params[:page]
+    @inspections = Inspection.includes(:asset).page params[:page]
     add_breadcrumb "Inspections", :inspections_path
     respond_to do |format|
       format.html # index.html.erb
@@ -38,10 +38,8 @@ class InspectionsController < ApplicationController
     respond_to do |format|
       if @inspection.save
         format.html { redirect_to @inspection, notice: 'Inspection was successfully created.' }
-        format.json { render json: @inspection, status: :created, location: @inspection }
       else
         format.html { render action: "new" }
-        format.json { render json: @inspection.errors, status: :unprocessable_entity }
       end
     end
   end

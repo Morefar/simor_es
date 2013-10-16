@@ -6,7 +6,15 @@ class AssetsController < ApplicationController
     add_breadcrumb 'Assets', :assets_path
     respond_to do |format|
       format.html
-      format.json { render json: @assets }
+      format.json do
+        if params.has_key? :asset_license_plate
+          render json: Asset.where("license_plate =?", params[:asset_license_plate])
+                            .pluck(:id)
+        else
+          render json: Asset.search_license_plate("%#{params[:term]}%")
+                            .limit(10).pluck(:license_plate)
+        end
+      end
     end
   end
 
@@ -16,6 +24,7 @@ class AssetsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @asset }
+      format.js
     end
   end
 

@@ -63,6 +63,7 @@ class Asset < ActiveRecord::Base
   around_destroy :decrease_asset_count_on_contract
 
   default_scope order("created_at DESC")
+  scope :search_license_plate, ->(license_plate) { where("license_plate like ?", license_plate) }
 
   def authorized_build
     errors.add(:kind, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)

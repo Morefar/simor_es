@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131007211925) do
+ActiveRecord::Schema.define(:version => 20131015155832) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20131007211925) do
   add_index "assets", ["color_id"], :name => "index_assets_on_color_id"
   add_index "assets", ["contract_id"], :name => "index_assets_on_contract_id"
   add_index "assets", ["kind_id"], :name => "index_assets_on_kind_id"
+  add_index "assets", ["license_plate"], :name => "index_assets_on_license_plate"
   add_index "assets", ["make_id"], :name => "index_assets_on_make_id"
   add_index "assets", ["model_id"], :name => "index_assets_on_model_id"
 
@@ -187,7 +188,6 @@ ActiveRecord::Schema.define(:version => 20131007211925) do
     t.string   "address"
     t.string   "city"
     t.string   "state"
-    t.time     "date"
     t.float    "current_value"
     t.integer  "appraiser_value"
     t.string   "soat_number"
@@ -215,9 +215,12 @@ ActiveRecord::Schema.define(:version => 20131007211925) do
     t.string   "person_in_charge"
     t.string   "pic_id"
     t.string   "pic_job"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.text     "observations"
+    t.boolean  "modifications",         :default => false
+    t.string   "odometer",              :default => "0"
+    t.datetime "inspection_date"
   end
 
   add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"

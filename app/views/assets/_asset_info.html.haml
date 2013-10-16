@@ -1,0 +1,54 @@
+.row.asset_info
+  = field_set_tag t('.fieldset.information') do
+    .row
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.license_plate')}:"
+      %span.large-2.columns
+        = asset.license_plate
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.inventory_number')}:"
+      %span.large-2.columns
+        = asset.inventory_number
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.chassis_number')}:"
+      %span.large-2.columns
+        = asset.chassis_number
+    .row
+      %span.small-5.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.make_id')}:"
+      %span.small-7.large-2.columns
+        = asset.make.name
+      %span.small-5.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.model_id')}:"
+      %span.small-7.large-2.columns
+        = asset.model.name
+      %span.small-5.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.year')}:"
+      %span.small-7.large-2.columns
+        = asset.year
+    .row
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.kind_id')}:"
+      %span.large-2.columns
+        = asset.kind.name
+      %span.small-6.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.body_id')}:"
+      %span.small-6.large-2.columns
+        = asset.body.name
+      %span.small-6.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.service_type')}:"
+      %span.small-6.large-2.columns
+        = asset.service_type
+    .row
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.color_id')}:"
+      %span.large-2.columns
+        = asset.color.name
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.book_value')}:"
+      %span.large-2.columns
+        = local_number_to_currency asset.book_value
+      %span.large-2.columns
+        %b= "#{t('activerecord.attributes.asset.inspection_count')}:"
+      %span.large-2.columns
+        = asset.inspection_count
