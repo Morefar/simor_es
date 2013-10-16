@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require jquery-ui
+//= require jquery-ui-timepicker-addon
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

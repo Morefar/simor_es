@@ -89,20 +89,20 @@ $('#asset_contract_number').on("autocompleteclose",
             },
             "json"
         );
-    });
+});
 $('#asset_make_name').autocomplete({source: $('#asset_make_name').data('autocomplete-source'), minLength: 3});
 $('#asset_model_name').autocomplete({source: $('#asset_model_name').data('autocomplete-source'), minLength: 3});
 $('#asset_color_name').autocomplete({source: $('#asset_color_name').data('autocomplete-source'), minLength: 3});
 $('#asset_kind_name').autocomplete({source: $('#asset_kind_name').data('autocomplete-source'), minLength: 3})
 $('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomplete-source'), minLength: 3});
 
-//Autocomplete for the contract form
+//Autocomplete for the Contract form
 $('#contract_lessee_name').autocomplete({
     source: $('#contract_lessee_name').data('autocomplete-source'),
     minLength: 4
 });
 
-// Toggle disable when imported/assembled is checked on the new asset form.
+// Toggle disable when imported/assembled is checked on the Asset form.
 $("#asset_importd_assembld").change(function() {
     var $input = $(this);
     var $datefield = $('#asset_import_date');
@@ -123,4 +123,29 @@ $('.datetime-field').datetimepicker({
       timezoneText: 'Zona',
       currentText: 'Ahora',
       closeText: 'Cerrar',
+});
+
+/* Inicialización en español para la extensión 'UI date picker' para jQuery. */
+/* Traducido por Vester (xvester@gmail.com). */
+jQuery(function($){
+  $.datepicker.regional['es'] = {
+      closeText: 'Cerrar',
+      prevText: '&#x3c;Ant',
+      nextText: 'Sig&#x3e;',
+      currentText: 'Hoy',
+      monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+        'Jul','Ago','Sep','Oct','Nov','Dic'],
+      dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+      dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+      dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+      weekHeader: 'Sm',
+      dateFormat: 'yy/mm/dd',
+      firstDay: 1,
+      showMonthAfterYear: false,
+      yearSuffix: '',
+      isRTL: false
+  };
+  $.datepicker.setDefaults($.datepicker.regional['es']);
 });

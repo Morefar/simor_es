@@ -200,6 +200,23 @@ header {
   z-index: 999;
   position: absolute;
   display: none;
+/* Timepicker */
+.ui-timepicker-div {
+  .ui-widget-header {
+    margin-bottom: 8px;
+  }
+  dl {
+    text-align: left;
+    font-size: 70%;
+    dt {
+      float: left;
+      clear: left;
+      padding: 0 0 0 5px;
+    }
+    dd {
+      margin: 0 10px 10px 45%;
+    }
+  }
 }
 .form_hint::before {
   content: "\25B2";
