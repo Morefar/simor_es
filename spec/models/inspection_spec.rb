@@ -32,7 +32,7 @@ end
   it { should validate_presence_of(:person_in_charge) }
   it { should validate_presence_of(:pic_id) }
   it { should validate_presence_of(:pic_job) }
-  it { should validate_presence_of(:date) }
+  it { should validate_presence_of(:inspection_date) }
 
   describe 'has valid soat dates' do
     context "soat doesn't exist" do

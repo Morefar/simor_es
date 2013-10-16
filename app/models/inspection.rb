@@ -1,11 +1,12 @@
 class Inspection < ActiveRecord::Base
-  attr_accessible :address, :city, :state, :date, :current_value, :appraiser_value,
+  attr_accessible :address, :city, :state, :inspection_date, :current_value, :appraiser_value,
       :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate,
       :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security,
       :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes,
       :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency,
       :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job,
-      :inspection_number, :asset_id, :observations
+      :inspection_number, :asset_id, :observations, :odometer, :asset_license_plate,
+      :modifications
 
   belongs_to :asset
   belongs_to :insurance_company
@@ -14,7 +15,7 @@ class Inspection < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
 
-  validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :date, :asset,presence: true
+  validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :inspection_date, :asset,presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
   validates :insurance_start, :insurance_finish, presence: true, if:  "insurance_number.present?"
   validates :emissions_begin_date, :emissions_finish_date, presence: true,if: "emissions_certificate.present?"
@@ -26,7 +27,14 @@ class Inspection < ActiveRecord::Base
   after_create :increase_inspection_count_on_asset
   around_destroy :decrease_inspection_count_on_asset
 
-  default_scope order("date DESC")
+  default_scope order("inspection_date DESC")
+
+  def asset_license_plate
+    asset.try(:license_plate)
+  end
+  def asset_license_plate= (license_plate)
+    self.asset = Asset.find_by_license_plate(license_plate) if license_plate.present?
+  end
 
   private
   def valid_soat_dates
