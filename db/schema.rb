@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015155832) do
+ActiveRecord::Schema.define(:version => 20131016210829) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(:version => 20131015155832) do
   add_index "assets", ["license_plate"], :name => "index_assets_on_license_plate"
   add_index "assets", ["make_id"], :name => "index_assets_on_make_id"
   add_index "assets", ["model_id"], :name => "index_assets_on_model_id"
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "right_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "assignments", ["right_id", "role_id"], :name => "index_assignments_on_right_id_and_role_id"
 
   create_table "bodies", :force => true do |t|
     t.string   "name"
@@ -163,6 +172,15 @@ ActiveRecord::Schema.define(:version => 20131015155832) do
   end
 
   add_index "entities", ["identification_type_id"], :name => "index_entities_on_identification_type_id"
+
+  create_table "grants", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "right_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "grants", ["role_id", "right_id"], :name => "index_grants_on_role_id_and_right_id"
 
   create_table "identification_types", :force => true do |t|
     t.string   "name"
@@ -342,6 +360,17 @@ ActiveRecord::Schema.define(:version => 20131015155832) do
   end
 
   add_index "models", ["make_id"], :name => "index_models_on_make_id"
+
+  create_table "rights", :force => true do |t|
+    t.string "resource"
+    t.string "operation"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
