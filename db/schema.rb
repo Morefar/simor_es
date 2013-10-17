@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016210829) do
+ActiveRecord::Schema.define(:version => 20131017181444) do
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -64,13 +64,11 @@ ActiveRecord::Schema.define(:version => 20131016210829) do
   add_index "assets", ["model_id"], :name => "index_assets_on_model_id"
 
   create_table "assignments", :force => true do |t|
-    t.integer  "right_id"
     t.integer  "role_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
-
-  add_index "assignments", ["right_id", "role_id"], :name => "index_assignments_on_right_id_and_role_id"
 
   create_table "bodies", :force => true do |t|
     t.string   "name"
@@ -214,9 +212,6 @@ ActiveRecord::Schema.define(:version => 20131016210829) do
     t.string   "emissions_certificate"
     t.string   "emissions_begin_date"
     t.string   "emissions_finish_date"
-    t.text     "maintenance"
-    t.text     "repairs"
-    t.text     "security"
     t.string   "exterior"
     t.text     "exterior_notes"
     t.string   "interior"
@@ -239,6 +234,9 @@ ActiveRecord::Schema.define(:version => 20131016210829) do
     t.boolean  "modifications",         :default => false
     t.string   "odometer",              :default => "0"
     t.datetime "inspection_date"
+    t.boolean  "maintenance",           :default => true
+    t.boolean  "repairs",               :default => true
+    t.boolean  "security",              :default => true
   end
 
   add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"
