@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Right do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'should have a valid factory' do
+    expect(build(:right)).to be_valid
+  end
+  it { should have_many :grants }
+  it { should have_many(:roles).through(:grants) }
 end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :assignment do
-    right 1
-    role 1
+    user
+    role
   end
 end

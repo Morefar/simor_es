@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Grant do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has a valid factory' do
+    expect(build(:grant)).to be_valid
+  end
+  it { should belong_to :role }
+  it { should belong_to :right }
 end

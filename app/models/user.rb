@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     :password_confirmation, :remember_me, :account_name
   belongs_to :account
   has_many :comments
+  has_many :assignments
+  has_many :roles, through: :assignments
 
   def account_name=(account_name)
   end

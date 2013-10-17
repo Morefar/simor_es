@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :role do
-    name "MyString"
+    sequence (:name) { |n| "test_role_#{n}" }
   end
 end

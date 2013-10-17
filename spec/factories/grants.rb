@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :grant do
-    role 1
-    right 1
+    role
+    right
   end
 end
