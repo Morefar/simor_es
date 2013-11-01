@@ -2,7 +2,7 @@
 <h1><%=t('.title') %></h1>
 <p><%= link_to t('.new_btn'), new_contract_url, class: 'icon-file button success radius' %></p>
 <div class='row'>
-  <table>
+  <table class="responsive-table layout display">
     <thead>
       <tr>
         <th><%= t('activerecord.attributes.contract.number') %></th>
@@ -19,17 +19,17 @@
     <tbody>
       <% @contracts.each do |contract| %>
       <tr>
-        <td><%= link_to contract.number, contract %></td>
-        <td><%= contract.created_at.localtime.strftime('%d-%m-%Y, %r %Z') %></td>
-        <td><%= contract.start_date %></td>
-        <td><%= contract.expiration_date %></td>
-        <td><%= link_to contract.lessee.name, contract.lessee %></td>
-        <td><%= contract.category.name %></td>
-        <td class='center'><%= contract.asset_count %></td>
-        <td>
+        <td data-label="<%= t('.responsive.number') %>" class="identifier"><%= link_to contract.number, contract %></td>
+        <td data-label="<%= t('.responsive.created') %>"><%= contract.created_at.localtime.strftime('%d-%m-%Y, %r %Z') %></td>
+        <td data-label="<%= t('.responsive.start_date') %>"><%= contract.start_date %></td>
+        <td data-label="<%= t('.responsive.expiration_date') %>"><%= contract.expiration_date %></td>
+        <td data-label="<%= t('.responsive.lessee') %>"><%= link_to contract.lessee.name, contract.lessee %></td>
+        <td data-label="<%= t('.responsive.category') %>"><%= contract.category.name %></td>
+        <td data-label="<%= t('.responsive.assets') %>" class='center'><%= contract.asset_count %></td>
+        <td class="actions edit">
           <%= link_to "", edit_contract_url(contract.id), class: 'icon-edit' %>
         </td>
-        <td>
+        <td class="actions delete">
           <%= link_to "", contract_url(contract.id), class: 'icon-trash', method: :delete, confirm: "Are you completely sure you want to erase contract #{contract.number}?" %>
         </td>
       </tr>
@@ -41,4 +41,3 @@
 <div class='row'>
   <%= paginate @contracts %>
 </div>
-<p><%= link_to t('.new_btn'), new_contract_url, class: 'icon-file button success radius' %></p>

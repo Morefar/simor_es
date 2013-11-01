@@ -1,4 +1,4 @@
-%table
+%table.responsive-table.layout.display
   %thead
     %tr
       %th= t('.number')
@@ -10,9 +10,9 @@
   %tbody
     - inspections.each do |inspection|
       %tr
-        %td.center= link_to inspection.inspection_number, inspection
-        %td= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
-        %td= inspection.city
-        %td= inspection.state
-        %td= number_to_currency inspection.asset.book_value
-        %td= number_to_currency inspection.current_value
+        %td.identifier.center{ "data-label" => "#{t('.number')}" }= link_to inspection.inspection_number, inspection
+        %td{ "data-label" => "#{t('.inspection_date')}" }= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
+        %td{ "data-label" => "#{t('.city')}" }= inspection.city
+        %td{ "data-label" => "#{t('.state')}" }= inspection.state
+        %td{ "data-label" => "#{t('.initial_value')}" }= number_to_currency inspection.asset.book_value
+        %td{ "data-label" => "#{t('.current_value')}" }= number_to_currency inspection.current_value

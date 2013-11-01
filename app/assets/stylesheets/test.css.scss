@@ -66,8 +66,11 @@ table {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   }
   @media (max-width: "#{ $small-screen }" ) {
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
     &.display {
-      margin: 0.5em 0px;
+      margin: auto;
     }
     &.responsive-table {
       box-shadow: none;
@@ -89,21 +92,28 @@ table {
         margin: 0em .5em 1em;
         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
         border: 1px solid #B3BFAA;
+        @include radius;
       }
       td {
         border: none;
-        text-align: center;
+        text-align: right;
         &.identifier{
           background: #D5E0CC;
           border-top: 1px solid #B3BFAA;
-          border-bottom: 1px solid #B3BFAA;
+          border-bottom:center 1px solid #B3BFAA;
+          text-align: center;
         }
         &.actions {
           position: absolute;
-          top: .5em;
-          right: .5em;
+          top: .7em;
           border: none;
           background: none;
+          &.edit {
+            right: 10%;
+          }
+          &.delete {
+            right: 1%;
+          }
         }
       }
     }

@@ -273,7 +273,7 @@ es:
       title: 'Inspecciones'
       new: ' Agregar Inspección'
       number: 'Acta'
-      date: 'Fecha'
+      inspection_date: 'Fecha'
       asset: 'Activo'
       initial_value: 'Valor Inicial'
       current_value: 'Valor Actual'
@@ -352,7 +352,7 @@ es:
       show: ' Vehículo'
       index: ' Activos'
     index:
-      title: 'Listado de Activos'
+      title: 'Activos'
       new_btn: ' Agregar Activo'
       inspections: 'Inspecciones'
     show:
@@ -389,10 +389,18 @@ es:
         cosigners: 'Información Codeudores'
         assets: 'Activos en el Contrato'
     index:
-      title: 'Contractos Activos'
+      title: 'Contratos'
       new_btn: 'Agregar Contrato'
       created_at: 'Fecha de Creación'
       assets: 'Activos'
+      responsive:
+        number: 'Contrato'
+        created: 'Creado'
+        start_date: 'Inicio'
+        expiration_date: 'Fin'
+        lessee: 'Locatario'
+        category: 'Tipo'
+        assets: 'Activos'
   comments:
     index:
       title: 'Notas'
@@ -432,6 +440,13 @@ es:
     index:
       title: 'Directorio de Personas y Entidades'
       new_btn: 'Agregar Persona'
+      responsive:
+        name: 'Nombre'
+        identification_number: 'Identificación'
+        email: 'email'
+        city: 'Ciudad'
+        lease_contracts: 'Contratos'
+        cosigner_contracts: 'Codeudor'
     show:
       title: 'Información Persona / Entidad'
       contact_numbers: 'Números de contacto Registrados'

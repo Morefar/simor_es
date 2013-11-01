@@ -1,13 +1,13 @@
 <h1><%= t('.title') %></h1>
-<div class='row'>
+<p>
   <%= link_to t('.new_btn'), new_asset_path, class: 'icon-file button success radius' %>
-</div>
+</p>
 <div class="row">
 <%= render 'asset_index', assets: @assets %>
 </div>
 <div class="row">
   <%= paginate @assets %>
 </div>
-<div class="row">
+<p>
   <%= link_to t('.new_btn'), new_asset_path, class: 'icon-file button success radius' %>
-</div>
+</p>

@@ -1,7 +1,7 @@
-%table
+%table.responsive-table.layout.display
   %thead
     %tr
-      %th= t(:contract_id, scope: [:activerecord,:attributes,:asset])
+      -# %th= t(:contract_id, scope: [:activerecord,:attributes,:asset])
       %th= t('activerecord.models.asset')
       %th= t('activerecord.attributes.asset.license_plate')
       %th= t('activerecord.attributes.asset.make_id')
@@ -15,14 +15,14 @@
   %tbody
     - assets.each do |asset|
       %tr
-        %td= link_to asset.contract.number, asset.contract
-        %td.center= link_to asset.inventory_number, asset
-        %td= asset.license_plate
-        %td= asset.make.name
-        %td= asset.model.name
-        %td= asset.year
-        %td= asset.service_type
-        %td= number_to_currency asset.book_value, unit: ''
-        %td.center= asset.inspection_count
-        %td.center= link_to '', edit_asset_path(asset), class: 'icon-edit'
-        %td.center= link_to '', asset, class: 'icon-trash',method: :delete, data: { confirm: 'Are you sure?' }
+        -# %td= link_to asset.contract.number, asset.contract
+        %td.identifier.center{"data-label" => "#{t('activerecord.models.asset')}" }= link_to asset.inventory_number, asset
+        %td{"data-label" => "#{t('activerecord.attributes.asset.license_plate')}" }= asset.license_plate
+        %td{"data-label" => "#{t('activerecord.attributes.asset.make_id')}" }= asset.make.name
+        %td{"data-label" => "#{t('activerecord.attributes.asset.model_id')}" }= asset.model.name
+        %td{"data-label" => "#{t('activerecord.attributes.asset.year')}" }= asset.year
+        %td{"data-label" => "#{t('activerecord.attributes.asset.service_type')}" }= asset.service_type
+        %td{"data-label" => "#{t('activerecord.attributes.asset.book_value')}" }= number_to_currency asset.book_value
+        %td.center{"data-label" => "#{t('assets.index.inspections')}" }= asset.inspection_count
+        %td.actions.edit.center= link_to '', edit_asset_path(asset), class: 'icon-edit'
+        %td.actions.delete.center= link_to '', asset, class: 'icon-trash',method: :delete, data: { confirm: 'Are you sure?' }
