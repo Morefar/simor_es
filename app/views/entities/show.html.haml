@@ -23,7 +23,7 @@
 .row
   .large-12.columns
     = "#{@entity.address}, #{@entity.city}, #{@entity.state}"
-- if @entity.contracts_as_lessee
+- unless @entity.contracts_as_lessee.empty?
   %h5= t('.contracts_as_lessee')
   .row
     - @entity.contracts_as_lessee.each do |contract|
@@ -34,7 +34,7 @@
           - contract.assets.each do |asset|
             .row
               = link_to asset.inventory_number, asset
-- if @entity.contracts_as_cosigner
+- unless @entity.contracts_as_cosigner.empty?
   %h5= t('.contracts_as_cosigner')
   .row
     - @entity.contracts_as_cosigner.each do |contract|
