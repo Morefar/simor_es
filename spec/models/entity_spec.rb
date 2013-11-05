@@ -17,7 +17,6 @@ describe Entity do
   it { should have_many(:contracts).through(:cosigners) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:identification_number) }
-  it { should validate_presence_of(:phone) }
   it { should validate_presence_of(:address) }
   it { should validate_presence_of(:city) }
   it { should validate_presence_of(:state) }

@@ -11,10 +11,10 @@
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.make_id')}:"
     %span.large-2.columns
-      = @asset.make.name.upcase
+      = @asset.make_name.upcase
     %b.large-2.columns= "#{t('activerecord.attributes.asset.model_id')}:"
     %span.large-2.columns
-      = @asset.model.name.upcase
+      = @asset.model_name.upcase
     %b.large-2.columns= "#{t('activerecord.attributes.asset.year')}:"
     %span.large-2.columns
       = @asset.year
@@ -24,17 +24,17 @@
       = @asset.cylinder_cap
     %b.large-2.columns= "#{t('activerecord.attributes.asset.color_id')}:"
     %span.large-2.columns
-      = @asset.color.name.upcase
+      = @asset.color_name.upcase
     %b.large-2.columns= "#{t('activerecord.attributes.asset.service_type')}:"
     %span.large-2.columns
       = @asset.service_type
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.kind_id')}:"
     %span.large-2.columns
-      = @asset.kind.name
+      = @asset.kind_name
     %b.large-2.columns= "#{t('activerecord.attributes.asset.body_id')}:"
     %span.large-2.columns
-      = @asset.body.name
+      = @asset.body_name
     %b.large-2.columns= "#{t('activerecord.attributes.asset.fuel_type')}:"
     %span.large-2.columns
       = @asset.fuel_type

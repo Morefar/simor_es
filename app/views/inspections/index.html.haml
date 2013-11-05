@@ -6,9 +6,9 @@
       %tr
         %th= t('.number')
         %th= t('.inspection_date')
+        %th= t('.address')
         %th= t('.asset')
         %th= t('.initial_value')
-        %th= t('.current_value')
         %th
         %th
     %tbody
@@ -16,9 +16,9 @@
         %tr
           %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection.inspection_number, inspection
           %td{"data-label" => "#{t('.inspection_date')}"}= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
-          %td.center{"data-label" => "#{t('.asset')}"}= link_to inspection.asset.inventory_number, inspection.asset
-          %td{"data-label" => "#{t('.initial_value')}"}= number_to_currency inspection.asset.book_value
-          %td{"data-label" => "#{t('.current_value')}"}= number_to_currency inspection.current_value
+          %td{"data-label" => "#{t('.address')}"}= "#{inspection.address}, #{inspection.city}, #{inspection.state}"
+          %td.center{"data-label" => "#{t('.asset')}"}= link_to inspection.asset_inventory_number, inspection.asset
+          %td{"data-label" => "#{t('.initial_value')}"}= number_to_currency inspection.asset_book_value
           %td.actions.edit.center= link_to '', edit_inspection_path(inspection), class: 'icon-edit'
           %td.actions.delete.cente= link_to '', inspection, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
 .row

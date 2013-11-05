@@ -12,6 +12,10 @@ class Contract < ActiveRecord::Base
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :cosigners
 
+  delegate :name, :identification_number, :identification_type_name,
+           to: :lessee, prefix: true
+  delegate :name, to: :category, prefix: true
+
   validates :client_id, :number, :category, :start_date, :duration, :total_value, :lessee, :expiration_date, :location_of_assets, :periodicity, :first_canon_date, presence: true
   validates :number, :uniqueness => { case_sensitive: false, scope: :client_id }
   validates :duration, :numericality => { only_integer: true,

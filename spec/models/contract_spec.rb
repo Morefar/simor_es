@@ -114,9 +114,9 @@ describe Contract do
       contract = create(:contract, number: 'lo123')
       kind = create(:kind, name: 'Camion')
       body = create(:body, name: 'Estacas')
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM863', kind: kind, body: body)
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM864', kind: kind, body: body)
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM865', kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM863', chassis_number: 'UHEB1287097SHM863', kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM864', chassis_number: 'UHEB1287097SHM864', serial_number: nil, motor_number: nil, kind: kind, body: body)
+      create(:asset, contract: contract, vin: 'UHEB1287097SHM865', chassis_number: 'UHEB1287097SHM865', serial_number: nil, motor_number: nil, kind: kind, body: body)
       expect(contract.asset_count).to eq(3)
     end
   end

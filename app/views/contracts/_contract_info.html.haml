@@ -6,7 +6,7 @@
         = link_to contract.number, contract
       %b.large-2.columns= "#{t('activerecord.attributes.contract.category_id')}:"
       %span.large-2.columns.pull-4
-        = contract.category.name
+        = contract.category_name
     .row
       %b.large-2.columns= "#{t('activerecord.attributes.contract.start_date')}:"
       %span.large-2.columns
@@ -20,8 +20,8 @@
     .row
       %b.large-2.columns= "#{t('activerecord.attributes.contract.lessee')}:"
       %span.large-2.columns
-        = link_to contract.lessee.name, contract.lessee
+        = link_to contract.lessee_name, contract.lessee
       %b.large-2.columns= "#{t('activerecord.attributes.entity.identification_number')}:"
       %span.large-2.columns.pull-4
-        = contract.lessee.identification_type.name
-        = contract.lessee.identification_number
+        = contract.lessee_identification_type_name
+        = contract.lessee_identification_number

@@ -274,6 +274,7 @@ es:
       new: ' Agregar Inspección'
       number: 'Acta'
       inspection_date: 'Fecha'
+      address: 'Lugar'
       asset: 'Activo'
       initial_value: 'Valor Inicial'
       current_value: 'Valor Actual'

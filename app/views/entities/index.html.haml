@@ -17,12 +17,12 @@
         %tr
           %td.identifier{"data-label" => "#{t('.responsive.name')}"}= link_to entity.name, entity
           %td{"data-label" => "#{t('.responsive.identification_number')}"}
-            = entity.identification_type.name
+            = entity.identification_type_name
             = entity.identification_number
           %td{"data-label" => "#{t('.responsive.email')}"}= entity.email
           %td{"data-label" => "#{t('.responsive.city')}"}= entity.city
-          %td{"data-label" => "#{t('.responsive.lease_contracts')}"}= entity.contracts_as_lessee.count
-          %td{"data-label" => "#{t('.responsive.cosigner_contracts')}"}= entity.contracts_as_cosigner.count
+          %td{"data-label" => "#{t('.responsive.lease_contracts')}"}= entity.contracts_as_lessee_count
+          %td{"data-label" => "#{t('.responsive.cosigner_contracts')}"}= entity.contracts_as_cosigner_count
           %td.actions.edit= link_to '', edit_entity_path(entity), class: 'icon-edit'
           %td.actions.delete= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
 .row

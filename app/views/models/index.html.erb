@@ -13,7 +13,7 @@
   <tbody>
   <% @models.each do |model| %>
     <tr>
-    <td><%= model.make.name %></td>
+    <td><%= model.make_name %></td>
     <td><%= model.name %></td>
     <td><%= link_to '', edit_model_path(model), class: 'icon-edit' %></td>
     <td><%= link_to '', model, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>

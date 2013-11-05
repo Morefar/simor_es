@@ -7,14 +7,15 @@ class Inspection < ActiveRecord::Base
       :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job,
       :inspection_number, :asset_id, :observations, :odometer, :asset_license_plate,
       :modifications
-
   belongs_to :asset
   belongs_to :insurance_company
   has_one :contract, through: :asset
   has_one :inventory
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
-
+  delegate :book_value, :license_plate, :inventory_number, :kind_name,
+          :chassis_number, :make_name, :model_name, :year, :service_type,
+          :vin, to: :asset, prefix: true
   validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :inspection_date, :asset,presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
   validates :insurance_start, :insurance_finish, presence: true, if:  "insurance_number.present?"
@@ -26,12 +27,8 @@ class Inspection < ActiveRecord::Base
   before_save :clean_unwanted_dates
   after_create :increase_inspection_count_on_asset
   around_destroy :decrease_inspection_count_on_asset
-
   default_scope order("inspection_date DESC")
 
-  def asset_license_plate
-    asset.try(:license_plate)
-  end
   def asset_license_plate= (license_plate)
     self.asset = Asset.find_by_license_plate(license_plate) if license_plate.present?
   end

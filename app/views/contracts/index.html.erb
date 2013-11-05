@@ -23,8 +23,8 @@
         <td data-label="<%= t('.responsive.created') %>"><%= contract.created_at.localtime.strftime('%d-%m-%Y, %r %Z') %></td>
         <td data-label="<%= t('.responsive.start_date') %>"><%= contract.start_date %></td>
         <td data-label="<%= t('.responsive.expiration_date') %>"><%= contract.expiration_date %></td>
-        <td data-label="<%= t('.responsive.lessee') %>"><%= link_to contract.lessee.name, contract.lessee %></td>
-        <td data-label="<%= t('.responsive.category') %>"><%= contract.category.name %></td>
+        <td data-label="<%= t('.responsive.lessee') %>"><%= link_to contract.lessee_name, contract.lessee %></td>
+        <td data-label="<%= t('.responsive.category') %>"><%= contract.category_name %></td>
         <td data-label="<%= t('.responsive.assets') %>" class='center'><%= contract.asset_count %></td>
         <td class="actions edit">
           <%= link_to "", edit_contract_url(contract.id), class: 'icon-edit' %>

@@ -122,15 +122,15 @@ describe Asset do
 
     context 'invalid size' do
       it 'is invalid if it\'s size is greater than 17 characters' do
-        expect(build(:asset, contract: @contract, serial_number: 'UJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:serial_number)
-        expect(build(:asset, contract: @contract, motor_number: 'EJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:motor_number)
-        expect(build(:asset, contract: @contract, chassis_number: 'AJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
-        expect(build(:asset, contract: @contract, vin: 'PJDK89698373EWD897', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, serial_number: 'UJDK89698373EWD897', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:serial_number)
+        expect(build(:asset, contract: @contract, motor_number: 'EJDK89698373EWD897', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:motor_number)
+        expect(build(:asset, contract: @contract, chassis_number: 'AJDK89698373EWD897', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:chassis_number)
+        expect(build(:asset, contract: @contract, vin: 'PJDK89698373EWD897', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:vin)
       end
 
       it 'is invalid if it\'s size is smaller than 17 characters' do
-        expect(build(:asset, contract: @contract, chassis_number: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:chassis_number)
-        expect(build(:asset, contract: @contract, vin: 'UHEB1287097SHM', body: @build_hash[:body], kind: @build_hash[:kind])).to have(1).errors_on(:vin)
+        expect(build(:asset, contract: @contract, chassis_number: 'UHEB1287097SHM', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:chassis_number)
+        expect(build(:asset, contract: @contract, vin: 'UHEB1287097SHM', body: @authorized_build[:body], kind: @authorized_build[:kind])).to have(1).errors_on(:vin)
       end
     end
 

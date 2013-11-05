@@ -18,8 +18,8 @@
         -# %td= link_to asset.contract.number, asset.contract
         %td.identifier.center{"data-label" => "#{t('activerecord.models.asset')}" }= link_to asset.inventory_number, asset
         %td{"data-label" => "#{t('activerecord.attributes.asset.license_plate')}" }= asset.license_plate
-        %td{"data-label" => "#{t('activerecord.attributes.asset.make_id')}" }= asset.make.name
-        %td{"data-label" => "#{t('activerecord.attributes.asset.model_id')}" }= asset.model.name
+        %td{"data-label" => "#{t('activerecord.attributes.asset.make_id')}" }= asset.make_name
+        %td{"data-label" => "#{t('activerecord.attributes.asset.model_id')}" }= asset.model_name
         %td{"data-label" => "#{t('activerecord.attributes.asset.year')}" }= asset.year
         %td{"data-label" => "#{t('activerecord.attributes.asset.service_type')}" }= asset.service_type
         %td{"data-label" => "#{t('activerecord.attributes.asset.book_value')}" }= number_to_currency asset.book_value

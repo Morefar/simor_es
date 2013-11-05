@@ -20,6 +20,13 @@ class Asset < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
 
+  delegate :number, to: :contract, prefix: true
+  delegate :name, to: :make, prefix: true
+  delegate :name, to: :model, prefix: true
+  delegate :name, to: :color, prefix: true
+  delegate :name, to: :kind, prefix: true
+  delegate :name, to: :body, prefix: true
+
   validates :contract_number, :inventory_number, :license_plate, :make_name,
     :model_name, :year, :registration_date, :tp_issue_date, :transit_authority,
     :book_value, :transit_permit, :color_name, :kind_name, :body_name,
@@ -90,44 +97,26 @@ class Asset < ActiveRecord::Base
     end
   end
 
-  def contract_number
-    contract.try(:number)
-  end
   def contract_number=(contract_number)
     self.contract = Contract.find_by_number(contract_number) if contract_number.present?
   end
 
-  def make_name
-    make.try(:name)
-  end
   def make_name=(make_name)
     self.make = Make.find_by_name(make_name) if make_name.present?
   end
 
-  def model_name
-    model.try(:name)
-  end
   def model_name=(model_name)
     self.model = Model.find_by_name(model_name) if model_name.present?
   end
 
-  def color_name
-    color.try(:name)
-  end
   def color_name=(color_name)
     self.color = Color.find_by_name(color_name) if color_name.present?
   end
 
-  def kind_name
-    kind.try(:name)
-  end
   def kind_name=(kind_name)
     self.kind = Kind.find_by_name(kind_name) if kind_name.present?
   end
 
-  def body_name
-    body.try(:name)
-  end
   def body_name=(body_name)
     self.body = Body.find_by_name(body_name) if body_name.present?
   end

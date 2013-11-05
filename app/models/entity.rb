@@ -5,6 +5,7 @@ class Entity < ActiveRecord::Base
   has_many :cosigners
   has_many :contracts, through: :cosigners
 
+  delegate :name, to: :identification_type, prefix: true
   validates :address, :city, :state, :identification_number, :identification_type_id, :name, presence: true
   validates :identification_number, uniqueness: { scope: :identification_type_id }
   validates :email, uniqueness: { scope: :identification_type_id, case_sensitive: false }, if: "email.present?"
@@ -15,8 +16,15 @@ class Entity < ActiveRecord::Base
     Array( Contract.where(lessee_id: id) )
   end
 
+  def contracts_as_lessee_count
+    Contract.where(lessee_id: id).count
+  end
+
   def contracts_as_cosigner
     contracts
   end
 
+  def contracts_as_cosigner_count
+    contracts.count
+  end
 end
