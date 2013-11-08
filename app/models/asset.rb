@@ -20,12 +20,12 @@ class Asset < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
 
-  delegate :number, to: :contract, prefix: true
-  delegate :name, to: :make, prefix: true
-  delegate :name, to: :model, prefix: true
-  delegate :name, to: :color, prefix: true
-  delegate :name, to: :kind, prefix: true
-  delegate :name, to: :body, prefix: true
+  delegate :number, to: :contract, prefix: true, allow_nil: true
+  delegate :name, to: :make, prefix: true, allow_nil: true
+  delegate :name, to: :model, prefix: true, allow_nil: true
+  delegate :name, to: :color, prefix: true, allow_nil: true
+  delegate :name, to: :kind, prefix: true, allow_nil: true
+  delegate :name, to: :body, prefix: true, allow_nil: true
 
   validates :contract_number, :inventory_number, :license_plate, :make_name,
     :model_name, :year, :registration_date, :tp_issue_date, :transit_authority,

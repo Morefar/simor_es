@@ -19,7 +19,7 @@ class AssetsController < ApplicationController
   end
 
   def show
-    add_breadcrumb "Contract: #{@asset.contract.number}", @asset.contract
+    add_breadcrumb "Contract: #{@asset.contract_number}", @asset.contract
     add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
     respond_to do |format|
       format.html
