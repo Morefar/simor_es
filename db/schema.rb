@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131017181444) do
+ActiveRecord::Schema.define(:version => 20131126165001) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "organization_name"
+    t.string   "subdomain"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "assets", :force => true do |t|
     t.integer  "contract_id"
@@ -348,7 +355,10 @@ ActiveRecord::Schema.define(:version => 20131017181444) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "runt_code"
   end
+
+  add_index "makes", ["runt_code"], :name => "index_makes_on_runt_code"
 
   create_table "models", :force => true do |t|
     t.integer  "make_id"
