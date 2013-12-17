@@ -3,7 +3,7 @@
 class DocumentUploader < CarrierWave::Uploader::Base
 
   # include CarrierWaveDirect::Uploader
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
   include Sprockets::Helpers::RailsHelper
   include Sprockets::Helpers::IsolatedHelper
   include CarrierWave::MimeTypes
