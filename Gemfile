@@ -25,6 +25,7 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
   gem 'rack-mini-profiler', '~> 0.1.31'
+  gem 'spring', '~> 1.0.0'
 end
 
 group :test do
