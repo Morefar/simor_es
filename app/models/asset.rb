@@ -73,7 +73,9 @@ class Asset < ActiveRecord::Base
   scope :search_license_plate, ->(license_plate) { where("license_plate like ?", license_plate) }
 
   def model_belongs_to_make
-    errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make.id
+    if make.present? && model.present?
+      errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make.id
+    end
   end
 
   def increase_asset_count_on_contract
