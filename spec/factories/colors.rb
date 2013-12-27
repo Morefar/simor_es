@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :color do
-    name 'Red'
+    sequence(:name) { |n| "color#{n}" }
   end
 end

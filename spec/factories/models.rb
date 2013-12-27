@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :model do
-    make {build(:make)}
-    name 'model1'
+    make
+    sequence(:name) { |n| "Test_Model#{n}" }
   end
 end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :body do
-    name 'Furgon'
+    sequence(:name) { |n| "Test_Body#{n}" }
   end
 end

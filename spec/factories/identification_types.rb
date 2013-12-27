@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :identification_type do
-    name 'cedula'
+    sequence(:name) { |n| "id#{n}test" }
   end
 end

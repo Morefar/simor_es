@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :kind do
-    name 'truck'
+    sequence(:name) { |n| "test_kind#{n}" }
   end
 end

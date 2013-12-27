@@ -26,12 +26,13 @@ class Asset < ActiveRecord::Base
   delegate :name, to: :color, prefix: true, allow_nil: true
   delegate :name, to: :kind, prefix: true, allow_nil: true
   delegate :name, to: :body, prefix: true, allow_nil: true
-
+  validates :inventory_number, :license_plate, :make_name, :model_name, :year,
+    :color_name, :kind_name, :chassis_number, presence: true, on: :create
   validates :contract_number, :inventory_number, :license_plate, :make_name,
     :model_name, :year, :registration_date, :tp_issue_date, :transit_authority,
     :book_value, :transit_permit, :color_name, :kind_name, :body_name,
-    :chassis_number, presence: true
-  validates :transit_permit, length: { is: 11 }
+    :chassis_number, presence: true, on: :update
+  validates :transit_permit, length: { is: 11 }, if: "transit_permit.present?"
   validates :license_plate, format: {
     with: /\A[a-z]{2}[a-z0-9]\d{3}\Z/i,
     message: 'incorrect format. Try (AAA000)'
@@ -46,12 +47,12 @@ class Asset < ActiveRecord::Base
     only_integer: true,
     greater_than_or_equal_to: 50,
     less_than_or_equal_to: 8000
-  }
+  }, if: "cylinder_cap.present?"
   validates :capacity, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 2,
     less_than_or_equal_to: 3500
-  }
+  }, if: "capacity.present?"
   validates :chassis_number, length: { is: 17 }
   validates :vin, length: { is: 17 }, if: "vin.present?"
   validates :vin, format: {
@@ -64,17 +65,12 @@ class Asset < ActiveRecord::Base
   validates :serial_number, uniqueness: true, if: "serial_number.present?"
   validates  :chassis_number, :vin, uniqueness: true
   validates :book_value, numericality: { greater_than: 0 }
-  validate :authorized_build
   validate :model_belongs_to_make
   after_create :increase_asset_count_on_contract
   around_destroy :decrease_asset_count_on_contract
 
   default_scope order("created_at DESC")
   scope :search_license_plate, ->(license_plate) { where("license_plate like ?", license_plate) }
-
-  def authorized_build
-    errors.add(:kind, I18n.t('errors.messages.unauthorized_build')) unless Build.authorized_build?(kind_id, body_id)
-  end
 
   def model_belongs_to_make
     errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make.id

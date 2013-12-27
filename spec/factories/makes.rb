@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :make do
-    name 'make'
+    sequence(:name) { |n| "Test_Make#{n}" }
   end
 end

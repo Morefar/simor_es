@@ -5,7 +5,6 @@ class  Category < ActiveRecord::Base
   validates :name, :uniqueness => true
   validates :name, :length => { :within => (2..20) }
   validates :name, format: {
-    with: /\A[a-zA-Z\s]+\z/,
-    message: "Only letters allowed"
+    with: /\A[a-zA-Z\d\s]+\z/
   }
 end
