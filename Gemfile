@@ -18,19 +18,20 @@ group :development, :test do
   gem 'meta_request', '~> 0.2.8'
   gem 'debugger', '~> 1.6.1'
   gem 'rspec-rails', '~> 2.13.2'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.3.0'
   gem 'guard-rspec', '~> 3.0.2'
   gem 'pry'
   gem 'pry-nav'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
   gem 'rack-mini-profiler', '~> 0.1.31'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 2.4.0'
   gem 'faker', '~> 1.2.0'
-  gem 'capybara'
+  gem 'capybara', '~>2.2.0'
   gem 'database_cleaner', '~> 1.1.1'
-  gem 'launchy'
 end
 
 
