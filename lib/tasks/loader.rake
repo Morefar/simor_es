@@ -4,7 +4,7 @@ namespace :parametric_data do
 
   desc "Loads make data from a CSV file"
   task load_makes: :environment do
-    CSV.foreach("lib/assets/makes.csv", headers: true, encoding: "ISO-8859-1:UTF-8") do |row|
+    CSV.foreach("lib/assets/makes.csv", headers: true, encoding: "UTF-8") do |row|
       make = Make.find_by_runt_code(row["runt_code"]) || Make.new
       make.attributes = row.to_hash.slice("runt_code", "name")
       make.save!
@@ -13,7 +13,7 @@ namespace :parametric_data do
 
   desc "Loads models data from a CSV file"
   task load_models: [:load_makes, :environment] do
-    CSV.foreach("lib/assets/models.csv", headers: true, encoding: "ISO-8859-1:UTF-8") do |row|
+    CSV.foreach("lib/assets/models.csv", headers: true, encoding: "UTF-8") do |row|
       make = Make.find_by_runt_code(row["make_runt_code"])
       unless make.nil?
         model = Model.find_by_name(row["name"]) || Model.new
