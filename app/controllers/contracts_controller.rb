@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
   before_filter :find_contract, except: [:new, :create, :index]
-  before_filter :get_categories, only: [:new, :edit]
+  before_filter :get_categories, only: [:new, :create, :edit, :update]
 
 #CREATE ACTIONS
   def new
