@@ -1,5 +1,7 @@
 = form_for(@asset) do |form|
   = render 'shared/error_messages', target: @asset
+  .row
+    %small.required_notification= t('shared.required_notification')
   .field
     = form.label :contract_number
     = form.text_field :contract_number, data: {autocomplete_source: contracts_path},
@@ -16,7 +18,7 @@
         = form.text_field :inventory_number, required: true
       .field.large-4.columns
         = form.label :transit_permit
-        = form.text_field :transit_permit, required: true
+        = form.text_field :transit_permit
         %span.form_hint= t(".transit_permit_hint")
     .row
       .field.large-3.columns
@@ -49,7 +51,7 @@
         = form.text_field :kind_name, data: {autocomplete_source: kinds_path}, required: true
       .field.large-3.columns
         = form.label :body_name
-        = form.text_field :body_name, data: {autocomplete_source: bodies_path}, required: true
+        = form.text_field :body_name, data: {autocomplete_source: bodies_path}
       .field.large-3.columns
         = form.label :fuel_type
         = form.select :fuel_type, [t('.gasoline'),t('.gnv'),t('.diesel'),t('.gas_gasoline'),t('.electric'),t('.hidrogen'),t('.ethanol'),t('.biodiesel')]

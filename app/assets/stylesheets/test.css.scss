@@ -65,7 +65,7 @@ table {
   &.responsive-table {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   }
-  @media (max-width: "#{ $small-screen }" ) {
+  @media (max-width: "#{upper-bound($small-range) }" ) {
     margin: 0px;
     padding: 0px;
     border: 0px none;
@@ -280,6 +280,7 @@ header {
 
 /* Form inline hints */
 .form_hint {
+  font-size: 70%;
   background: #d45252;
   @include radius;
   color: white;
@@ -297,16 +298,29 @@ header {
     left: 6px;
   }
 }
-.field input {
-  &:focus ~ .form_hint {
-    display: inline;
-  }
-  &:required:valid ~ .form_hint {
-    background: #28921f;
-    &::before {
-      color: #28921f;
+.field {
+  input {
+    &:focus ~ .form_hint {
+      display: inline;
+    }
+    &:required {
+      padding-right: 30px;
+      background: #fff url("/assets/red_asterisk.png") no-repeat scroll 98% center;
+      background-size: 0.5em;
+    }
+    &:required:valid ~ .form_hint {
+      background: #28921f;
+      &::before {
+        color: #28921f;
+      }
     }
   }
+}
+.required_notification {
+  color: #d45252;
+  margin: 5px 0 0 0;
+  display: inline;
+  float: right;
 }
 
 /* Timepicker */

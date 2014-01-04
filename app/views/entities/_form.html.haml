@@ -4,14 +4,25 @@
   .row
     .field.large-12.columns
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, required: true
   .row
     .field.large-6.columns
       = f.label :identification_type_id
-      = f.collection_select :identification_type_id, IdentificationType.all, :id, :name
+      = f.collection_select :identification_type_id, IdentificationType.all, :id, :name, required: true
     .field.large-6.columns
       = f.label :identification_number
-      = f.text_field :identification_number
+      = f.text_field :identification_number, required: true
+  .row
+    .field.large-12.columns
+      = f.label :address
+      = f.text_field :address, required: true
+  .row
+    .field.large-6.columns
+      = f.label :city
+      = f.text_field :city, required: true
+    .field.large-6.columns
+      = f.label :state
+      = f.text_field :state, required: true
   .row
     .field.large-12.columns
       = f.label :email
@@ -23,17 +34,6 @@
     .field.large-6.columns
       = f.label :phone
       = f.phone_field :phone
-  .row
-    .field.large-12.columns
-      = f.label :address
-      = f.text_field :address
-  .row
-    .field.large-6.columns
-      = f.label :city
-      = f.text_field :city
-    .field.large-6.columns
-      = f.label :state
-      = f.text_field :state
   .action
     = f.submit
 %br/

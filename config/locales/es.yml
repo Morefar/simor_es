@@ -239,6 +239,7 @@ es:
     sign_out: 'Salir'
     sign_in: 'Ingresar'
     sign_up: 'Registrarse'
+    required_notification: '* Campo obligatorio'
     error_messages:
       error:
         one: 'error'
@@ -324,7 +325,7 @@ es:
       contract_number_hint: 'Número del contrato al que pertenece este nuevo activo, si el contrato no existe debe crearlo primero'
       transit_permit_hint: 'Debe contener 11 dígitos numéricos'
       license_plate_hint: 'Debe tener 6 caracteres alfanuméricos sin espacios ni guiones'
-      cylinder_cap_hint: 'Debe ser un número positivo sin puntos ni comas'
+      cylinder_cap_hint: 'Debe ser un número positivo sin puntos ni comas, mayor o igual a 50.'
       rerecorded_hint: "Dejelo en blanco si no ha sido regrabado"
       vin_hint: "Debe contener 17 caracteres alfanumericos pero no puede incluir las letras 'I', 'O', 'Q', 'Ñ'"
       shield_hint: "Deje el campo en blanco si no tiene blindaje"

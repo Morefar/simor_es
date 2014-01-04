@@ -48,8 +48,7 @@
 </header>
   <div class="container-with-nav">
     <div>
-      <a href="#top" data-magellan-destination='top'>
-      <nav class="top-bar">
+      <nav class="top-bar data-topbar show-for-medium-up">
         <ul class="title-area">
           <!-- Title Area -->
           <li class="name">
@@ -67,7 +66,7 @@
           <!-- Left Nav Section -->
           <ul class="left">
             <li class="divider"></li>
-            <li class="active"><%= link_to t('.nav.assets'), assets_url %></li>
+            <li><%= link_to t('.nav.assets'), assets_url %></li>
             <li class="divider"></li>
             <li><%= link_to t('.nav.contracts'), contracts_url %></li>
             <li class="divider"></li>
@@ -113,7 +112,6 @@
           </ul>
         </section>
       </nav>
-      </a>
     </div>
     <div class="workspace-container">
       <nav class="breadcrumbs">
