@@ -69,7 +69,7 @@ class Asset < ActiveRecord::Base
   after_create :increase_asset_count_on_contract
   around_destroy :decrease_asset_count_on_contract
 
-  default_scope order("created_at DESC")
+  default_scope { order("created_at DESC") }
   scope :search_license_plate, ->(license_plate) { where("license_plate like ?", license_plate) }
 
   def model_belongs_to_make

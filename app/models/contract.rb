@@ -26,7 +26,7 @@ class Contract < ActiveRecord::Base
   validate :non_valid_first_canon_date
   validate :non_valid_option_to_buy_date
 
-  default_scope order("created_at DESC")
+  default_scope { order("created_at DESC") }
   scope :search_number, ->(number) { where("number like ?", number) }
 
   def lessee_name=(lessee_name)

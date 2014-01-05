@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  add_breadcrumb 'Home', :root_path
   before_filter :set_i18n_locale_from_params
 
   protected
@@ -16,6 +15,6 @@ class ApplicationController < ActionController::Base
     end
 
     def default_url_options
-      {locale: I18n.locale }
+      { locale: I18n.locale }
     end
 end

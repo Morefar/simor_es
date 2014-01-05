@@ -27,7 +27,7 @@ class Inspection < ActiveRecord::Base
   before_save :clean_unwanted_dates
   after_create :increase_inspection_count_on_asset
   around_destroy :decrease_inspection_count_on_asset
-  default_scope order("inspection_date DESC")
+  default_scope { order("inspection_date DESC") }
 
   def asset_license_plate= (license_plate)
     self.asset = Asset.find_by_license_plate(license_plate) if license_plate.present?

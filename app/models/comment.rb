@@ -5,5 +5,5 @@ class Comment < ActiveRecord::Base
 
   validates :content, :commentable_id, :commentable_type, presence: true
 
-  default_scope order("created_at DESC")
+  default_scope { order("created_at DESC") }
 end
