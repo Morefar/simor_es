@@ -9,18 +9,21 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126165001) do
+ActiveRecord::Schema.define(version: 20131126165001) do
 
-  create_table "accounts", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "accounts", force: true do |t|
     t.string   "organization_name"
     t.string   "subdomain"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "assets", :force => true do |t|
+  create_table "assets", force: true do |t|
     t.integer  "contract_id"
     t.integer  "invoice_id"
     t.string   "inventory_number"
@@ -56,65 +59,65 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.string   "tp_expiration_date"
     t.string   "transit_authority"
     t.float    "book_value"
-    t.integer  "inspection_count",     :default => 0
+    t.integer  "inspection_count",     default: 0
     t.date     "last_inspection_date"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
-  add_index "assets", ["body_id"], :name => "index_assets_on_body_id"
-  add_index "assets", ["color_id"], :name => "index_assets_on_color_id"
-  add_index "assets", ["contract_id"], :name => "index_assets_on_contract_id"
-  add_index "assets", ["kind_id"], :name => "index_assets_on_kind_id"
-  add_index "assets", ["license_plate"], :name => "index_assets_on_license_plate"
-  add_index "assets", ["make_id"], :name => "index_assets_on_make_id"
-  add_index "assets", ["model_id"], :name => "index_assets_on_model_id"
+  add_index "assets", ["body_id"], name: "index_assets_on_body_id", using: :btree
+  add_index "assets", ["color_id"], name: "index_assets_on_color_id", using: :btree
+  add_index "assets", ["contract_id"], name: "index_assets_on_contract_id", using: :btree
+  add_index "assets", ["kind_id"], name: "index_assets_on_kind_id", using: :btree
+  add_index "assets", ["license_plate"], name: "index_assets_on_license_plate", using: :btree
+  add_index "assets", ["make_id"], name: "index_assets_on_make_id", using: :btree
+  add_index "assets", ["model_id"], name: "index_assets_on_model_id", using: :btree
 
-  create_table "assignments", :force => true do |t|
+  create_table "assignments", force: true do |t|
     t.integer  "role_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 
-  create_table "bodies", :force => true do |t|
+  create_table "bodies", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "builds", :force => true do |t|
+  create_table "builds", force: true do |t|
     t.integer  "kind_id"
     t.integer  "body_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "builds", ["body_id"], :name => "index_builds_on_body_id"
-  add_index "builds", ["kind_id"], :name => "index_builds_on_kind_id"
+  add_index "builds", ["body_id"], name: "index_builds_on_body_id", using: :btree
+  add_index "builds", ["kind_id"], name: "index_builds_on_kind_id", using: :btree
 
-  create_table "categories", :force => true do |t|
+  create_table "categories", force: true do |t|
     t.string "name"
   end
 
-  create_table "colors", :force => true do |t|
+  create_table "colors", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "comments", :force => true do |t|
+  create_table "comments", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
 
-  create_table "contracts", :force => true do |t|
+  create_table "contracts", force: true do |t|
     t.integer  "client_id"
     t.integer  "lessee_id"
     t.string   "number"
@@ -126,28 +129,28 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.date     "expiration_date"
     t.float    "total_value"
     t.string   "currency"
-    t.integer  "asset_count",         :default => 0
+    t.integer  "asset_count",         default: 0
     t.text     "location_of_assets"
     t.boolean  "option_to_buy"
     t.date     "last_date_to_option"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  add_index "contracts", ["category_id"], :name => "index_contracts_on_category_id"
-  add_index "contracts", ["number"], :name => "index_contracts_on_number"
+  add_index "contracts", ["category_id"], name: "index_contracts_on_category_id", using: :btree
+  add_index "contracts", ["number"], name: "index_contracts_on_number", using: :btree
 
-  create_table "cosigners", :force => true do |t|
+  create_table "cosigners", force: true do |t|
     t.integer  "entity_id"
     t.integer  "contract_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "cosigners", ["contract_id"], :name => "index_cosigners_on_contract_id"
-  add_index "cosigners", ["entity_id"], :name => "index_cosigners_on_entity_id"
+  add_index "cosigners", ["contract_id"], name: "index_cosigners_on_contract_id", using: :btree
+  add_index "cosigners", ["entity_id"], name: "index_cosigners_on_entity_id", using: :btree
 
-  create_table "documents", :force => true do |t|
+  create_table "documents", force: true do |t|
     t.string   "content"
     t.string   "slug"
     t.string   "md5hash"
@@ -156,13 +159,13 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.string   "category"
     t.integer  "documentable_id"
     t.string   "documentable_type"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
-  add_index "documents", ["documentable_id", "documentable_type"], :name => "index_documents_on_documentable_id_and_documentable_type"
+  add_index "documents", ["documentable_id", "documentable_type"], name: "index_documents_on_documentable_id_and_documentable_type", using: :btree
 
-  create_table "entities", :force => true do |t|
+  create_table "entities", force: true do |t|
     t.string   "address"
     t.string   "city"
     t.string   "email"
@@ -172,28 +175,28 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.string   "phone"
     t.string   "state"
     t.integer  "identification_type_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "entities", ["identification_type_id"], :name => "index_entities_on_identification_type_id"
+  add_index "entities", ["identification_type_id"], name: "index_entities_on_identification_type_id", using: :btree
 
-  create_table "grants", :force => true do |t|
+  create_table "grants", force: true do |t|
     t.integer  "role_id"
     t.integer  "right_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "grants", ["role_id", "right_id"], :name => "index_grants_on_role_id_and_right_id"
+  add_index "grants", ["role_id", "right_id"], name: "index_grants_on_role_id_and_right_id", using: :btree
 
-  create_table "identification_types", :force => true do |t|
+  create_table "identification_types", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "inspection_orders", :force => true do |t|
+  create_table "inspection_orders", force: true do |t|
     t.string   "contract_url"
     t.string   "asset_unique_identifier"
     t.boolean  "recurring"
@@ -201,11 +204,11 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.string   "current_status"
     t.text     "notes"
     t.integer  "asset_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "inspections", :force => true do |t|
+  create_table "inspections", force: true do |t|
     t.string   "inspection_number"
     t.integer  "asset_id"
     t.string   "address"
@@ -235,27 +238,27 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.string   "person_in_charge"
     t.string   "pic_id"
     t.string   "pic_job"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.text     "observations"
-    t.boolean  "modifications",         :default => false
-    t.string   "odometer",              :default => "0"
+    t.boolean  "modifications",         default: false
+    t.string   "odometer",              default: "0"
     t.datetime "inspection_date"
-    t.boolean  "maintenance",           :default => true
-    t.boolean  "repairs",               :default => true
-    t.boolean  "security",              :default => true
+    t.boolean  "maintenance",           default: true
+    t.boolean  "repairs",               default: true
+    t.boolean  "security",              default: true
   end
 
-  add_index "inspections", ["asset_id"], :name => "index_inspections_on_asset_id"
+  add_index "inspections", ["asset_id"], name: "index_inspections_on_asset_id", using: :btree
 
-  create_table "insurance_companies", :force => true do |t|
+  create_table "insurance_companies", force: true do |t|
     t.string   "name"
     t.string   "nit"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "inventories", :force => true do |t|
+  create_table "inventories", force: true do |t|
     t.integer  "inspection_id"
     t.boolean  "kilometers"
     t.boolean  "villare"
@@ -339,58 +342,58 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.boolean  "electric_antena"
     t.boolean  "antena"
     t.text     "observations"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  add_index "inventories", ["inspection_id"], :name => "index_inventories_on_inspection_id"
+  add_index "inventories", ["inspection_id"], name: "index_inventories_on_inspection_id", using: :btree
 
-  create_table "kinds", :force => true do |t|
+  create_table "kinds", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "makes", :force => true do |t|
+  create_table "makes", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "runt_code"
   end
 
-  add_index "makes", ["runt_code"], :name => "index_makes_on_runt_code"
+  add_index "makes", ["runt_code"], name: "index_makes_on_runt_code", using: :btree
 
-  create_table "models", :force => true do |t|
+  create_table "models", force: true do |t|
     t.integer  "make_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "models", ["make_id"], :name => "index_models_on_make_id"
+  add_index "models", ["make_id"], name: "index_models_on_make_id", using: :btree
 
-  create_table "rights", :force => true do |t|
+  create_table "rights", force: true do |t|
     t.string "resource"
     t.string "operation"
   end
 
-  create_table "roles", :force => true do |t|
+  create_table "roles", force: true do |t|
     t.string "name"
   end
 
-  add_index "roles", ["name"], :name => "index_roles_on_name"
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "avatar"
     t.integer  "account_id"
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -399,16 +402,16 @@ ActiveRecord::Schema.define(:version => 20131126165001) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        :default => 0,  :null => false
+    t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
 end
