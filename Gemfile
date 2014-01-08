@@ -16,6 +16,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.3.0'
   gem 'guard-rspec', '~> 4.2.3'
   gem 'pry'
+  gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
@@ -25,6 +26,8 @@ group :development, :test do
   gem 'faker', '~> 1.2.0'
   gem 'capybara', '~>2.2.0'
   gem 'database_cleaner', '~> 1.2.0'
+  gem 'launchy', '~> 2.3.0'
+  gem 'selenium-webdriver', '~> 2.35.1'
 end
 
 gem 'sass-rails',   '~> 4.0.1'
@@ -53,7 +56,7 @@ gem 'protected_attributes'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+# gem 'jbuilder', '~> 2.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'

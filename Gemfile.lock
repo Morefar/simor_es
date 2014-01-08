@@ -10,10 +10,6 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionpack-action_caching (1.1.1)
-      actionpack (>= 4.0.0, < 5.0)
-    actionpack-page_caching (1.0.2)
-      actionpack (>= 4.0.0, < 5)
     activemodel (4.0.2)
       activesupport (= 4.0.2)
       builder (~> 3.1.0)
@@ -29,6 +25,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
@@ -56,6 +53,8 @@ GEM
       uuidtools
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     chunky_png (1.2.9)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -145,6 +144,8 @@ GEM
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.3.0)
+      addressable (~> 2.3)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -181,6 +182,8 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.3)
       pry (~> 0.9.10)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     pry-rescue (1.2.0)
       interception (>= 0.3)
       pry
@@ -202,8 +205,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.2)
       sprockets-rails (~> 2.0.0)
-    rails-observers (0.1.2)
-      activemodel (~> 4.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -238,11 +239,17 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-hmac (0.4.0)
+    rubyzip (0.9.9)
     sass (3.2.13)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    selenium-webdriver (2.35.1)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip (< 1.0.0)
+      websocket (~> 1.0.4)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
     sidekiq (2.17.2)
@@ -281,6 +288,7 @@ GEM
     uuidtools (2.1.4)
     warden (1.2.3)
       rack (>= 1.0)
+    websocket (1.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -288,9 +296,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack-action_caching
-  actionpack-page_caching
-  activerecord-deprecated_finders
   better_errors (~> 1.1.0)
   binding_of_caller (~> 0.7.2)
   breadcrumbs_on_rails (~> 2.3.0)
@@ -312,6 +317,7 @@ DEPENDENCIES
   jquery-rails (~> 3.0.4)
   jquery-ui-rails (~> 4.1.1)
   kaminari (~> 0.15.0)
+  launchy (~> 2.3.0)
   meta_request (~> 0.2.8)
   mini_magick (~> 3.7.0)
   newrelic_rpm (~> 3.7.1.182)
@@ -319,14 +325,15 @@ DEPENDENCIES
   protected_attributes
   pry
   pry-nav
+  pry-rails
   pry-rescue
   pry-stack_explorer
   rack-mini-profiler (~> 0.1.31)
   rails (= 4.0.2)
-  rails-observers
   rails_12factor (~> 0.0.2)
   rspec-rails (~> 2.14.1)
   sass-rails (~> 4.0.1)
+  selenium-webdriver (~> 2.35.1)
   shoulda-matchers (~> 2.4.0)
   sidekiq (~> 2.17.2)
   spring (~> 1.0.0)
