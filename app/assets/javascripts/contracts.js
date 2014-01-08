@@ -67,7 +67,7 @@ var updateExpirationField = function(){
   var $startDate = new Date($('#contract_first_canon_date').val());
   var $months = ($duration * $periods);
   $startDate.addMonths($months);
-  $('#contract_expiration_date').val($startDate.getFullYear()+'-'+($startDate.getMonth()+1)+'-'+$startDate.getDate());
+  $('#contract_expiration_date').val($startDate.getFullYear()+'/'+($startDate.getMonth()+1)+'/'+$startDate.getDate());
 };
 
 // Update expiration date based on first canon date and number of periods.
