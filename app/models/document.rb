@@ -19,7 +19,7 @@ class Document < ActiveRecord::Base
   end
 
   def compute_hash
-    self.md5hash = Digest::MD5.hexdigest(self.content.read) unless
-    content.read.nil?  end
+    self.md5hash = Digest::MD5.hexdigest(self.content.read) unless content.read.nil?
+  end
 
 end

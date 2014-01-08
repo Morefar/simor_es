@@ -4,8 +4,6 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   # include CarrierWaveDirect::Uploader
   include CarrierWave::MiniMagick
-  include Sprockets::Helpers::RailsHelper
-  include Sprockets::Helpers::IsolatedHelper
   include CarrierWave::MimeTypes
   process :set_content_type
 
@@ -16,10 +14,21 @@ class DocumentUploader < CarrierWave::Uploader::Base
     "documents/#{model.documentable_type.to_s.underscore}/#{model.documentable_id}/#{mounted_as}/#{model.id}"
   end
 
+  process convert: :png
+
   # Create different versions of your uploaded files:
   version :thumb do
-    process convert: :png
-    process resize_to_fill: [200, 200]
+    process :thumbnail
+  end
+
+  def thumbnail
+    manipulate! do |img|
+      img.auto_orient
+      img.format("png", 5)
+      img.resize("100x100")
+      img = yield(img) if block_given?
+      img
+    end
   end
 
   def extension_white_list
