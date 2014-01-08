@@ -5,7 +5,7 @@ def index
   @entities = Entity.includes(:identification_type).order(:name).page params[:page]
   respond_to do |format|
     format.html
-    format.json { render json: @entities.search_name("%#{params[:term]}%").limit(10).pluck(:name) }
+    format.json { render json: Entity.search_name("%#{params[:term]}%").limit(10).pluck(:name) }
   end
 end
 
