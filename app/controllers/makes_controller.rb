@@ -1,5 +1,5 @@
 class MakesController < ApplicationController
-  before_filter :find_make, except: [:index, :new, :create]
+  before_action :find_make, except: [:index, :new, :create]
 
   def index
     @makes = Make.order(:name).page params[:page]
@@ -28,7 +28,7 @@ class MakesController < ApplicationController
   end
 
   def create
-    @make = Make.new(params[:make])
+    @make = Make.new(make_params)
     respond_to do |format|
       if @make.save
         format.html { redirect_to @make, notice: 'Make was successfully created.' }
@@ -42,7 +42,7 @@ class MakesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @make.update_attributes(params[:make])
+      if @make.update_attributes(make_params)
         format.html { redirect_to @make, notice: 'Make was successfully updated.' }
         format.json { head :no_content }
       else
@@ -63,5 +63,8 @@ class MakesController < ApplicationController
   private
   def find_make
     @make = Make.find(params[:id])
+  end
+  def make_params
+    params.require(:make).permit(:name, :runt_code)
   end
 end

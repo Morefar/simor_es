@@ -1,5 +1,5 @@
 class ColorsController < ApplicationController
-  before_filter :find_color, except: [:index, :new, :create]
+  before_action :find_color, except: [:index, :new, :create]
 
   def index
     @colors = Color.order(:name).page params[:page]
@@ -28,7 +28,7 @@ class ColorsController < ApplicationController
   end
 
   def create
-    @color = Color.new(params[:color])
+    @color = Color.new(color_params)
     respond_to do |format|
       if @color.save
         format.html { redirect_to @color, notice: 'Color was successfully created.' }
@@ -63,5 +63,8 @@ class ColorsController < ApplicationController
   private
   def find_color
     @color = Color.find_by_id(params[:id]) if params[:id]
+  end
+  def color_params
+    params.require(:color).permit(:name)
   end
 end

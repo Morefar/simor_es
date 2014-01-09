@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  before_filter :find_asset, except: [:new, :create, :index]
+  before_action :find_asset, except: [:new, :create, :index]
 
   def index
     @assets = Asset.includes(:contract, :make, :model).page params[:page]
@@ -41,7 +41,7 @@ class AssetsController < ApplicationController
   end
 
   def create
-    @asset = Asset.new params[:asset]
+    @asset = Asset.new(asset_params)
     respond_to do |format|
       if @asset.save
         format.html { redirect_to @asset, notice: 'Asset was successfully created.' }
@@ -55,7 +55,7 @@ class AssetsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @asset.update_attributes(params[:asset])
+      if @asset.update_attributes(asset_params)
         format.html { redirect_to @asset, notice: 'Asset was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -78,5 +78,18 @@ class AssetsController < ApplicationController
                             contract: [:category, { lessee: :identification_type }],
                            comments: :user)
                             .find_by_id params[:id] if params[:id]
+  end
+
+  def asset_params
+    params.require(:asset).
+      permit(:invoice_id, :inventory_number, :license_plate, :make_name,
+    :model_name, :year, :cylinder_cap, :color_name, :service_type, :kind_name,
+    :body_name, :fuel_type, :capacity, :motor_number, :rerecorded_motor, :vin,
+    :serial_number, :rerecorded_serial, :chassis_number, :rerecorded_chassis,
+    :mobility_restriction, :shield_level, :horse_power, :importd_assembld,
+    :import_statement, :color_id, :import_date, :number_of_doors, :property_limitation,
+    :registration_date, :tp_issue_date, :tp_expiration_date, :transit_authority,
+    :book_value, :last_inspection_date, :contract_number, :transit_permit, :color,
+    :make, :model, :body, :kind, :contract)
   end
 end

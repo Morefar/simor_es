@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe InsuranceCompany do
 
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:nit) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:nit) }
   it { should have_many(:inspections) }

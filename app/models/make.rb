@@ -1,5 +1,4 @@
 class Make < ActiveRecord::Base
-  attr_accessible :name, :runt_code
   has_many :models, inverse_of: :make
 
   validates :name, presence: true

@@ -51,7 +51,6 @@ gem 'devise', '~> 3.2.2'
 gem 'dotenv-rails', '~> 0.9.0'
 gem 'newrelic_rpm', "~> 3.7.1.182"
 
-gem 'protected_attributes'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

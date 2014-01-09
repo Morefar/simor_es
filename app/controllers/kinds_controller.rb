@@ -1,5 +1,5 @@
 class KindsController < ApplicationController
-  before_filter :find_kind, except: [:index, :new, :create]
+  before_action :find_kind, except: [:index, :new, :create]
 
   def index
     @kinds = Kind.order(:name).page params[:page]
@@ -10,16 +10,12 @@ class KindsController < ApplicationController
     end
   end
 
-
-
   def show
     respond_to do |format|
       format.html
       format.json { render json: @kind }
     end
   end
-
-
 
   def new
     @kind = Kind.new
@@ -29,11 +25,8 @@ class KindsController < ApplicationController
     end
   end
 
-
   def edit
   end
-
-
 
   def create
     @kind = Kind.new(params[:kind])
@@ -48,8 +41,6 @@ class KindsController < ApplicationController
     end
   end
 
-
-
   def update
     respond_to do |format|
       if @kind.update_attributes(params[:kind])
@@ -62,8 +53,6 @@ class KindsController < ApplicationController
     end
   end
 
-
-
   def destroy
     @kind.destroy
     respond_to do |format|
@@ -75,5 +64,8 @@ class KindsController < ApplicationController
   private
   def find_kind
     @kind = Kind.find_by_id(params[:id]) if params[:id]
+  end
+  def kind_params
+    params.require(:kind).permit(:name)
   end
 end

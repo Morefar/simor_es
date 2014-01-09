@@ -1,7 +1,5 @@
 
 class Kind < ActiveRecord::Base
-  attr_accessible :name
-
   has_many :builds
   has_many :bodies, through: :builds
 

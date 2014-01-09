@@ -1,5 +1,4 @@
 #encoding: UTF-8
-
 require 'spec_helper'
 
 describe Body do
@@ -10,7 +9,6 @@ describe Body do
   it { should validate_uniqueness_of(:name).case_insensitive }
   it { should allow_value('Vehiculo').for(:name) }
   it { should allow_value('Vehiculo de Carga').for(:name) }
-  it { should allow_mass_assignment_of(:name) }
 
   it 'has a valid factory' do
     expect(build(:body)).to be_valid

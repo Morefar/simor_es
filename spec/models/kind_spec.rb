@@ -8,7 +8,6 @@ describe Kind do
   it { should validate_uniqueness_of(:name).case_insensitive }
   it { should allow_value('Estacas').for(:name) }
   it { should allow_value('Tolva Rotatoria').for(:name) }
-  it { should allow_mass_assignment_of(:name) }
 
   it 'has a valid factory' do
     expect(build(:kind)).to be_valid

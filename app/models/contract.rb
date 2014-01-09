@@ -1,6 +1,10 @@
 class Contract < ActiveRecord::Base
 
-  attr_accessible :number, :start_date, :first_canon_date, :expiration_date, :duration, :periodicity, :total_value, :currency, :asset_count, :location_of_assets, :client_id, :category_id, :option_to_buy, :last_date_to_option, :category, :client_id, :lessee_id, :lessee_name, :lessee, :documents_attributes, :cosigners_attributes, :entity_name
+  # attr_accessible :number, :start_date, :first_canon_date, :expiration_date,
+  # :duration, :periodicity, :total_value, :currency, :asset_count,
+  # :location_of_assets, :client_id, :category_id, :option_to_buy,
+  # :last_date_to_option, :category, :client_id, :lessee_id, :lessee_name,
+  # :lessee, :documents_attributes, :cosigners_attributes, :entity_name
   belongs_to :category
   belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
   has_many :assets, inverse_of: :contract

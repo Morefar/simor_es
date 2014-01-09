@@ -1,5 +1,4 @@
 class Document < ActiveRecord::Base
-  attr_accessible :category, :content, :slug, :documentable_id, :documentable_type
   belongs_to :documentable, polymorphic: true
   mount_uploader :content, DocumentUploader
 

@@ -1,6 +1,6 @@
 class InsuranceCompaniesController < ApplicationController
 
-  before_filter :find_insurance_company, except: [:index, :new, :create]
+  before_action :find_insurance_company, except: [:index, :new, :create]
 
   def index
     @insurance_companies = InsuranceCompany.order(:name).page params[:page]
@@ -47,5 +47,8 @@ class InsuranceCompaniesController < ApplicationController
   private
   def find_insurance_company
     @insurance_company = InsuranceCompany.find(params[:id]) unless params.fetch(:id).nil?
+  end
+  def insurance_company_params
+    params.require(:insurance_company).permit(:name, :nit)
   end
 end

@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
-  before_filter :find_contract, except: [:new, :create, :index]
-  before_filter :get_categories, only: [:new, :create, :edit, :update]
+  before_action :find_contract, except: [:new, :create, :index]
+  before_action :get_categories, only: [:new, :create, :edit, :update]
 
 #CREATE ACTIONS
   def new
@@ -12,7 +12,7 @@ class ContractsController < ApplicationController
   end
 
   def create
-    @contract = Contract.new(params[:contract])
+    @contract = Contract.new(contract_params)
     if @contract.save
       redirect_to contracts_url
     else
@@ -52,7 +52,7 @@ class ContractsController < ApplicationController
   end
 
   def update
-    @contract.update_attributes(params[:contract])
+    @contract.update_attributes(contract_params)
     if @contract.save
       redirect_to @contract
     else
@@ -75,5 +75,12 @@ class ContractsController < ApplicationController
   end
   def get_categories
       @categories = Category.all
+  end
+  def contract_params
+    params.require(:contract).
+      permit(:number, :start_date, :first_canon_date, :expiration_date, :duration,
+             :periodicity, :total_value, :currency, :location_of_assets, :client_id,
+             :category_id, :option_to_buy, :last_date_to_option, :category,
+             :lessee_name, :cosigners_attributes)
   end
 end

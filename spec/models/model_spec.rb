@@ -6,6 +6,5 @@ describe Model do
   end
   it { should belong_to(:make) }
   it { should allow_value('7:24', 'CORSA', 'Mazda 2').for(:name) }
-  it { should allow_mass_assignment_of(:name) }
   it { should validate_uniqueness_of(:name).scoped_to(:make_id) }
 end

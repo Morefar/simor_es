@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe IdentificationType do
-  it { should allow_mass_assignment_of(:name) }
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name).case_insensitive }
   it { should allow_value('Cedula', 'pasaporte', 'NUIP', 'NIT').for(:name) }

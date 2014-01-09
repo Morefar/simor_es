@@ -1,15 +1,5 @@
 #encoding: UTF-8
 class Asset < ActiveRecord::Base
-  attr_accessible :invoice_id, :inventory_number, :license_plate, :make_name,
-    :model_name, :year, :cylinder_cap, :color_name, :service_type, :kind_name,
-    :body_name, :fuel_type, :capacity, :motor_number, :rerecorded_motor, :vin,
-    :serial_number, :rerecorded_serial, :chassis_number, :rerecorded_chassis,
-    :mobility_restriction, :shield_level, :horse_power, :importd_assembld,
-    :import_statement, :color_id, :import_date, :number_of_doors, :property_limitation,
-    :registration_date, :tp_issue_date, :tp_expiration_date, :transit_authority,
-    :book_value, :last_inspection_date, :contract_number, :transit_permit, :color,
-    :make, :model, :body, :kind, :contract
-
   belongs_to :contract, inverse_of: :assets
   belongs_to :make
   belongs_to :model

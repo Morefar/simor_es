@@ -1,5 +1,5 @@
 class InspectionsController < ApplicationController
-  before_filter :find_inspection, except: [:new, :create, :index]
+  before_action :find_inspection, except: [:new, :create, :index]
 
 
   def index
@@ -69,5 +69,17 @@ private
     @inspection = Inspection.includes(:insurance_company, :documents, :contract,
                                       asset: [:make, :model], comments: :user)
                   .find_by_id(params[:id]) if params[:id]
+  end
+  def inspection_params
+    params.require(:inspection).
+      permit(:address, :city, :state, :inspection_date, :current_value,
+             :appraiser_value, :soat_number,  :soat_begin_date, :soat_finish_date,
+             :emissions_certificate, :emissions_begin_date, :emissions_finish_date,
+             :maintenance, :repairs, :security, :exterior, :exterior_notes,
+             :interior, :interior_notes, :engine, :engine_notes, :accesories,
+             :insurance_number, :insurance_company_id, :insured_value, :currency,
+             :insurance_start, :insurance_finish, :person_in_charge, :pic_id,
+             :pic_job, :inspection_number, :asset_id, :observations, :odometer,
+             :asset_license_plate, :modifications)
   end
 end

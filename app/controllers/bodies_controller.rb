@@ -1,6 +1,5 @@
 class BodiesController < ApplicationController
 
-
   def index
     @bodies = Body.order(:name).page params[:page]
 
@@ -10,8 +9,6 @@ class BodiesController < ApplicationController
     end
   end
 
-
-
   def show
     @body = Body.find(params[:id])
 
@@ -19,10 +16,6 @@ class BodiesController < ApplicationController
       format.html
       format.json { render json: @body }
     end
-  end
-
-
-
   def new
     @body = Body.new
 
@@ -32,15 +25,12 @@ class BodiesController < ApplicationController
     end
   end
 
-
   def edit
     @body = Body.find(params[:id])
   end
 
-
-
   def create
-    @body = Body.new(params[:body])
+    @body = Body.new(body_params)
 
     respond_to do |format|
       if @body.save
@@ -53,13 +43,11 @@ class BodiesController < ApplicationController
     end
   end
 
-
-
   def update
     @body = Body.find(params[:id])
 
     respond_to do |format|
-      if @body.update_attributes(params[:body])
+      if @body.update_attributes(body_params)
         format.html { redirect_to @body, notice: 'Body was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,8 +57,6 @@ class BodiesController < ApplicationController
     end
   end
 
-
-
   def destroy
     @body = Body.find(params[:id])
     @body.destroy
@@ -79,5 +65,10 @@ class BodiesController < ApplicationController
       format.html { redirect_to bodies_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def body_params
+    params.require(:body).permit(:name)
   end
 end

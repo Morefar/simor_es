@@ -3,15 +3,6 @@ require 'spec_helper'
 describe Entity do
 
   it { should belong_to(:identification_type) }
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:address) }
-  it { should allow_mass_assignment_of(:city) }
-  it { should allow_mass_assignment_of(:email) }
-  it { should allow_mass_assignment_of(:phone) }
-  it { should allow_mass_assignment_of(:mobile_phone) }
-  it { should allow_mass_assignment_of(:state) }
-  it { should allow_mass_assignment_of(:identification_type_id) }
-  it { should allow_mass_assignment_of(:identification_number) }
   it { should have_many(:cosigners) }
   it { should have_many(:contracts) }
   it { should have_many(:contracts).through(:cosigners) }

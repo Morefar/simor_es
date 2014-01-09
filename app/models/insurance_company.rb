@@ -1,5 +1,4 @@
 class InsuranceCompany < ActiveRecord::Base
-  attr_accessible :name, :nit
   has_many :inspections
 
   validates :name, :nit, presence: true

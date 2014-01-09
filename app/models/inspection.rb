@@ -1,12 +1,4 @@
 class Inspection < ActiveRecord::Base
-  attr_accessible :address, :city, :state, :inspection_date, :current_value, :appraiser_value,
-      :soat_number,  :soat_begin_date, :soat_finish_date, :emissions_certificate,
-      :emissions_begin_date, :emissions_finish_date, :maintenance, :repairs, :security,
-      :exterior, :exterior_notes, :interior, :interior_notes, :engine, :engine_notes,
-      :accesories, :insurance_number, :insurance_company_id, :insured_value, :currency,
-      :insurance_start, :insurance_finish, :person_in_charge, :pic_id, :pic_job,
-      :inspection_number, :asset_id, :observations, :odometer, :asset_license_plate,
-      :modifications
   belongs_to :asset
   belongs_to :insurance_company
   has_one :contract, through: :asset

@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_filter :find_document, except: [:new, :create]
+  before_action :find_document, except: [:new, :create]
 
   def new
     @document = Document.new
@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(params[:document])
+    @document = Document.new(document_params)
     if @document.save
       redirect_to @document.documentable, notice: 'Document was succesfully created.'
     else
@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    if @document.update_attributes(params[:document])
+    if @document.update_attributes(document_params)
       format.js
       format.html { redirect_to @document.documentable, notice: "Document was successfully updated." }
     else
@@ -45,5 +45,10 @@ class DocumentsController < ApplicationController
   private
   def find_document
     @document = Document.find(params[:id]) if params[:id]
+  end
+
+  def document_params
+    params.require(:document).
+      permit(:category, :content, :slug, :documentable_id, :documentable_type)
   end
 end

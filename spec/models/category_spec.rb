@@ -5,7 +5,6 @@ describe Category do
     expect(build(:category)).to be_valid
   end
 
-  it { should allow_mass_assignment_of(:name) }
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should ensure_length_of(:name).

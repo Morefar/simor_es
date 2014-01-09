@@ -1,6 +1,5 @@
 class Entity < ActiveRecord::Base
 
-  attr_accessible :address, :city, :email, :identification_type_id, :identification_number, :mobile_phone, :name, :phone, :state
   belongs_to :identification_type
   has_many :cosigners
   has_many :contracts, through: :cosigners

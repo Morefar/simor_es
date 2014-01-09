@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :find_comment, except:  [:create]
+  before_action :find_comment, except:  [:create]
 
   def edit
     respond_to do |format|
@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
     respond_to do |format|
       if @comment.save
         format.js
@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(comment_params)
         format.js
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully updated.' }
       else
@@ -36,5 +36,8 @@ class CommentsController < ApplicationController
   def find_comment
     @comment = Comment.find(params[:id]) if params[:id]
   end
-
+  def comment_params
+    params.require(:comment).
+      permit(:content, :user_id, :commentable_id, :commentable_type, :user_id)
+  end
 end

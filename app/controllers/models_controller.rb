@@ -1,5 +1,5 @@
 class ModelsController < ApplicationController
-  before_filter :find_model, except: [:index, :new, :create]
+  before_action :find_model, except: [:index, :new, :create]
 
   def index
     @models = Model.includes(:make).order(:make_id, :name).page params[:page]
@@ -28,7 +28,7 @@ class ModelsController < ApplicationController
   end
 
   def create
-    @model = Model.new(params[:model])
+    @model = Model.new(model_params)
     respond_to do |format|
       if @model.save
         format.html { redirect_to @model, notice: 'Model was successfully created.' }
@@ -42,7 +42,7 @@ class ModelsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @model.update_attributes(params[:model])
+      if @model.update_attributes(model_params)
         format.html { redirect_to @model, notice: 'Model was successfully updated.' }
         format.json { head :no_content }
       else
@@ -63,5 +63,8 @@ class ModelsController < ApplicationController
   private
   def find_model
     @model = Model.find(params[:id]) if params[:id]
+  end
+  def model_params
+    params.require(:model).permit(:make_id, :name)
   end
 end
