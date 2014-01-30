@@ -23,47 +23,33 @@
 
 <body>
 
-<header>
-  <section class="utilities">
-    <% if user_signed_in? %>
-      <%= "#{current_user.first_name} #{current_user.last_name}" %>
-      &nbsp;&nbsp;
-      <%= link_to edit_user_registration_path, title: t(".settings") do %>
-        <i class="icon-cog icon-large"></i> <small><%= t(".settings") %></small>
+<header id="page_header" class="row" role="banner">
+  <div class="columns large-2 small-2" id="ah-logo">
+    <%= link_to(image_tag("logo.png", size:"122x74", alt: "AssetHound",
+                         id: "logo"), root_url, title: "Inicio") %>
+  </div>
+  <span id="tagline" class="columns large-2 push-2">assethound</span>
+  <div class="columns large-7 push-1">
+    <nav id="utility" class="row">
+      <%= form_for(User.new, as: "user", url: session_path("user")) do |f|  %>
+        <div class="columns large-4"><%= f.email_field :email, placeholder: "correo electrónico" %></div>
+        <div class="columns large-4"><%= f.password_field :password, placeholder: "contraseña" %></div>
+        <div class="columns large-4"><%= f.submit t("shared.sign_in"), class: "icon-signin button tiny" %></div>
       <% end %>
-      &nbsp;&nbsp;
-      <%= link_to destroy_user_session_path, title: t(".sign_out"), method: :delete do %>
-        <i class="icon-signout icon-large"></i> <small><%= t(".sign_out") %></small>
-      <% end %>
-    <% else %>
-      <%= link_to new_user_session_path, title: t(".sign_in") do %>
-        <i class="icon-signin icon-large"></i> <small><%= t(".sign_in") %></small>
-      <% end %>
-      &nbsp;&nbsp;
-      <%= link_to new_user_registration_path, title: t(".sign_up") do %>
-        <i class="icon-group icon-large"></i> <small><%= t(".sign_up") %></small>
-      <% end %>
-    <% end %>
-  </section>
+    </nav>
+  </div>
 </header>
-  <div class="container-with-nav">
-    <div>
-      <nav>
-      </nav>
-    </div>
-    <div class="workspace-container">
-      <% flash.each do |k,v| %>
+    <div class="container row">
+      <div class="row">
+        <% flash.each do |k,v| %>
           <div class='flash <%= k %>'><%= v %></div>
       <% end %>
+      </div>
       <div class="row">
         <%= yield %>
       </div>
     </div>
-  </div>
-  <footer>
-      <small>
-      &copy; <%= link_to 'Morefar S.A.S.', 'http://morefar.co/' %> 2013. AssetHound&trade; & assethound.co&trade; son marcas registradas.</small>
-  </footer>
+  <%= render "layouts/footer" %>
   <%= javascript_include_tag "application" %>
 </body>
 </html>
