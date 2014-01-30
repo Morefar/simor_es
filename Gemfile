@@ -56,10 +56,8 @@ gem 'dotenv-rails', '~> 0.9.0'
 gem 'newrelic_rpm', "~> 3.7.1.188"
 gem 'foreman', '~> 0.63.0'
 gem 'puma', '~> 2.7.1'
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.0.2'
+gem 'virtus', '~> 1.0.1'
 
 # Deploy with Capistrano
 # gem 'capistrano'
