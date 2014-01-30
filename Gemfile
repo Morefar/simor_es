@@ -54,15 +54,12 @@ gem 'kaminari', '~> 0.15.1'
 gem 'devise', '~> 3.2.2'
 gem 'dotenv-rails', '~> 0.9.0'
 gem 'newrelic_rpm', "~> 3.7.1.188"
-
-# To use ActiveModel has_secure_password
+gem 'foreman', '~> 0.63.0'
+gem 'puma', '~> 2.7.1'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder', '~> 2.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
