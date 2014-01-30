@@ -1,0 +1,20 @@
+%section#sidebar
+  %nav#funtional_nav
+    %ul
+      %li.btn-tny
+        ESCOJA UNA TAREA
+        %i.icon-cog.task-icon
+      %li.btn-tny.inactive
+        =link_to contracts_url do
+          consultar contrato
+          %i.icon-search.task-icon.icon-large
+      %li.btn-tny.inactive
+        =link_to new_inspection_order_url do
+          crear orden de inspección
+          %i.icon-pencil.task-icon.icon-large
+      %li.btn-tny.inactive
+        =link_to inspection_orders_url do
+          seguimiento orden de inspección
+          %i.icon-eye-open.task-icon.icon-large
+      -if content_for :sidebar
+        = yield :sidebar

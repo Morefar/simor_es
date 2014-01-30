@@ -1,0 +1,13 @@
+nav#main_nav {
+  position: relative;
+  li {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 4px 6px;
+    color: #111;
+    a, a:link, a:visited {
+      color: #838383;
+      text-decoration: none;
+    }
+  }
+}

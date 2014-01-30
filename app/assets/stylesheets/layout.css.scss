@@ -1,0 +1,97 @@
+@import "foundation_and_overrides";
+
+header#page_header {
+  background-color: #fff;
+  color: #000;
+  height: 78px;
+  margin-bottom: .3125em;
+  padding: 2em 1.25em .3125em 1.25em;
+  border-bottom: solid #C9C7C7 2px;
+  a,
+  a:link,
+  a:hover,
+  a:active,
+  a:visited {
+    text-decoration: none;
+  }
+  #ah-logo {
+    position: absolute;
+    top: 0;
+  }
+  nav#utility {
+    font-size: 1em;
+    margin: 0px;
+
+  input {
+    height: 2rem;
+    &[type=search] {
+      background:
+      url("http://png.findicons.com/files/icons/1389/g5_system/16/toolbar_find.png")
+      center right no-repeat;
+      height: initial;
+    }
+    &[type=submit] {
+      background-color: #008cba;
+      background-border: #007ba1;
+    }
+  }
+
+
+    #user_settings_button {
+      @include button;
+      @include button-size($button-tny);
+      @include dropdown-button(
+        $padding: tiny,
+        $pip-color: #000
+      );
+      @include button-style($secondary-color, true);
+      @include radius;
+      @include single-transition;
+      @include inset-shadow;
+    }
+  }
+
+  #logo {
+    max-width: 100%;
+  }
+
+  #tagline {
+    font-family: sans-serif;
+    font-size: 1.5em;
+    padding-left: 10px;
+  }
+}
+
+
+div.container {
+  padding: 0 20px;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer#page_footer {
+  font-size: 0.7em;
+  height: 100px;
+  text-align: center;
+  padding: 30px;
+
+  ul {
+    margin-left: -10px;
+    padding: 0;
+
+    li{
+      border-right: 1px solid #fef8e7;
+      display: inline;
+      margin: 0;
+      &:last-child {
+        border-right: none;
+      }
+      a {
+        padding: 5px 10px;
+      }
+    }
+  }
+}

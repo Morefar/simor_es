@@ -1,0 +1,11 @@
+%nav#main_nav{ role: "navigation" }
+  %ul
+    %li= link_to_unless_current "Centro de control", root_url
+    %li= link_to_unless_current t('.nav.contracts'), contracts_url
+    %li= link_to_unless_current t('.nav.assets'), assets_url
+    %li= link_to_unless_current t('.nav.inspections'), inspections_url
+    %li= link_to_unless_current "FAQ", "#"
+    %li= link_to_unless_current "Escuela assethound", "#"
+    %li= link_to_unless_current "Contacto", "#"
+    - if content_for? :main_navigation
+      = yield :main_navigation
