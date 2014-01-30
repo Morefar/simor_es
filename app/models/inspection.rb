@@ -1,5 +1,6 @@
 class Inspection < ActiveRecord::Base
   belongs_to :asset
+  belongs_to :inspection_order
   belongs_to :insurance_company
   has_one :contract, through: :asset
   has_one :inventory

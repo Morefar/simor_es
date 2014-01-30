@@ -7,6 +7,7 @@ class Asset < ActiveRecord::Base
   belongs_to :body
   belongs_to :color
   has_many :inspections
+  has_many :inspection_orders
   has_many :comments, as: :commentable
   has_many :documents, as: :documentable
 
