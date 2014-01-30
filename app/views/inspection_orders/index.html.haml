@@ -1,0 +1,24 @@
+- content_for :title do
+  AH - Ordenes de Inspección
+
+%div{ "data-no-turbolink" => "" }
+  %p= link_to t('.new'), new_inspection_order_path, class: 'icon-file button radius button-tny'
+.row
+  %table.responsive-table.display
+    %thead
+      %tr
+        %th= t('.number')
+        %th= t('.date')
+        %th= t('.status')
+        %th
+        %th
+    %tbody
+      - @inspection_orders.each do |inspection_order|
+        %tr
+          %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection_order.id, inspection_order
+          %td{"data-label" => "#{t('.date')}"}= inspection_order.created_at.strftime('%d-%m-%y %r %Z')
+          %td{"data-label" => "#{t('.status')}"}= inspection_order.status
+          %td.actions.edit.center= link_to '', edit_inspection_order_path(inspection_order), class: 'icon-edit'
+          %td.actions.delete.center= link_to '', inspection_order, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
+.row
+  = paginate @inspection_orders, window: 3

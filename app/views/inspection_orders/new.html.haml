@@ -1,0 +1,10 @@
+- content_for :title do
+  AH - Crear Orden de Inspección
+
+- content_for :content_header do
+  = render 'shared/header_title', title: "CREAR ORDEN DE INSPECCIÓN"
+
+.content-container.row
+  = render 'form'
+
+= render 'shared/content_footer', target: inspection_orders_path

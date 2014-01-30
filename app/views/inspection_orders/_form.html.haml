@@ -1,0 +1,45 @@
+
+= form_for @inspection_order_form, url: inspection_orders_path do |f|
+  = render 'shared/error_messages', target: @inspection_order_form
+  = f.hidden_field :user_id, value: current_user.id if user_signed_in?
+  %small.required_notification= t('shared.required_notification')
+  .row
+    .field.large-6.columns
+      = f.label :contract_number
+      = f.text_field :contract_number, data: { autocomplete_source: contracts_path },
+        placeholder: "Número del contrato", autofocus: true, required: true,
+        class: "autocomplete"
+      %span.form_hint= t(".contract_number_hint")
+      .contract_info
+  .row
+    .field.large-6.columns
+      = f.label :name
+      = f.text_field :name, required: true
+  .row
+    .field.large-6.columns
+      = f.label :identification_type_id
+      = f.collection_select :identification_type_id, IdentificationType.all, :id, :name
+    .field.large-6.columns
+      = f.label :identification_number
+      = f.text_field :identification_number
+  .row
+    .field.large-6.columns
+      = f.label :address
+      = f.text_field :address
+  .row
+    .field.large-6.columns
+      = f.label :city
+      = f.text_field :city
+    .field.large-6.columns
+      = f.label :state
+      = f.text_field :state
+  .row
+    .field.large-12.columns
+      = f.label :note_content
+      = f.text_area :note_content
+  .row
+    .field.large-12.columns
+      = f.label :document_content
+      = f.file_field :document_content
+  .actions
+    = f.submit
