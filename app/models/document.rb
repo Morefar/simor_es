@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
 
   before_validation :compute_hash
 
-  validates :slug, :md5hash, :category, :content, presence: true
+  validates :md5hash, :content, presence: true
   validates :md5hash, uniqueness: true
 
   before_save :update_document_attributes
@@ -18,7 +18,7 @@ class Document < ActiveRecord::Base
   end
 
   def compute_hash
-    self.md5hash = Digest::MD5.hexdigest(self.content.read) unless content.read.nil?
+    self.md5hash = content.md5
   end
 
 end
