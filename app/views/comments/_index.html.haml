@@ -1,8 +1,6 @@
-%a{name: '#comments', data: {magellan_destination: 'comments'}}
-  %h2= t('.title')
-.comments
-  - commentable.comments.includes(:user).each do |comment|
-    = render 'comments/comment', comment: comment
-#new-comment-button.small.button.success.radius.icon-comment
-  = t('.add_comment')
+- unless commentable.comments.empty?
+  %h4.section-label= t('.title')
+  %ul#comments.icons-ul.comments
+    = render commentable.comments.includes(:user)
+%h4.section-label= t('.add_comment')
 = render 'comments/form', comment: Comment.new, commentable: commentable

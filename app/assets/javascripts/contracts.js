@@ -15,15 +15,6 @@
   });
 }).call(this);
 
-//Comment form behavior.
-$('#new-comment-button').on('click', displayCommentForm);
-function displayCommentForm() {
-  var hiddenCommentBox = $('.new_comment');
-  $(this).hide('fast');
-  hiddenCommentBox.show('slow');
-  hiddenCommentBox.find('textarea').focus();
-};
-
 // Toggle disable when option is checked.
 $("#contract_option_to_buy").change(function() {
     var $input = $(this);
@@ -71,35 +62,34 @@ var updateExpirationField = function(){
 };
 
 // Update expiration date based on first canon date and number of periods.
-$('#contract_periodicity').change(function() {updateExpirationField()});
-$('#contract_duration').change(function() {updateExpirationField()});
+$('#contract_periodicity').change(function() { updateExpirationField() });
+$('#contract_duration').change(function() { updateExpirationField() });
 
-// Autocomplete behaviour for the asset form.
-$('#asset_contract_number').autocomplete({
-    source: $('#asset_contract_number').data('autocomplete-source'),
-    minLength: 4,
-});
-$('#asset_contract_number').on("autocompleteclose",
+// Autocomplete behaviour after selection
+$('#inspection_order_form_contract_number, #asset_contract_number').
+  on("autocompleteclose",
     function( event, ui ){
         var selectedContractNumber = $(this).val();
         $.get("/es/contracts.json",
             { number: selectedContractNumber },
             function( data ) {
-              $.get("/es/contracts/" + data + ".js");
+              $.get("/es/contracts/" + data + ".js")
+              .fail(function(){ alert("Contrato no encontrado");
+              });
             },
             "json"
         );
 });
-$('#asset_make_name').autocomplete({source: $('#asset_make_name').data('autocomplete-source'), minLength: 3});
-$('#asset_model_name').autocomplete({source: $('#asset_model_name').data('autocomplete-source'), minLength: 3});
-$('#asset_color_name').autocomplete({source: $('#asset_color_name').data('autocomplete-source'), minLength: 3});
-$('#asset_kind_name').autocomplete({source: $('#asset_kind_name').data('autocomplete-source'), minLength: 3})
-$('#asset_body_name').autocomplete({source: $('#asset_body_name').data('autocomplete-source'), minLength: 3});
 
-//Autocomplete for the Contract form
-$('#contract_lessee_name').autocomplete({
-    source: $('#contract_lessee_name').data('autocomplete-source'),
-    minLength: 4
+//Autocomplete behaviour in forms
+$(function() {
+    $('.autocomplete')
+    .each(function() {
+            $(this).autocomplete({
+                source: $(this).data('autocomplete-source'),
+                minLength: 2
+            });
+    });
 });
 
 // Toggle disable when imported/assembled is checked on the Asset form.
@@ -112,6 +102,10 @@ $("#asset_importd_assembld").change(function() {
       $datefield.prop('disabled', true)
     }
 }).change();
+
+/**
+ * Inspection related JS.
+ **/
 
 // Time picker included on the inspections form.
 $('.datetime-field').datetimepicker({
@@ -148,4 +142,17 @@ jQuery(function($){
       isRTL: false
   };
   $.datepicker.setDefaults($.datepicker.regional['es']);
+});
+
+// Autocomplete behaviour for the inspection form.
+$('#inspection_asset_license_plate').on("autocompleteclose",
+    function( event, ui ){
+        var selectedLicensePlate = $(this).val();
+        $.get("/es/assets.json",
+            { asset_license_plate: selectedLicensePlate },
+            function( data ) {
+              $.get("/es/assets/" + data + ".js");
+            },
+            "json"
+        );
 });

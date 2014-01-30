@@ -1,0 +1,11 @@
+- content_for :title do
+  AH - editar contrato
+- content_for :content_header do
+  = render 'shared/header_title', title: "EDITAR CONTRATO"
+
+.content-container.row
+  = render 'form', object: @contract
+
+= render 'shared/content_footer', target: :back
+= link_to t('.show'), @contract, class: 'icon-mail-reply'
+= link_to t('.index'), contracts_path, class: 'icon-list-alt'

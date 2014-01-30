@@ -4,8 +4,7 @@
     = f.hidden_field :commentable_id, value: commentable.id
     = f.hidden_field :commentable_type, value: commentable.class
   = f.hidden_field :user_id, value: current_user.id if user_signed_in?
-  .field
-    = f.text_area :content, placeholder: t('.placeholder'), cols: '80', rows: '10'
-  .actions
-    = f.submit
-    = link_to '', '', class: 'tiny button alert radius icon-remove-circle icon-large'
+  .field.columns.large-8
+    = f.text_field :content, placeholder: t('.placeholder')
+  .actions.columns.large-4
+    = f.submit "Agregar"

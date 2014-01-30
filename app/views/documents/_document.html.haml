@@ -1,12 +1,12 @@
-.document{id: "document-#{document.id}"}
-  -#= link_to image_tag(document.content_url(:thumb).to_s, class: 'thmbnail'), document.content_url.to_s, target: '_blank'
-  .panel.radius
-    = link_to image_tag(document.content_url(:thumb).to_s, class: 'thmbnail'), document.content_url.to_s, target: '_blank'
-    %p
-      %small
-        %b= document.category
-        %br
-        = document.slug
-  .actions
-    = link_to '', edit_document_path(document), class: 'icon-edit', remote: true
-    = link_to '', document, class: 'icon-remove-circle', method: :delete, remote: true
+%li
+  .document{id: "document-#{document.id}"}
+    .panel.radius
+      = link_to image_tag(document.content_url(:thumb).to_s, class: 'thmbnail'), document.content_url.to_s, target: '_blank'
+      %p
+        %small
+          %b= document.category
+          %br
+          = document.slug
+    .actions
+      = link_to '', edit_document_path(document), class: 'icon-edit', remote: true
+      = link_to '', document, class: 'icon-remove-circle', method: :delete, remote: true

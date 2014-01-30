@@ -1,0 +1,67 @@
+= form_for @contract do |form|
+  = render 'shared/error_messages', target: @contract
+  .row
+    %small.required_notification= t('shared.required_notification')
+  .row
+    .field.large-4.columns
+      = form.label :client_id
+      = form.text_field :client_id, placeholder: t('.placeholder.client')
+    .field.large-4.columns
+      = form.label :number
+      = form.text_field :number, placeholder: 'i.e. 1189719-989', required: true
+    .field.large-4.columns
+      = form.label :category_id
+      = form.collection_select :category_id, @categories, :id, :name, |
+        prompt: true, required: true                                  |
+  .row
+    .field.large-3.columns
+      = form.label :start_date do
+        %i.icon-calendar
+        Fecha de Inicio
+      = form.text_field :start_date, placeholder: 'yyyy-mm-dd', class: 'date-field', required: true
+    .field.large-3.columns
+      = form.label :first_canon_date do
+        %i.icon-calendar
+        Fecha Pago Primer Canon
+      = form.text_field :first_canon_date, placeholder: 'yyyy-mm-dd', class: 'date-field', required: true
+    .field.large-1.columns
+      = form.label :duration
+      = form.number_field :duration, required: true
+    .field.large-2.columns
+      = form.label :periodicity
+      = form.select :periodicity, [[t('.months'),1], [t('.quarters'),3], [t('.semesters'),6], [t('.years'),12]]
+    .field.large-3.columns
+      = form.label :expiration_date do
+        %i.icon-calendar
+        Fecha de Finalización
+      = form.text_field :expiration_date, placeholder: 'yyyy-mm-dd', class: 'date-field', required: true
+  .row
+    .field.large-4.columns
+      = form.label :total_value
+      = form.number_field :total_value, placeholder: 'i.e. 12000000'
+    .field.large-3.columns
+      = form.label :currency
+      = form.select :currency, TwitterCldr::Shared::Currencies.currency_codes
+    .field.large-5.columns
+      = form.label :lessee_name
+      = form.text_field :lessee_name, data: { autocomplete_source: entities_path }, required: true, class: "autocomplete"
+  .row
+    .field.large-2.columns.center
+      = form.label :option_to_buy
+      = form.check_box :option_to_buy
+    .field.large-4.columns
+      = form.label :last_date_to_option do
+        %i.icon-calendar
+        Fecha Opción de Compra
+      = form.text_field :last_date_to_option, placeholder: 'yyyy-mm-dd', class: 'date-field'
+    .field.large-6.columns
+      = form.label :location_of_assets
+      = form.text_field :location_of_assets, placeholder: t('.placeholder.location'), required: true
+  = form.fields_for :cosigners do |cf|
+    = field_set_tag t('activerecord.models.cosigner') do
+      = cf.label :entity_name
+      = cf.text_field :entity_name, data: { autocomplete_source: entities_path }, class: "autocomplete"
+      = cf.hidden_field :contract_id, value: @contract.id
+  .actions
+    = form.submit
+    = link_to t('.cancel'), contracts_url, class: 'small button button-tny alert radius icon-remove-sign',data: { confirm: t('.confirm'), disable_with: t('.disable') }

@@ -3,14 +3,13 @@
   - unless document.documentable.present?
     = f.hidden_field :documentable_id, value: documentable.id
     = f.hidden_field :documentable_type, value: documentable.class.to_s
-  .field
-    = f.label :slug
-    = f.text_field :slug
-  .field
-    = f.label :category
-    = f.select :category, %W(Photo Document Contract Invoice Imprint Other)
-  .field
-    = f.label :content
-    = f.file_field :content
-  .action
-    = f.submit
+  .row
+    .field.large-7.columns
+      = f.text_field :slug, placeholder: "Descripción"
+    .field.large-3.columns.pull-2
+      = f.file_field :content
+  .row
+    .field.large-3.columns
+      = f.select :category, %W(Foto Documento Contrato Factura Impronta Otro), { prompt: "Categoría" }, class: "radius"
+    .action.large-3.columns.pull-6
+      = f.submit

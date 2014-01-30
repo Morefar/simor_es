@@ -1,4 +1,2 @@
-$('.comments').prepend("<%= j render 'comments/comment', comment: @comment %>");
+$('.comments').prepend("<%= j render @comment %>");
 $('#comment_content').val("");
-$('#new-comment-button').show();
-$('.new_comment').hide();

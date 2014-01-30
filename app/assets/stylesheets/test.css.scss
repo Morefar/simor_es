@@ -1,10 +1,5 @@
 @import 'foundation_and_overrides';
 
-.workspace-container {
-  border-bottom: 1px solid rgb(221, 221, 221);
-  padding: 25px 10px 40px;
-  position: relative;
-}
 fieldset {
   -webkit-border-radius: 10px;
           border-radius: 10px;
@@ -13,24 +8,40 @@ fieldset {
 
 .row {
   padding-bottom: 15px;
-  //border: dashed thin black;
-}
-.new_comment {
-  display: none;
+  // border: dashed thin black;
 }
 
+.section-label {
+  font-weight: bold;
+  color: #515151;
+}
+
+.icons-ul.comments {
+  margin-left: 4em;
+  // & > li {
+    // &:not(:first-child), &:not(:last-child) {
+      // list-style-image: url(http://image.spreadshirt.com/image-server/v1/designs/3647769,width%3D190,height%3D190.png/vertical-line_design.png)
+    // }
+  // }
+}
+
+.comment {
+  list-style: none;
+}
+.comment-label {
+  font-weight: bold;
+  display: inline-block;
+  font-size: 80%;
+}
 .comment-time {
   font-size: 80%;
-  color: rgba(1,1,1,0.4);
+  color: rgba(1,1,1,0.6);
+  margin-right: 2px;
+  display: inline-block;
 }
-
 .comment-content {
-  color: rgba(1,1,1,0.6)
-}
-
-footer {
-  text-align: center;
-  padding: 30px;
+  color: rgba(1,1,1,0.6);
+  display: block;
 }
 
 .documents {
@@ -44,6 +55,7 @@ table {
   }
   thead tr th {
     text-align: center;
+    text-transform: uppercase;
   }
   td {
     text-align: left;
@@ -53,7 +65,7 @@ table {
     border-collapse: collapse;
   }
   &.display {
-    margin: 1em 0.5em;
+    margin: 0 0.5em 0.5em;
     th, td {
       border: 1px solid #B3BFAA;
       padding: .5em 1em;
@@ -92,7 +104,7 @@ table {
         margin: 0em .5em 1em;
         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
         border: 1px solid #B3BFAA;
-        @include radius;
+        @include radius();
       }
       td {
         border: none;
@@ -150,10 +162,10 @@ table {
 }
 form input[type=submit] {
   @include button;
-  @include button-size($button-sml);
+  @include button-size($button-tny);
   @include single-transition;
-  @include button-style($success-color, true);
-  @include inset-shadow(true)
+  // @include radius;
+  @include inset-shadow(false);
 }
 .thmbnail {
   margin: auto;
@@ -241,10 +253,9 @@ ul.ui-autocomplete {
   a {
     padding: .3em .2em .1em;
     margin: .2em;
-    border: 1px solid #aad;
+    color: rgb(149, 133, 133);
     text-decoration: none;
     &:hover, &:active {
-      border: 1px solid #369;
       color: #000;
     }
   }
@@ -252,7 +263,6 @@ ul.ui-autocomplete {
     &.current {
       padding:.3em .2em .1em;
       margin:.2em;
-      border:1px solid #369;
       font-weight:bold;
       background-color:#369;
       color:#FFF;
@@ -260,21 +270,8 @@ ul.ui-autocomplete {
     &.disabled {
       padding:.1em .3em;
       margin:.2em;
-      border:1px solid #eee;
       color:#ddd;
     }
-  }
-}
-
-header {
-  position: relative;
-  padding: 10px;
-  margin-bottom: 15px;
-  section {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 80%;
   }
 }
 
@@ -304,9 +301,8 @@ header {
       display: inline;
     }
     &:required {
-      padding-right: 30px;
-      background: #fff url("/assets/red_asterisk.png") no-repeat scroll 98% center;
-      background-size: 0.5em;
+      background: #fff url("/assets/red_asterisk.png") no-repeat scroll 95% center;
+      background-size: 0.3em;
     }
     &:required:valid ~ .form_hint {
       background: #28921f;
@@ -340,4 +336,85 @@ header {
       margin: 0 10px 10px 45%;
     }
   }
+}
+
+#content_nav {
+  a, a:link, a:visited {
+    color: #fff;
+    font-size: 1rem;
+  }
+}
+
+.nav-button-group {
+  @include button-group-container($styles: true);
+  .btn {
+    @include button();
+    height: 100%;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 15px;
+    min-height: 77px;
+    font-size: 18px;
+    border-right: 1px solid white;
+  }
+  & > li {
+    @include button-group-style($even: 3);
+    text-align: left;
+    font-size: 1.3rem;
+  }
+}
+
+.task-icon {
+  color: black;
+  float: right;
+  position: relative;
+}
+
+.detail-title {
+  margin-bottom: 10px;
+  #model_number {
+    margin-left: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  #model_title {
+    margin-left: 5px;
+    color: gray;
+  }
+}
+
+.content-title {
+  border: 1px solid lightgray;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 0px 5px;
+  &.row { margin-bottom: 10px; }
+  & > h5 {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+  }
+}
+
+.content-container {
+  border: 1px solid lightgray;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  overflow: hidden;
+}
+
+.search-box-container {
+  border: 1px solid lightgray;
+  padding: 10px;
+  &.row { margin-bottom: 10px; }
+}
+
+.content-footer {
+  &.row { margin-top: 10px; }
+}
+
+section.row {
+  padding: 0 0 15px 0;
+  margin: 0;
 }

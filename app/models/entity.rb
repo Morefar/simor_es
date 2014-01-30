@@ -12,7 +12,7 @@ class Entity < ActiveRecord::Base
 
   scope :search_name, ->(term) { where("name ilike ?", term) }
   def contracts_as_lessee
-    Array( Contract.where(lessee_id: id) )
+    Array( Contract.where(lessee_id: id).order("created_at DESC"))
   end
 
   def contracts_as_lessee_count
@@ -20,7 +20,7 @@ class Entity < ActiveRecord::Base
   end
 
   def contracts_as_cosigner
-    contracts
+    contracts.order("created_at DESC")
   end
 
   def contracts_as_cosigner_count
