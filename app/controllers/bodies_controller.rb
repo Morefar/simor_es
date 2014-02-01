@@ -16,6 +16,8 @@ class BodiesController < ApplicationController
       format.html
       format.json { render json: @body }
     end
+  end
+
   def new
     @body = Body.new
 

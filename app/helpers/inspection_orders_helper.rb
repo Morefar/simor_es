@@ -1,0 +1,2 @@
+module InspectionOrdersHelper
+end

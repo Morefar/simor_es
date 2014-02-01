@@ -5,8 +5,10 @@ Simor::Application.routes.draw do
       get '/', to: "dashboard#show", as: :user_root
     end
     authenticate do
-      resource :dashboardi, only: [:show]
-      resources :contracts, :assets, :categories, :makes, :models, :colors, :kinds, :bodies, :builds, :inspections, :inspection_orders, :insurance_companies
+      resource :dashboard, only: [:show]
+      resources :contracts, :assets, :categories, :makes, :models, :colors,
+        :kinds, :bodies, :builds, :inspections, :inspection_orders,
+        :insurance_companies
       resources :comments, only: [:create, :update, :edit]
       resources :entities
       resources :documents, except: [:index]
