@@ -30,7 +30,7 @@ class AssetsController < ApplicationController
 
   def new
     @asset = Asset.new
-
+    @asset.contract_number = params[:contract] if params.has_key? :contract
     respond_to do |format|
       format.html
       format.json { render json: @asset }

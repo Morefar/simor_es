@@ -61,11 +61,11 @@ class Asset < ActiveRecord::Base
   around_destroy :decrease_asset_count_on_contract
 
   default_scope { order("created_at DESC") }
-  scope :search_license_plate, ->(license_plate) { where("license_plate like ?", license_plate) }
+  scope :search_license_plate, ->(license_plate) { where("license_plate ilike ?", license_plate) }
 
   def model_belongs_to_make
     if make.present? && model.present?
-      errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make.id
+      errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make_id
     end
   end
 
@@ -95,7 +95,9 @@ class Asset < ActiveRecord::Base
   end
 
   def model_name=(model_name)
-    self.model = Model.find_by_name(model_name) if model_name.present?
+    if model_name.present? && make.present?
+      self.model = Model.where(name: model_name, make: self.make).first
+    end
   end
 
   def color_name=(color_name)

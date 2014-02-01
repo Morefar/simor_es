@@ -1,0 +1,9 @@
+- content_for :title do
+  AH - crear activo
+- content_for :content_header do
+  = render 'shared/header_title', title: "CREAR ACTIVO"
+
+.content-container.row
+  = render 'form'
+
+= render 'shared/content_footer', target: assets_path
