@@ -1,4 +1,38 @@
-%h1
-  = "#{ @user.first_name }'s Dashboard"
+- content_for :title do
+  ah - centro de control
 
-%p Coming soon
+- content_for :content_header do
+  %nav#content_nav.show-for-medium-up
+    %ul.nav-button-group
+      %li.btn
+        = link_to contracts_url do
+          consultar
+          %br
+          contrato &nbsp;
+          %i.icon-search.icon-3x.task-icon
+      %li.btn
+        = link_to new_inspection_order_url do
+          crear orden
+          %br
+          de inspección &nbsp;
+          %i.icon-pencil.icon-3x.task-icon
+      %li.btn
+        = link_to inspection_orders_url do
+          seguimiento orden
+          %br
+          de inspección &nbsp;
+          %i.icon-eye-open.icon-3x.task-icon
+
+= field_set_tag do
+  %h6 LISTADO ÚLTIMAS CONSULTAS / ACCIONES
+  %article
+    %strong= "Centro de control de #{current_user.full_name}"
+    %p Pronto llegará
+= field_set_tag do
+  %h6 AYUDA
+  %article
+    %strong Cómo comenzar
+    %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
+  %article
+    %strong Hacer una consulta
+    %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
