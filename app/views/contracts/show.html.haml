@@ -9,6 +9,10 @@
     = link_to new_asset_url(contract: @contract.number) do
       agregar activo
       %i.icon-truck.task-icon.icon-large
+  %li.btn-tny.inactive
+    = link_to new_contract_url do
+      agregar contrato
+      %i.icon-file-text.task-icon.icon-large
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"
