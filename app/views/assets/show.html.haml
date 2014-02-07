@@ -1,9 +1,29 @@
-%h1
-  = t('.title')
-  = @asset.inventory_number
-= render 'contracts/contract_info', contract: @asset.contract
+- content_for :title do
+  = "activo: #{@asset.license_plate}"
+- content_for :sidebar do
+  %li.btn-tny.inactive
+    = link_to edit_asset_url(@asset) do
+      editar activo
+      %i.icon-edit.task-icon.icon-large
+  %li.btn-tny.inactive
+    = link_to new_inspection_url(asset: @asset.inventory_number) do
+      agregar inspección
+      %i.icon-paste.task-icon.icon-large
+  %li.btn-tny.inactive
+    = link_to new_asset_url do
+      agregar activo
+      %i.icon-truck.task-icon.icon-large
+.detail-title
+  %span#model_number= @asset.inventory_number
+  %span#model_title= "#{@asset.kind_name} #{@asset.make_name} #{@asset.model_name} #{@asset.year}"
+.content-container.row
+  .row
+    .medium-6.columns
+      = @asset.document_slider
+    .medium-6.columns
+      = render 'contracts/contract_info', contract: @asset.contract
 
-= field_set_tag t('inspections.form.fieldset.information') do
+  %h4.section-label= t('inspections.form.fieldset.information')
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.license_plate')}:"
     %span.large-2.columns.pull-8
@@ -11,10 +31,10 @@
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.make_id')}:"
     %span.large-2.columns
-      = @asset.make_name.upcase
+      = @asset.make_name
     %b.large-2.columns= "#{t('activerecord.attributes.asset.model_id')}:"
     %span.large-2.columns
-      = @asset.model_name.upcase
+      = @asset.model_name
     %b.large-2.columns= "#{t('activerecord.attributes.asset.year')}:"
     %span.large-2.columns
       = @asset.year
@@ -24,7 +44,7 @@
       = @asset.cylinder_cap
     %b.large-2.columns= "#{t('activerecord.attributes.asset.color_id')}:"
     %span.large-2.columns
-      = @asset.color_name.upcase
+      = @asset.color_name
     %b.large-2.columns= "#{t('activerecord.attributes.asset.service_type')}:"
     %span.large-2.columns
       = @asset.service_type
@@ -44,28 +64,28 @@
       = @asset.capacity
     %b.large-2.columns= "#{t('activerecord.attributes.asset.motor_number')}:"
     %span.large-2.columns
-      = @asset.motor_number
+      %small= @asset.motor_number
     %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_motor')}:"
     %span.large-2.columns
-      = @asset.rerecorded_motor? ? t("shared.yes") : t("shared.no")
+      = @asset.rerecorded_motor
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.vin')}:"
     %span.large-2.columns
-      = @asset.vin
+      %small= @asset.vin
     %b.large-2.columns= "#{t('activerecord.attributes.asset.serial_number')}:"
     %span.large-2.columns
-      = @asset.serial_number
+      %small= @asset.serial_number
     %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_serial')}:"
     %span.large-2.columns
-      = @asset.rerecorded_serial? ? t('shared.yes') : t('shared.no')
+      = @asset.rerecorded_serial
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.chassis_number')}:"
     %span.large-2.columns
-      = @asset.chassis_number
+      %small= @asset.chassis_number
     %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_chassis')}:"
     %span.large-2.columns.pull-4
-      = @asset.rerecorded_chassis? ? t('shared.yes') : t('shared.no')
-= field_set_tag t('assets.form.fieldset.additional_info') do
+      = @asset.rerecorded_chassis
+  %h4.section-label= t('assets.form.fieldset.additional_info')
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.mobility_restriction')}:"
     %span.large-2.columns
@@ -77,16 +97,7 @@
     %span.large-2.columns
       = @asset.horse_power
   .row
-    - if @asset.importd_assembld?
-      %b.large-4.columns= t('.imported')
-      %b.large-2.columns= "#{t('activerecord.attributes.asset.import_statement')}:"
-      %span.large-2.columns
-        = @asset.import_statement
-      %b.large-2.columns= "#{t('activerecord.attributes.asset.import_date')}:"
-      %span.large-2.columns
-        = @asset.import_date
-    - else
-      %b.columns= t('.assembled')
+    = @asset.imported?
   .row
     %b.large-2.columns= "#{t('activerecord.attributes.asset.number_of_doors')}:"
     %span.large-2.columns
@@ -112,15 +123,14 @@
     %span.large-2.columns.pull-8
       = number_to_currency @asset.book_value
 
-- unless @asset.inspections.empty?
-  = field_set_tag t('.fieldset.inspections') do
+  - unless @asset.inspections.empty?
+    %h4.section-label= t('.fieldset.inspections')
     = render 'inspections/index_table', inspections: @asset.inspections
-.row
-  = render 'documents/index', documentable: @asset
-= render 'documents/form', document: Document.new, documentable: @asset
-.row
-  = render 'comments/index', commentable: @asset
-.row
-  = link_to ' Back', assets_path, class: 'icon-reply'
-  \|
-  = link_to ' Edit', edit_asset_path(@asset), class: 'icon-edit'
+  %section#documents.row
+    = render 'documents/index', documentable: @asset
+  %section#comments.row
+    = render 'comments/index', commentable: @asset
+  %section#document-upload.row
+    %h4.section-label Adjuntar documentos
+    = render 'documents/form', document: Document.new, documentable: @asset
+= render "shared/content_footer", target: assets_path

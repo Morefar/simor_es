@@ -4,7 +4,7 @@
       %span.large-2.columns
         %b= "#{t('activerecord.attributes.asset.license_plate')}:"
       %span.large-2.columns
-        = asset.license_plate
+        = link_to asset.license_plate, @asset
       %span.large-2.columns
         %b= "#{t('activerecord.attributes.asset.inventory_number')}:"
       %span.large-2.columns

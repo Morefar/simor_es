@@ -58,6 +58,6 @@ gem 'foreman', '~> 0.63.0'
 gem 'puma', '~> 2.7.1'
 gem 'jbuilder', '~> 2.0.2'
 gem 'virtus', '~> 1.0.1'
-
+gem 'draper', '~> 1.3.0'
 # Deploy with Capistrano
 # gem 'capistrano'

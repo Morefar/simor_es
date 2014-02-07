@@ -21,6 +21,7 @@ class AssetsController < ApplicationController
   def show
     add_breadcrumb "Contract: #{@asset.contract_number}", @asset.contract
     add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
+    @asset = @asset.decorate
     respond_to do |format|
       format.html
       format.json { render json: @asset }

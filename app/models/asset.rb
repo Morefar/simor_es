@@ -54,7 +54,8 @@ class Asset < ActiveRecord::Base
   validates :motor_number, uniqueness: true, if: "motor_number.present?"
   validates :serial_number, length: { in: 1..17 }, if: "serial_number.present?"
   validates :serial_number, uniqueness: true, if: "serial_number.present?"
-  validates  :chassis_number, :vin, uniqueness: true
+  validates :chassis_number, uniqueness: true
+  validates :vin, uniqueness: true, if: "vin.present?"
   validates :book_value, numericality: { greater_than: 0 }
   validate :model_belongs_to_make
   after_create :increase_asset_count_on_contract
