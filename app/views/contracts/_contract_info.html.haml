@@ -1,27 +1,31 @@
 .contract_info
-  = field_set_tag t('contracts.form.fieldset.information') do
-    .row
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.number')}:"
-      %span.large-2.columns
-        = link_to contract.number, contract
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.category_id')}:"
-      %span.large-2.columns.pull-4
-        = contract.category_name
-    .row
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.start_date')}:"
-      %span.large-2.columns
-        = contract.start_date
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.first_canon_date')}:"
-      %span.large-2.columns
-        = contract.first_canon_date
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.expiration_date')}:"
-      %span.large-2.columns
-        = contract.expiration_date
-    .row
-      %b.large-2.columns= "#{t('activerecord.attributes.contract.lessee')}:"
-      %span.large-2.columns
-        = link_to contract.lessee_name, contract.lessee
-      %b.large-2.columns= "#{t('activerecord.attributes.entity.identification_number')}:"
-      %span.large-2.columns.pull-4
-        = contract.lessee_identification_type_name
-        = contract.lessee_identification_number
+  %h4.section-label= t('contracts.form.fieldset.information')
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.number')}:"
+    %span.large-8.columns
+      = link_to contract.number, contract
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.start_date')}:"
+    %span.large-8.columns
+      = contract.start_date
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.category_id')}:"
+    %span.large-8.columns
+      = contract.category_name
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.first_canon_date')}:"
+    %span.large-8.columns
+      = contract.first_canon_date
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.expiration_date')}:"
+    %span.large-8.columns
+      = contract.expiration_date
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.contract.lessee')}:"
+    %span.large-8.columns
+      = link_to contract.lessee_name, contract.lessee
+  .row
+    %b.large-4.columns= "#{t('activerecord.attributes.entity.identification_number')}:"
+    %span.large-8.columns
+      = contract.lessee_identification_type_name
+      = contract.lessee_identification_number
