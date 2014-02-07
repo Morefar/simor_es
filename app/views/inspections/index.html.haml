@@ -1,6 +1,37 @@
-%h1= t('.title')
-%p= link_to t('.new'), new_inspection_path, class: 'icon-file button success radius'
-.row
+- content_for :title do
+  = t('.title')
+- content_for :content_header do
+  = render 'shared/header_title', title: "CONSULTAR INSPECCION"
+- content_for :sidebar do
+  %li.btn-tny.inactive
+    = link_to new_inspection_url do
+      = t('.new')
+      %i.icon-paste.task-icon.icon-large
+.search-box-container.row
+  = form_tag do
+    .field.large-4.columns
+      = search_field_tag :inspection_query, nil, placeholder: "Busqueda de inspección"
+    .field.large-2.columns.center
+      = label_tag :query_optiions_by_number do
+        %i.icon-paste.icon-large
+        acta
+      = radio_button_tag :query_options, :by_number, true
+    .field.large-2.columns.center
+      = label_tag :query_optiions_by_date do
+        %i.icon-time.icon-large
+        fecha
+      = radio_button_tag :query_options, :by_date
+    .field.large-2.columns.center
+      = label_tag :query_options_by_range do
+        %i.icon-resize-full.icon-large
+        rango
+      = radio_button_tag :query_options, :by_range
+    .field.large-2.columns.center
+      = label_tag :query_options_by_asset_license_plate do
+        %i.icon-truck.icon-large
+        activo
+      = radio_button_tag :query_options, :by_asset_license_plate
+.content-container.row
   %table.responsive-table.layout.display
     %thead
       %tr
@@ -17,10 +48,12 @@
           %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection.inspection_number, inspection
           %td{"data-label" => "#{t('.inspection_date')}"}= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
           %td{"data-label" => "#{t('.address')}"}= "#{inspection.address}, #{inspection.city}, #{inspection.state}"
-          %td.center{"data-label" => "#{t('.asset')}"}= link_to inspection.asset_inventory_number, inspection.asset
+          %td.center{"data-label" => "#{t('.asset')}"}= link_to inspection.asset_license_plate, inspection.asset
           %td{"data-label" => "#{t('.initial_value')}"}= number_to_currency inspection.asset_book_value
           %td.actions.edit.center= link_to '', edit_inspection_path(inspection), class: 'icon-edit'
-          %td.actions.delete.cente= link_to '', inspection, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
-.row
+          %td.actions.delete.center= link_to '', inspection, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
   = paginate @inspections, window: 3
-%p= link_to t('.new'), new_inspection_path, class: 'icon-file button success radius'
+%footer.content-footer.row
+  = link_to :back do
+    %i.icon-reply
+    regresar
