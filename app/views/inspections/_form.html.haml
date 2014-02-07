@@ -13,7 +13,8 @@
       .field.large-6.columns
         = f.label :asset_license_plate
         = f.text_field :asset_license_plate, data: { autocomplete_source: assets_path },
-          placeholder: t('.license_plate_number_placeholder'), required: true
+          placeholder: t('.license_plate_number_placeholder'), required: true,
+          class: "autocomplete"
         %span.form_hint= t(".asset_license_plate_hint")
     .row
       .field.large-4.columns
