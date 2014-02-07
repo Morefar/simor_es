@@ -6,7 +6,7 @@
       changeMonth: true,
       changeYear: true,
       yearRange: "2000:2020",
-      closeText: "Close",
+      closeText: "Cerrar",
       dateFormat: 'yy-mm-dd',
       duration: "slow",
       hideIfNoPrevNext: true
@@ -25,6 +25,40 @@ $("#contract_option_to_buy").change(function() {
       $datefield.prop('disabled', true)
     }
 }).change();
+
+$( "input[name^=query_options]" ).on("click", function() {
+  var input = $(this)[0];
+  var $searchField = $( "#contract_query" );
+  var byDate = $( "#query_options_by_date" )[0];
+  var byDateRange = $( "#query_options_by_range" )[0];
+  var byLessee = $( "#query_options_by_lessee" )[0];
+  var byNumber = $("#query_options_by_number")[0];
+  $searchField.autocomplete();
+  if(input == byDate) {
+      $searchField.addClass( "dateField" )
+      $(".dateField").datepicker({ dateFormat: "dd/mm/yy" });
+  } else {
+      $(".dateField").datepicker( "destroy" );
+      $searchField.removeClass( "dateField" );
+      if(input == byLessee) {
+        $searchField.autocomplete({
+          source: "/es/entities.json",
+          minLength: 2
+        });
+      } else {
+        if(input == byNumber) {
+          $searchField.autocomplete({
+            source: "/es/contracts.json",
+            minLength: 4
+          });
+        } else {
+          $searchField.removeClass();
+          $searchField.autocomplete( "destroy" );
+        }
+      }
+  }
+  return $searchField.focus();
+});
 
 // Date handling functions
 Date.isLeapYear = function (year) {

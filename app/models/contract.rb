@@ -1,5 +1,5 @@
 class Contract < ActiveRecord::Base
-
+  include PgSearch
   # attr_accessible :number, :start_date, :first_canon_date, :expiration_date,
   # :duration, :periodicity, :total_value, :currency, :asset_count,
   # :location_of_assets, :client_id, :category_id, :option_to_buy,
@@ -31,7 +31,47 @@ class Contract < ActiveRecord::Base
   validate :non_valid_option_to_buy_date
 
   default_scope { order("created_at DESC") }
-  scope :search_number, ->(number) { where("number like ?", number) }
+  scope :search_by_number, ->(number) { where("number like ?", number) }
+  scope :search_by_date, ->date { where( %{
+        start_date = :date OR first_canon_date = :date OR
+        expiration_date = :date OR created_at = :date }, date: date) }
+  scope :search_by_range, ->dates { where( %{
+        start_date BETWEEN :start AND :end OR
+        expiration_date BETWEEN :start AND :end OR
+        created_at BETWEEN :start AND :end },
+        start: dates[:start], end: dates[:end]) }
+  pg_search_scope :search_by_lessee, associated_against: {
+    lessee: [:identification_number, :name],
+    entities: [:identification_number, :name] },
+    using: { tsearch: { dictionary: "spanish", prefix: true, any_word: true } }
+  # -- Class Methods -------------------
+  def self.contract_search(args={})
+    case args[:query_options]
+    when "by_number"
+      query = "%#{args[:contract_query]}"
+    when "by_date"
+      query = Date.strptime args[:contract_query], '%d/%m/%Y'
+    when "by_range"
+      dates = args[:contract_query].split('-')
+      query = {}
+      begin
+        query[:start] = Date.strptime(dates[0].strip, '%d/%m/%Y')
+        query[:end] = dates[1] ? Date.strptime(dates[1].strip, '%d/%m/%Y') : Date.today
+      rescue ArgumentError
+        query[:start] = Date.today
+        query[:end] = query[:end]
+      end
+    else
+      query = args[:contract_query]
+    end
+    if args.has_key? :query_options
+      send("search_#{args[:query_options]}", query)
+    elsif args.has_key? :contract_query
+      search_by_number(query)
+    else
+      all
+    end
+  end
 
   def lessee_name=(lessee_name)
       self.lessee = Entity.find_by_name(lessee_name) if lessee_name.present?

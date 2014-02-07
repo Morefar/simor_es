@@ -22,6 +22,9 @@ module Simor
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = :es
 
+    # Sets the schema format to sql to support postgres specific features.
+    # config.active_record.schema_format = :sql
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,

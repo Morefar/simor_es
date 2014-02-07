@@ -22,15 +22,14 @@ class ContractsController < ApplicationController
 
 #READ ACTIONS
   def index
-    add_breadcrumb 'Contracts', :contracts_path
-    @contracts = Contract.includes(:category, :lessee).page params[:page]
+    @contracts = Contract.contract_search(params).includes(:category, :lessee).page params[:page]
     respond_to do |format|
       format.html
       format.json do
         if params.has_key? :number
           render json: Contract.where("number = ?", params[:number]).pluck(:id)
         else
-          render json: Contract.search_number("%#{params[:term]}%")
+          render json: Contract.search_by_number("%#{params[:term]}%")
                                            .limit(10).pluck(:number)
         end
       end
