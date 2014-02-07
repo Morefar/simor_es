@@ -5,7 +5,8 @@ class BodiesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: Body.search_name("%#{params[:term]}%").order(:name).limit(10).pluck(:name) }
+      format.json { render json: Body.search_name("%#{params[:term]}%")
+        .order(:name).limit(10).pluck(:name) }
     end
   end
 
@@ -36,11 +37,13 @@ class BodiesController < ApplicationController
 
     respond_to do |format|
       if @body.save
-        format.html { redirect_to @body, notice: 'Body was successfully created.' }
+        format.html { redirect_to @body,
+                      notice: 'Body was successfully created.' }
         format.json { render json: @body, status: :created, location: @body }
       else
         format.html { render action: "new" }
-        format.json { render json: @body.errors, status: :unprocessable_entity }
+        format.json { render json: @body.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -50,7 +53,8 @@ class BodiesController < ApplicationController
 
     respond_to do |format|
       if @body.update_attributes(body_params)
-        format.html { redirect_to @body, notice: 'Body was successfully updated.' }
+        format.html { redirect_to @body,
+                      notice: 'Body was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

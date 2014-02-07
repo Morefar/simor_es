@@ -5,6 +5,8 @@ class Contract < ActiveRecord::Base
   # :location_of_assets, :client_id, :category_id, :option_to_buy,
   # :last_date_to_option, :category, :client_id, :lessee_id, :lessee_name,
   # :lessee, :documents_attributes, :cosigners_attributes, :entity_name
+
+  # -- Relationships -------------------
   belongs_to :category
   belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
   has_many :assets, inverse_of: :contract
@@ -16,11 +18,15 @@ class Contract < ActiveRecord::Base
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :cosigners
 
+  # -- Delegations ---------------------
   delegate :name, :identification_number, :identification_type_name,
            to: :lessee, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
-  validates :client_id, :number, :category, :start_date, :duration, :total_value, :lessee, :expiration_date, :location_of_assets, :periodicity, :first_canon_date, presence: true
+  # -- Validations ---------------------
+  validates :client_id, :number, :category, :start_date, :duration,
+    :total_value, :lessee, :expiration_date, :location_of_assets, :periodicity,
+    :first_canon_date, presence: true
   validates :number, :uniqueness => { case_sensitive: false, scope: :client_id }
   validates :duration, :numericality => { only_integer: true,
                                           greater_than: 0 }
@@ -30,6 +36,7 @@ class Contract < ActiveRecord::Base
   validate :non_valid_first_canon_date
   validate :non_valid_option_to_buy_date
 
+  # -- Scopes --------------------------
   default_scope { order("created_at DESC") }
   scope :search_by_number, ->(number) { where("number like ?", number) }
   scope :search_by_date, ->date { where( %{
@@ -73,6 +80,7 @@ class Contract < ActiveRecord::Base
     end
   end
 
+  # -- Instance Methods ----------------
   def lessee_name=(lessee_name)
       self.lessee = Entity.find_by_name(lessee_name) if lessee_name.present?
   end
@@ -80,6 +88,7 @@ class Contract < ActiveRecord::Base
     lessee.try(:name)
   end
 
+  private
   def non_valid_expiration_date
     if expiration_date?
       errors.add(:expiration_date, I18n.t("errors.messages.expiration_in_past")) if expiration_date < Date.today
