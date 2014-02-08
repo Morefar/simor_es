@@ -23,7 +23,7 @@ class InspectionsController < ApplicationController
 
   def new
     @inspection = Inspection.new
-
+    @inspection.asset_license_plate = params[:asset] if params.has_key? :asset
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @inspection }

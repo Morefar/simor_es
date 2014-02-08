@@ -1,164 +1,173 @@
-.row.collapse
-  %h1.large-5.columns
-    =t(".record")
-    = @inspection.inspection_number
-  %h2.large-5.columns
-    ="#{t(".asset_number")}:"
+- content_for :title do
+  = "inspección: #{ @inspection.inspection_number }"
+- content_for :sidebar do
+  %li.btn-tny.inactive
+    = link_to edit_inspection_url(@inspection) do
+      editar inspección
+      %i.icon-edit.task-icon.icon-large
+  %li.btn-tny.inactive
+    = link_to new_inspection_url(asset: @inspection.asset_license_plate) do
+      agregar inspección
+      %i.icon-paste.task-icon.icon-large
+.detail-title
+  %span#model_number= "#{ t('.record') }: #{ @inspection.inspection_number }"
+  %span#model_title
+    = t(".asset_number")
     = link_to @inspection.asset_inventory_number, @inspection.asset
-= field_set_tag t(".fieldset.where") do
-  .row
-    .large-4.columns.centered.push-1
-      .row
-        %h5="#{t(".inspection_date")}:"
-        = @inspection.inspection_date.localtime.strftime('%d-%m-%Y, %r %Z')
-      .row
-        %h5= "#{t(".location")}:"
-        %ul.vcard
-          %li.street-address= @inspection.address
-          %li.locality= @inspection.city
-          %li.state= @inspection.state
-    .large-6.columns.centered
+.content-container.row
+  %section.row
+    .medium-6.columns
       %img{src: "/assets/map_example.png", alt: "Asset location map. Address: #{@inspection.address}, #{@inspection.state}"}
-= field_set_tag t('.fieldset.information') do
-  .row
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.kind_id')}:"
-    %span.large-2.columns
-      = @inspection.asset_kind_name
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.license_plate')}:"
-    %span.large-2.columns
-      = @inspection.asset_license_plate
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.chassis_number')}:"
-    %span.large-2.columns
-      = @inspection.asset_chassis_number
-  .row
-    %span.small-5.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.make_id')}:"
-    %span.small-7.large-2.columns
-      = @inspection.asset_make_name
-    %span.small-5.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.model_id')}:"
-    %span.small-7.large-2.columns
-      = @inspection.asset_model_name
-    %span.small-5.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.year')}:"
-    %span.small-7.large-2.columns
-      = @inspection.asset_year
-  .row
-    %span.small-6.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.service_type')}:"
-    %span.small-6.large-2.columns
-      = @inspection.asset_service_type
-    %span.small-6.large-2.columns
-      %b= "#{t('activerecord.attributes.inspection.odometer')}:"
-    %span.small-6.large-2.columns
-      = @inspection.odometer
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.vin')}:"
-    %span.large-2.columns
-      = @inspection.asset_vin
-  .row
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.asset.book_value')}:"
-    %span.large-2.columns
-      = local_number_to_currency @inspection.asset_book_value
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.inspection.current_value')}:"
-    %span.large-2.columns
-      = local_number_to_currency @inspection.current_value
-    %span.large-2.columns
-      %b= "#{t('activerecord.attributes.inspection.appraiser_value')}:"
-    %span.large-2.columns
-      = local_number_to_currency @inspection.appraiser_value
-= field_set_tag t(".fieldset.documents") do
-  .row
-    %b.large-2.columns= "#{t(".soat")}:"
-    %span.large-2.columns
-      = @inspection.soat_number
-    %b.large-2.columns= "#{t(".soat_begins")}:"
-    %span.large-2.columns
-      = @inspection.soat_begin_date
-    %b.large-2.columns= "#{t(".soat_expires")}:"
-    %span.large-2.columns
-      = @inspection.soat_finish_date
-  .row
-    %b.large-2.columns= "#{t(".emissions")}:"
-    %span.large-2.columns
-      = @inspection.emissions_certificate
-    %b.large-2.columns= "#{t(".emissions_begins")}:"
-    %span.large-2.columns
-      = @inspection.emissions_begin_date
-    %b.large-2.columns= "#{t(".emissions_expires")}:"
-    %span.large-2.columns
-      = @inspection.emissions_finish_date
-= field_set_tag t(".fieldset.condition") do
-  .row
-    %b.large-2.columns= "#{t(".maintenance")}:"
-    %span.large-2.columns
-      = @inspection.maintenance ? t(".adecuate") : t(".inadecuate")
-    %b.large-2.columns= "#{t(".repairs")}:"
-    %span.large-2.columns.pull-4
-      = @inspection.repairs ? t(".adecuate") : t(".inadecuate")
-  .row
-    %b.large-2.columns= "#{t(".security")}:"
-    %span.large-2.columns
-      = @inspection.security ? t(".adecuate") : t(".inadecuate")
-    %b.large-2.columns= "#{t(".modifications")}:"
-    %span.large-2.columns.pull-4
-      = @inspection.modifications ? t(".modified") : t(".none")
-  %p
-    %h4= t("activerecord.attributes.inspection.exterior")
-    %b= "#{@inspection.exterior}. "
-    = @inspection.exterior_notes
-  %p
-    %h4= t("activerecord.attributes.inspection.interior")
-    %b= "#{@inspection.interior}. "
-    = @inspection.interior_notes
-  %p
-    %h4= t("activerecord.attributes.inspection.engine")
-    %b= "#{@inspection.engine}. "
-    = @inspection.engine_notes
-  - if @inspection.accesories
-    %p
-      %h4= "#{t("activerecord.attributes.inspection.accesories")}"
-      = @inspection.accesories
-- if @inspection.insurance_number
-  = field_set_tag t("inspections.form.fieldset.insurance") do
-    %a{name: "insurance", data: {magellan_destination: "insurance"}}
+    .medium-6.columns
+      .row
+        %h4.section-label= "#{t(".inspection_date")}:"
+        = @inspection.inspection_date.localtime.strftime('%d-%m-%Y, %I:%M %p %Z')
+      .row
+        %h4.section-label= "#{t(".location")}:"
+        .vcard
+          .street-address= @inspection.address
+          .locality= @inspection.city
+          .region= @inspection.state
+  %section.row
+    %h4.section-label= t('.fieldset.information')
     .row
-      %b.large-2.columns= "#{t("activerecord.attributes.inspection.insurance_company_id")}:"
-      %span.large-2.columns
-        = @inspection.insurance_company.name
-      %b.large-2.columns= "#{t("activerecord.attributes.inspection.insurance_number")}:"
-      %span.large-2.columns
-        = @inspection.insurance_number
-      %b.large-2.columns= "#{t("activerecord.attributes.inspection.insured_value")}:"
-      %span.large-2.columns
-        = number_to_currency @inspection.insured_value
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}"
+        = @inspection.asset_kind_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}"
+        = @inspection.asset_license_plate
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}"
+        = @inspection.asset_chassis_number
     .row
-      %b.large-2.columns= "#{t("activerecord.attributes.inspection.insurance_start")}:"
-      %span.large-2.columns
-        = @inspection.insurance_start
-      %b.large-2.columns= "#{t("activerecord.attributes.inspection.insurance_finish")}:"
-      %span.large-2.columns.pull-4
-        = @inspection.insurance_finish
-= field_set_tag "#{t(".fieldset.other_information")}" do
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}"
+        = @inspection.asset_make_name
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}"
+        = @inspection.asset_model_name
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.year')}"
+        = @inspection.asset_year
+    .row
+      .small-6.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.service_type')}"
+        = @inspection.asset_service_type
+      .small-6.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.inspection.odometer')}"
+        = @inspection.odometer
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.vin')}"
+        = @inspection.asset_vin
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}"
+        = local_number_to_currency @inspection.asset_book_value
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.inspection.current_value')}"
+        = local_number_to_currency @inspection.current_value
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.inspection.appraiser_value')}"
+        = local_number_to_currency @inspection.appraiser_value
+  %section.row
+    %h4.section-label= t(".fieldset.documents")
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t(".soat")}"
+        = @inspection.soat_number
+      .medium-4.columns
+        %h5.field-title= "#{t(".soat_begins")}"
+        = @inspection.soat_begin_date
+      .medium-4.columns
+        %h5.field-title= "#{t(".soat_expires")}"
+        = @inspection.soat_finish_date
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t(".emissions")}"
+        = @inspection.emissions_certificate
+      .medium-4.columns
+        %h5.field-title= "#{t(".emissions_begins")}"
+        = @inspection.emissions_begin_date
+      .medium-4.columns
+        %h5.field-title= "#{t(".emissions_expires")}"
+        = @inspection.emissions_finish_date
+  %section.row
+    %h4.section-label= t(".fieldset.condition")
+    .row
+      .medium-3.columns
+        %h5.field-title= "#{t(".maintenance")}"
+        = @inspection.maintenance ? t(".adecuate") : t(".inadecuate")
+      .medium-3.columns
+        %h5.field-title= "#{t(".repairs")}"
+        = @inspection.repairs ? t(".adecuate") : t(".inadecuate")
+      .medium-3.columns
+        %h5.field-title= "#{t(".security")}"
+        = @inspection.security ? t(".adecuate") : t(".inadecuate")
+      .medium-3.columns
+        %h5.field-title= "#{t(".modifications")}"
+        = @inspection.modifications ? t(".modified") : t(".none")
+    .row
+      %h4.field-title
+        = t("activerecord.attributes.inspection.exterior")
+      = @inspection.exterior
+      %h5 Observaciones estado
+      %p= @inspection.exterior_notes
+    .row
+      %h4.field-title
+        = t("activerecord.attributes.inspection.interior")
+      = @inspection.interior
+      %h5 Observaciones estado
+      %p= @inspection.interior_notes
+    .row
+      %h4.field-title
+        = t("activerecord.attributes.inspection.engine")
+      = @inspection.engine
+      %h5 Observaciones estado
+      %p= @inspection.engine_notes
+    - if @inspection.accesories
+      .row
+        %h4.field-title
+          = "#{t("activerecord.attributes.inspection.accesories")}"
+        %h5 Observaciones estado
+        %p= @inspection.accesories
+  - if @inspection.insurance_number
+    %section.row
+      %h4.section-label= t("inspections.form.fieldset.insurance")
+      .row
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_company_id")}"
+          = @inspection.insurance_company.name
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_number")}"
+          = @inspection.insurance_number
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.currency")}"
+          = number_to_currency @inspection.currency
+      .row
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_start")}"
+          = @inspection.insurance_start
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_finish")}"
+          = @inspection.insurance_finish
+        .medium-4.columns
+          %h5.field-title= "#{t("activerecord.attributes.inspection.insured_value")}"
+          = number_to_currency @inspection.insured_value
   - if @inspection.observations
-    %p
-      %h4= "#{t("activerecord.attributes.inspection.observations")}"
+    .row
+      %h5.field-title= "#{t("activerecord.attributes.inspection.observations")}"
       = @inspection.observations
   - if @inspection.inventory
-    %p
-      %h4= "#{t("activerecord.attributes.inspection.inventory")}"
-      = link_to "#{t("activerecord.attributes.inspection.inventory")}", @inspection.inventory
-= render "documents/index", documentable: @inspection
-= render "documents/form", document: Document.new, documentable: @inspection
-%br/
-= render "comments/index", commentable: @inspection
-%br/
-%p
-  = link_to "Back", inspections_path, class: "icon-reply"
-  \|
-  = link_to " Edit", edit_inspection_path(@inspection), class: "icon-edit"
+    %section.row
+      %h4.section-label= "#{t(".fieldset.other_information")}"
+      .row
+        %h4= "#{t("activerecord.attributes.inspection.inventory")}"
+        = link_to "#{t("activerecord.attributes.inspection.inventory")}", @inspection.inventory
+  %section#documents.row
+    = render "documents/index", documentable: @inspection
+  %section#comments.row
+    = render "comments/index", commentable: @inspection
+  %section#document-upload.row
+    = render "documents/form", document: Document.new, documentable: @inspection
+= render "shared/content_footer", target: inspections_path
