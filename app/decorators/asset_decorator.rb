@@ -7,7 +7,8 @@ class AssetDecorator < Draper::Decorator
                    :chassis_number, :mobility_restriction, :shield_level,
                    :horse_power, :number_of_doors, :property_limitation,
                    :transit_authority, :import_date, :tp_expiration_date,
-                   :tp_issue_date, :tp_expiration_date, :registration_date]
+                   :tp_issue_date, :tp_expiration_date, :registration_date,
+                   :transit_permit, :import_statement]
 
   ASSET_METHODS.each do |method|
     define_method "#{ method.to_s }" do
@@ -29,7 +30,7 @@ class AssetDecorator < Draper::Decorator
     else
       h.content_tag :section, id: "asset-slideshow", class: "slideshow-wrapper" do
         slider_options = "timer:false;animiation:slide;pause_on_hover:true;"\
-                         "variable_height:true;bullets:false"
+          "variable_height:true;bullets:false"
         h.content_tag :ul, data: { orbit: "", options: slider_options } do
           h.content_tag_for(:li, model.documents) do |document|
             h.image_tag(document.content_url(:thumb).to_s, class: 'thmbnail')
@@ -46,24 +47,9 @@ class AssetDecorator < Draper::Decorator
   end
 
   def imported?
-    html_result = ""
-    if model.importd_assembld?
-      html_result << h.content_tag(:b, "Importado", class: "medium-4 columns")
-      html_result << h.content_tag(:b,
-                    "#{h.t('activerecord.attributes.asset.import_statement')}:",
-                    class: "medium-2 columns")
-      html_result << h.content_tag(:span,
-                    model.import_statement, class: "medium-2 columns")
-      html_result << h.content_tag(:b,
-                    "#{h.t('activerecord.attributes.asset.import_date')}:",
-                    class: "medium-2 columns")
-      html_result << h.content_tag(:span,
-                    model.import_date.to_date.strftime("%d/%m/%Y"),
-                    class: "medium-2 columns")
-    else
-      html_result << h.content_tag(:b, "Ensamblado", class: "medium-4 columns")
-    end
-    html_result.html_safe
+    formatted_field field_value: model.importd_assembld? ? "Importado" : "Ensamblado",
+                    column_size: 4,
+                    attribute: "importd_assembld"
   end
 
   private
@@ -73,5 +59,15 @@ class AssetDecorator < Draper::Decorator
     else
       h.content_tag :span, "N/D", class: "none"
     end
+  end
+  def formatted_field(args = {})
+      h.content_tag(:div, class: "medium-#{args[:column_size]} columns") do
+        internationalized_attribute = I18n.t args[:attribute],
+          scope: [:activerecord, :attributes, :asset]
+        div_result = h.content_tag(:h5, internationalized_attribute,
+                                   class: "field-title")
+        div_result << "#{ args[:field_value] }"
+        div_result.html_safe
+      end.html_safe
   end
 end

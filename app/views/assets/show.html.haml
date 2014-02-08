@@ -25,102 +25,111 @@
 
   %h4.section-label= t('inspections.form.fieldset.information')
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.license_plate')}:"
-    %span.large-2.columns.pull-8
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}"
       = @asset.license_plate
+    .medium-4.columns.pull-4
+      %h5.field-title= "#{t('activerecord.attributes.asset.transit_permit')}"
+      = @asset.transit_permit
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.make_id')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}"
       = @asset.make_name
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.model_id')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}"
       = @asset.model_name
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.year')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.year')}"
       = @asset.year
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.cylinder_cap')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.cylinder_cap')}"
       = @asset.cylinder_cap
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.color_id')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.color_id')}"
       = @asset.color_name
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.service_type')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.service_type')}"
       = @asset.service_type
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.kind_id')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}"
       = @asset.kind_name
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.body_id')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.body_id')}"
       = @asset.body_name
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.fuel_type')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.fuel_type')}"
       = @asset.fuel_type
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.capacity')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.capacity')}"
       = @asset.capacity
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.motor_number')}:"
-    %span.large-2.columns
-      %small= @asset.motor_number
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_motor')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.motor_number')}"
+      = @asset.motor_number
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.rerecorded_motor')}"
       = @asset.rerecorded_motor
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.vin')}:"
-    %span.large-2.columns
-      %small= @asset.vin
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.serial_number')}:"
-    %span.large-2.columns
-      %small= @asset.serial_number
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_serial')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.vin')}"
+      = @asset.vin
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.serial_number')}"
+      = @asset.serial_number
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.rerecorded_serial')}"
       = @asset.rerecorded_serial
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.chassis_number')}:"
-    %span.large-2.columns
-      %small= @asset.chassis_number
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.rerecorded_chassis')}:"
-    %span.large-2.columns.pull-4
+    .medium-4.columns.push-4
+      %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}"
+      = @asset.chassis_number
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.rerecorded_chassis')}"
       = @asset.rerecorded_chassis
   %h4.section-label= t('assets.form.fieldset.additional_info')
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.mobility_restriction')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.mobility_restriction')}"
       = @asset.mobility_restriction
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.shield_level')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.shield_level')}"
       = @asset.shield_level
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.horse_power')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.horse_power')}"
       = @asset.horse_power
   .row
     = @asset.imported?
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.import_statement')}"
+      = @asset.import_statement
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.import_date')}"
+      = @asset.import_date
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.number_of_doors')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.number_of_doors')}"
       = @asset.number_of_doors
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.property_limitation')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.property_limitation')}"
       = @asset.property_limitation
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.transit_authority')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.transit_authority')}"
       = @asset.transit_authority
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.registration_date')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.registration_date')}"
       = @asset.registration_date
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.tp_issue_date')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.tp_issue_date')}"
       = @asset.tp_issue_date
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.tp_expiration_date')}:"
-    %span.large-2.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.tp_expiration_date')}"
       = @asset.tp_expiration_date
   .row
-    %b.large-2.columns= "#{t('activerecord.attributes.asset.book_value')}:"
-    %span.large-2.columns.pull-8
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}"
       = number_to_currency @asset.book_value
 
   - unless @asset.inspections.empty?
@@ -131,6 +140,5 @@
   %section#comments.row
     = render 'comments/index', commentable: @asset
   %section#document-upload.row
-    %h4.section-label Adjuntar documentos
     = render 'documents/form', document: Document.new, documentable: @asset
 = render "shared/content_footer", target: assets_path
