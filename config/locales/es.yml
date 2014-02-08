@@ -278,8 +278,8 @@ es:
       city: 'Ciudad'
       state: 'Departamento'
     show:
-      record: 'Acta de Inspección No.'
-      asset_number: 'Número del Activo Inspeccionado'
+      record: 'Acta No'
+      asset_number: 'Activo Inspeccionado'
       inspection_date: 'Fecha y Hora'
       location: 'Lugar'
       kind: 'Clase de Vehículo'
