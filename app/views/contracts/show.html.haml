@@ -88,6 +88,5 @@
   %section#comments.row
     = render 'comments/index', commentable: @contract
   %section#document-upload.row
-    %h4.section-label Adjuntar documentos
     = render 'documents/form', document: Document.new, documentable: @contract
 = render "shared/content_footer", target: contracts_path
