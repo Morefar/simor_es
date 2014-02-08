@@ -34,7 +34,7 @@ class InspectionsController < ApplicationController
   end
 
   def create
-    @inspection = Inspection.new(params[:inspection])
+    @inspection = Inspection.new(inspection_params)
     respond_to do |format|
       if @inspection.save
         format.html { redirect_to @inspection, notice: 'Inspection was successfully created.' }
@@ -46,7 +46,7 @@ class InspectionsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @inspection.update_attributes(params[:inspection])
+      if @inspection.update_attributes(inspection_params)
         format.html { redirect_to @inspection, notice: 'Inspection was successfully updated.' }
         format.json { head :no_content }
       else
