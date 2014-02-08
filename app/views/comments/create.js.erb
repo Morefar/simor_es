@@ -1,2 +1,6 @@
+var $commentSection = $(".comments")
+if ($commentSection.length == 0) {
+  $('#comments').prepend("<h4 class='section-label'>Notas</h4><ul class='icons-ul comments'></ul>");
+}
 $('.comments').prepend("<%= j render @comment %>");
 $('#comment_content').val("");

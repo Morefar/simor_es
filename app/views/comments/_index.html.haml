@@ -1,6 +1,6 @@
 - unless commentable.comments.empty?
   %h4.section-label= t('.title')
-  %ul#comments.icons-ul.comments
+  %ul.icons-ul.comments
     = render commentable.comments.includes(:user)
 %h4.section-label= t('.add_comment')
 = render 'comments/form', comment: Comment.new, commentable: commentable
