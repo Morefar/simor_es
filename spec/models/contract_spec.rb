@@ -18,18 +18,17 @@ describe Contract do
     expect(contract).to be_valid
   end
 
-  it 'is valid with a duplicate contract number from diferent clients' do
+  # it 'is valid with a duplicate contract number from diferent clients' do
+  #   create(:contract, number: '10980984-9873', client_id: 1)
+  #   contract = build(:contract, number: '10980984-9873', client_id: 2, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
+  #   expect(contract).to be_valid
+  # end
 
-    create(:contract, number: '10980984-9873', client_id: 1)
-    contract = build(:contract, number: '10980984-9873', client_id: 2, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
-    expect(contract).to be_valid
-  end
-
-  it  'is invalid with a duplicate contract number from the same client' do
-    create(:contract, number: '10980984-9873', client_id: 1)
-    contract = build(:contract, number: '10980984-9873', client_id: 1, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
-    expect(contract).to have(1).errors_on(:number)
-  end
+  # it  'is invalid with a duplicate contract number from the same client' do
+  #   create(:contract, number: '10980984-9873', client_id: 1)
+  #   contract = build(:contract, number: '10980984-9873', client_id: 1, lessee: create(:entity, identification_type: create(:identification_type, name: 'NIT')))
+  #   expect(contract).to have(1).errors_on(:number)
+  # end
 
   it 'is invalid with an expiration date earlier than a starting date' do
 
