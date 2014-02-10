@@ -323,7 +323,7 @@ es:
       rerecorded_hint: "Dejelo en blanco si no ha sido regrabado"
       vin_hint: "Debe contener 17 caracteres alfanumericos pero no puede incluir las letras 'I', 'O', 'Q', 'Ñ'"
       shield_hint: "Deje el campo en blanco si no tiene blindaje"
-      i_e_hint: "Marcado significa importado, en blanco significa ensamblado"
+      i_e_hint: "Marcado => importado, en blanco => ensamblado"
       value_hint: "Debe ser un número positivo sin separador de miles. El punto indica el separador decimal"
       private: 'Particular'
       public: 'Público'
@@ -375,7 +375,7 @@ es:
       title: 'Nuevo Contrato de Leasing'
     edit:
       title: 'Editar Contrato de Leasing'
-      show: ' Contracto'
+      show: ' Contrato'
       index: ' Contratos'
     show:
       edit: ' Editar'
@@ -622,8 +622,9 @@ es:
       contract:
         client_id: 'Cliente'
         lessee: 'Arrendatario'
-        lessee_name: 'Locatario / Arrendatario'
+        lessee_name: 'Nombre de Locatario / Arrendatario'
         number: 'Número de Contrato'
+        category: 'Tipo de Contrato'
         category_id: 'Tipo de Contrato'
         start_date: ' Fecha de Inicio'
         first_canon_date: ' Fecha de Pago Primer Cánon'
