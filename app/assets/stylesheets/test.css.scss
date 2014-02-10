@@ -301,7 +301,7 @@ ul.ui-autocomplete {
       display: inline;
     }
     &:required {
-      background: #fff url("/assets/red_asterisk.png") no-repeat scroll 95% center;
+      background: #fff image-url("red_asterisk.png") no-repeat scroll 95% center;
       background-size: 0.3em;
     }
     &:required:valid ~ .form_hint {
