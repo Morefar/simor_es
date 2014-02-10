@@ -24,10 +24,10 @@ class Contract < ActiveRecord::Base
   delegate :name, to: :category, prefix: true, allow_nil: true
 
   # -- Validations ---------------------
-  validates :client_id, :number, :category, :start_date, :duration,
+  validates :number, :category, :start_date, :duration,
     :total_value, :lessee, :expiration_date, :location_of_assets, :periodicity,
     :first_canon_date, presence: true
-  validates :number, :uniqueness => { case_sensitive: false, scope: :client_id }
+  validates :number, :uniqueness => { case_sensitive: false }
   validates :duration, :numericality => { only_integer: true,
                                           greater_than: 0 }
   validates :total_value, :numericality => { greater_than: 0 }
