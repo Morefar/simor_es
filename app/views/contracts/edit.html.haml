@@ -2,6 +2,8 @@
   AH - editar contrato
 - content_for :content_header do
   = render 'shared/header_title', title: "EDITAR CONTRATO"
+- content_for :sidebar do
+  = sidebar_button url: new_entity_path, label: "crear locatario", icon: "group"
 
 .content-container.row
   = render 'form', object: @contract

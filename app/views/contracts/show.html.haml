@@ -1,18 +1,12 @@
 - content_for :title do
   = "contrato: #{@contract.number}"
 - content_for :sidebar do
-  %li.btn-tny.inactive
-    = link_to edit_contract_path(@contract) do
-      editar contrato
-      %i.icon-edit.task-icon.icon-large
-  %li.btn-tny.inactive
-    = link_to new_asset_url(contract: @contract.number) do
-      agregar activo
-      %i.icon-truck.task-icon.icon-large
-  %li.btn-tny.inactive
-    = link_to new_contract_url do
-      agregar contrato
-      %i.icon-file-text.task-icon.icon-large
+  = sidebar_button url: edit_contract_path(@contract), label: "editar contrato",
+    icon: "edit"
+  = sidebar_button url: new_asset_url(contract: @contract.number),
+    label: "agregar activo", icon: "truck"
+  = sidebar_button url: new_contract_url, label: "agregar contrato",
+    icon: "file-text"
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"

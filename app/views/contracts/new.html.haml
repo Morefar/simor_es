@@ -2,6 +2,8 @@
   AH - crear contrato
 - content_for :content_header do
   = render 'shared/header_title', title: "CREAR CONTRATO"
+- content_for :sidebar do
+  = sidebar_button url: new_entity_path, label: "Crear locatario", icon: "group"
 
 .content-container.row
   = render 'form'

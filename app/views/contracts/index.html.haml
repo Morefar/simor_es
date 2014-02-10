@@ -3,10 +3,8 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CONSULTAR CONTRATO"
 - content_for :sidebar do
-  %li.btn-tny.inactive
-    = link_to new_contract_url do
-      crear nuevo contrato
-      %i.icon-file-text.task-icon.icon-large
+  = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
+    icon: "file-text"
 .search-box-container.row
   = form_tag contracts_path, method: :get do
     .field.large-4.columns
