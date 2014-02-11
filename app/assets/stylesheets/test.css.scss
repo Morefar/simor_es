@@ -66,6 +66,7 @@ table {
   }
   &.display {
     margin: 0 0.5em 0.5em;
+    table-layout: fixed;
     th, td {
       border: 1px solid #B3BFAA;
       padding: .5em 1em;
@@ -273,6 +274,12 @@ ul.ui-autocomplete {
       color:#ddd;
     }
   }
+}
+
+.entry-count {
+  float: right;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Form inline hints */

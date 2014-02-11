@@ -9,38 +9,38 @@
   = form_tag entities_path, method: :get do
     .field.medium-4.columns
       = search_field_tag :entities_query, nil, placeholder: "Busqueda"
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_id do
         %i.icon-barcode.icon-large
         identificación
       = radio_button_tag :query_options, :by_id
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_city do
         %i.icon-compass.icon-large
         ciudad
       = radio_button_tag :query_options, :by_city
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_state do
         %i.icon-road.icon-large
         departamento
       = radio_button_tag :query_options, :by_state
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_name do
         %i.icon-user.icon-large
         nombre
       = radio_button_tag :query_options, :by_name
 .content-container.row
+  %span.entry-count
+    = page_entries_info @entities
   %table.responsive-table.layout.display
     %thead
       %tr
         %th= t('entities.shared.name')
         %th= t("entities.shared.identification_number")
-        %th= t('entities.shared.email')
+        %th= t('entities.shared.address')
         %th= t('entities.shared.city')
-        %th= t('entities.shared.lease_contracts')
-        %th= t('entities.shared.cosigner_contracts')
-        %th
-        %th
+        -# %th
+        -# %th
     %tbody
       - @entities.each do |entity|
         %tr
@@ -48,12 +48,10 @@
           %td{"data-label" => "#{t('.responsive.identification_number')}"}
             = entity.identification_type_name
             = entity.identification_number
-          %td{"data-label" => "#{t('.responsive.email')}"}= entity.email
+          %td{"data-label" => "#{t('.responsive.email')}"}= entity.address
           %td{"data-label" => "#{t('.responsive.city')}"}= entity.city
-          %td{"data-label" => "#{t('.responsive.lease_contracts')}"}= entity.contracts_as_lessee_count
-          %td{"data-label" => "#{t('.responsive.cosigner_contracts')}"}= entity.contracts_as_cosigner_count
-          %td.actions.edit= link_to '', edit_entity_path(entity), class: 'icon-edit'
-          %td.actions.delete= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
+          -# %td.actions.edit= link_to '', edit_entity_path(entity), class: 'icon-edit'
+          -# %td.actions.delete= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
   %section.row
     = render 'shared/pagination', collection: @entities
   %footer.content-footer.row
