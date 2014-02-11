@@ -51,30 +51,14 @@ class Contract < ActiveRecord::Base
     lessee: [:identification_number, :name],
     entities: [:identification_number, :name] },
     using: { tsearch: { dictionary: "spanish", prefix: true, any_word: true } }
+
   # -- Class Methods -------------------
   def self.contract_search(args={})
-    case args[:query_options]
-    when "by_number"
-      query = "%#{args[:contract_query]}"
-    when "by_date"
-      query = Date.strptime args[:contract_query], '%d/%m/%Y'
-    when "by_range"
-      dates = args[:contract_query].split('-')
-      query = {}
-      begin
-        query[:start] = Date.strptime(dates[0].strip, '%d/%m/%Y')
-        query[:end] = dates[1] ? Date.strptime(dates[1].strip, '%d/%m/%Y') : Date.today
-      rescue ArgumentError
-        query[:start] = Date.today
-        query[:end] = query[:end]
-      end
-    else
-      query = args[:contract_query]
-    end
+    query = parse_search_query(args)
     if args.has_key? :query_options
       send("search_#{args[:query_options]}", query)
     elsif args.has_key? :contract_query
-      search_by_number(query)
+      search_by_lessee(query)
     else
       all
     end
@@ -84,6 +68,7 @@ class Contract < ActiveRecord::Base
   def lessee_name=(lessee_name)
       self.lessee = Entity.find_by_name(lessee_name) if lessee_name.present?
   end
+
   def lessee_name
     lessee.try(:name)
   end
@@ -106,5 +91,31 @@ class Contract < ActiveRecord::Base
     if option_to_buy && last_date_to_option
       errors.add(:last_date_to_option, I18n.t("errors.messages.later_than_expiration_date")) if (last_date_to_option > expiration_date)
     end
+  end
+
+  def self.parse_search_query(args = {})
+    case args.fetch(:query_options) { "by_number" }
+    when "by_number"
+      query = "%#{args[:contract_query]}%"
+    when "by_date"
+      begin
+        query = Date.strptime args[ :contract_query ], '%d/%m/%Y'
+      rescue ArgumentError
+        query = Date.today
+      end
+    when "by_range"
+      dates = args[:contract_query].split('-')
+      query = {}
+      begin
+        query[:start] = Date.strptime(dates[0].strip, '%d/%m/%Y')
+        query[:end] = dates[1] ? Date.strptime(dates[1].strip, '%d/%m/%Y') : Date.today
+      rescue ArgumentError
+        query[:start] = Date.today
+        query[:end] = Date.today
+      end
+    else
+      query = args[:contract_query]
+    end
+    query
   end
 end
