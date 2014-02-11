@@ -38,8 +38,6 @@ class ContractsController < ApplicationController
 
   def show
     add_breadcrumb "Contract:#{@contract.number}", @contract
-    @lessee = @contract.lessee
-    @cosigners = Array(@contract.cosigners)
     respond_to do |format|
       format.html
       format.js
