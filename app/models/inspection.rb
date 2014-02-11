@@ -3,9 +3,9 @@ class Inspection < ActiveRecord::Base
   belongs_to :inspection_order
   belongs_to :insurance_company
   has_one :contract, through: :asset
-  has_one :inventory
-  has_many :comments, as: :commentable
-  has_many :documents, as: :documentable
+  has_one :inventory, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :documents, as: :documentable, dependent: :restrict_with_error
   delegate :book_value, :license_plate, :inventory_number, :kind_name,
           :chassis_number, :make_name, :model_name, :year, :service_type,
           :vin, to: :asset, prefix: true, allow_nil: true

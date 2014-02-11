@@ -6,10 +6,10 @@ class Asset < ActiveRecord::Base
   belongs_to :kind
   belongs_to :body
   belongs_to :color
-  has_many :inspections
+  has_many :inspections, inverse_of: :asset, dependent: :restrict_with_error
   has_many :inspection_orders
-  has_many :comments, as: :commentable
-  has_many :documents, as: :documentable
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :documents, as: :documentable, dependent: :restrict_with_error
 
   delegate :number, to: :contract, prefix: true, allow_nil: true
   delegate :name, to: :make, prefix: true, allow_nil: true

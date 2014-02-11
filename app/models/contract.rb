@@ -8,7 +8,8 @@ class Contract < ActiveRecord::Base
 
   # -- Relationships -------------------
   belongs_to :category
-  belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
+  belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id',
+    inverse_of: :leases_on
   has_many :assets, inverse_of: :contract, dependent: :restrict_with_error
   has_many :inspections, through: :assets
   has_many :cosigners, inverse_of: :contract

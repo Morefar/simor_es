@@ -1,7 +1,8 @@
 class Entity < ActiveRecord::Base
-
   belongs_to :identification_type
-  has_many :cosigners
+  has_many :leases_on, class_name: "Contract", foreign_key: "lessee_id",
+    inverse_of: :lessee, dependent: :restrict_with_error
+  has_many :cosigners, dependent: :restrict_with_error
   has_many :contracts, through: :cosigners
 
   delegate :name, to: :identification_type, prefix: true
@@ -16,20 +17,4 @@ class Entity < ActiveRecord::Base
                     if: "email.present?"
 
   scope :search_name, ->(term) { where("name ilike ?", term) }
-
-  def contracts_as_lessee
-    Array( Contract.where(lessee_id: id).order("created_at DESC"))
-  end
-
-  def contracts_as_lessee_count
-    Contract.where(lessee_id: id).count
-  end
-
-  def contracts_as_cosigner
-    contracts.order("created_at DESC")
-  end
-
-  def contracts_as_cosigner_count
-    contracts.count
-  end
 end
