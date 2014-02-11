@@ -24,17 +24,18 @@
 <body>
 
 <header id="page_header" class="row" role="banner">
-  <div class="columns large-2 small-2" id="ah-logo">
+  <div class="columns medium-2 " id="ah-logo">
     <%= link_to(image_tag("logo.png", size:"122x74", alt: "AssetHound",
                          id: "logo"), root_url, title: "Inicio") %>
   </div>
-  <span id="tagline" class="columns large-2 push-2">assethound</span>
-  <div class="columns large-7 push-1">
+  <span id="tagline" class="columns medium-2 push-2 hide-for-small">assethound</span>
+  <span class="show-for-small small-12 columns"><br/><br/><br/></span>
+  <div class="columns medium-7 push-1">
     <nav id="utility" class="row">
       <%= form_for(User.new, as: "user", url: session_path("user")) do |f|  %>
-        <div class="columns large-4"><%= f.email_field :email, placeholder: "correo electrónico" %></div>
-        <div class="columns large-4"><%= f.password_field :password, placeholder: "contraseña" %></div>
-        <div class="columns large-4"><%= f.submit t("shared.sign_in"), class: "icon-signin button tiny" %></div>
+        <div class="columns medium-4"><%= f.email_field :email, placeholder: "correo electrónico" %></div>
+        <div class="columns medium-4"><%= f.password_field :password, placeholder: "contraseña" %></div>
+        <div class="columns medium-4"><%= f.submit t("shared.sign_in"), class: "icon-signin button tiny" %></div>
       <% end %>
     </nav>
   </div>

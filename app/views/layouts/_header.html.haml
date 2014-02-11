@@ -1,16 +1,16 @@
 %header#page_header{ role: "banner" }
   .row
-    #ah-logo.columns.large-2.small-2= link_to(image_tag("logo.png", size: "122x74", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
-    %span#tagline.columns.large-2.push-2.hide-for-small assethound
-    .columns.large-8.push-1
+    #ah-logo.columns.medium-2.small-2= link_to(image_tag("logo.png", size: "122x74", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
+    %span#tagline.columns.medium-2.push-2.hide-for-small assethound
+    .columns.medium-8.push-1
       %nav#utility.row
         - if user_signed_in?
-          .columns.large-2= link_to "ayuda", ""
-          .columns.large-2= link_to "actividad reciente", ""
-          .columns.large-3
+          .columns.medium-2= link_to "ayuda", ""
+          .columns.medium-2= link_to "actividad reciente", ""
+          .columns.medium-3
             = form_tag do
               =search_field_tag :search_query, nil, placeholder: "Busqueda"
-          %a#user_settings_button.columns.large-3{ href: "#", data: { dropdown: "drop" } }
+          %a#user_settings_button.columns.medium-3{ href: "#", data: { dropdown: "drop" } }
             %i.icon-user
             %strong= "#{current_user.first_name} #{current_user.last_name}"
           %br
