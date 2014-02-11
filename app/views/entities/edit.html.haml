@@ -1,5 +1,12 @@
-%h1= t('.title')
+- content_for :title do
+  = t('.title')
+- content_for :content_header do
+  = render 'shared/header_title', title: "EDITAR PERSONA"
+- content_for :sidebar do
+  = sidebar_button url: entities_url, label: "consultar personas", icon: "group"
+  = sidebar_button url: new_entity_url, label: "crear persona", icon: "user"
 
-= render 'form'
-%br/
-= link_to t('shared.back'), entities_url
+.content-container.row
+  = render 'form'
+
+= render 'shared/content_footer', target: @entity
