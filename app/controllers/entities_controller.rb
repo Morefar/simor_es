@@ -48,7 +48,7 @@ private
 
   def entity_params
     params.require(:entity).
-      permit(:address, :city, :email, :identificaton_type_id,
+      permit(:address, :city, :email, :identification_type_id,
              :identification_number,:mobile_phone, :name, :phone, :state)
   end
 end
