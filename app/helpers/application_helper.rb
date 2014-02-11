@@ -6,8 +6,9 @@ module ApplicationHelper
     attribute.localize("#{ I18n.locale }_co")
   end
   def sidebar_button(options = {})
+    method = options[:method] ? options[:method] : :get
     content_tag(:li, class: "btn-tny inactive") do
-      link_to options[:url] do
+      link_to options[:url], method: method do
         %{ #{ options[:label] }
         <i class="icon-#{options[:icon]} task-icon icon-large"></i> }.html_safe
       end
