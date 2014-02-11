@@ -40,7 +40,7 @@
     .medium-6.columns
       %h5.field-title= "#{t('entities.shared.phone')}:"
       = @entity.phone
-  - unless @entity.contracts_as_lessee.empty?
+  - unless @entity.leases_on.empty?
     %h4.section-label= t('.contracts_as_lessee')
     %table.responsive-table.layout.display
       %thead
@@ -52,8 +52,8 @@
           %th= "Tipo de contrato"
           %th= "Activos"
       %tbody
-        = render @entity.contracts_as_lessee
-  - unless @entity.contracts_as_cosigner.empty?
+        = render @entity.leases_on
+  - unless @entity.contracts.unscoped.empty?
     %h4.section-label= t('.contracts_as_cosigner')
     %table.responsive-table.layout.display
       %thead
@@ -65,5 +65,5 @@
           %th= "Tipo de contrato"
           %th= "Activos"
       %tbody
-        = render @entity.contracts_as_cosigner
+        = render @entity.contracts
 = render "shared/content_footer", target: entities_path

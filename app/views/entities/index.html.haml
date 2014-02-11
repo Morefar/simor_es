@@ -39,8 +39,6 @@
         %th= t("entities.shared.identification_number")
         %th= t('entities.shared.address')
         %th= t('entities.shared.city')
-        -# %th
-        -# %th
     %tbody
       - @entities.each do |entity|
         %tr
@@ -50,8 +48,6 @@
             = entity.identification_number
           %td{"data-label" => "#{t('.responsive.email')}"}= entity.address
           %td{"data-label" => "#{t('.responsive.city')}"}= entity.city
-          -# %td.actions.edit= link_to '', edit_entity_path(entity), class: 'icon-edit'
-          -# %td.actions.delete= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
   %section.row
     = render 'shared/pagination', collection: @entities
   %footer.content-footer.row
