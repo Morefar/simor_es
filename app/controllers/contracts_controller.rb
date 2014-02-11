@@ -62,9 +62,10 @@ class ContractsController < ApplicationController
 #DELETE ACTIONS
   def destroy
     if @contract.destroy
-      redirect_to contracts_url
+      redirect_to contracts_url, notice: "Contrato eliminado exitosamente"
     else
-        flash.now[:alert] = "No se eliminó porque aún tiene activos asociados"
+        flash.now[:alert] = %{ No se eliminó porque aún tiene activos o
+                              documentos asociados }
         render action: "show", status: :forbidden
     end
   end

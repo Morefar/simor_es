@@ -1,4 +1,5 @@
 class EntitiesController < ApplicationController
+  respond_to :html
   before_action :find_entity, except: [:index, :new, :create]
 
 def index
@@ -10,10 +11,12 @@ def index
 end
 
 def show
+  respond_with @entity
 end
 
 def new
   @entity = Entity.new
+  respond_with @entity
 end
 
 def edit
@@ -21,24 +24,23 @@ end
 
 def create
   @entity = Entity.new(entity_params)
-  if @entity.save
-    redirect_to entities_url
-  else
-    render 'new'
-  end
+  flash[:notice] = "Persona creada satisfactoriamente" if @entity.save
+  respond_with @entity
 end
 
 def update
-  if @entity.update_attributes(entity_params)
-    redirect_to @entity
-  else
-    render 'edit'
-  end
+  flash[:notice] = "Datos de persona actualizados" if @entity.update_attributes(entity_params)
+  respond_with @entity
 end
 
 def destroy
-  @entity.destroy
-  redirect_to entities_url
+    if @entity.destroy
+      redirect_to entities_url, notice: "Datos de Persona eliminados exitosamente"
+    else
+        flash.now[:alert] = %{ Datos de persona no fueron eliminados porque aún tiene
+                               contratos asociados }
+        render action: "show", status: :forbidden
+    end
 end
 
 private

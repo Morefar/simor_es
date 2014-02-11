@@ -45,31 +45,30 @@ class AssetsController < ApplicationController
     @asset = Asset.new(asset_params)
     respond_to do |format|
       if @asset.save
-        format.html { redirect_to @asset, notice: 'Asset was successfully created.' }
+        format.html { redirect_to @asset, notice: 'Activo creado exitosamente.' }
       else
         format.html { render action: "new" }
       end
     end
   end
 
-
-
   def update
     respond_to do |format|
       if @asset.update_attributes(asset_params)
-        format.html { redirect_to @asset, notice: 'Asset was successfully updated.' }
+        format.html { redirect_to @asset, notice: 'Activo actualizado correctamente' }
       else
         format.html { render action: "edit" }
       end
     end
   end
 
-
-
   def destroy
-    @asset.destroy
-    respond_to do |format|
-      format.html { redirect_to assets_url }
+    if @asset.destroy
+      redirect_to assets_url, notice: "Activo eliminado exitosamente"
+    else
+        flash.now[:alert] = %{ Activo no fue eliminado porque aún tiene
+                              inspecciones o documentos asociados }
+        render action: "show", status: :forbidden
     end
   end
 
