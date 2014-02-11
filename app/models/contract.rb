@@ -9,12 +9,12 @@ class Contract < ActiveRecord::Base
   # -- Relationships -------------------
   belongs_to :category
   belongs_to :lessee, class_name: 'Entity', foreign_key:'lessee_id'
-  has_many :assets, inverse_of: :contract
+  has_many :assets, inverse_of: :contract, dependent: :restrict_with_error
   has_many :inspections, through: :assets
   has_many :cosigners, inverse_of: :contract
   has_many :entities, through: :cosigners
-  has_many :comments, as: :commentable
-  has_many :documents, as: :documentable
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :documents, as: :documentable, dependent: :restrict_with_error
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :cosigners
 

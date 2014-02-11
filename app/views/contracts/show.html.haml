@@ -69,10 +69,10 @@
             = @contract.last_date_to_option.strftime "%d/%m/%Y"
     %section#lessee_info.large-6.columns
       %h4.section-label= t('.fieldset.lessee')
-      = render @lessee
-      - unless @cosigners.empty?
+      = render @contract.lessee
+      - unless @contract.cosigners.empty?
         %h4.section-label= t('.fieldset.cosigners')
-        = render @cosigners.map(&:entity)
+        = render @contract.consigners.map(&:entity)
   - if @contract.asset_count > 0
     %section#assets_info.row
       %h4.section-label= t('.fieldset.assets')
