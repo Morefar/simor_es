@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :set_i18n_locale_from_params
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
   protected
     def set_i18n_locale_from_params
       if params[:locale]
@@ -16,5 +16,10 @@ class ApplicationController < ActionController::Base
 
     def default_url_options
       { locale: I18n.locale }
+    end
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :account_name]
+      devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name]
     end
 end
