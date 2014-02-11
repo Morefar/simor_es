@@ -5,6 +5,8 @@
 - content_for :sidebar do
   = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
     icon: "file-text"
+  = sidebar_button url: entities_path, label: "consultar personas",
+    icon: "group"
 .search-box-container.row
   = form_tag contracts_path, method: :get do
     .field.medium-4.columns

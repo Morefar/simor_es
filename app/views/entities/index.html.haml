@@ -1,6 +1,35 @@
-%h1= t('.title')
-%p= link_to t('.new_btn'), new_entity_url, class: "button radius success"
-.row
+- content_for :title do
+  = t('.title')
+- content_for :content_header do
+  = render 'shared/header_title', title: "CONSULTAR PERSONA"
+- content_for :sidebar do
+  = sidebar_button url: new_entity_url, label: "crear nueva persona",
+    icon: "user"
+.search-box-container.row
+  = form_tag entities_path, method: :get do
+    .field.medium-4.columns
+      = search_field_tag :entities_query, nil, placeholder: "Busqueda"
+    .field.medium-2.columns.center
+      = label_tag :query_options_by_id do
+        %i.icon-barcode.icon-large
+        identificación
+      = radio_button_tag :query_options, :by_id
+    .field.medium-2.columns.center
+      = label_tag :query_options_by_city do
+        %i.icon-compass.icon-large
+        ciudad
+      = radio_button_tag :query_options, :by_city
+    .field.medium-2.columns.center
+      = label_tag :query_options_by_state do
+        %i.icon-road.icon-large
+        departamento
+      = radio_button_tag :query_options, :by_state
+    .field.medium-2.columns.center
+      = label_tag :query_options_by_name do
+        %i.icon-user.icon-large
+        nombre
+      = radio_button_tag :query_options, :by_name
+.content-container.row
   %table.responsive-table.layout.display
     %thead
       %tr
@@ -25,5 +54,9 @@
           %td{"data-label" => "#{t('.responsive.cosigner_contracts')}"}= entity.contracts_as_cosigner_count
           %td.actions.edit= link_to '', edit_entity_path(entity), class: 'icon-edit'
           %td.actions.delete= link_to '', entity, class: 'icon-trash', method: :delete, data: { confirm: 'Está seguro que desea borrar esta persona?'}
-.row
-  = paginate @entities
+  %section.row
+    = render 'shared/pagination', collection: @entities
+  %footer.content-footer.row
+    = link_to :back do
+      %i.icon-reply
+      regresar
