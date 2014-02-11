@@ -72,7 +72,7 @@
       = render @contract.lessee
       - unless @contract.cosigners.empty?
         %h4.section-label= t('.fieldset.cosigners')
-        = render @contract.consigners.map(&:entity)
+        = render @contract.cosigners.map(&:entity)
   - if @contract.asset_count > 0
     %section#assets_info.row
       %h4.section-label= t('.fieldset.assets')
