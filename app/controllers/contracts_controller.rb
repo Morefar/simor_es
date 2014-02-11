@@ -24,13 +24,7 @@ class ContractsController < ApplicationController
   def index
     @contracts = Contract.contract_search(params).includes(:category, :lessee).page params[:page]
     respond_to do |format|
-      format.html do
-        if @contracts.empty?
-          render "public/404", status: :not_found
-        else
-          @contracts
-        end
-      end
+      format.html
       format.json do
         if params.has_key? :number
           render json: Contract.where("number = ?", params[:number]).pluck(:id)
