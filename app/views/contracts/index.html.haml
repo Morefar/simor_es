@@ -54,7 +54,8 @@
             = link_to "", edit_contract_url(contract.id), class: 'icon-edit'
           %td.actions.delete
             = link_to "", contract_url(contract.id), class: 'icon-trash', method: :delete, data: { confirm: "Are you completely sure you want to erase contract #{contract.number}?" }
-  = paginate @contracts
+  %section.row
+    = render 'shared/pagination', collection: @contracts
 %footer.content-footer.row
   = link_to :back do
     %i.icon-reply
