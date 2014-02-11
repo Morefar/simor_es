@@ -1,47 +1,69 @@
-%h1= t('.title')
-
-%h2
-  = "#{ t('entities.shared.name') }:"
+- content_for :title do
   = @entity.name
-.row
-  .large-6.columns
-    %b= "#{t('entities.shared.identification_number')}:"
-    = @entity.identification_type_name
-    = @entity.identification_number
-  .large-6.columns
-    %b= "#{t('entities.shared.email')}:"
-    = @entity.email
-%h4= "#{t('.contact_numbers')}:"
-.row
-  .large-6.columns
-    %b= "#{t('entities.shared.mobile_phone')}:"
-    = @entity.mobile_phone
-  .large-6.columns
-    %b= "#{t('entities.shared.phone')}:"
-    = @entity.phone
-%h4= "#{t('.contact_address')}:"
-.row
-  .large-12.columns
-    = "#{@entity.address}, #{@entity.city}, #{@entity.state}"
-- unless @entity.contracts_as_lessee.empty?
-  %h5= t('.contracts_as_lessee')
+- content_for :sidebar do
+  = sidebar_button url: edit_entity_path(@entity), label: "editar persona",
+    icon: "edit"
+  = sidebar_button url: @entity, label: "eliminar persona", icon: "trash",
+    method: :delete
+  = sidebar_button url: new_entity_url, label: "crear nueva persona",
+    icon: "user"
+
+.detail-title
+  %span#model_number= @entity.name
+  %span#model_title= "Locatario"
+.content-container.row
+  %h4.section-label= "Información Básica"
   .row
-    - @entity.contracts_as_lessee.each do |contract|
-      .row
-        .large-6.columns.center
-          = link_to contract.number, contract
-        .large-6.columns.center
-          - contract.assets.each do |asset|
-            .row
-              = link_to asset.inventory_number, asset
-- unless @entity.contracts_as_cosigner.empty?
-  %h5= t('.contracts_as_cosigner')
+    .medium-6.columns
+      %h5.field-title= "#{t('entities.shared.identification_number')}"
+      = @entity.identification_type_name
+      = @entity.identification_number
+    .medium-6.columns
+      %h5.field-title= "#{t('entities.shared.email')}"
+      = @entity.email
+  %h4.section-label= "#{t('.contact_address')}"
   .row
-    - @entity.contracts_as_cosigner.each do |contract|
-      .row
-        .large-6.columns.center
-          = link_to contract.number, contract
-        .large-6.columns.center
-          - contract.assets.each do |asset|
-            .row
-              = link_to asset.inventory_number, asset
+    .medium-6.columns
+      %h5.field-title= "Dirección"
+      = "#{@entity.address}"
+    .medium-3.columns
+      %h5.field-title= "Ciudad"
+      = @entity.city
+    .medium-3.columns
+      %h5.field-title= "Departamento"
+      = @entity.state
+  %h4.section-label= "#{t('.contact_numbers')}:"
+  .row
+    .medium-6.columns
+      %h5.field-title= "#{t('entities.shared.mobile_phone')}:"
+      = @entity.mobile_phone
+    .medium-6.columns
+      %h5.field-title= "#{t('entities.shared.phone')}:"
+      = @entity.phone
+  - unless @entity.contracts_as_lessee.empty?
+    %h4.section-label= t('.contracts_as_lessee')
+    %table.responsive-table.layout.display
+      %thead
+        %tr
+          %th= "Contrato"
+          %th= "Creación"
+          %th= "Inicio"
+          %th= "Terminación"
+          %th= "Tipo de contrato"
+          %th= "Activos"
+      %tbody
+        = render @entity.contracts_as_lessee
+  - unless @entity.contracts_as_cosigner.empty?
+    %h4.section-label= t('.contracts_as_cosigner')
+    %table.responsive-table.layout.display
+      %thead
+        %tr
+          %th= "Contrato"
+          %th= "Creación"
+          %th= "Inicio"
+          %th= "Terminación"
+          %th= "Tipo de contrato"
+          %th= "Activos"
+      %tbody
+        = render @entity.contracts_as_cosigner
+= render "shared/content_footer", target: entities_path

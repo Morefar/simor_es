@@ -1,0 +1,7 @@
+%tr
+  %td.identifier{"data-label" => "Número"}= link_to contract.number, contract
+  %td{"data-label" => "Creado"}= contract.created_at.strftime("%d/%m/%Y")
+  %td{"data-label" => "Inicio"}= contract.start_date.strftime("%d/%m/%Y")
+  %td{"data-label" => "Fin"}= contract.expiration_date.strftime("%d/%m/%Y")
+  %td{"data-label" => "CategorÍa"}= contract.category_name
+  %td.center{"data-label" => "Activos"}= contract.asset_count
