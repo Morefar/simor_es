@@ -7,24 +7,24 @@
     icon: "file-text"
 .search-box-container.row
   = form_tag contracts_path, method: :get do
-    .field.large-4.columns
+    .field.medium-4.columns
       = search_field_tag :contract_query, nil, placeholder: "Busqueda"
-    .field.large-2.columns.center
+    .field.medium-2.columns.center
       = label_tag :query_options_by_number do
         %i.icon-barcode.icon-large
         número
       = radio_button_tag :query_options, :by_number
-    .field.large-2.columns.center
+    .field.medium-2.columns.center
       = label_tag :query_options_by_date do
         %i.icon-time.icon-large
         fecha
       = radio_button_tag :query_options, :by_date
-    .field.large-2.columns.center
+    .field.medium-2.columns.center
       = label_tag :query_options_by_range do
         %i.icon-resize-full.icon-large
         rango
       = radio_button_tag :query_options, :by_range
-    .field.large-2.columns.center
+    .field.medium-2.columns.center
       = label_tag :query_options_by_lessee do
         %i.icon-user.icon-large
         locatario
@@ -45,15 +45,15 @@
       - @contracts.each do |contract|
         %tr
           %td.identifier{"data-label" => t('.responsive.number')}= link_to contract.number, contract
-          %td{"data-label" => t('.responsive.start_date')}= contract.start_date
-          %td{"data-label" => t('.responsive.expiration_date')}= contract.expiration_date
+          %td{"data-label" => t('.responsive.start_date')}= contract.start_date.strftime("%d/%m/%Y")
+          %td{"data-label" => t('.responsive.expiration_date')}= contract.expiration_date.strftime("%d/%m/%Y")
           %td{"data-label" => t('.responsive.lessee')}= link_to contract.lessee_name, contract.lessee
           %td{"data-label" => t('.responsive.category')}= contract.category_name
           %td.center{"data-label" => t('.responsive.assets')}= contract.asset_count
           %td.actions.edit
             = link_to "", edit_contract_url(contract.id), class: 'icon-edit'
           %td.actions.delete
-            = link_to "", contract_url(contract.id), class: 'icon-trash', method: :delete, data: { confirm: "Are you completely sure you want to erase contract #{contract.number}?" }
+            = link_to "", contract_url(contract.id), class: 'icon-trash', method: :delete, data: { confirm: "Está seguro que desea eliminar el contrato #{contract.number}?" }
   %section.row
     = render 'shared/pagination', collection: @contracts
 %footer.content-footer.row
