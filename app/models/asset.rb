@@ -24,31 +24,22 @@ class Asset < ActiveRecord::Base
     :book_value, :transit_permit, :color_name, :kind_name, :body_name,
     :chassis_number, presence: true, on: :update
   validates :transit_permit, length: { is: 11 }, if: "transit_permit.present?"
-  validates :license_plate, format: {
-    with: /\A[a-z]{2}[a-z0-9]\d{3}\Z/i,
-    message: 'incorrect format. Try (AAA000)'
-  }
+  validates :license_plate, format: { with: /\A[a-z]{2}[a-z0-9]\d{3}\Z/i,
+                            message: 'incorrect format. Try (AAA000)' }
   validates :license_plate, length: { is: 6 }
-  validates :year, numericality: {
-    only_integer: true,
+  validates :year, numericality: { only_integer: true,
     greater_than_or_equal_to: 2000,
-    less_than_or_equal_to: (Date.current >> 12).year
-  }
+    less_than_or_equal_to: (Date.current >> 12).year }
   validates :cylinder_cap, numericality: {
-    only_integer: true,
-    greater_than_or_equal_to: 50,
-    less_than_or_equal_to: 8000
-  }, if: "cylinder_cap.present?"
+    only_integer: true, greater_than_or_equal_to: 50,
+    less_than_or_equal_to: 8000 }, if: "cylinder_cap.present?"
   validates :capacity, numericality: {
-    only_integer: true,
-    greater_than_or_equal_to: 2,
-    less_than_or_equal_to: 3500
-  }, if: "capacity.present?"
+    only_integer: true, greater_than_or_equal_to: 2,
+    less_than_or_equal_to: 3500 }, if: "capacity.present?"
   validates :chassis_number, length: { is: 17 }
   validates :vin, length: { is: 17 }, if: "vin.present?"
   validates :vin, format: {
-    with: /\A[^_iIoOqQ\W]+\Z/,
-    message: I18n.t('errors.messages.invalid_vin')
+    with: /\A[^_iIoOqQ\W]+\Z/, message: I18n.t('errors.messages.invalid_vin')
   }, if: "vin.present?"
   validates :motor_number, length: { in: 1..17 }, if: "motor_number.present?"
   validates :motor_number, uniqueness: true, if: "motor_number.present?"
@@ -62,11 +53,14 @@ class Asset < ActiveRecord::Base
   around_destroy :decrease_asset_count_on_contract
 
   default_scope { order("created_at DESC") }
-  scope :search_license_plate, ->(license_plate) { where("license_plate ilike ?", license_plate) }
+  scope :search_license_plate,
+    ->(license_plate) { where("license_plate ilike ?", license_plate) }
 
   def model_belongs_to_make
     if make.present? && model.present?
-      errors.add(:model, I18n.t('errors.messages.model_dont_belong_make')) unless make.id == model.make_id
+      unless make.id == model.make_id
+        errors.add(:model, I18n.t('errors.messages.model_dont_belong_make'))
+      end
     end
   end
 
@@ -88,11 +82,15 @@ class Asset < ActiveRecord::Base
   end
 
   def contract_number=(contract_number)
-    self.contract = Contract.find_by_number(contract_number) if contract_number.present?
+    if contract_number.present?
+      self.contract = Contract.find_by_number(contract_number)
+    end
   end
 
   def make_name=(make_name)
-    self.make = Make.find_by_name(make_name) if make_name.present?
+    if make_name.present?
+      self.make = Make.find_by_name(make_name)
+    end
   end
 
   def model_name=(model_name)
@@ -102,14 +100,20 @@ class Asset < ActiveRecord::Base
   end
 
   def color_name=(color_name)
-    self.color = Color.find_by_name(color_name) if color_name.present?
+    if color_name.present?
+      self.color = Color.find_by_name(color_name)
+    end
   end
 
   def kind_name=(kind_name)
-    self.kind = Kind.find_by_name(kind_name) if kind_name.present?
+    if kind_name.present?
+      self.kind = Kind.find_by_name(kind_name)
+    end
   end
 
   def body_name=(body_name)
-    self.body = Body.find_by_name(body_name) if body_name.present?
+    if body_name.present?
+      self.body = Body.find_by_name(body_name)
+    end
   end
 end
