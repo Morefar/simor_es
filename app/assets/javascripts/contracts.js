@@ -26,6 +26,24 @@ $("#contract_option_to_buy").change(function() {
     }
 }).change();
 
+// Contract form remove cosigners behaviour
+$("form").on("click", ".remove_cosigners", function(event) {
+  $(this).prev('input[type=hidden]').val(1);
+  $(this).closest('.row').hide();
+  event.preventDefault();
+});
+
+// Contract form add cosigners field behaviour
+$("form").on("click", ".add_fields", function(event) {
+  var time = new Date().getTime();
+  regexp = new RegExp($(this).data('id'), 'g');
+  $(this).before($(this).data('fields').replace(regexp, time))
+  $autoField = $(this).prev('.row').find('.autocomplete').first();
+  $autoField.autocomplete({ source: $autoField.data("autocomplete-source"), minLength: 2 });
+  event.preventDefault();
+});
+
+// Contract index search form
 $( "input[name^=query_options]" ).on("click", function() {
   var input = $(this)[0];
   var $searchField = $( "#contract_query" );

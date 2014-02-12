@@ -1,0 +1,8 @@
+.row
+  .field.medium-4.columns
+    = f.label :entity_name, "Nombre del codeudor"
+    = f.text_field :entity_name,                                          |
+      data: { autocomplete_source: entities_path }, class: "autocomplete" |
+  = f.hidden_field :_destroy
+  = link_to "#", class: "remove_cosigners" do
+    %i.icon-trash

@@ -5,6 +5,7 @@ class ContractsController < ApplicationController
 #CREATE ACTIONS
   def new
     @contract = Contract.new
+    @contract.cosigners.build
     respond_to do |format|
       format.html
       format.json { render json: @contract }
@@ -22,7 +23,8 @@ class ContractsController < ApplicationController
 
 #READ ACTIONS
   def index
-    @contracts = Contract.contract_search(params).includes(:category, :lessee).page params[:page]
+    @contracts = Contract.contract_search(params).
+                 includes(:category, :lessee).page params[:page]
     respond_to do |format|
       format.html
       format.json do
@@ -80,9 +82,11 @@ class ContractsController < ApplicationController
   end
   def contract_params
     params.require(:contract).
-      permit(:number, :start_date, :first_canon_date, :expiration_date, :duration,
-             :periodicity, :total_value, :currency, :location_of_assets, :client_id,
-             :category_id, :option_to_buy, :last_date_to_option, :category,
-             :lessee_name, :cosigners_attributes)
+      permit(:number, :start_date, :first_canon_date, :expiration_date,
+             :duration, :periodicity, :total_value, :currency,
+             :location_of_assets, :client_id, :category_id, :option_to_buy,
+             :last_date_to_option, :category, :lessee_name,
+             cosigners_attributes: [:id, :entity_name, :contract_id, :_destroy]
+            )
   end
 end

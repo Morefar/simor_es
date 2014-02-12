@@ -17,7 +17,7 @@ class Contract < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :restrict_with_error
   accepts_nested_attributes_for :documents, allow_destroy: true
-  accepts_nested_attributes_for :cosigners
+  accepts_nested_attributes_for :cosigners, allow_destroy: true
 
   # -- Delegations ---------------------
   delegate :name, :identification_number, :identification_type_name,
