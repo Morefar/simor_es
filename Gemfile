@@ -8,6 +8,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'dotenv-rails', '~> 0.9.0'
   gem 'better_errors', '~> 1.1.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'meta_request', '~> 0.2.8'
@@ -45,15 +46,15 @@ gem 'aasm', '~> 3.1.0'
 gem 'haml-rails', '~> 0.5.3'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 4.1.1'
-gem 'mini_magick', '~> 3.7.0'
 gem 'carrierwave', '~> 0.9.0'
-gem 'carrierwave_direct', '~> 0.0.13'
+gem 'mini_magick', '~> 3.7.0'
+gem 'carrierwave_backgrounder', '~> 0.3.0'
+gem 'unf','~> 0.1.3'
 gem 'sidekiq', '~> 2.17.4'
 gem 'fog', '~> 1.20.0'
 gem 'twitter_cldr', '~> 2.4.2'
 gem 'kaminari', '~> 0.15.1'
 gem 'devise', '~> 3.2.2'
-gem 'dotenv-rails', '~> 0.9.0'
 gem 'newrelic_rpm', "~> 3.7.2"
 gem 'foreman', '~> 0.63.0'
 gem 'puma', '~> 2.7.1'
