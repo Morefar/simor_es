@@ -27,8 +27,8 @@ AssetHound.subl*
 /public/uploads
 /public/documents
 
-#Ignore foreman procfile
-/Procfile
-
 #Ignore environment variables file
 /.env
+
+# Ignore redis dumps
+dump.rdb
