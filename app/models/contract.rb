@@ -12,7 +12,7 @@ class Contract < ActiveRecord::Base
     inverse_of: :leases_on
   has_many :assets, inverse_of: :contract, dependent: :restrict_with_error
   has_many :inspections, through: :assets
-  has_many :cosigners, inverse_of: :contract
+  has_many :cosigners, inverse_of: :contract, validate: true
   has_many :entities, through: :cosigners
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :restrict_with_error
