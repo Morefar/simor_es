@@ -1,6 +1,7 @@
 class Document < ActiveRecord::Base
   belongs_to :documentable, polymorphic: true
   mount_uploader :content, DocumentUploader
+  process_in_background :content
 
   before_validation :compute_hash
 
@@ -20,5 +21,4 @@ class Document < ActiveRecord::Base
   def compute_hash
     self.md5hash = content.md5
   end
-
 end

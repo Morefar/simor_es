@@ -2,23 +2,27 @@
 
 class DocumentUploader < CarrierWave::Uploader::Base
 
-  # include CarrierWaveDirect::Uploader
+  include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
   process :set_content_type
 
-  storage :file
-  # storage :fog
+  # storage :file
+  storage :fog
 
   def store_dir
     "documents/#{model.documentable_type.to_s.underscore}/#{model.documentable_id}/#{mounted_as}"
   end
 
-  process convert: :png
+  # alternate temporary location for Heroku
+  def cache_dir
+    "#{Rails.root.to_s}/tmp/uploads"
+  end
 
   # Create different versions of your uploaded files:
     version :thumb do
       process :thumbnail
+      process convert: :png
     end
 
     def thumbnail
@@ -32,7 +36,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
     end
 
   def extension_white_list
-    %w(jpg jpeg gif png pdf)
+    %w(jpg jpeg gif png pdf JPG JPEG GIF PNG PDF)
   end
 
   def md5
