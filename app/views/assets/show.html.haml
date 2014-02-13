@@ -138,7 +138,7 @@
   %section#documents.row
     = render 'documents/index', documentable: @asset
   %section#comments.row
-    = render 'comments/index', commentable: @asset
+    = render 'comments/index', commentable: @asset.model
   %section#document-upload.row
-    = render 'documents/form', document: Document.new, documentable: @asset
+    = render 'documents/form', document: Document.new, documentable: @asset.model
 = render "shared/content_footer", target: assets_path
