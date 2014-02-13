@@ -30,11 +30,16 @@ class AssetDecorator < Draper::Decorator
     else
       h.content_tag :section, id: "asset-slideshow", class: "slideshow-wrapper" do
         slider_options = "timer:false;animiation:slide;pause_on_hover:true;"\
-          "variable_height:true;bullets:false"
+          "variable_height:false;bullets:false"
         h.content_tag :ul, data: { orbit: "", options: slider_options } do
-          h.content_tag_for(:li, model.documents) do |document|
-            h.image_tag(document.content_url(:thumb).to_s, class: 'thmbnail')
+          slider_items = ""
+          model.documents.each do |document|
+            if document.content_type.starts_with? "image"
+              slider_items << h.content_tag(:li,
+                h.image_tag(document.content_url.to_s, class: 'th thmbnail'))
+            end
           end
+          slider_items.html_safe
         end
       end
     end

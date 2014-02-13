@@ -5,12 +5,12 @@
     = f.hidden_field :documentable_id, value: documentable.id
     = f.hidden_field :documentable_type, value: documentable.class.to_s
   .row
-    .field.large-7.columns
+    .field.medium-7.columns
       = f.text_field :slug, placeholder: "Descripción"
-    .field.large-3.columns.pull-2
+    .field.medium-3.columns.pull-2
       = f.file_field :content
   .row
-    .field.large-3.columns
+    .field.medium-3.columns
       = f.select :category, %W(Foto Documento Contrato Factura Impronta Otro), { prompt: "Categoría" }, class: "radius"
-    .action.large-3.columns.pull-6
+    .action.medium-3.columns.pull-6
       = f.submit
