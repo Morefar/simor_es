@@ -38,11 +38,12 @@
         required: true, class: "autocomplete"
     .field.medium-3.columns
       = form.label :year
-      = form.select :year, (2000..(Date.current >> 12).year), selected: Date.current.year
+      = form.select :year, (2000..(Date.current >> 12).year), |
+                          selected: Date.current.year         |
   .row
     .field.medium-3.columns
       = form.label :cylinder_cap
-      = form.number_field :cylinder_cap
+      = form.number_field :cylinder_cap, min: 1
       %span.form_hint= t(".cylinder_cap_hint")
     .field.medium-3.columns
       = form.label :color_name
@@ -50,7 +51,8 @@
         required: true, class: "autocomplete"
     .field.medium-3.columns.pull-3
       = form.label :service_type
-      = form.select :service_type, [t('.private'),t('.public'),t('.diplomatic'),t('.official'),t('.special'),t('.others')]
+      = form.select :service_type, [t('.private'),t('.public'),               |
+                  t('.diplomatic'),t('.official'),t('.special'),t('.others')] |
   .row
     .field.medium-3.columns
       = form.label :kind_name
@@ -62,10 +64,12 @@
         required: true, class: "autocomplete"
     .field.medium-3.columns
       = form.label :fuel_type
-      = form.select :fuel_type, [t('.gasoline'),t('.gnv'),t('.diesel'),t('.gas_gasoline'),t('.electric'),t('.hidrogen'),t('.ethanol'),t('.biodiesel')]
+      = form.select :fuel_type, [t('.gasoline'),t('.gnv'),t('.diesel'), |
+        t('.gas_gasoline'),t('.electric'),t('.hidrogen'),               |
+        t('.ethanol'),t('.biodiesel')]                                  |
     .field.medium-3.columns
       = form.label :capacity
-      = form.number_field :capacity
+      = form.number_field :capacity, min: 1
   .row
     .field.medium-3.columns
       = form.label :motor_number
@@ -102,11 +106,11 @@
         = form.text_field :mobility_restriction
       .field.medium-3.columns
         = form.label :shield_level
-        = form.number_field :shield_level
+        = form.number_field :shield_level, min: 1
         %span.form_hint= t(".shield_hint")
       .field.medium-3.columns.pull-3
         = form.label :horse_power
-        = form.number_field :horse_power
+        = form.number_field :horse_power, min: 1
     .row
       .field.medium-3.columns
         = form.label :import_statement
@@ -122,7 +126,7 @@
         = form.text_field :import_date, class: 'date-field'
       .field.medium-3.columns
         = form.label :number_of_doors
-        = form.number_field :number_of_doors
+        = form.number_field :number_of_doors, min: 1
     .row
       .field.columns
         = form.label :property_limitation
@@ -150,7 +154,8 @@
     .row
       .field.medium-3.columns
         = form.label :book_value
-        = form.number_field :book_value, placeholder: 'i.e. 15000000.50', required: true
+        = form.number_field :book_value, placeholder: 'i.e. 15000000.50', |
+                                          required: true, min: 1          |
         %span.form_hint= t(".value_hint")
   .actions
     = form.submit

@@ -7,8 +7,6 @@
       %th= t('activerecord.attributes.asset.model_id')
       %th= t('activerecord.attributes.asset.year')
       %th= t('activerecord.attributes.asset.service_type')
-      %th
-      %th
   %tbody
     - assets.each do |asset|
       %tr
@@ -18,5 +16,3 @@
         %td{"data-label" => "#{t('activerecord.attributes.asset.model_id')}" }= asset.model_name
         %td{"data-label" => "#{t('activerecord.attributes.asset.year')}" }= asset.year
         %td{"data-label" => "#{t('activerecord.attributes.asset.service_type')}" }= asset.service_type
-        %td.actions.edit.center= link_to '', edit_asset_path(asset), class: 'icon-edit'
-        %td.actions.delete.center= link_to '', asset, class: 'icon-trash',method: :delete, data: { confirm: 'Are you sure?' }

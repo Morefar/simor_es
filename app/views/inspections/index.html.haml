@@ -3,10 +3,20 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CONSULTAR INSPECCION"
 - content_for :sidebar do
-  %li.btn-tny.inactive
-    = link_to new_inspection_url do
-      = t('.new')
-      %i.icon-paste.task-icon.icon-large
+  = sidebar_button url: new_inspection_url, label: "crear nueva inspeccion",
+    icon: "paste"
+  = sidebar_button url: new_asset_url, label: "crear nuevo activo",
+    icon: "truck"
+  = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
+    icon: "file-text"
+  = sidebar_button url: contracts_path, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: assets_path, label: "consultar activos",
+    icon: "truck"
+  = sidebar_button url: inspection_orders_path,
+    label: "seguimiento orden de inspeccion", icon: "eye-open"
+  = sidebar_button url: new_inspection_order_path,
+    label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
   = form_tag do
     .field.large-4.columns

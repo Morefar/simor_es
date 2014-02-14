@@ -7,6 +7,14 @@
     icon: "file-text"
   = sidebar_button url: entities_path, label: "consultar personas",
     icon: "group"
+  = sidebar_button url: assets_path, label: "consultar activos",
+    icon: "truck"
+  = sidebar_button url: inspections_path, label: "consultar inspecciones",
+    icon: "paste"
+  = sidebar_button url: inspection_orders_path,
+    label: "seguimiento orden de inspeccion", icon: "eye-open"
+  = sidebar_button url: new_inspection_order_path,
+    label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
   = form_tag contracts_path, method: :get do
     .field.medium-4.columns
@@ -41,8 +49,6 @@
         %th= t('activerecord.attributes.contract.lessee')
         %th= t('activerecord.attributes.contract.category_id')
         %th= t('.assets')
-        %th
-        %th
     %tbody
       - @contracts.each do |contract|
         %tr
@@ -52,10 +58,6 @@
           %td{"data-label" => t('.responsive.lessee')}= link_to contract.lessee_name, contract.lessee
           %td{"data-label" => t('.responsive.category')}= contract.category_name
           %td.center{"data-label" => t('.responsive.assets')}= contract.asset_count
-          %td.actions.edit
-            = link_to "", edit_contract_url(contract.id), class: 'icon-edit'
-          %td.actions.delete
-            = link_to "", contract_url(contract.id), class: 'icon-trash', method: :delete, data: { confirm: "Está seguro que desea eliminar el contrato #{contract.number}?" }
   %section.row
     = render 'shared/pagination', collection: @contracts
 %footer.content-footer.row
