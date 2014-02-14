@@ -38,7 +38,7 @@ class Contract < ActiveRecord::Base
   validate :non_valid_option_to_buy_date
 
   # -- Scopes --------------------------
-  default_scope { order("created_at DESC") }
+  scope :ordered_by_creation, -> { order("created_at DESC") }
   scope :search_by_number, ->(number) { where("number like ?", number) }
   scope :search_by_date, ->date { where( %{
         start_date = :date OR first_canon_date = :date OR
@@ -59,9 +59,9 @@ class Contract < ActiveRecord::Base
     if args.has_key? :query_options
       send("search_#{args[:query_options]}", query)
     elsif args.has_key? :contract_query
-      search_by_lessee(query)
+      search_by_lessee(query).ordered_by_creation
     else
-      all
+      all.ordered_by_creation
     end
   end
 

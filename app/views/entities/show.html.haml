@@ -52,8 +52,8 @@
           %th= "Tipo de contrato"
           %th= "Activos"
       %tbody
-        = render @entity.leases_on
-  - unless @entity.contracts.unscoped.empty?
+        = render @entity.leases_on.ordered_by_creation
+  - unless @entity.contracts.empty?
     %h4.section-label= t('.contracts_as_cosigner')
     %table.responsive-table.layout.display
       %thead
@@ -65,5 +65,5 @@
           %th= "Tipo de contrato"
           %th= "Activos"
       %tbody
-        = render @entity.contracts
+        = render @entity.contracts.ordered_by_creation
 = render "shared/content_footer", target: entities_path

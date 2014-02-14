@@ -1,6 +1,7 @@
 =form_for @entity do |f|
   = render 'shared/error_messages', target: @entity
-
+  .row
+    %small.required_notification= t('shared.required_notification')
   .row
     .field.medium-6.columns
       = f.label :name
