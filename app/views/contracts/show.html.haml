@@ -7,6 +7,12 @@
     label: "agregar activo", icon: "truck"
   = sidebar_button url: new_contract_url, label: "agregar contrato",
     icon: "file-text"
+  = sidebar_button url: @contract, label: "eliminar contrato",
+    icon: "trash", method: :delete
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: entities_url, label: "consultar personas",
+    icon: "group"
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"

@@ -24,8 +24,8 @@ class AssetDecorator < Draper::Decorator
 
   def document_slider
     if model.documents.empty?
-      h.content_tag :section, id: "asset-slideshow" do
-        h.image_tag("car_placeholder.png")
+      h.content_tag :section, id: "#{model_class_name}-slideshow" do
+        h.image_tag("#{model_class_name}_placeholder.png")
       end
     else
       h.content_tag :section, id: "asset-slideshow", class: "slideshow-wrapper" do
@@ -43,6 +43,10 @@ class AssetDecorator < Draper::Decorator
         end
       end
     end
+  end
+
+  def model_class_name
+    model.class.to_s.downcase
   end
 
   %w(motor serial chassis).each do |action|

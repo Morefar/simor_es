@@ -3,7 +3,11 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CREAR CONTRATO"
 - content_for :sidebar do
-  = sidebar_button url: new_entity_path, label: "Crear locatario", icon: "group"
+  = sidebar_button url: new_entity_url, label: "crear persona", icon: "user"
+  = sidebar_button url: entities_url, label: "consultar personas",
+    icon: "group"
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
 
 .content-container.row
   = render 'form'
