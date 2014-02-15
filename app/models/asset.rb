@@ -27,6 +27,7 @@ class Asset < ActiveRecord::Base
   validates :license_plate, format: { with: /\A[a-z]{2}[a-z0-9]\d{3}\Z/i,
                             message: 'incorrect format. Try (AAA000)' }
   validates :license_plate, length: { is: 6 }
+  validates :license_plate, uniqueness: true
   validates :year, numericality: { only_integer: true,
     greater_than_or_equal_to: 2000,
     less_than_or_equal_to: (Date.current >> 12).year }

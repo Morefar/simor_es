@@ -1,54 +1,42 @@
 .row.asset_info
-  = field_set_tag t('.fieldset.information') do
+  = field_set_tag "ACTIVO" do
     .row
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.license_plate')}:"
-      %span.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}:"
         = link_to asset.license_plate, @asset
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.inventory_number')}:"
-      %span.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.inventory_number')}:"
         = asset.inventory_number
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.chassis_number')}:"
-      %span.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}:"
         = asset.chassis_number
     .row
-      %span.small-5.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.make_id')}:"
-      %span.small-7.large-2.columns
-        = asset.make.name
-      %span.small-5.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.model_id')}:"
-      %span.small-7.large-2.columns
-        = asset.model.name
-      %span.small-5.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.year')}:"
-      %span.small-7.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}:"
+        = asset.make_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}:"
+        = asset.model_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.year')}:"
         = asset.year
     .row
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.kind_id')}:"
-      %span.large-2.columns
-        = asset.kind.name
-      %span.small-6.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.body_id')}:"
-      %span.small-6.large-2.columns
-        = asset.body.name
-      %span.small-6.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.service_type')}:"
-      %span.small-6.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}:"
+        = asset.kind_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.body_id')}:"
+        = asset.body_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.service_type')}:"
         = asset.service_type
     .row
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.color_id')}:"
-      %span.large-2.columns
-        = asset.color.name
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.book_value')}:"
-      %span.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.color_id')}:"
+        = asset.color_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}:"
         = local_number_to_currency asset.book_value
-      %span.large-2.columns
-        %b= "#{t('activerecord.attributes.asset.inspection_count')}:"
-      %span.large-2.columns
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.inspection_count')}:"
         = asset.inspection_count
