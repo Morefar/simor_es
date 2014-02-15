@@ -4,9 +4,6 @@
     %small.required_notification= t('shared.required_notification')
   %h4.section-label= "Información Básica"
   .row
-    -# .field.medium-4.columns
-    -#   = form.label :client_id
-    -#   = form.text_field :client_id, placeholder: t('.placeholder.client')
     .field.medium-3.columns
       = form.label :number
       = form.text_field :number, placeholder: 'i.e. 1189719-989', |
@@ -44,7 +41,8 @@
   .row
     .field.medium-4.columns
       = form.label :total_value
-      = form.number_field :total_value, placeholder: 'i.e. 12000000'
+      = form.number_field :total_value, placeholder: 'i.e. 12000000', |
+        step: "any"                                                   |
     .field.medium-3.columns
       = form.label :currency
       = form.select :currency,                                          |

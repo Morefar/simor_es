@@ -154,8 +154,8 @@
     .row
       .field.medium-3.columns
         = form.label :book_value
-        = form.number_field :book_value, placeholder: 'i.e. 15000000.50', |
-                                          required: true, min: 1          |
+        = form.number_field :book_value, placeholder: 'i.e. 15000000.50',     |
+                                          required: true, min: 1, step: "any" |
         %span.form_hint= t(".value_hint")
   .actions
     = form.submit
