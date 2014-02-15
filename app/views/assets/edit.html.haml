@@ -1,0 +1,14 @@
+- content_for :title do
+  AH - editar activo
+- content_for :content_header do
+  = render 'shared/header_title', title: "EDITAR ACTIVO"
+- content_for :sidebar do
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: assets_url, label: "consultar activos",
+    icon: "truck"
+
+.content-container.row
+  = render 'form'
+
+= render 'shared/content_footer', target: asset_path(@asset)
