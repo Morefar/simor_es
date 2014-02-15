@@ -11,6 +11,7 @@ def index
 end
 
 def show
+  @entity = @entity.decorate
   respond_with @entity
 end
 

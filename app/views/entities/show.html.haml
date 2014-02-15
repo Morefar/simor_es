@@ -1,6 +1,8 @@
 - content_for :title do
   = @entity.name
 - content_for :sidebar do
+  = sidebar_button url: entities_url, label: "consultar personas",
+    icon: "group"
   = sidebar_button url: edit_entity_path(@entity), label: "editar persona",
     icon: "edit"
   = sidebar_button url: @entity, label: "eliminar persona", icon: "trash",
@@ -18,9 +20,6 @@
       %h5.field-title= "#{t('entities.shared.identification_number')}"
       = @entity.identification_type_name
       = @entity.identification_number
-    .medium-6.columns
-      %h5.field-title= "#{t('entities.shared.email')}"
-      = @entity.email
   %h4.section-label= "#{t('.contact_address')}"
   .row
     .medium-6.columns
@@ -34,12 +33,15 @@
       = @entity.state
   %h4.section-label= "#{t('.contact_numbers')}:"
   .row
-    .medium-6.columns
-      %h5.field-title= "#{t('entities.shared.mobile_phone')}:"
-      = @entity.mobile_phone
-    .medium-6.columns
+    .medium-4.columns
+      %h5.field-title= "#{t('entities.shared.email')}"
+      = @entity.email
+    .medium-4.columns
       %h5.field-title= "#{t('entities.shared.phone')}:"
       = @entity.phone
+    .medium-4.columns
+      %h5.field-title= "#{t('entities.shared.mobile_phone')}:"
+      = @entity.mobile_phone
   - unless @entity.leases_on.empty?
     %h4.section-label= t('.contracts_as_lessee')
     %table.responsive-table.layout.display
