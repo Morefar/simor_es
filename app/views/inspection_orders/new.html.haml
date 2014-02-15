@@ -4,6 +4,16 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CREAR ORDEN DE INSPECCIÓN"
 
+- content_for :sidebar do
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: assets_url, label: "consultar activos",
+    icon: "truck"
+  = sidebar_button url: inspections_url, label: "consultar inspecciones",
+    icon: "paste"
+  = sidebar_button url: inspection_orders_url,
+    label: "seguimiento ordenes de inspección", icon: "eye-open"
+
 .content-container.row
   = render 'form'
 

@@ -6,7 +6,7 @@ describe InspectionOrder do
   it { should have_many :documents }
   it { should have_one :inspection }
   it { should belong_to :asset }
-  it { should ensure_inclusion_of( :recurring ).in_array([true, false]) }
+  it { should belong_to(:requested_by).class_name("User") }
 
   context "if recurring is set to true" do
     before { subject.stub(:recurring?) { true } }
@@ -24,7 +24,9 @@ describe InspectionOrder do
       should_not validate_numericality_of(:renew_period)
     end
   end
-  it { should allow_value('generated', 'pending', 'scheduled', 'inspected').for(:status) }
-  it { should_not allow_value('1', 'ANYOTHER').for(:status) }
+  it { should ensure_inclusion_of(:status).
+       in_array(%w(generated pending scheduled inspected)) }
+  it { should ensure_inclusion_of(:priority).
+       in_array(%w(normal high)) }
 
 end

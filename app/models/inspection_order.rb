@@ -1,6 +1,7 @@
 class InspectionOrder < ActiveRecord::Base
   include AASM
 
+  belongs_to :requested_by, class_name: 'User', foreign_key: "user_id"
   belongs_to :asset
   has_one :inspection
   has_many :notes, class_name: 'Comment', as: :commentable
@@ -12,7 +13,10 @@ class InspectionOrder < ActiveRecord::Base
                                            if: "recurring?"
   validates :recurring, inclusion: { in: [true, false] }
   validates :renew_period, presence: true, if: "recurring?"
-  validates :status, format: { with: /(generated|pending|scheduled|inspected)/ }
+  validates :status, inclusion: %w(generated pending scheduled inspected)
+  validates :priority, inclusion: %w(high normal)
+
+  scope :by_creation, -> { order("created_at DESC") }
 
   aasm  column: "status" do
     state :generated, initial: true

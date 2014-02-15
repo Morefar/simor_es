@@ -1,57 +1,90 @@
 class InspectionOrderForm < FormObject::Base
-  attribute :contract_number, String
-  attribute :user_id, Integer
+
+  attribute :number, String
+  attribute :number_from, String
+  attribute :requested_by, Integer
   attribute :inspection_order, InspectionOrder, default: InspectionOrder.new
-  attribute :lessee, Entity, default: Entity.new
   attribute :note, Comment, default: Comment.new
-  attribute :document, Document, default: Document.new
 
-  delegate :recurring, :renew_period, :status, :asset_id, :scheduled_date,
-    to: :inspection_order
-  delegate :name, :identification_number, :identification_type_id, :address, :city,
-    :state, to: :lessee
-  delegate :content, to: :note, prefix: true
-  delegate :content, to: :document, prefix: true
+  delegate :recurring, :recurring=, :renew_period, :renew_period=, :status,
+    :asset_id, :scheduled_date, :priority,
+    to: :inspection_order, allow_nil: true
+  delegate :content, :content=, to: :note, prefix: true, allow_nil: true
 
-  def submit(params)
-    lessee.assign_attributes params.slice(:name, :address, :city, :state,
-                                    :identification_number, :identification_type_id)
-    note.assign_attributes content: params[:note_content], user_id: params[:user_id]
-    document.assign_attributes content: params.slice(:document_content)
-    return false unless valid?
-    p "valid"
-    InspectionOrder.transaction do
-      lessee.save!
-      inspection_order.save!
-      note.save!
+  validate :model_must_exist
+  validate :assets_present?
+
+  def submit
+    if valid?
+      binding.pry
+      generated_orders = Array.new
+      asset_ids.each do |asset|
+        inspection_order = InspectionOrder.new(requested_by: requestor,
+                                                asset_id: asset,
+                                                recurring: recurring,
+                                                renew_period: renew_period,
+                                                priority: priority)
+        note.attributes = { user_id: requestor.id,
+                            commentable_type: inspection_order.class.to_s }
+        inspection_order.notes << note
+        generated_orders << inspection_order
+      end
+      InspectionOrder.transaction do
+        generated_orders.each do |inspection_order|
+          inspection_order.save!
+        end
+      end
     end
-  end
-
-  def valid?
-    lessee.valid? && note.valid? && document.valid? && inspection_order.valid?
   end
 
   def inspection_order
     @inspection_order ||= InspectionOrder.new
   end
 
-  def lessee
-    @lessee ||= Entity.new
-  end
-
   def note
     @note ||= Comment.new
   end
 
-  def document
-    @document ||= Document.new
+  private
+  def model_must_exist
+    if model.nil?
+      errors.add(:number, "contrato o activo no existe")
+    end
+  end
+
+  def assets_present?
+    if asset_ids.empty?
+      errors.add(:number,
+        "no se encontraron activos asociados al contrato a los cuales generar orden de inspección")
+    end
+  end
+
+  def model
+    @model ||= get_model(number, number_from)
+  end
+
+  def requestor
+    @requestor ||= User.find(requested_by)
+  end
+
+  def get_model(number, number_from)
+    finder = number_from.eql?('asset') ? "license_plate" : "number"
+    number_from.classify.constantize.
+      send("find_by_#{finder}", number)
+  end
+
+  def asset_ids
+    @asset_ids ||=  if model.is_a? Contract
+        asset_ids = model.assets.pluck(:id)
+      else
+        asset_ids = [ model.id ]
+      end
   end
 
   def inspection_order_form_params
-    params.require(:inspection_order_form).permit(:contract_number, :user_id,
-                                                 :name, :address,
-                                                 :city, :identification_number,
-                                                 :identification_type_id,
-                                                 :note_content, :document_content)
+    params.require(:inspection_order_form).permit(:requested_by, :number,
+                                          :number_from, :recurring,
+                                          :renew_period, :note_content,
+                                          :priority)
   end
 end

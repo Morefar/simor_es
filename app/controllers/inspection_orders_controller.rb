@@ -3,7 +3,7 @@ class InspectionOrdersController < ApplicationController
   before_action :set_inspection_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @inspection_orders = InspectionOrder.page params[:page]
+    @inspection_orders = InspectionOrder.by_creation.page params[:page]
     respond_with @inspection_orders
   end
 
@@ -20,10 +20,9 @@ class InspectionOrdersController < ApplicationController
   end
 
   def create
-    @inspection_order_form = InspectionOrderForm.new
-    binding.pry
-    if @inspection_order_form.submit(inspection_order_form_params)
-      respond_with inspection_order_form.inspection_order
+    @inspection_order_form = InspectionOrderForm.new(params[:inspection_order_form])
+    if @inspection_order_form.submit
+      redirect_to inspection_orders_url, notice: "Ordenes de Inspección Generadas"
     else
       render 'new'
     end

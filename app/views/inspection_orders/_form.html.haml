@@ -1,45 +1,53 @@
 
 = form_for @inspection_order_form, url: inspection_orders_path do |f|
   = render 'shared/error_messages', target: @inspection_order_form
-  = f.hidden_field :user_id, value: current_user.id if user_signed_in?
-  %small.required_notification= t('shared.required_notification')
+  = f.hidden_field :requested_by, value: current_user.id if user_signed_in?
   .row
-    .field.large-6.columns
-      = f.label :contract_number
-      = f.text_field :contract_number, data: { autocomplete_source: contracts_path },
-        placeholder: "Número del contrato", autofocus: true, required: true,
-        class: "autocomplete"
+    %small.required_notification= t('shared.required_notification')
+  %section.row
+    .field.medium-1.columns
+      = f.label :number do
+        Número
+    .field.medium-5.columns
+      = f.text_field :number,                                     |
+          data: { autocomplete_source: contracts_path },          |
+          placeholder: "Número", autofocus: true, required: true, |
+          class: "autocomplete"                                   |
       %span.form_hint= t(".contract_number_hint")
-      .contract_info
+    .field.small-6.medium-2.columns.text-center
+      = f.label :number_from_contract do
+        Contrato
+    .field.small-6.medium-1.columns.text-left
+      = f.radio_button :number_from, :contract
+    .field.small-6.medium-2.columns.text-center
+      = f.label :number_from_asset do
+        Activo
+    .field.small-6.medium-1.columns.text-left
+      = f.radio_button :number_from, :asset
   .row
-    .field.large-6.columns
-      = f.label :name
-      = f.text_field :name, required: true
-  .row
-    .field.large-6.columns
-      = f.label :identification_type_id
-      = f.collection_select :identification_type_id, IdentificationType.all, :id, :name
-    .field.large-6.columns
-      = f.label :identification_number
-      = f.text_field :identification_number
-  .row
-    .field.large-6.columns
-      = f.label :address
-      = f.text_field :address
-  .row
-    .field.large-6.columns
-      = f.label :city
-      = f.text_field :city
-    .field.large-6.columns
-      = f.label :state
-      = f.text_field :state
-  .row
-    .field.large-12.columns
-      = f.label :note_content
-      = f.text_area :note_content
-  .row
-    .field.large-12.columns
-      = f.label :document_content
-      = f.file_field :document_content
-  .actions
+    .medium-6.columns
+      .model_info
+    .medium-6.columns
+      .row
+        .field.medium-2.columns.center
+          = f.label :recurring do
+            renovar?
+        .field.medium-1.columns.text-center
+          = f.check_box :recurring
+        .field.medium-2.columns.center
+          = f.label :renew_period do
+            cada
+        .field.medium-2.columns
+          = f.number_field :renew_period, in: 1...13, placeholder: "meses"
+        .field.medium-2.columns.center
+          = label_tag :priority do
+            Prioridad
+        .field.medium-3.columns
+          = select_tag :priority, "<option>Normal</option><option>Alta</option>".html_safe
+      .row
+        .field.medium-12.columns
+          = f.label :note_content do
+            Notas
+          = f.text_area :note_content
+  .actions.right
     = f.submit
