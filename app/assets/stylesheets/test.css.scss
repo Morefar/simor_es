@@ -303,7 +303,8 @@ ul.ui-autocomplete {
   }
 }
 .field {
-  input {
+  input, textarea, select {
+    @include radius;
     &:focus ~ .form_hint {
       display: inline;
     }

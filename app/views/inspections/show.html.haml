@@ -1,14 +1,16 @@
 - content_for :title do
   = "inspección: #{ @inspection.inspection_number }"
 - content_for :sidebar do
-  %li.btn-tny.inactive
-    = link_to edit_inspection_url(@inspection) do
-      editar inspección
-      %i.icon-edit.task-icon.icon-large
-  %li.btn-tny.inactive
-    = link_to new_inspection_url(asset: @inspection.asset_license_plate) do
-      agregar inspección
-      %i.icon-paste.task-icon.icon-large
+  = sidebar_button url: inspections_url, label: "consultar inspecciones",
+    icon: "list"
+  = sidebar_button url: edit_inspection_url(@inspection.model),
+    label: "editar inspección", icon: "edit"
+  = sidebar_button url: inspection_url(@inspection.model),
+    label: "eliminar inspección", icon: "trash", method: :delete
+  = sidebar_button url: inspection_orders_url,
+    label: "consultar ordenes de inspección", icon: "eye-open"
+  = sidebar_button url: new_inspection_order_url,
+    label: "crear nueva orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= "#{ t('.record') }: #{ @inspection.inspection_number }"
   %span#model_title
@@ -16,18 +18,21 @@
     = link_to @inspection.asset_inventory_number, @inspection.asset
 .content-container.row
   %section.row
-    .medium-6.columns
-      %img{src: "/assets/map_example.png", alt: "Asset location map. Address: #{@inspection.address}, #{@inspection.state}"}
+    .medium-6.columns.center
+      = @inspection.document_slider
     .medium-6.columns
       .row
-        %h4.section-label= "#{t(".inspection_date")}:"
-        = @inspection.inspection_date.localtime.strftime('%d-%m-%Y, %I:%M %p %Z')
+        %h4.section-label= "#{t(".inspection_date")}"
+        = @inspection.inspection_date
       .row
-        %h4.section-label= "#{t(".location")}:"
+        %h4.section-label= "#{t(".location")}"
         .vcard
           .street-address= @inspection.address
           .locality= @inspection.city
           .region= @inspection.state
+      .row
+        %h4.section-label= "Orden de Inspección"
+        = @inspection.inspection_order_id
   %section.row
     %h4.section-label= t('.fieldset.information')
     .row
@@ -63,13 +68,13 @@
     .row
       .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}"
-        = local_number_to_currency @inspection.asset_book_value
+        = @inspection.asset_book_value
       .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.inspection.current_value')}"
-        = local_number_to_currency @inspection.current_value
+        = @inspection.current_value
       .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.inspection.appraiser_value')}"
-        = local_number_to_currency @inspection.appraiser_value
+        = @inspection.appraiser_value
   %section.row
     %h4.section-label= t(".fieldset.documents")
     .row
@@ -97,67 +102,67 @@
     .row
       .medium-3.columns
         %h5.field-title= "#{t(".maintenance")}"
-        = @inspection.maintenance ? t(".adecuate") : t(".inadecuate")
+        = @inspection.maintenance
       .medium-3.columns
         %h5.field-title= "#{t(".repairs")}"
-        = @inspection.repairs ? t(".adecuate") : t(".inadecuate")
+        = @inspection.repairs
       .medium-3.columns
         %h5.field-title= "#{t(".security")}"
-        = @inspection.security ? t(".adecuate") : t(".inadecuate")
+        = @inspection.security
       .medium-3.columns
         %h5.field-title= "#{t(".modifications")}"
-        = @inspection.modifications ? t(".modified") : t(".none")
+        = @inspection.modifications
     .row
-      %h4.field-title
+      %h5.field-title.medium-2.columns
         = t("activerecord.attributes.inspection.exterior")
-      = @inspection.exterior
-      %h5 Observaciones estado
-      %p= @inspection.exterior_notes
+      %span.medium-4.columns
+        %i= @inspection.exterior
+      .medium-12.columns
+        = @inspection.exterior_notes
     .row
-      %h4.field-title
+      %h5.field-title.medium-2.columns
         = t("activerecord.attributes.inspection.interior")
-      = @inspection.interior
-      %h5 Observaciones estado
-      %p= @inspection.interior_notes
+      %span.medium-4.columns
+        %i= @inspection.interior
+      .medium-12.columns
+        = @inspection.interior_notes
     .row
-      %h4.field-title
+      %h5.field-title.medium-2.columns
         = t("activerecord.attributes.inspection.engine")
-      = @inspection.engine
-      %h5 Observaciones estado
-      %p= @inspection.engine_notes
-    - if @inspection.accesories
-      .row
-        %h4.field-title
-          = "#{t("activerecord.attributes.inspection.accesories")}"
-        %h5 Observaciones estado
-        %p= @inspection.accesories
-  - if @inspection.insurance_number
-    %section.row
-      %h4.section-label= t("inspections.form.fieldset.insurance")
-      .row
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_company_id")}"
-          = @inspection.insurance_company.name
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_number")}"
-          = @inspection.insurance_number
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.currency")}"
-          = number_to_currency @inspection.currency
-      .row
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_start")}"
-          = @inspection.insurance_start
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_finish")}"
-          = @inspection.insurance_finish
-        .medium-4.columns
-          %h5.field-title= "#{t("activerecord.attributes.inspection.insured_value")}"
-          = number_to_currency @inspection.insured_value
-  - if @inspection.observations
+      %span.medium-4.columns
+        %i= @inspection.engine
+      .medium-12.columns
+        = @inspection.engine_notes
     .row
-      %h5.field-title= "#{t("activerecord.attributes.inspection.observations")}"
-      = @inspection.observations
+      %h5.field-title.medium-2.columns
+        = "#{t("activerecord.attributes.inspection.accesories")}"
+      %span.medium-12.columns
+        = @inspection.accesories
+  %section.row
+    %h4.section-label= t("inspections.form.fieldset.insurance")
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_company_id")}"
+        = @inspection.insurance_company_name
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_number")}"
+        = @inspection.insurance_number
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.currency")}"
+        = @inspection.currency
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_start")}"
+        = @inspection.insurance_start
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.insurance_finish")}"
+        = @inspection.insurance_finish
+      .medium-4.columns
+        %h5.field-title= "#{t("activerecord.attributes.inspection.insured_value")}"
+        = @inspection.insured_value
+  .row
+    %h5.field-title= "#{t("activerecord.attributes.inspection.observations")}"
+    = @inspection.observations
   - if @inspection.inventory
     %section.row
       %h4.section-label= "#{t(".fieldset.other_information")}"

@@ -3,171 +3,205 @@
   .row
     %small.required_notification= t('shared.required_notification')
   .row.asset_info
-  = field_set_tag t('.fieldset.record'), class: 'round' do
+  %section.row
+    %h4.section-label= t('.fieldset.record')
+    .field.medium-4.columns
+      = f.label :asset_license_plate
+      = f.text_field :asset_license_plate,                                    |
+        data: { autocomplete_source: assets_path },                           |
+        placeholder: t('.license_plate_number_placeholder'), autofocus: true, |
+        required: true, class: "autocomplete"                                 |
+      %span.form_hint= t(".asset_license_plate_hint")
+    .field.medium-4.columns
+      = f.label :inspection_order_id
+      = f.number_field :inspection_order_id, min: 1
+    .field.medium-4.columns
+      = f.label :inspection_number
+      = f.text_field :inspection_number, required: true,
+        placeholder: t(".inspection_number_placeholder")
+      %span.form_hint= t(".inspection_number_hint")
+  .row
+    .field.medium-4.columns
+      = f.label :address
+      = f.text_field :address, required: true
+      %span.form_hint= t(".address_hint")
+    .field.medium-4.columns
+      = f.label :city
+      = f.text_field :city, required: true
+    .field.medium-4.columns
+      = f.label :state
+      = f.text_field :state, required: true
+      %span.form_hint= t(".state_hint")
+  .row
+    .field.medium-4.columns
+      = f.label :inspection_date
+      = f.text_field :inspection_date, class: 'datetime-field',     |
+        placeholder: 'yyyy-mm-dd hh:mm am/pm -0500', required: true |
+      %span.form_hint= t(".date_hint")
+  %section.row
+    %h4.section-label= t('.fieldset.information')
+    .field.medium-4.columns
+      = f.label :odometer
+      = f.number_field :odometer
+    .field.medium-4.columns
+      = f.label :current_value
+      = f.number_field :current_value
+    .field.medium-4.columns
+      = f.label :appraiser_value
+      = f.number_field :appraiser_value
+  %section.row
+    %h4.section-label= t('.fieldset.documents')
+    .field.medium-4.columns
+      = f.label :soat_number
+      = f.text_field :soat_number
+    .field.medium-4.columns
+      = f.label :soat_begin_date do
+        Inicio Cobertura
+        %i.icon-calendar
+          = f.text_field :soat_begin_date, class: 'date-field', |
+            placeholder: 'yyyy/mm/dd'                           |
+    .field.medium-4.columns
+      = f.label :soat_finish_date do
+        Fin Cobertura
+        %i.icon-calendar
+          = f.text_field :soat_finish_date, class: 'date-field', |
+            placeholder: 'yyyy/mm/dd'                            |
+  .row
+    .field.medium-4.columns
+      = f.label :emissions_certificate
+      = f.text_field :emissions_certificate
+    .field.medium-4.columns
+      = f.label :emissions_begin_date do
+        Fecha de Emision
+        %i.icon-calendar
+          = f.text_field :emissions_begin_date, class: 'date-field', |
+            placeholder: 'yyyy/mm/dd'                                |
+    .field.medium-4.columns
+      = f.label :emissions_finish_date do
+        Fecha de Expiración
+        %i.icon-calendar
+          = f.text_field :emissions_finish_date, class: 'date-field', |
+            placeholder: 'yyyy/mm/dd'                                 |
+  %section.row
+    %h4.section-label= t('.fieldset.condition')
     .row
-      .field.large-6.columns
-        = f.label :inspection_number
-        = f.text_field :inspection_number, autofocus: true, required: true,
-          placeholder: t(".inspection_number_placeholder")
-        %span.form_hint= t(".inspection_number_hint")
-      .field.large-6.columns
-        = f.label :asset_license_plate
-        = f.text_field :asset_license_plate, data: { autocomplete_source: assets_path },
-          placeholder: t('.license_plate_number_placeholder'), required: true,
-          class: "autocomplete"
-        %span.form_hint= t(".asset_license_plate_hint")
-    .row
-      .field.large-4.columns
-        = f.label :address
-        = f.text_field :address, required: true
-        %span.form_hint= t(".address_hint")
-      .field.large-4.columns
-        = f.label :city
-        = f.text_field :city, required: true
-      .field.large-4.columns
-        = f.label :state
-        = f.text_field :state, required: true
-        %span.form_hint= t(".state_hint")
-    .row
-      .field.large-4.columns
-        = f.label :inspection_date
-        = f.text_field :inspection_date, class: 'datetime-field', placeholder: 'yyyy-mm-dd hh:mm am/pm -0500', required: true
-        %span.form_hint= t(".date_hint")
-  = field_set_tag t('.fieldset.information') do
-    .row
-      .field.large-4.columns
-        = f.label :odometer
-        = f.number_field :odometer
-      .field.large-4.columns
-        = f.label :current_value
-        = f.number_field :current_value
-      .field.large-4.columns
-        = f.label :appraiser_value
-        = f.number_field :appraiser_value
-  = field_set_tag t('.fieldset.documents') do
-    .row
-      .field.large-4.columns
-        = f.label :soat_number
-        = f.text_field :soat_number
-      .field.large-4.columns
-        = f.label :soat_begin_date
-        = f.text_field :soat_begin_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
-      .field.large-4.columns
-        = f.label :soat_finish_date
-        = f.text_field :soat_finish_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
-    .row
-      .field.large-4.columns
-        = f.label :emissions_certificate
-        = f.text_field :emissions_certificate
-      .field.large-4.columns
-        = f.label :emissions_begin_date
-        = f.text_field :emissions_begin_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
-      .field.large-4.columns
-        = f.label :emissions_finish_date
-        = f.text_field :emissions_finish_date, class: 'date-field', placeholder: 'yyyy-mm-dd'
-  = field_set_tag t('.fieldset.condition') do
-    .row
-      .field.small-6.large-2.columns.center
+      .field.small-6.medium-2.columns.center
         = f.label :maintenance
+      .field.small-6.medium-1.columns
         = f.check_box :maintenance
-      .field.small-6.large-2.columns.center
+      .field.small-6.medium-2.columns.center
         = f.label :repairs
+      .field.small-6.medium-1.columns
         = f.check_box :repairs
-      .field.large-4.columns
-        %b= f.label :exterior
-        .row
-          .radio.small-4.large-4.columns.center
-            = f.label :exterior_good
-            = f.radio_button :exterior, 'Good', checked: true
-          .radio.small-4.large-4.columns.center
-            = f.label :exterior_regular
-            = f.radio_button :exterior, 'Regular'
-          .radio.small-4.large-4.columns.center
-            = f.label :exterior_bad
-            = f.radio_button :exterior, 'Bad'
-        .row
-          .field
-            = f.label :exterior_notes
-            = f.text_area :exterior_notes
-      .field.large-4.columns
-        = f.label :engine
-        .row
-          .radio.small-4.large-4.columns.center
-            = f.label :engine_good
-            = f.radio_button :engine, 'Good', checked: true
-          .radio.small-4.large-4.columns.center
-            = f.label :engine_regular
-            = f.radio_button :engine, 'Regular'
-          .radio.small-4.large-4.columns.center
-            = f.label :engine_bad
-            = f.radio_button :engine, 'Bad'
-        .row
-          .field
-            = f.label :engine_notes
-            = f.text_area :engine_notes
-    .row
-      .field.small-6.large-2.columns.center
+      .field.small-6.medium-2.columns.center
         = f.label :security
+      .field.small-6.medium-1.columns
         = f.check_box :security
-      .field.small-6.large-2.columns.center
+      .field.small-6.medium-2.columns.center
         = f.label :modifications
+      .field.small-6.medium-1.columns
         = f.check_box :modifications
-      .field.large-4.columns
-        = f.label :interior
-        .row
-          .radio.small-4.large-4.columns.center
-            = f.label :interior_good
-            = f.radio_button :interior, 'Good', checked: true
-          .radio.small-4.large-4.columns.center
-            = f.label :interior_regular
-            = f.radio_button :interior, 'Regular'
-          .radio.small-4.large-4.columns.center
-            = f.label :interior_bad
-            = f.radio_button :interior, 'Bad'
-        .row
-          .field
-            = f.label :interior_notes
-            = f.text_area :interior_notes
-      .field.large-4.columns
-        .row
-          = f.label :accesories
-          = f.text_area :accesories
-  = field_set_tag t('.fieldset.insurance') do
     .row
-      .field.large-4.columns
-        = f.label :insurance_number
-        = f.text_field :insurance_number
-      .field.large-4.columns
-        = f.label :insurance_company_id
-        = f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name
-      .field.large-4.columns
-        = f.label :currency
-        = f.text_field :currency
+      .field.medium-3.columns.center
+        = f.label :exterior do
+          %b Estado exterior
+      .radio.small-6.medium-1.columns.center
+        = f.label :exterior_good
+      .radio.small-6.medium-1.columns
+        = f.radio_button :exterior, 'Bueno', checked: true
+      .radio.small-6.medium-1.columns.center
+        = f.label :exterior_regular
+      .radio.small-6.medium-1.columns
+        = f.radio_button :exterior, 'Regular'
+      .radio.small-6.medium-1.columns.center
+        = f.label :exterior_bad
+      .radio.small-6.medium-1.columns
+        = f.radio_button :exterior, 'Malo'
+      .field.medium-12.columns
+        = f.label :exterior_notes
+        = f.text_area :exterior_notes, required: true
     .row
-      .field.large-4.columns
-        = f.label :insured_value
-        = f.text_field :insured_value
-      .field.small-6.large-4.columns
-        = f.label :insurance_start
-        = f.text_field :insurance_start, class: 'date-field', placeholder: 'yyyy-mm-dd'
-      .field.small-6.large-4.columns
-        = f.label :insurance_finish
-        = f.text_field :insurance_finish, class: 'date-field', placeholder: 'yyyy-mm-dd'
+      .field.medium-3.columns.center
+        = f.label :interior do
+          %b Estado interior
+      .radio.small-6.medium-1.columns.center
+        = f.label :interior_good
+      .radio.small-6.medium-1.columns
+        = f.radio_button :interior, 'Bueno', checked: true
+      .radio.small-6.medium-1.columns.center
+        = f.label :interior_regular
+      .radio.small-6.medium-1.columns
+        = f.radio_button :interior, 'Regular'
+      .radio.small-6.medium-1.columns.center
+        = f.label :interior_bad
+      .radio.small-6.medium-1.columns
+        = f.radio_button :interior, 'Malo'
+      .field.medium-12.columns
+        = f.label :interior_notes
+        = f.text_area :interior_notes, required: true
+    .row
+      .field.medium-3.columns.center
+        = f.label :engine do
+          %b Estado maquinaria
+      .radio.small-6.medium-1.columns.center
+        = f.label :engine_good
+      .radio.small-6.medium-1.columns
+        = f.radio_button :engine, 'Bueno', checked: true
+      .radio.small-6.medium-1.columns.center
+        = f.label :engine_regular
+      .radio.small-6.medium-1.columns
+        = f.radio_button :engine, 'Regular'
+      .radio.small-6.medium-1.columns.center
+        = f.label :engine_bad
+      .radio.small-6.medium-1.columns
+        = f.radio_button :engine, 'Malo'
+      .field.medium-12.columns
+        = f.label :engine_notes
+        = f.text_area :engine_notes, required: true
+    .row
+      .field.medium-12.columns
+        = f.label :accesories do
+          %b Accesorios
+        = f.text_area :accesories
+  %section.row
+    %h4.section-label= t('.fieldset.insurance')
+    .field.medium-4.columns
+      = f.label :insurance_number
+      = f.text_field :insurance_number
+    .field.medium-4.columns
+      = f.label :insurance_company_id
+      = f.collection_select :insurance_company_id, InsuranceCompany.all, |
+        :id, :name, prompt: "Compañía de Seguros"                        |
+    .field.medium-4.columns
+      = f.label :currency
+      = f.text_field :currency
+  .row
+    .field.medium-4.columns
+      = f.label :insured_value
+      = f.text_field :insured_value
+    .field.small-6.medium-4.columns
+      = f.label :insurance_start
+      = f.text_field :insurance_start, class: 'date-field', |
+        placeholder: 'yyyy/mm/dd'                           |
+    .field.small-6.medium-4.columns
+      = f.label :insurance_finish
+      = f.text_field :insurance_finish, class: 'date-field', |
+        placeholder: 'yyyy/mm/dd'                            |
   .row
     .field.columns
       = f.label :observations
-      = f.text_area :observations
+      = f.text_area :observations, required: true
       %span.form_hint= t(".observations_hint")
-  = field_set_tag t('.fieldset.signature') do
-    .row
-      .field.large-4.columns
-        = f.label :person_in_charge
-        = f.text_field :person_in_charge
-      .field.large-4.columns
-        = f.label :pic_id
-        = f.text_field :pic_id
-      .field.large-4.columns
-        = f.label :pic_job
-        = f.text_field :pic_job
+  %section.row
+    %h4.section-label= t('.fieldset.signature')
+    .field.medium-4.columns
+      = f.label :person_in_charge
+      = f.text_field :person_in_charge, required: true
+    .field.medium-4.columns
+      = f.label :pic_id
+      = f.text_field :pic_id, required: true
+    .field.medium-4.columns
+      = f.label :pic_job
+      = f.text_field :pic_job
   .actions
     = f.submit

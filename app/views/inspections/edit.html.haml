@@ -1,8 +1,18 @@
-%h1= t('.title')
-= render 'form'
+- content_for :title do
+  AH - editar inspección
+- content_for :content_header do
+  = render 'shared/header_title', title: "EDITAR INSPECCIÓN"
+- content_for :sidebar do
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: assets_url, label: "consultar activos",
+    icon: "truck"
+  = sidebar_button url: inspections_url, label: "consultar inspecciones",
+    icon: "paste"
+  = sidebar_button url: inspection_orders_url,
+    label: "consultar ordenes de inspección", icon: "eye-open"
 
-= link_to t('.show'), @inspection, class: 'icon-mail-reply'
-\|
-= link_to t('.index'), inspections_path, class: 'icon-list-alt'
-\|
-= link_to t('shared.back'), :back, class: 'icon-mail-reply'
+.content-container.row
+  = render 'form'
+
+= render 'shared/content_footer', target: :back

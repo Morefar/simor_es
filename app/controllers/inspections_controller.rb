@@ -12,6 +12,7 @@ class InspectionsController < ApplicationController
     add_breadcrumb "Contract: #{@inspection.contract.number}", @inspection.contract
     add_breadcrumb "Asset: #{@inspection.asset.inventory_number}", @inspection.asset
     add_breadcrumb "Inspection: #{@inspection.inspection_number}" , @inspection
+    @inspection = @inspection.decorate
     respond_with @inspection
   end
 

@@ -9,6 +9,8 @@ class Inspection < ActiveRecord::Base
   delegate :book_value, :license_plate, :inventory_number, :kind_name,
           :chassis_number, :make_name, :model_name, :year, :service_type,
           :vin, to: :asset, prefix: true, allow_nil: true
+  delegate :name, to: :insurance_company, prefix: true, allow_nil: true
+  delegate :id, to: :inspection_order, prefix: true, allow_nil: true
   validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :inspection_date, :asset,presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
   validates :insurance_start, :insurance_finish, presence: true, if:  "insurance_number.present?"
