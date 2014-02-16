@@ -97,6 +97,7 @@ es:
     format: ! '%{attribute} %{message}'
     messages:
       accepted: debe ser aceptado
+      absence: debe estar en blanco
       blank: no puede estar en blanco
       confirmation: no coincide con la confirmación
       empty: no puede estar vacío
@@ -481,6 +482,18 @@ es:
     index:
       title: 'Carrocerías de Vehículo'
       new_btn: 'Agregar Carrocería'
+  inspection_orders:
+    show:
+      record: "Orden de Inspección"
+      asset_number: "Activo"
+    index:
+      number: "Número"
+      date: "Fecha solicitud"
+      asset: "Activo"
+      recurring: "Recurrente"
+      renew_period: "Periodo renovación"
+      status: "Estado"
+      contract: "Contrato"
   views:
     pagination:
       first: '&laquo;'
@@ -528,6 +541,7 @@ es:
       color: 'Color'
       comment: 'Comentario'
       user: 'Usuario'
+      inspection_order_form: "Ordenes de Inspección"
     attributes:
       inspection:
         inspection_number: 'Número de Inspección'
@@ -590,7 +604,7 @@ es:
         cylinder_cap: 'Cilindraje'
         color_id: 'Color'
         color_name: 'Color'
-        service_type: 'Tipo de Servicio'
+        service_type: 'Servicio'
         kind_id: 'Clase de Vehículo'
         kind_name: 'Clase de Vehículo'
         body_id: 'Tipo Carrocería'
@@ -660,3 +674,6 @@ es:
         last_name: 'Apellido'
         account_name: 'Cuenta'
         remember_me: 'Recordarme'
+      inspection_order_form:
+        number: "Número"
+        renew_period: "Periodo de renovación"

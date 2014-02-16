@@ -12,7 +12,7 @@ class InspectionOrdersController < ApplicationController
   end
 
   def new
-    @inspection_order_form = InspectionOrderForm.new
+    @inspection_order_form = InspectionOrderForm.new(params.slice(:number, :number_from))
     respond_with @inspection_order_form
   end
 

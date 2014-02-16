@@ -7,6 +7,9 @@ class InspectionOrder < ActiveRecord::Base
   has_many :notes, class_name: 'Comment', as: :commentable
   has_many :documents, as: :documentable
 
+  delegate :license_plate, :make_name, :model_name, :year, :service_type,
+  :chassis_number, :kind_name, to: :asset, prefix:  true
+  delegate :full_name, to: :requested_by, prefix: true
   validates :renew_period, numericality: { only_integer: true,
                                            greater_than: 0,
                                            less_than: 13 },

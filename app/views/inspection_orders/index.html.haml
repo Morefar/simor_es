@@ -1,24 +1,62 @@
 - content_for :title do
   AH - Ordenes de Inspección
-
+- content_for :content_header do
+  = render 'shared/header_title', title: "CONSULTAR ORDENES DE INSPECCIÓN"
+- content_for :sidebar do
+  = sidebar_button url: new_inspection_order_url,
+    label: 'crear nueva orden de inspección', icon: 'pencil'
+  = sidebar_button url: contracts_url, label: 'consultar contratos',
+    icon: 'search'
+  = sidebar_button url: assets_url, label: 'consultar activos', icon: 'truck'
 %div{ "data-no-turbolink" => "" }
-  %p= link_to t('.new'), new_inspection_order_path, class: 'icon-file button radius button-tny'
-.row
-  %table.responsive-table.display
+.search-box-container.row
+  = form_tag do
+    .field.medium-4.columns
+      = search_field_tag :inspection_order_query, nil, placeholder: "Buscar"
+    .field.small-6.medium-2.columns.center
+      = label_tag :query_options_by_date do
+        %i.icon-time.icon-large
+        fecha
+      = radio_button_tag :query_options, :by_date
+    .field.small-6.medium-2.columns.center
+      = label_tag :query_options_by_status do
+        %i.icon-tasks.icon-large
+        estado
+      = radio_button_tag :query_options, :by_range
+    .field.small-6.medium-2.columns.center
+      = label_tag :query_options_by_asset_license_plate do
+        %i.icon-truck.icon-large
+        activo
+      = radio_button_tag :query_options, :by_asset_license_plate
+    .field.small-6.medium-2.columns.center
+      = label_tag :query_options_by_contract_number do
+        %i.icon-file-text.icon-large
+        contrato
+      = radio_button_tag :query_options, :by_contract_number
+.content-container.row
+  %table.responsive-table.layout.display
     %thead
       %tr
         %th= t('.number')
         %th= t('.date')
+        %th= t('.asset')
+        %th= t('.contract')
+        %th= t('.recurring')
+        %th= t('.renew_period')
         %th= t('.status')
-        %th
-        %th
     %tbody
       - @inspection_orders.each do |inspection_order|
         %tr
           %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection_order.id, inspection_order
           %td{"data-label" => "#{t('.date')}"}= inspection_order.created_at.strftime('%d-%m-%y %r %Z')
+          %td{"data-label" => "#{t('.asset')}"}= inspection_order.asset.license_plate
+          %td{"data-label" => "#{t('.contract')}"}= inspection_order.asset.contract_number
+          %td{"data-label" => "#{t('.recurring')}"}= inspection_order.recurring
+          %td{"data-label" => "#{t('.renew_period')}"}= inspection_order.renew_period
           %td{"data-label" => "#{t('.status')}"}= inspection_order.status
-          %td.actions.edit.center= link_to '', edit_inspection_order_path(inspection_order), class: 'icon-edit'
-          %td.actions.delete.center= link_to '', inspection_order, class: 'icon-trash', method: :delete, data: { confirm: 'Are you sure?' }
-.row
-  = paginate @inspection_orders, window: 3
+  %section.row
+    = render 'shared/pagination', collection: @inspection_orders
+%footer.content-footer.row
+  = link_to :back do
+    %i.icon-reply
+      regresar

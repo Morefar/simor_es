@@ -16,7 +16,6 @@ class InspectionOrderForm < FormObject::Base
 
   def submit
     if valid?
-      binding.pry
       generated_orders = Array.new
       asset_ids.each do |asset|
         inspection_order = InspectionOrder.new(requested_by: requestor,
