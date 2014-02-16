@@ -19,22 +19,22 @@
   = form_tag contracts_path, method: :get do
     .field.medium-4.columns
       = search_field_tag :contract_query, nil, placeholder: "Busqueda"
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_number do
         %i.icon-barcode.icon-large
         número
       = radio_button_tag :query_options, :by_number
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_date do
         %i.icon-time.icon-large
         fecha
       = radio_button_tag :query_options, :by_date
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_range do
         %i.icon-resize-full.icon-large
         rango
       = radio_button_tag :query_options, :by_range
-    .field.medium-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_lessee do
         %i.icon-user.icon-large
         locatario

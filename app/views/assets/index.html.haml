@@ -17,31 +17,32 @@
     label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
   = form_tag do
-    .field.large-4.columns
+    .field.medium-4.columns
       = search_field_tag :asset_query, nil, placeholder: "Busqueda de activos"
-    .field.large-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_licence_plate do
         %i.icon-ticket.icon-large
         placa
       = radio_button_tag :query_options, :by_license_plate, true
-    .field.large-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_make do
         %i.icon-truck.icon-large
         marca
       = radio_button_tag :query_options, :by_make
-    .field.large-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_model do
         %i.icon-th.icon-large
         línea
       = radio_button_tag :query_options, :by_model
-    .field.large-2.columns.center
+    .field.small-6.medium-2.columns.center
       = label_tag :query_options_by_year do
         %i.icon-calendar.icon-large
         modelo
       = radio_button_tag :query_options, :by_year
 .content-container.row
   = render 'asset_index', assets: @assets
-  = paginate @assets
+  %section.row
+    = render 'shared/pagination', collection: @assets
 %footer.content-footer.row
   = link_to :back do
     %i.icon-reply
