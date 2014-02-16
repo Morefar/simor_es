@@ -13,6 +13,10 @@
     icon: "search"
   = sidebar_button url: entities_url, label: "consultar personas",
     icon: "group"
+  = sidebar_button url: inspection_orders_url,
+    label: "seguimiento ordenes de inspección", icon: "eye-open"
+  = sidebar_button url: new_inspection_order_url(number: @contract.number, number_from: "contract"),
+    label: "generar orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"

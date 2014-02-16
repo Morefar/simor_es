@@ -12,10 +12,9 @@
   = sidebar_button url: new_inspection_order_url,
     label: "crear nueva orden de inspección", icon: "pencil"
 .detail-title
-  %span#model_number= "#{ t('.record') }: #{ @inspection.inspection_number }"
+  %span#model_number= "#{ @inspection.inspection_number }"
   %span#model_title
-    = t(".asset_number")
-    = link_to @inspection.asset_inventory_number, @inspection.asset
+    = "Acta de inspección"
 .content-container.row
   %section.row
     .medium-6.columns.center
@@ -41,7 +40,7 @@
         = @inspection.asset_kind_name
       .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}"
-        = @inspection.asset_license_plate
+        = link_to @inspection.asset_license_plate, @inspection.asset
       .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}"
         = @inspection.asset_chassis_number
