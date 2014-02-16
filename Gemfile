@@ -20,7 +20,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'
-  gem 'pry-rescue', '~> 1.3.1'
+  gem 'pry-rescue', '~> 1.4.0'
   gem 'pry-stack_explorer'
   gem 'rack-mini-profiler', '~> 0.9.0'
   gem 'spring', '~> 1.1.1'
