@@ -1,10 +1,33 @@
+# ## Schema Information
+#
+# Table name: `contracts`
+#
+# ### Columns
+#
+# Name                       | Type               | Attributes
+# -------------------------- | ------------------ | ---------------------------
+# **`id`**                   | `integer`          | `not null, primary key`
+# **`client_id`**            | `integer`          |
+# **`lessee_id`**            | `integer`          |
+# **`number`**               | `string(255)`      |
+# **`category_id`**          | `integer`          |
+# **`start_date`**           | `date`             |
+# **`first_canon_date`**     | `date`             |
+# **`duration`**             | `integer`          |
+# **`periodicity`**          | `integer`          |
+# **`expiration_date`**      | `date`             |
+# **`total_value`**          | `float`            |
+# **`currency`**             | `string(255)`      |
+# **`asset_count`**          | `integer`          | `default(0)`
+# **`location_of_assets`**   | `text`             |
+# **`option_to_buy`**        | `boolean`          |
+# **`last_date_to_option`**  | `date`             |
+# **`created_at`**           | `datetime`         | `not null`
+# **`updated_at`**           | `datetime`         | `not null`
+#
+
 class Contract < ActiveRecord::Base
   include PgSearch
-  # attr_accessible :number, :start_date, :first_canon_date, :expiration_date,
-  # :duration, :periodicity, :total_value, :currency, :asset_count,
-  # :location_of_assets, :client_id, :category_id, :option_to_buy,
-  # :last_date_to_option, :category, :client_id, :lessee_id, :lessee_name,
-  # :lessee, :documents_attributes, :cosigners_attributes, :entity_name
 
   # -- Relationships -------------------
   belongs_to :category

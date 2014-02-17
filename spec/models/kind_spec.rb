@@ -13,3 +13,17 @@ describe Kind do
     expect(build(:kind)).to be_valid
   end
 end
+
+# ## Schema Information
+#
+# Table name: `kinds`
+#
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`name`**        | `string(255)`      |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
+#

@@ -1,3 +1,18 @@
+# ## Schema Information
+#
+# Table name: `builds`
+#
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`kind_id`**     | `integer`          |
+# **`body_id`**     | `integer`          |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
+#
+
 class Build < ActiveRecord::Base
   belongs_to :kind
   belongs_to :body

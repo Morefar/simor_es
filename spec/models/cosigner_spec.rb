@@ -20,3 +20,18 @@ describe Cosigner do
     expect(build(:cosigner, entity: entity, contract: contract)).to have(1).errors_on(:entity_id)
   end
 end
+
+# ## Schema Information
+#
+# Table name: `cosigners`
+#
+# ### Columns
+#
+# Name               | Type               | Attributes
+# ------------------ | ------------------ | ---------------------------
+# **`id`**           | `integer`          | `not null, primary key`
+# **`entity_id`**    | `integer`          |
+# **`contract_id`**  | `integer`          |
+# **`created_at`**   | `datetime`         | `not null`
+# **`updated_at`**   | `datetime`         | `not null`
+#

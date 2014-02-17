@@ -7,3 +7,16 @@ describe Right do
   it { should have_many :grants }
   it { should have_many(:roles).through(:grants) }
 end
+
+# ## Schema Information
+#
+# Table name: `rights`
+#
+# ### Columns
+#
+# Name             | Type               | Attributes
+# ---------------- | ------------------ | ---------------------------
+# **`id`**         | `integer`          | `not null, primary key`
+# **`resource`**   | `string(255)`      |
+# **`operation`**  | `string(255)`      |
+#

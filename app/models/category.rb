@@ -1,3 +1,15 @@
+# ## Schema Information
+#
+# Table name: `categories`
+#
+# ### Columns
+#
+# Name        | Type               | Attributes
+# ----------- | ------------------ | ---------------------------
+# **`id`**    | `integer`          | `not null, primary key`
+# **`name`**  | `string(255)`      |
+#
+
 class  Category < ActiveRecord::Base
   default_scope { order(:name) }
   validates :name, presence: true

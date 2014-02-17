@@ -158,3 +158,54 @@ end
   end
 
 end
+
+# ## Schema Information
+#
+# Table name: `inspections`
+#
+# ### Columns
+#
+# Name                         | Type               | Attributes
+# ---------------------------- | ------------------ | ---------------------------
+# **`id`**                     | `integer`          | `not null, primary key`
+# **`inspection_number`**      | `string(255)`      |
+# **`asset_id`**               | `integer`          |
+# **`address`**                | `string(255)`      |
+# **`city`**                   | `string(255)`      |
+# **`state`**                  | `string(255)`      |
+# **`current_value`**          | `float`            |
+# **`appraiser_value`**        | `integer`          |
+# **`soat_number`**            | `string(255)`      |
+# **`soat_begin_date`**        | `string(255)`      |
+# **`soat_finish_date`**       | `string(255)`      |
+# **`emissions_certificate`**  | `string(255)`      |
+# **`emissions_begin_date`**   | `string(255)`      |
+# **`emissions_finish_date`**  | `string(255)`      |
+# **`exterior`**               | `string(255)`      |
+# **`exterior_notes`**         | `text`             |
+# **`interior`**               | `string(255)`      |
+# **`interior_notes`**         | `text`             |
+# **`engine`**                 | `string(255)`      |
+# **`engine_notes`**           | `text`             |
+# **`accesories`**             | `text`             |
+# **`insurance_number`**       | `string(255)`      |
+# **`insurance_company_id`**   | `integer`          |
+# **`insured_value`**          | `integer`          |
+# **`currency`**               | `string(255)`      |
+# **`insurance_start`**        | `string(255)`      |
+# **`insurance_finish`**       | `string(255)`      |
+# **`person_in_charge`**       | `string(255)`      |
+# **`pic_id`**                 | `string(255)`      |
+# **`pic_job`**                | `string(255)`      |
+# **`created_at`**             | `datetime`         | `not null`
+# **`updated_at`**             | `datetime`         | `not null`
+# **`observations`**           | `text`             |
+# **`modifications`**          | `boolean`          | `default(FALSE)`
+# **`odometer`**               | `string(255)`      | `default("0")`
+# **`inspection_date`**        | `datetime`         |
+# **`maintenance`**            | `boolean`          | `default(TRUE)`
+# **`repairs`**                | `boolean`          | `default(TRUE)`
+# **`security`**               | `boolean`          | `default(TRUE)`
+# **`inspection_order_id`**    | `integer`          |
+# **`overall_condition`**      | `string(255)`      |
+#

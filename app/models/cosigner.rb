@@ -1,3 +1,18 @@
+# ## Schema Information
+#
+# Table name: `cosigners`
+#
+# ### Columns
+#
+# Name               | Type               | Attributes
+# ------------------ | ------------------ | ---------------------------
+# **`id`**           | `integer`          | `not null, primary key`
+# **`entity_id`**    | `integer`          |
+# **`contract_id`**  | `integer`          |
+# **`created_at`**   | `datetime`         | `not null`
+# **`updated_at`**   | `datetime`         | `not null`
+#
+
 class Cosigner < ActiveRecord::Base
   belongs_to :entity
   belongs_to :contract

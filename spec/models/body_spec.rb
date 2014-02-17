@@ -14,3 +14,17 @@ describe Body do
     expect(build(:body)).to be_valid
   end
 end
+
+# ## Schema Information
+#
+# Table name: `bodies`
+#
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`name`**        | `string(255)`      |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
+#

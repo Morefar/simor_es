@@ -9,3 +9,18 @@ describe Account do
   it { should validate_presence_of(:subdomain) }
   it { should accept_nested_attributes_for(:user) }
 end
+
+# ## Schema Information
+#
+# Table name: `accounts`
+#
+# ### Columns
+#
+# Name                     | Type               | Attributes
+# ------------------------ | ------------------ | ---------------------------
+# **`id`**                 | `integer`          | `not null, primary key`
+# **`organization_name`**  | `string(255)`      |
+# **`subdomain`**          | `string(255)`      |
+# **`created_at`**         | `datetime`         |
+# **`updated_at`**         | `datetime`         |
+#

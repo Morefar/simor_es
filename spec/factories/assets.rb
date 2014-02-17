@@ -1,3 +1,53 @@
+# ## Schema Information
+#
+# Table name: `assets`
+#
+# ### Columns
+#
+# Name                        | Type               | Attributes
+# --------------------------- | ------------------ | ---------------------------
+# **`id`**                    | `integer`          | `not null, primary key`
+# **`contract_id`**           | `integer`          |
+# **`invoice_id`**            | `integer`          |
+# **`inventory_number`**      | `string(255)`      |
+# **`transit_permit`**        | `string(255)`      |
+# **`license_plate`**         | `string(255)`      |
+# **`make_id`**               | `integer`          |
+# **`model_id`**              | `integer`          |
+# **`year`**                  | `integer`          |
+# **`cylinder_cap`**          | `integer`          |
+# **`color_id`**              | `integer`          |
+# **`service_type`**          | `string(255)`      |
+# **`kind_id`**               | `integer`          |
+# **`body_id`**               | `integer`          |
+# **`fuel_type`**             | `string(255)`      |
+# **`capacity`**              | `integer`          |
+# **`motor_number`**          | `string(255)`      |
+# **`rerecorded_motor`**      | `boolean`          |
+# **`vin`**                   | `string(255)`      |
+# **`serial_number`**         | `string(255)`      |
+# **`rerecorded_serial`**     | `boolean`          |
+# **`chassis_number`**        | `string(255)`      |
+# **`rerecorded_chassis`**    | `boolean`          |
+# **`mobility_restriction`**  | `string(255)`      |
+# **`shield_level`**          | `integer`          |
+# **`horse_power`**           | `string(255)`      |
+# **`importd_assembld`**      | `boolean`          |
+# **`import_statement`**      | `string(255)`      |
+# **`import_date`**           | `string(255)`      |
+# **`number_of_doors`**       | `integer`          |
+# **`property_limitation`**   | `string(255)`      |
+# **`registration_date`**     | `string(255)`      |
+# **`tp_issue_date`**         | `string(255)`      |
+# **`tp_expiration_date`**    | `string(255)`      |
+# **`transit_authority`**     | `string(255)`      |
+# **`book_value`**            | `float`            |
+# **`inspection_count`**      | `integer`          | `default(0)`
+# **`last_inspection_date`**  | `date`             |
+# **`created_at`**            | `datetime`         | `not null`
+# **`updated_at`**            | `datetime`         | `not null`
+#
+
 FactoryGirl.define do
   factory :asset do
     contract

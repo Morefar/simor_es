@@ -13,3 +13,15 @@ describe Category do
   it { should allow_value('Financiero').for(:name) }
   it { should_not allow_value('Financiero Importación').for(:name) }
 end
+
+# ## Schema Information
+#
+# Table name: `categories`
+#
+# ### Columns
+#
+# Name        | Type               | Attributes
+# ----------- | ------------------ | ---------------------------
+# **`id`**    | `integer`          | `not null, primary key`
+# **`name`**  | `string(255)`      |
+#

@@ -30,3 +30,23 @@ describe InspectionOrder do
        in_array(%w(normal high)) }
 
 end
+
+# ## Schema Information
+#
+# Table name: `inspection_orders`
+#
+# ### Columns
+#
+# Name                  | Type               | Attributes
+# --------------------- | ------------------ | ---------------------------
+# **`id`**              | `integer`          | `not null, primary key`
+# **`recurring`**       | `boolean`          | `default(FALSE)`
+# **`renew_period`**    | `integer`          |
+# **`status`**          | `string(255)`      |
+# **`asset_id`**        | `integer`          |
+# **`created_at`**      | `datetime`         | `not null`
+# **`updated_at`**      | `datetime`         | `not null`
+# **`scheduled_date`**  | `date`             |
+# **`user_id`**         | `integer`          |
+# **`priority`**        | `string(255)`      | `default("normal")`
+#

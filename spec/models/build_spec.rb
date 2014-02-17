@@ -12,3 +12,18 @@ describe Build do
     expect(build(:build)).to be_valid
   end
 end
+
+# ## Schema Information
+#
+# Table name: `builds`
+#
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`kind_id`**     | `integer`          |
+# **`body_id`**     | `integer`          |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
+#
