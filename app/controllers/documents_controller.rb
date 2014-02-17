@@ -12,9 +12,11 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
-      redirect_to @document.documentable, notice: "El documento fue agregado exitósamente"
+      redirect_to @document.documentable,
+        notice: "El documento fue agregado exitósamente"
     else
-      redirect_to @document.documentable, alert: "El documento no pudo ser anexado. #{@document.errors.full_messages.first if @document.errors.any?}"
+      redirect_to @document.documentable,
+        alert: "El documento no pudo ser anexado. #{@document.errors.full_messages.first if @document.errors.any?}"
     end
   end
 
@@ -27,7 +29,8 @@ class DocumentsController < ApplicationController
   def update
     if @document.update_attributes(document_params)
       format.js
-      format.html { redirect_to @document.documentable, notice: "El documento ha sido actualizado" }
+      format.html { redirect_to @document.documentable,
+                    notice: "El documento ha sido actualizado" }
     else
       render 'edit'
     end
