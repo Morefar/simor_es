@@ -20,27 +20,27 @@
 .search-box-container.row
   = form_tag entities_path, method: :get do
     .field.medium-4.columns
-      = search_field_tag :entities_query, nil, placeholder: "Busqueda"
+      = search_field_tag :query, nil, placeholder: "Busqueda"
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_id do
+      = label_tag :options_by_id do
         %i.icon-barcode.icon-large
         identificación
-      = radio_button_tag :query_options, :by_id
+      = radio_button_tag :options, :by_id
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_city do
-        %i.icon-compass.icon-large
-        ciudad
-      = radio_button_tag :query_options, :by_city
-    .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_state do
-        %i.icon-road.icon-large
-        departamento
-      = radio_button_tag :query_options, :by_state
-    .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_name do
+      = label_tag :options_by_name do
         %i.icon-user.icon-large
         nombre
-      = radio_button_tag :query_options, :by_name
+      = radio_button_tag :options, :by_name
+    .field.small-6.medium-2.columns.center
+      = label_tag :options_by_city do
+        %i.icon-compass.icon-large
+        ciudad
+      = radio_button_tag :options, :by_city
+    .field.small-6.medium-2.columns.center
+      = label_tag :options_by_state do
+        %i.icon-road.icon-large
+        departamento
+      = radio_button_tag :options, :by_state
 .content-container.row
   %span.entry-count
     = page_entries_info @entities

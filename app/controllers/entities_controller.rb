@@ -3,10 +3,14 @@ class EntitiesController < ApplicationController
   before_action :find_entity, except: [:index, :new, :create]
 
 def index
-  @entities = Entity.includes(:identification_type).order(:name).page params[:page]
+  @entities = Entity.search(params).includes(:identification_type).page params[:page]
   respond_to do |format|
     format.html
-    format.json { render json: Entity.search_name("%#{params[:term]}%").limit(10).pluck(:name) }
+    format.json do
+      render json: Entity.search(query: params[:term], options: :by_name).
+        limit(10).pluck(:name)
+    end
+
   end
 end
 
