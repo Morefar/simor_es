@@ -24,7 +24,7 @@ class InspectionOrder < ActiveRecord::Base
   #-- Relationships --------------------
   belongs_to :requested_by, class_name: 'User', foreign_key: "user_id"
   belongs_to :asset
-  has_one :inspection
+  has_one :inspection, inverse_of: :inspection_order
   has_many :notes, class_name: 'Comment', as: :commentable
   has_many :documents, as: :documentable
 
@@ -42,6 +42,9 @@ class InspectionOrder < ActiveRecord::Base
   validates :renew_period, presence: true, if: "recurring?"
   validates :status, inclusion: %w(generated pending scheduled inspected)
   validates :priority, inclusion: %w(high normal)
+
+  #-- Callbacks ------------------------
+  before_destroy :check_state
 
   #-- Scopes ---------------------------
   scope :by_recency, -> { order("created_at DESC") }
@@ -87,6 +90,10 @@ class InspectionOrder < ActiveRecord::Base
         before_enter: :wipe_scheduled_date
     end
 
+    event :revert_inspected do
+      transitions from: :inspected, to: :scheduled, on_transition: :clear_inspection
+    end
+
     event :close do
       transitions from: :scheduled, to: :inspected
     end
@@ -98,6 +105,17 @@ class InspectionOrder < ActiveRecord::Base
 
   def wipe_scheduled_date
     self.scheduled_date = nil
+  end
+
+  def clear_inspection
+    self.inspection = nil
+  end
+
+  def check_state
+    if inspected?
+      self.errors[:base] << "No se puede borrar una vez ha sido generada la inspección"
+    end
+    !inspected?
   end
 
   private

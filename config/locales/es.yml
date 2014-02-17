@@ -521,6 +521,7 @@ es:
     errors:
       <<: *errors
     models:
+      inspection_order_form: "Orden de Inspección"
       inspection: 'Inspección'
       contract: 'Contrato'
       asset: 'Activo'
@@ -589,6 +590,9 @@ es:
         person_in_charge: 'Persona a Cargo'
         pic_id: 'Identificación Persona a Cargo'
         pic_job: 'Función Persona a Cargo'
+        asset_license_plate: "Placa Activo"
+        inspection_order_id: "Orden de Inspección"
+        overall_condition: "Estado general"
       asset:
         contract_id: 'Número de Contrato'
         contract_number: 'Número de Contrato'

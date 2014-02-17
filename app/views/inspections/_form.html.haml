@@ -43,7 +43,7 @@
     %h4.section-label= t('.fieldset.information')
     .field.medium-4.columns
       = f.label :odometer
-      = f.number_field :odometer, min: 1
+      = f.number_field :odometer, min: 0
     .field.medium-4.columns
       = f.label :current_value
       = f.number_field :current_value, min: 1, step: "any"

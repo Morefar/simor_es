@@ -52,7 +52,7 @@
 class Inspection < ActiveRecord::Base
   #-- Relationships --------------------
   belongs_to :asset
-  belongs_to :inspection_order
+  belongs_to :inspection_order, inverse_of: :inspection
   belongs_to :insurance_company
   has_one :contract, through: :asset
   has_one :inventory, dependent: :destroy
@@ -70,14 +70,15 @@ class Inspection < ActiveRecord::Base
   validates :inspection_number, :person_in_charge, :pic_id, :pic_job,
     :inspection_date, :asset, :address, :city, :state, :exterior,
     :exterior_notes, :interior, :interior_notes, :engine, :engine_notes,
-    :overall_condition, :observations, presence: true
-  validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
+    :overall_condition, :observations, :inspection_order_id, presence: true
+  validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }, on: :create
   validates :insurance_start, :insurance_finish,
     presence: true, if:  "insurance_number.present?"
   validates :emissions_begin_date, :emissions_finish_date,
     presence: true,if: "emissions_certificate.present?"
   validates :soat_begin_date, :soat_finish_date,
     presence: true, if: "soat_number.present?"
+  validate :correct_inspection_order
   validate :valid_insurance_data
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
@@ -86,6 +87,7 @@ class Inspection < ActiveRecord::Base
   before_save :clean_unwanted_dates
   after_create :increase_inspection_count_on_asset
   after_create :link_to_order
+  before_destroy :reverse_order_state
   around_destroy :decrease_inspection_count_on_asset
 
   #-- Scopes ---------------------------
@@ -138,6 +140,14 @@ class Inspection < ActiveRecord::Base
     end
   end
 
+  def correct_inspection_order
+    if inspection_order.present?
+      unless  inspection_order.asset == asset
+        errors.add(:inspection_order_id, "no corresponde al activo indicado.")
+      end
+    end
+  end
+
   def increase_inspection_count_on_asset
     if self.asset.present?
       parent_asset = self.asset
@@ -183,6 +193,11 @@ class Inspection < ActiveRecord::Base
   end
   def remove_dates(first_date, second_date)
     first_date, second_date = nil, nil
+  end
+  def revert_order_state
+    if self.inspection_order.may_revert_inspected?
+      self.inspection_order.revert_inspected!
+    end
   end
   def self.parse_query(args)
     return "" if args[:query].blank?
