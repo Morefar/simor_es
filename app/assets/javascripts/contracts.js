@@ -53,11 +53,13 @@ $( "input[name^=query_options]" ).on("click", function() {
   var byNumber = $("#query_options_by_number")[0];
   $searchField.autocomplete();
   if(input == byDate) {
+      $searchField.attr('placeholder', 'dd/mm/yyyy');
       $searchField.addClass( "dateField" )
       $(".dateField").datepicker({ dateFormat: "dd/mm/yy" });
   } else {
       $(".dateField").datepicker( "destroy" );
       $searchField.removeClass( "dateField" );
+      $searchField.attr('placeholder', 'Buscar');
       if(input == byLessee) {
         $searchField.autocomplete({
           source: "/es/entities.json",
@@ -72,6 +74,7 @@ $( "input[name^=query_options]" ).on("click", function() {
         } else {
           $searchField.removeClass();
           $searchField.autocomplete( "destroy" );
+          $searchField.attr('placeholder', 'dd/mm/yyyy - dd/mm/yyyy');
         }
       }
   }
@@ -118,7 +121,7 @@ $('#contract_periodicity').change(function() { updateExpirationField() });
 $('#contract_duration').change(function() { updateExpirationField() });
 
 // Autocomplete behaviour after selection
-$('#inspection_order_form_contract_number, #asset_contract_number').
+$('#asset_contract_number').
   on("autocompleteclose",
     function( event, ui ){
         var selectedContractNumber = $(this).val();
@@ -207,4 +210,91 @@ $('#inspection_asset_license_plate').on("autocompleteclose",
             },
             "json"
         );
+});
+
+$("#inspection_inspection_order_id," +
+  " #inspection_asset_license_plate, #asset_contract_number").each(function() {
+  if($(this).val() != "") {
+    $(this).prop('readonly', true);
+  };
+});
+
+//
+// Inspection Orders Behaviour
+$("#inspection_order_status").on('change', function (event) {
+  if ($(this).val() === "schedule") {
+    $("#inspection_order_scheduled_date").prop('disabled', false);
+  } else {
+    $("#inspection_order_scheduled_date").prop('disabled', true);
+    }
+});
+
+
+$('input:radio[name=options]').on("click", function() {
+  var input = $(this)[0];
+  var $searchField = $("#query");
+  var option = $('input:radio[name=options]:checked').val();
+  if(option === "by_date") {
+    $searchField.attr('placeholder', 'dd/mm/yyyy');
+    $searchField.addClass( "dateField" )
+    $(".dateField").datepicker({ dateFormat: "dd/mm/yy" });
+  } else {
+    if ($searchField.hasClass("dateField")) {
+      $searchField.datepicker("destroy");
+      $searchField.removeClass("dateField");
+    }
+    if(option === "by_range") {
+      $searchField.attr('placeholder', "dd/mm/yyyy - dd/mm/yyyy");
+    } else {
+      $searchField.attr('placeholder', "Buscar");
+    }
+  }
+  return $searchField.focus();
+});
+
+$('input:radio[name$="[number_from]"]').on("click", function() {
+  var input = $(this)[0];
+  var $searchField = $( "#inspection_order_form_number" );
+  var option = $('input:radio[name$="[number_from]"]:checked').val();
+  $searchField.autocomplete();
+  if(option === "contract") {
+    $searchField.autocomplete({
+      source: "/es/contracts.json",
+      minLength: 2
+    });
+  } else {
+    $searchField.autocomplete({
+      source: "/es/assets.json",
+      minLength: 2
+    });
+  }
+  return $searchField.focus();
+});
+
+$('#inspection_order_form_number').
+  on("autocompleteclose",
+    function( event, ui ){
+        var selectedNumber = $(this).val();
+        var option = $('input:radio[name$="[number_from]"]:checked').val();
+        if (option === "contract") {
+          $.get("/es/contracts.json",
+              { number: selectedNumber },
+              function( data ) {
+                $.get("/es/contracts/" + data + ".js")
+                .fail(function(){ alert("Contrato no encontrado");
+                });
+              },
+              "json"
+          );
+        } else {
+          $.get("/es/assets.json",
+              { asset_license_plate: selectedNumber },
+              function( data ) {
+                $.get("/es/assets/" + data + ".js")
+                .fail(function(){ alert("Activo no encontrado");
+                });
+              },
+              "json"
+          );
+        }
 });
