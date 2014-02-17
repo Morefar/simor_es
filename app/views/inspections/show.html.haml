@@ -174,9 +174,9 @@
         %h4= "#{t("activerecord.attributes.inspection.inventory")}"
         = link_to "#{t("activerecord.attributes.inspection.inventory")}", @inspection.inventory
   %section#documents.row
-    = render "documents/index", documentable: @inspection
+    = render "documents/index", documentable: @inspection.object
   %section#comments.row
-    = render "comments/index", commentable: @inspection
+    = render "comments/index", commentable: @inspection.object
   %section#document-upload.row
-    = render "documents/form", document: Document.new, documentable: @inspection
+    = render "documents/form", document: Document.new, documentable: @inspection.object
 = render "shared/content_footer", target: inspections_path

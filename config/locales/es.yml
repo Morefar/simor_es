@@ -661,7 +661,7 @@ es:
       document:
         content: 'Archivo a Adjuntar'
         slug: 'Descripción'
-        md5hash: 'md5hash'
+        md5hash: 'Archivo'
         content_type: 'Tipo de Contenido'
         file_size: 'Tamaño Archivo'
         category: 'Categoría'
