@@ -1,0 +1,59 @@
+= form_for @inspection_order do |f|
+  %section.row
+    %h4.section-label= 'Activo'
+    .row
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}"
+        = @inspection_order.asset_kind_name
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}"
+        = link_to @inspection_order.asset_license_plate, @inspection_order.asset
+      .medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}"
+        = @inspection_order.asset_chassis_number
+    .row
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}"
+        = @inspection_order.asset_make_name
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}"
+        = @inspection_order.asset_model_name
+      .small-5.medium-4.columns
+        %h5.field-title= "#{t('activerecord.attributes.asset.year')}"
+        = @inspection_order.asset_year
+  %section.row
+    %h4.section-label= "Orden de Inspección"
+    .row
+      .medium-4.columns
+        %h5.field-title= "Fecha de solicitud"
+        = @inspection_order.created_at.localtime.strftime("%d/%m/%Y")
+      .medium-4.columns
+        %h5.field-title= "Última actualización"
+        = @inspection_order.updated_at.localtime.strftime("%d/%m/%Y")
+      .field.medium-4.columns
+        %h5.field-title= "Estado"
+        = f.select :status, [["Generada", :generated], ["Pendiente", :delay], ["Agendar", :schedule]], required: true
+    .row
+      .medium-4.columns
+        %h5.field-title= "Prioridad"
+        = @inspection_order.priority
+      - if @inspection_order.recurring?
+        .medium-4.columns
+          %h5.field-title= "Recurrente?"
+          = "Si"
+        .medium-4.columns
+          %h5.field-title= "Periodo"
+          = "#{@inspection_order.renew_period} meses"
+    .row
+      .field.medium-4.columns
+        %h5.field-title= "Fecha programada"
+        = f.text_field :scheduled_date, placeholder: "yyyy/mm/dd",
+          class: 'date-field', disabled: true
+  %section.row
+    %h4.section-label= "Solicitante"
+    .medium-6.columns
+      %b= @inspection_order.requested_by_full_name
+  = f.fields_for :notes do |nf|
+    = nf.hidden_field :user_id, value: current_user.id if user_signed_in?
+    = nf.text_area :content, required: true
+  = f.submit

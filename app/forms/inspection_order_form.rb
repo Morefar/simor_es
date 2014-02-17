@@ -7,7 +7,7 @@ class InspectionOrderForm < FormObject::Base
   attribute :note, Comment, default: Comment.new
 
   delegate :recurring, :recurring=, :renew_period, :renew_period=, :status,
-    :asset_id, :scheduled_date, :priority,
+    :asset_id, :scheduled_date, :priority, :priority=,
     to: :inspection_order, allow_nil: true
   delegate :content, :content=, to: :note, prefix: true, allow_nil: true
 

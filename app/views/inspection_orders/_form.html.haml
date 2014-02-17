@@ -18,7 +18,7 @@
       = f.label :number_from_contract do
         Contrato
     .field.small-6.medium-1.columns.text-left
-      = f.radio_button :number_from, :contract
+      = f.radio_button :number_from, :contract, checked: true
     .field.small-6.medium-2.columns.text-center
       = f.label :number_from_asset do
         Activo
@@ -26,8 +26,9 @@
       = f.radio_button :number_from, :asset
   .row
     .medium-6.columns
-      .model_info
-    .medium-6.columns
+      .contract_info
+      .asset_info
+    .medium-5.columns
       .row
         .field.medium-2.columns.center
           = f.label :recurring do
@@ -40,10 +41,11 @@
         .field.medium-2.columns
           = f.number_field :renew_period, in: 1...13, placeholder: "meses"
         .field.medium-2.columns.center
-          = label_tag :priority do
+          = f.label :priority do
             Prioridad
         .field.medium-3.columns
-          = select_tag :priority, "<option>Normal</option><option>Alta</option>".html_safe
+          = f.select :priority, [["Alta", "high"],["Normal", "normal"]]
+
       .row
         .field.medium-12.columns
           = f.label :note_content do

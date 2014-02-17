@@ -3,6 +3,14 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CONSULTAR ORDENES DE INSPECCIÓN"
 - content_for :sidebar do
+  = sidebar_button url: inspection_orders_url(status: :generated),
+    label: "ordenes generadas", icon: "book"
+  = sidebar_button url: inspection_orders_url(status: :pending),
+    label: "ordenes pendientes", icon: "spinner"
+  = sidebar_button url: inspection_orders_url(status: :scheduled),
+    label: "ordenes agendadas", icon: "calendar"
+  = sidebar_button url: inspection_orders_url(status: :inspected),
+    label: "ordenes inspeccionadas", icon: "check"
   = sidebar_button url: new_inspection_order_url,
     label: 'crear nueva orden de inspección', icon: 'pencil'
   = sidebar_button url: contracts_url, label: 'consultar contratos',
@@ -10,29 +18,24 @@
   = sidebar_button url: assets_url, label: 'consultar activos', icon: 'truck'
 %div{ "data-no-turbolink" => "" }
 .search-box-container.row
-  = form_tag do
+  = form_tag inspection_orders_url, method: :get do
     .field.medium-4.columns
-      = search_field_tag :inspection_order_query, nil, placeholder: "Buscar"
+      = search_field_tag :query, nil, placeholder: "Buscar"
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_date do
+      = label_tag :options_by_range do
         %i.icon-time.icon-large
-        fecha
-      = radio_button_tag :query_options, :by_date
+        solicitud
+      = radio_button_tag :options, :by_range
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_status do
-        %i.icon-tasks.icon-large
-        estado
-      = radio_button_tag :query_options, :by_range
-    .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_asset_license_plate do
+      = label_tag :options_by_asset do
         %i.icon-truck.icon-large
         activo
-      = radio_button_tag :query_options, :by_asset_license_plate
-    .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_contract_number do
+      = radio_button_tag :options, :by_asset
+    .field.small-6.medium-2.columns.center.pull-2
+      = label_tag :options_by_contract do
         %i.icon-file-text.icon-large
         contrato
-      = radio_button_tag :query_options, :by_contract_number
+      = radio_button_tag :options, :by_contract
 .content-container.row
   %table.responsive-table.layout.display
     %thead
@@ -51,9 +54,9 @@
           %td{"data-label" => "#{t('.date')}"}= inspection_order.created_at.strftime('%d-%m-%y %r %Z')
           %td{"data-label" => "#{t('.asset')}"}= inspection_order.asset.license_plate
           %td{"data-label" => "#{t('.contract')}"}= inspection_order.asset.contract_number
-          %td{"data-label" => "#{t('.recurring')}"}= inspection_order.recurring
-          %td{"data-label" => "#{t('.renew_period')}"}= inspection_order.renew_period
-          %td{"data-label" => "#{t('.status')}"}= inspection_order.status
+          %td{"data-label" => "#{t('.recurring')}"}= inspection_order.recurring ? "Si" : "No"
+          %td{"data-label" => "#{t('.renew_period')}"}= show_renew_period inspection_order.renew_period
+          %td{"data-label" => "#{t('.status')}"}= show_status inspection_order.status
   %section.row
     = render 'shared/pagination', collection: @inspection_orders
 %footer.content-footer.row

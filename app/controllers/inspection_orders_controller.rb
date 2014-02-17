@@ -3,7 +3,13 @@ class InspectionOrdersController < ApplicationController
   before_action :set_inspection_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @inspection_orders = InspectionOrder.by_creation.page params[:page]
+    if params.has_key? :status
+      @inspection_orders = InspectionOrder.send(params[:status]).
+        includes(asset: :contract).by_recency.page params[:page]
+    else
+      @inspection_orders = InspectionOrder.search(params).
+        includes(asset: :contract).page params[:page]
+    end
     respond_with @inspection_orders
   end
 
@@ -17,6 +23,7 @@ class InspectionOrdersController < ApplicationController
   end
 
   def edit
+    respond_with @inspection_order
   end
 
   def create
@@ -29,7 +36,7 @@ class InspectionOrdersController < ApplicationController
   end
 
   def update
-    @inspection_order.update(inspection_order_params)
+    @inspection_order.change_state(inspection_order_params)
     respond_with @inspection_order
   end
 
@@ -39,21 +46,22 @@ class InspectionOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_inspection_order
       @inspection_order = InspectionOrder.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def inspection_order_params
-      params[:inspection_order]
+      params.require(:inspection_order).
+        permit(:status, :scheduled_date, :priority, notes: [:content, :user_id,
+                                                            :commentable_id,
+                                                            :commentable_type])
+
     end
 
   def inspection_order_form_params
-    params.require(:inspection_order_form).permit(:contract_number, :user_id,
-                                                 :name, :address,
-                                                 :city, :identification_number,
-                                                 :identification_type_id,
-                                                 :note_content, :document_content)
+    params.require(:inspection_order_form).
+      permit(:contract_number, :user_id, :name, :address, :city,
+             :identification_number, :identification_type_id, :note_content,
+             :document_content)
   end
 end

@@ -3,10 +3,11 @@
 - content_for :sidebar do
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "list"
-  -# = sidebar_button url: edit_inspection_url(@inspection.model),
-    -# label: "editar inspección", icon: "edit"
-  -# = sidebar_button url: inspection_url(@inspection.model),
-    -# label: "eliminar inspección", icon: "trash", method: :delete
+  = sidebar_button url: edit_inspection_order_url(@inspection_order),
+    label: "cambiar estado orden de inspección", icon: "edit"
+  = sidebar_button url: new_inspection_url(inspection_order: @inspection_order.id,
+    asset_license_plate: @inspection_order.asset_license_plate),
+    label: "registrar inspección", icon: "paste"
   = sidebar_button url: inspection_orders_url,
     label: "consultar ordenes de inspección", icon: "eye-open"
   = sidebar_button url: new_inspection_order_url,
@@ -29,13 +30,13 @@
         %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}"
         = @inspection_order.asset_chassis_number
     .row
-      .small-5.medium-4.columns
+      .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}"
         = @inspection_order.asset_make_name
-      .small-5.medium-4.columns
+      .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}"
         = @inspection_order.asset_model_name
-      .small-5.medium-4.columns
+      .medium-4.columns
         %h5.field-title= "#{t('activerecord.attributes.asset.year')}"
         = @inspection_order.asset_year
   %section.row
@@ -49,18 +50,31 @@
         = @inspection_order.updated_at.localtime.strftime("%d/%m/%Y")
       .medium-4.columns
         %h5.field-title= "Estado"
-        = @inspection_order.status
+        = show_status @inspection_order.status
     .row
       .medium-4.columns
-        %h5.field-title= "prioridad"
-        = @inspection_order.priority
-      - if @inspection_order.recurring?
+        %h5.field-title= "Prioridad"
+        = show_priority @inspection_order.priority
+      - if @inspection_order.inspected?
+        .medium-4.columns
+          %h5.field-title= "Acta de Inspección"
+          = link_to @inspection_order.inspection.inspection_number, @inspection_order.inspection
+      - if @inspection_order.scheduled_date.present?
+        .medium-4.columns
+          %h5.field-title= "Fecha Programada"
+          = @inspection_order.scheduled_date.strftime("%d/%m/%Y")
+    - if @inspection_order.recurring?
+      .row
         .medium-4.columns
           %h5.field-title= "Recurrente?"
           = "Si"
         .medium-4.columns
           %h5.field-title= "Periodo"
-          = "#{@inspection_order.renew_period} meses"
+          = show_renew_period @inspection_order.renew_period
+        .medium-4.columns
+          %h5.field-title= "Fecha próxima orden"
+          = next_inspection_date(@inspection_order.created_at,
+            @inspection_order.renew_period)
   %section.row
     %h4.section-label= "Solicitante"
     .medium-6.columns

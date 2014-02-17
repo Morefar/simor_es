@@ -1,7 +1,14 @@
-%h1 Editing inspection_order
+- content_for :title do
+  AH - cambiar estado
+- content_for :content_header do
+  = render 'shared/header_title', title: "CAMBIAR ESTADO ORDEN DE INSPECCIÓN"
+- content_for :sidebar do
+  = sidebar_button url: new_contract_url, label: "crear contrato",
+    icon: "file-text"
+  = sidebar_button url: contracts_url, label: "consultar contratos",
+    icon: "search"
+  = sidebar_button url: assets_url, label: "consultar activos",
+    icon: "truck"
 
-= render 'form'
-
-= link_to 'Show', @inspection_order
-\|
-= link_to 'Back', inspection_orders_path
+.content-container.row
+  = render 'status_change_form'
