@@ -36,14 +36,14 @@
     .row
       .medium-4.columns
         %h5.field-title= "Prioridad"
-        = @inspection_order.priority
+        = show_priority @inspection_order.priority
       - if @inspection_order.recurring?
         .medium-4.columns
           %h5.field-title= "Recurrente?"
           = "Si"
         .medium-4.columns
           %h5.field-title= "Periodo"
-          = "#{@inspection_order.renew_period} meses"
+          = show_renew_period @inspection_order.renew_period
     .row
       .field.medium-4.columns
         %h5.field-title= "Fecha programada"

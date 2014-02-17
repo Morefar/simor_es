@@ -224,6 +224,7 @@ $("#inspection_inspection_order_id," +
 $("#inspection_order_status").on('change', function (event) {
   if ($(this).val() === "schedule") {
     $("#inspection_order_scheduled_date").prop('disabled', false);
+    $("#inspection_order_scheduled_date").focus();
   } else {
     $("#inspection_order_scheduled_date").prop('disabled', true);
     }
