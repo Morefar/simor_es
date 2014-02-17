@@ -2,7 +2,7 @@ class AssetsController < ApplicationController
   before_action :find_asset, except: [:new, :create, :index]
 
   def index
-    @assets = Asset.includes(:contract, :make, :model).page params[:page]
+    @assets = Asset.search(params).includes(:contract, :make, :model).page params[:page]
     add_breadcrumb 'Assets', :assets_path
     respond_to do |format|
       format.html
@@ -11,7 +11,7 @@ class AssetsController < ApplicationController
           render json: Asset.where("license_plate =?", params[:asset_license_plate])
                             .pluck(:id)
         else
-          render json: Asset.search_license_plate("%#{params[:term]}%")
+          render json: Asset.search(query: "#{params[:term]}", options: :by_license_plate)
                             .limit(10).pluck(:license_plate)
         end
       end

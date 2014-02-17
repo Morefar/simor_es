@@ -1,42 +1,42 @@
-.row.asset_info
-  = field_set_tag "ACTIVO" do
-    .row
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}:"
-        = link_to asset.license_plate, @asset
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.inventory_number')}:"
-        = asset.inventory_number
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}:"
-        = asset.chassis_number
-    .row
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}:"
-        = asset.make_name
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}:"
-        = asset.model_name
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.year')}:"
-        = asset.year
-    .row
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}:"
-        = asset.kind_name
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.body_id')}:"
-        = asset.body_name
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.service_type')}:"
-        = asset.service_type
-    .row
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.color_id')}:"
-        = asset.color_name
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}:"
-        = local_number_to_currency asset.book_value
-      .medium-4.columns
-        %h5.field-title= "#{t('activerecord.attributes.asset.inspection_count')}:"
-        = asset.inspection_count
+.asset_info
+  %h4.section-label= "ACTIVO"
+  .row
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.license_plate')}:"
+      = link_to asset.license_plate, @asset
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.inventory_number')}:"
+      = asset.inventory_number
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.chassis_number')}:"
+      = asset.chassis_number
+  .row
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.make_id')}:"
+      = asset.make_name
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.model_id')}:"
+      = asset.model_name
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.year')}:"
+      = asset.year
+  .row
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.kind_id')}:"
+      = asset.kind_name
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.body_id')}:"
+      = asset.body_name
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.service_type')}:"
+      = asset.service_type
+  .row
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.color_id')}:"
+      = asset.color_name
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.book_value')}:"
+      = local_number_to_currency asset.book_value
+    .medium-4.columns
+      %h5.field-title= "#{t('activerecord.attributes.asset.inspection_count')}:"
+      = asset.inspection_count

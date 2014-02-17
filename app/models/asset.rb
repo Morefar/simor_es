@@ -1,5 +1,6 @@
 #encoding: UTF-8
 class Asset < ActiveRecord::Base
+  #-- Relationships --------------------
   belongs_to :contract, inverse_of: :assets
   belongs_to :make
   belongs_to :model
@@ -11,12 +12,15 @@ class Asset < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :restrict_with_error
 
+  #-- Delegations ----------------------
   delegate :number, to: :contract, prefix: true, allow_nil: true
   delegate :name, to: :make, prefix: true, allow_nil: true
   delegate :name, to: :model, prefix: true, allow_nil: true
   delegate :name, to: :color, prefix: true, allow_nil: true
   delegate :name, to: :kind, prefix: true, allow_nil: true
   delegate :name, to: :body, prefix: true, allow_nil: true
+
+  # -- Validations ---------------------
   validates :inventory_number, :license_plate, :make_name, :model_name, :year,
     :color_name, :kind_name, :chassis_number, presence: true, on: :create
   validates :contract_number, :inventory_number, :license_plate, :make_name,
@@ -50,38 +54,37 @@ class Asset < ActiveRecord::Base
   validates :vin, uniqueness: true, if: "vin.present?"
   validates :book_value, numericality: { greater_than: 0 }
   validate :model_belongs_to_make
+
+  #-- Callbacks ------------------------
   after_create :increase_asset_count_on_contract
   around_destroy :decrease_asset_count_on_contract
 
-  default_scope { order("created_at DESC") }
-  scope :search_license_plate,
-    ->(license_plate) { where("license_plate ilike ?", license_plate) }
+  #-- Scopes ---------------------------
+  scope :by_recency, -> { order("created_at DESC") }
+  scope :by_make,
+    ->(make_name) { self.joins(:make).where("makes.name ilike ?", make_name).
+                    order("makes.name ASC") }
+  scope :by_model,
+    ->(model_name) { self.joins(:model).
+                     where("models.name ilike ?", model_name).
+                     order("models.name ASC") }
+  scope :by_license_plate,
+    ->(license_plate) { where("license_plate ilike ?", license_plate).
+                        order("license_plate ASC") }
+  scope :by_year,
+    ->(year) { where("year = ?", year).by_recency }
 
-  def model_belongs_to_make
-    if make.present? && model.present?
-      unless make.id == model.make_id
-        errors.add(:model, I18n.t('errors.messages.model_dont_belong_make'))
-      end
+  #-- Class Methods --------------------
+  def self.search(args = {})
+    if args.has_key? :options
+      query = parse_query(args)
+      send(args[:options].to_s, query)
+    else
+      all.by_recency
     end
   end
 
-  def increase_asset_count_on_contract
-    if self.contract.present?
-      parent_contract = self.contract
-      parent_contract.asset_count += 1
-      parent_contract.save
-    end
-  end
-
-  def decrease_asset_count_on_contract
-    if self.contract.present?
-      parent_contract = self.contract
-      yield
-      parent_contract.asset_count -= 1
-      parent_contract.save
-    end
-  end
-
+  #-- Instance Methods -----------------
   def contract_number=(contract_number)
     if contract_number.present?
       self.contract = Contract.find_by_number(contract_number)
@@ -115,6 +118,40 @@ class Asset < ActiveRecord::Base
   def body_name=(body_name)
     if body_name.present?
       self.body = Body.find_by_name(body_name)
+    end
+  end
+
+  private
+  def self.parse_query(args)
+    return "" if args[:query].blank?
+    if args[:options].to_s.eql?("by_year")
+      args[:query]
+    else
+      "%#{args[:query]}%"
+    end
+  end
+  def model_belongs_to_make
+    if make.present? && model.present?
+      unless make.id == model.make_id
+        errors.add(:model, I18n.t('errors.messages.model_dont_belong_make'))
+      end
+    end
+  end
+
+  def increase_asset_count_on_contract
+    if self.contract.present?
+      parent_contract = self.contract
+      parent_contract.asset_count += 1
+      parent_contract.save
+    end
+  end
+
+  def decrease_asset_count_on_contract
+    if self.contract.present?
+      parent_contract = self.contract
+      yield
+      parent_contract.asset_count -= 1
+      parent_contract.save
     end
   end
 end

@@ -16,29 +16,29 @@
   = sidebar_button url: new_inspection_order_path,
     label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
-  = form_tag do
+  = form_tag assets_path, method: :get do
     .field.medium-4.columns
-      = search_field_tag :asset_query, nil, placeholder: "Busqueda de activos"
+      = search_field_tag :query, nil, placeholder: "Busqueda de activos"
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_licence_plate do
+      = label_tag :options_by_licence_plate do
         %i.icon-ticket.icon-large
         placa
-      = radio_button_tag :query_options, :by_license_plate, true
+      = radio_button_tag :options, :by_license_plate
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_make do
+      = label_tag :options_by_make do
         %i.icon-truck.icon-large
         marca
-      = radio_button_tag :query_options, :by_make
+      = radio_button_tag :options, :by_make
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_model do
+      = label_tag :options_by_model do
         %i.icon-th.icon-large
         línea
-      = radio_button_tag :query_options, :by_model
+      = radio_button_tag :options, :by_model
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_year do
+      = label_tag :options_by_year do
         %i.icon-calendar.icon-large
         modelo
-      = radio_button_tag :query_options, :by_year
+      = radio_button_tag :options, :by_year
 .content-container.row
   = render 'asset_index', assets: @assets
   %section.row

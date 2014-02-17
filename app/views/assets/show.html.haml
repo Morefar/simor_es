@@ -4,7 +4,7 @@
   = sidebar_button url: assets_url, label: "consultar activos", icon: "th-list"
   = sidebar_button url: edit_asset_path(@asset), label: "editar activo",
     icon: "edit"
-  = sidebar_button url: new_inspection_url(asset: @asset.license_plate),
+  = sidebar_button url: new_inspection_url(asset_license_plate: @asset.license_plate),
     label: "agregar inspección", icon: "paste"
   = sidebar_button url: new_asset_url, label: "agregar activo", icon: "truck"
   = sidebar_button url: @asset, label: "eliminar activo", icon: "trash",
