@@ -1,4 +1,5 @@
 class Inspection < ActiveRecord::Base
+  #-- Relationships --------------------
   belongs_to :asset
   belongs_to :inspection_order
   belongs_to :insurance_company
@@ -6,24 +7,57 @@ class Inspection < ActiveRecord::Base
   has_one :inventory, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :restrict_with_error
+
+  #-- Delegations ----------------------
   delegate :book_value, :license_plate, :inventory_number, :kind_name,
           :chassis_number, :make_name, :model_name, :year, :service_type,
           :vin, to: :asset, prefix: true, allow_nil: true
   delegate :name, to: :insurance_company, prefix: true, allow_nil: true
   delegate :id, to: :inspection_order, prefix: true, allow_nil: true
-  validates :inspection_number, :person_in_charge, :pic_id, :pic_job, :inspection_date, :asset,presence: true
+
+  #-- Validations ----------------------
+  validates :inspection_number, :person_in_charge, :pic_id, :pic_job,
+    :inspection_date, :asset, :address, :city, :state, :exterior,
+    :exterior_notes, :interior, :interior_notes, :engine, :engine_notes,
+    :overall_condition, :observations, presence: true
   validates :inspection_number, uniqueness: { case_sensitive: false, scope: :asset_id }
-  validates :insurance_start, :insurance_finish, presence: true, if:  "insurance_number.present?"
-  validates :emissions_begin_date, :emissions_finish_date, presence: true,if: "emissions_certificate.present?"
-  validates :soat_begin_date, :soat_finish_date, presence: true, if: "soat_number.present?"
+  validates :insurance_start, :insurance_finish,
+    presence: true, if:  "insurance_number.present?"
+  validates :emissions_begin_date, :emissions_finish_date,
+    presence: true,if: "emissions_certificate.present?"
+  validates :soat_begin_date, :soat_finish_date,
+    presence: true, if: "soat_number.present?"
   validate :valid_insurance_data
   validate :valid_soat_dates
   validate :valid_emissions_certficate_dates
+
+  #-- Callbacks ------------------------
   before_save :clean_unwanted_dates
   after_create :increase_inspection_count_on_asset
+  after_create :link_to_order
   around_destroy :decrease_inspection_count_on_asset
-  default_scope { order("inspection_date DESC") }
 
+  #-- Scopes ---------------------------
+  scope :by_recency, -> { order("inspection_date DESC") }
+  scope :by_number_order, -> { order("inspection_number ASC") }
+  scope :by_number, ->(number) { where("inspection_number ilike ?", number) }
+  scope :by_date, ->(date) { where(inspection_date: date).by_number_order }
+  scope :by_range,
+    ->(range) { where(inspection_date: range).by_recency.by_number_order }
+  scope :by_asset,
+    ->(license_plate) { self.joins(:asset).where("assets.license_plate ilike ?", license_plate) }
+
+  #-- Class Methods --------------------
+  def self.search(args = {})
+    if args.has_key? :options
+      query = parse_query(args)
+      send(args[:options].to_s, query)
+    else
+      all.by_recency
+    end
+  end
+
+  #-- Instance Methods -----------------
   def asset_license_plate= (license_plate)
     self.asset = Asset.find_by_license_plate(license_plate) if license_plate.present?
   end
@@ -31,19 +65,25 @@ class Inspection < ActiveRecord::Base
   private
   def valid_soat_dates
     if soat_number? && soat_begin_date? && soat_finish_date?
-      errors.add(:soat_finish_date, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(soat_finish_date) >= (Date.parse(soat_begin_date) >> 12))
+      unless (Date.parse(soat_finish_date) >= (Date.parse(soat_begin_date) >> 11))
+        errors.add(:soat_finish_date, I18n.t("errors.messages.earlier_than_start_date"))
+      end
     end
   end
 
   def valid_insurance_data
     if insurance_number? && insurance_start? && insurance_finish?
-      errors.add(:insurance_finish, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(insurance_finish) >= (Date.parse(insurance_start) >> 12))
+      unless (Date.parse(insurance_finish) >= (Date.parse(insurance_start) >> 11))
+        errors.add(:insurance_finish, I18n.t("errors.messages.earlier_than_start_date"))
+      end
     end
   end
 
   def valid_emissions_certficate_dates
     if emissions_certificate? && emissions_begin_date? && emissions_finish_date?
-      errors.add(:emissions_finish_date, I18n.t("errors.messages.earlier_than_start_date")) unless (Date.parse(emissions_finish_date) >= (Date.parse(emissions_begin_date) >> 12))
+      unless (Date.parse(emissions_finish_date) >= (Date.parse(emissions_begin_date) >> 11))
+        errors.add(:emissions_finish_date, I18n.t("errors.messages.earlier_than_start_date"))
+      end
     end
   end
 
@@ -63,6 +103,10 @@ class Inspection < ActiveRecord::Base
       parent_asset.inspection_count -= 1
       parent_asset.save
     end
+  end
+
+  def link_to_order
+    self.inspection_order.close!
   end
 
   def clean_unwanted_dates
@@ -89,5 +133,26 @@ class Inspection < ActiveRecord::Base
   def remove_dates(first_date, second_date)
     first_date, second_date = nil, nil
   end
-
+  def self.parse_query(args)
+    return "" if args[:query].blank?
+    case args[:options].to_s
+    when "by_date"
+      begin
+        Date.strptime(args[:query], '%d/%m/%y')
+      rescue
+        Time.now
+      end
+    when "by_range"
+      dates = args[:query].split('-')
+      begin
+        start = Date.strptime(dates[0].strip, '%d/%m/%Y')
+        finish = dates[1] ? Date.strptime(dates[1].strip, '%d/%m/%Y') : Date.today
+        start..finish
+      rescue
+        Date.today..Date.today
+      end
+    else
+      "%#{args[:query]}%"
+    end
+  end
 end

@@ -18,29 +18,29 @@
   = sidebar_button url: new_inspection_order_path,
     label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
-  = form_tag do
+  = form_tag inspections_url, method: :get do
     .field.medium-4.columns
-      = search_field_tag :inspection_query, nil, placeholder: "Busqueda de inspección"
+      = search_field_tag :query, nil, placeholder: "Busqueda de inspecciones"
     .field.small-6.medium-2.columns.center
-      = label_tag :query_optiions_by_number do
+      = label_tag :options_by_number do
         %i.icon-paste.icon-large
         acta
-      = radio_button_tag :query_options, :by_number, true
+      = radio_button_tag :options, :by_number
     .field.small-6.medium-2.columns.center
-      = label_tag :query_optiions_by_date do
+      = label_tag :options_by_date do
         %i.icon-time.icon-large
         fecha
-      = radio_button_tag :query_options, :by_date
+      = radio_button_tag :options, :by_date
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_range do
+      = label_tag :options_by_range do
         %i.icon-resize-full.icon-large
         rango
-      = radio_button_tag :query_options, :by_range
+      = radio_button_tag :options, :by_range
     .field.small-6.medium-2.columns.center
-      = label_tag :query_options_by_asset_license_plate do
+      = label_tag :options_by_asset do
         %i.icon-truck.icon-large
         activo
-      = radio_button_tag :query_options, :by_asset_license_plate
+      = radio_button_tag :options, :by_asset
 .content-container.row
   %table.responsive-table.layout.display
     %thead
@@ -49,7 +49,7 @@
         %th= t('.inspection_date')
         %th= t('.address')
         %th= t('.asset')
-        %th= t('.initial_value')
+        %th= "Estado"
     %tbody
       - @inspections.each do |inspection|
         %tr
@@ -57,7 +57,7 @@
           %td{"data-label" => "#{t('.inspection_date')}"}= inspection.inspection_date.strftime('%d-%m-%y %r %Z')
           %td{"data-label" => "#{t('.address')}"}= "#{inspection.address}, #{inspection.city}, #{inspection.state}"
           %td.center{"data-label" => "#{t('.asset')}"}= link_to inspection.asset_license_plate, inspection.asset
-          %td{"data-label" => "#{t('.initial_value')}"}= number_to_currency inspection.asset_book_value
+          %td.center{"data-label" => "Estado"}= inspection.overall_condition
   %section.row
     = render 'shared/pagination', collection: @inspections
 %footer.content-footer.row

@@ -3,7 +3,7 @@ class InspectionsController < ApplicationController
   before_action :find_inspection, except: [:new, :create, :index]
 
   def index
-    @inspections = Inspection.includes(:asset).page params[:page]
+    @inspections = Inspection.search(params).includes(:asset).page params[:page]
     add_breadcrumb "Inspections", :inspections_path
     respond_with @inspections
   end
@@ -18,7 +18,8 @@ class InspectionsController < ApplicationController
 
   def new
     @inspection = Inspection.new
-    @inspection.asset_license_plate = params[:asset] if params.has_key? :asset
+    @inspection.asset_license_plate = params[:asset_license_plate] if params.has_key? :asset_license_plate
+    @inspection.inspection_order_id = params[:inspection_order] if params.has_key? :inspection_order
     respond_with @inspection
   end
 
@@ -29,6 +30,9 @@ class InspectionsController < ApplicationController
     @inspection = Inspection.new(inspection_params)
     flash[:notice] = "La inspección fue guardada exitosamente" if @inspection.save
     respond_with @inspection
+    rescue AASM::InvalidTransition
+      flash[:alert] = "No se pudo guardar la inspección. Si el estado de la orden es Pendiente o Generada, primero debe Agendarla."
+      render 'new'
   end
 
   def update
@@ -62,6 +66,7 @@ private
              :insurance_number, :insurance_company_id, :insured_value, :currency,
              :insurance_start, :insurance_finish, :person_in_charge, :pic_id,
              :pic_job, :inspection_number, :asset_id, :observations, :odometer,
-             :asset_license_plate, :modifications)
+             :asset_license_plate, :modifications, :inspection_order_id,
+             :overall_condition)
   end
 end

@@ -159,9 +159,14 @@
       .medium-4.columns
         %h5.field-title= "#{t("activerecord.attributes.inspection.insured_value")}"
         = @inspection.insured_value
-  .row
-    %h5.field-title= "#{t("activerecord.attributes.inspection.observations")}"
-    = @inspection.observations
+  %section.row
+    %h4.section-label= "Conclusiones"
+    %h5.field-title.medium-2.columns
+      = "Estado General"
+    %span.medium-4.columns
+      %i= @inspection.overall_condition
+    .medium-12.columns
+      = @inspection.observations
   - if @inspection.inventory
     %section.row
       %h4.section-label= "#{t(".fieldset.other_information")}"

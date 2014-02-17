@@ -2,7 +2,8 @@
   = render 'shared/error_messages', target: @inspection
   .row
     %small.required_notification= t('shared.required_notification')
-  .row.asset_info
+  .row
+    .asset_info
   %section.row
     %h4.section-label= t('.fieldset.record')
     .field.medium-4.columns
@@ -42,13 +43,13 @@
     %h4.section-label= t('.fieldset.information')
     .field.medium-4.columns
       = f.label :odometer
-      = f.number_field :odometer
+      = f.number_field :odometer, min: 1
     .field.medium-4.columns
       = f.label :current_value
-      = f.number_field :current_value
+      = f.number_field :current_value, min: 1, step: "any"
     .field.medium-4.columns
       = f.label :appraiser_value
-      = f.number_field :appraiser_value
+      = f.number_field :appraiser_value, min: 1, step: "any"
   %section.row
     %h4.section-label= t('.fieldset.documents')
     .field.medium-4.columns
@@ -187,8 +188,27 @@
       = f.label :insurance_finish
       = f.text_field :insurance_finish, class: 'date-field', |
         placeholder: 'yyyy/mm/dd'                            |
-  .row
-    .field.columns
+  %section.row
+    %h4.section-label= "Conclusiones"
+    .field.medium-3.columns.center
+      = f.label :overall_condition do
+        %b Estado general
+    .radio.small-6.medium-1.columns.center
+      = f.label :overall_condition_good do
+        Bueno
+    .radio.small-6.medium-1.columns
+      = f.radio_button :overall_condition, 'Bueno', checked: true
+    .radio.small-6.medium-1.columns.center
+      = f.label :overall_condition_regular do
+        Regular
+    .radio.small-6.medium-1.columns
+      = f.radio_button :overall_condition, 'Regular'
+    .radio.small-6.medium-1.columns.center
+      = f.label :overall_condition_bad do
+        Malo
+    .radio.small-6.medium-1.columns
+      = f.radio_button :overall_condition, 'Malo'
+    .field.medium-12.columns
       = f.label :observations
       = f.text_area :observations, required: true
       %span.form_hint= t(".observations_hint")
@@ -202,6 +222,6 @@
       = f.text_field :pic_id, required: true
     .field.medium-4.columns
       = f.label :pic_job
-      = f.text_field :pic_job
+      = f.text_field :pic_job, required: true
   .actions
     = f.submit
