@@ -1,4 +1,4 @@
-class KindsController < ApplicationController
+class Admin::KindsController < ApplicationController
   before_action :find_kind, except: [:index, :new, :create]
 
   def index

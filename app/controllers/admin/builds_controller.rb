@@ -1,4 +1,4 @@
-class BuildsController < ApplicationController
+class Admin::BuildsController < ApplicationController
 
   def index
     @builds = Build.includes(:kind, :body).page params[:page]

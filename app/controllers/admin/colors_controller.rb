@@ -1,4 +1,4 @@
-class ColorsController < ApplicationController
+class Admin::ColorsController < ApplicationController
   before_action :find_color, except: [:index, :new, :create]
 
   def index

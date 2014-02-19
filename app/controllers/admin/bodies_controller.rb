@@ -1,4 +1,4 @@
-class BodiesController < ApplicationController
+class Admin::BodiesController < ApplicationController
 
   def index
     @bodies = Body.order(:name).page params[:page]

@@ -1,4 +1,4 @@
-class ModelsController < ApplicationController
+class Admin::ModelsController < ApplicationController
   before_action :find_model, except: [:index, :new, :create]
 
   def index

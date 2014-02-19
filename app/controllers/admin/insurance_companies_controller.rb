@@ -1,4 +1,4 @@
-class InsuranceCompaniesController < ApplicationController
+class Admin::InsuranceCompaniesController < ApplicationController
 
   before_action :find_insurance_company, except: [:index, :new, :create]
 

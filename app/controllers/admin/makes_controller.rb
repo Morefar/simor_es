@@ -1,4 +1,4 @@
-class MakesController < ApplicationController
+class Admin::MakesController < ApplicationController
   before_action :find_make, except: [:index, :new, :create]
 
   def index
