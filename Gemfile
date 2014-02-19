@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.1.0'
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
@@ -50,7 +50,7 @@ gem 'carrierwave', '~> 0.9.0'
 gem 'mini_magick', '~> 3.7.0'
 gem 'carrierwave_backgrounder', '~> 0.3.0'
 gem 'unf','~> 0.1.3'
-gem 'sidekiq', '~> 2.17.4'
+gem 'sidekiq', '~> 2.17.5'
 gem 'fog', '~> 1.20.0'
 gem 'twitter_cldr', '~> 2.4.2'
 gem 'kaminari', '~> 0.15.1'
@@ -58,8 +58,9 @@ gem 'devise', '~> 3.2.2'
 gem 'newrelic_rpm', "~> 3.7.2"
 gem 'foreman', '~> 0.63.0'
 gem 'puma', '~> 2.7.1'
-gem 'jbuilder', '~> 2.0.2'
+gem 'jbuilder', '~> 2.0.3'
 gem 'virtus', '~> 1.0.1'
 gem 'draper', '~> 1.3.0'
+gem 'pundit', '~> 0.2.2'
 # Deploy with Capistrano
 # gem 'capistrano'
