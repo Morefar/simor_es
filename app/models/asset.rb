@@ -149,7 +149,12 @@ class Asset < ActiveRecord::Base
 
   def model_name=(model_name)
     if model_name.present? && make.present?
-      self.model = Model.where(name: model_name, make: self.make).first
+      model_found = Model.where(name: model_name, make: self.make).first
+      if model_found
+        self.model = model_found
+      else
+        self.model = Model.where(name: model_name).first
+      end
     end
   end
 
@@ -183,7 +188,7 @@ class Asset < ActiveRecord::Base
   def model_belongs_to_make
     if make.present? && model.present?
       unless make.id == model.make_id
-        errors.add(:model, I18n.t('errors.messages.model_dont_belong_make'))
+        errors.add(:model_name, I18n.t('errors.messages.model_dont_belong_make'))
       end
     end
   end
