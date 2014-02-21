@@ -21,8 +21,9 @@
     .row
       = render "layouts/header"
     .row
-      = render "layouts/main_navigation"
-      = yield(:main_navigation)
+      .small-12.medium-10.large-10.small-centered.columns
+        = render "layouts/main_navigation"
+        = yield(:main_navigation)
     .container.row
       = render "layouts/notifications"
       .columns.large-3
