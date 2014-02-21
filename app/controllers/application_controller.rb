@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :set_i18n_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
   protected
     def set_i18n_locale_from_params
       if params[:locale]
