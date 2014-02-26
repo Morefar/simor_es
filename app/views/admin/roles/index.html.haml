@@ -1,0 +1,22 @@
+- content_for :title do
+  = "ADMIN - Roles "
+- content_for :content_header do
+  = render 'shared/header_title', title: "AUTENTICACIÓN - ROLES"
+- content_for :sidebar do
+  = sidebar_button url: new_role_url, label: "crear un nuevo rol"
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @roles.each do |role|
+    %tr
+      %td= link_to role.name, role
+      %td= link_to 'Edit', edit_role_path(role)
+      %td= link_to 'Destroy', role, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Role', new_role_path

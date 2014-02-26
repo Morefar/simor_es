@@ -1,0 +1,29 @@
+= form_for @role do |f|
+  - if @role.errors.any?
+    = render 'shared/error_messages', target: @role
+  .row
+    %small.required_notification= t('shared.required_notification')
+  .row
+    .field.medium-4.colums
+      = f.label :name
+      = f.text_field :name, placeholder: 'nombre del rol', |
+        required: true
+  .row
+    %table
+      %thead
+        %th
+        %th CREAR
+        %th CONSULTAR
+        %th ACTUALIZAR
+        %th ELIMINAR
+      %tbody
+        - Right.all.select(:resource).order(resource: :asc).uniq.each do |right|
+          %tr
+            %th= t("#{right.resource}", scope: [:activerecord, :models])
+            - ["CREATE", "READ", "UPDATE", "DELETE"].each do |op|
+              - right_id = Right.where(resource: right.resource, operation: op). |
+                pluck(:id).first                                                 |
+              %td.center= check_box_tag "right_ids[]", right_id, right_id.in?(@role.right_ids)
+
+  .actions
+    = f.submit 'Save'

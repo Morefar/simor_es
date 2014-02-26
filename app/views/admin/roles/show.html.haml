@@ -1,0 +1,28 @@
+- content_for :title do
+  = "Admin - Rol: #{@role.name}"
+- content_for :sidebar do
+  = sidebar_button url: roles_url, label: "roles"
+  = sidebar_button url: edit_role_url(@role), label: "editar rol"
+  = sidebar_button url: role_url(@role), label: "eliminar rol", method: :delete
+
+.detail-title
+  %span#model_number= @role.name
+  %span#model_title= "Rol"
+.content-container.row
+  %h5.section-label= "Permisos"
+  %table.responsive-table.display
+    %thead
+      %tr
+        %th
+        %th= "CREAR"
+        %th= "LEER"
+        %th= "ACTUALIZAR"
+        %th= "BORRAR"
+    %tbody
+      - Right.all.select(:resource).order(resource: :asc).uniq.each do |right|
+        %tr
+          %th= t("#{right.resource}", scope: [:activerecord, :models])
+          - ["CREATE", "READ", "UPDATE", "DELETE"].each do |op|
+            - right_id = Right.where(resource: right.resource, operation: op). |
+              pluck(:id).first                                                 |
+            %td.center= right_id.in?(@role.right_ids) ? "&#x2713;".html_safe : ''
