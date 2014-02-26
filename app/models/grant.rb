@@ -14,6 +14,10 @@
 #
 
 class Grant < ActiveRecord::Base
+  #-- Relationships --------------------
   belongs_to :role
   belongs_to :right
+
+  #-- Validations ----------------------
+  validates :right, uniqueness: { scope: :role }
 end

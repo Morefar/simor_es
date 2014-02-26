@@ -14,6 +14,12 @@
 #
 
 class Assignment < ActiveRecord::Base
+
+  #-- Relationships --------------------
   belongs_to :user
   belongs_to :role
+
+  #-- Validations ----------------------
+  validates :user, :role, presence: true
+  validates :role, uniqueness: { scope: :user }
 end
