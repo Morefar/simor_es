@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery
+
+  #-- Callbacks ------------------------
   before_action :set_i18n_locale_from_params
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   protected
     def set_i18n_locale_from_params
       if params[:locale]
@@ -22,5 +29,10 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :account_name]
       devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name]
+    end
+
+    def user_not_authorized
+      flash[:alert] = "#{current_user.full_name} no autorizado para realizar esta acción."
+      redirect_to request.headers["Referer"] || root_path
     end
 end
