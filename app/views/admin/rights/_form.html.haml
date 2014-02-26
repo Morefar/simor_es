@@ -1,0 +1,16 @@
+= form_for @right do |f|
+  - if @right.errors.any?
+    = render 'shared/error_messages', target: @right
+  .row
+    %small.required_notification= t('shared.required_notification')
+  .row
+    .field.medium-4.columns
+      = f.label :resource
+      = f.text_field :resource, placeholder: 'nombre del recurso', |
+        required: true
+    .field.medium-4.columns.pull-4
+      = f.label :operation
+      = f.select :operation, [["CREAR", "CREATE"], ["LEER", "READ"],
+        ["ACTUALIZAR", "UPDATE"], ["BORRAR", "DELETE"]]
+  .actions
+    = f.submit

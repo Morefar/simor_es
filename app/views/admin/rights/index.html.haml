@@ -1,0 +1,21 @@
+%h1 Listing rights
+
+%table
+  %tr
+    %th Recurso
+    %th Operación
+    %th
+    %th
+    %th
+
+  - @rights.each do |right|
+    %tr
+      %td= right.resource
+      %td= right.operation
+      %td= link_to 'Show', right
+      %td= link_to 'Edit', edit_right_path(right)
+      %td= link_to 'Destroy', right, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Right', new_right_path
