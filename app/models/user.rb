@@ -54,4 +54,7 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+  def can?(action, resource)
+    roles.joins(:rights).for(action, resource).any?
+  end
 end

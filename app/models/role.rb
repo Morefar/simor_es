@@ -22,4 +22,8 @@ class Role < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: true }
 
+  #-- Scopes ---------------------------
+  scope :for, ->(action, resource) {
+    where('rights.operation = ? AND rights.resource =?',
+          Right::OPERATION_MAPPINGS[action], resource) }
 end
