@@ -3,8 +3,9 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CONSULTAR CONTRATO"
 - content_for :sidebar do
-  = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
-    icon: "file-text"
+  -if current_user.can? "new", "contract"
+    = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
+      icon: "file-text"
   = sidebar_button url: entities_path, label: "consultar personas",
     icon: "group"
   = sidebar_button url: assets_path, label: "consultar activos",
@@ -13,8 +14,9 @@
     icon: "paste"
   = sidebar_button url: inspection_orders_path,
     label: "seguimiento orden de inspeccion", icon: "eye-open"
-  = sidebar_button url: new_inspection_order_path,
-    label: "crear orden de inspección", icon: "pencil"
+  - if current_user.can? "new", "inspection_order"
+    = sidebar_button url: new_inspection_order_path,
+      label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
   = form_tag contracts_path, method: :get do
     .field.medium-4.columns

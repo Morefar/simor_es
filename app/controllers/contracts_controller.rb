@@ -5,6 +5,7 @@ class ContractsController < ApplicationController
 #CREATE ACTIONS
   def new
     @contract = Contract.new
+    authorize @contract
     @contract.cosigners.build
     respond_to do |format|
       format.html
@@ -14,6 +15,7 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
+    authorize @contract
     if @contract.save
       redirect_to @contract
     else
@@ -39,6 +41,7 @@ class ContractsController < ApplicationController
   end
 
   def show
+    authorize @contract
     add_breadcrumb "Contract:#{@contract.number}", @contract
     respond_to do |format|
       format.html
@@ -48,9 +51,11 @@ class ContractsController < ApplicationController
 
 #UPDATE ACTIONS
   def edit
+    authorize @contract
   end
 
   def update
+    authorize @contract
     @contract.update_attributes(contract_params)
     if @contract.save
       redirect_to @contract
@@ -61,6 +66,7 @@ class ContractsController < ApplicationController
 
 #DELETE ACTIONS
   def destroy
+    authorize @contract
     if @contract.destroy
       redirect_to contracts_url, notice: "Contrato eliminado exitosamente"
     else

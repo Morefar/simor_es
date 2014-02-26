@@ -5,17 +5,32 @@
   %nav#content_nav.show-for-medium-up
     %ul.nav-button-group
       %li.btn
-        = link_to contracts_url do
-          consultar
-          %br
-          contrato &nbsp;
-          %i.icon-search.icon-3x.task-icon
+        - if current_user.can?("new", "contract")
+          = link_to new_contract_url do
+            crear
+            %br
+            contrato &nbsp;
+            %i.icon-file-text.icon-3x.task-icon
+        - else
+          = link_to contracts_url do
+            consultar
+            %br
+            contrato &nbsp;
+            %i.icon-search.icon-3x.task-icon
       %li.btn
-        = link_to new_inspection_order_url do
-          crear orden
-          %br
-          de inspección &nbsp;
-          %i.icon-pencil.icon-3x.task-icon
+        - if current_user.can? "new", "inspection_order"
+          = link_to new_inspection_order_url do
+            crear orden
+            %br
+            de inspección &nbsp;
+            %i.icon-pencil.icon-3x.task-icon
+        - else
+          = link_to new_asset_url do
+            crear
+            %br
+            activo &nbsp;
+            %i.icon-truck.icon-3x.task-icon
+
       %li.btn
         = link_to inspection_orders_url do
           seguimiento orden
@@ -26,13 +41,14 @@
   = sidebar_button url: contracts_url, label: "consultar contratos",
     icon: "search"
   = sidebar_button url: assets_url, label: "consultar activos",
-    icon: "truck"
+    icon: "bar-chart"
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "paste"
   = sidebar_button url: inspection_orders_url,
     label: "seguimiento orden de inspección", icon: "eye-open"
-  = sidebar_button url: new_inspection_order_url,
-    label: "crear orden de inspección", icon: "pencil"
+  - if current_user.can?("new", "inspection_order")
+    = sidebar_button url: new_inspection_order_url,
+      label: "crear orden de inspección", icon: "pencil"
 = field_set_tag do
   %h6 LISTADO ÚLTIMAS CONSULTAS / ACCIONES
   %article

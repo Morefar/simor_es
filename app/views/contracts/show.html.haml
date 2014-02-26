@@ -1,22 +1,27 @@
 - content_for :title do
   = "contrato: #{@contract.number}"
 - content_for :sidebar do
-  = sidebar_button url: edit_contract_path(@contract), label: "editar contrato",
-    icon: "edit"
-  = sidebar_button url: new_asset_url(contract: @contract.number),
-    label: "agregar activo", icon: "truck"
-  = sidebar_button url: new_contract_url, label: "agregar contrato",
-    icon: "file-text"
-  = sidebar_button url: @contract, label: "eliminar contrato",
-    icon: "trash", method: :delete
+  - if policy(@contract).edit?
+    = sidebar_button url: edit_contract_path(@contract), label: "editar contrato",
+      icon: "edit"
+  - if current_user.can?("new", "asset")
+    = sidebar_button url: new_asset_url(contract: @contract.number),
+      label: "agregar activo", icon: "truck"
+  - if policy(@contract).new?
+    = sidebar_button url: new_contract_url, label: "agregar contrato",
+      icon: "file-text"
+  - if policy(@contract).destroy?
+    = sidebar_button url: @contract, label: "eliminar contrato",
+      icon: "trash", method: :delete
   = sidebar_button url: contracts_url, label: "consultar contratos",
     icon: "search"
   = sidebar_button url: entities_url, label: "consultar personas",
     icon: "group"
   = sidebar_button url: inspection_orders_url,
     label: "seguimiento ordenes de inspección", icon: "eye-open"
-  = sidebar_button url: new_inspection_order_url(number: @contract.number, number_from: "contract"),
-    label: "generar orden de inspección", icon: "pencil"
+  - if current_user.can?("new", "inspection_order")
+    = sidebar_button url: new_inspection_order_url(number: @contract.number, number_from: "contract"),
+      label: "generar orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"
@@ -91,6 +96,7 @@
     = render 'documents/index', documentable: @contract
   %section#comments.row
     = render 'comments/index', commentable: @contract
-  %section#document-upload.row
-    = render 'documents/form', document: Document.new, documentable: @contract
+  -if current_user.can?("new", "document")
+    %section#document-upload.row
+      = render 'documents/form', document: Document.new, documentable: @contract
 = render "shared/content_footer", target: contracts_path
