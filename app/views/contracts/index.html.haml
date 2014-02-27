@@ -3,7 +3,7 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CONSULTAR CONTRATO"
 - content_for :sidebar do
-  -if current_user.can? "new", "contract"
+  -if current_user.can? :create, :contract
     = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
       icon: "file-text"
   = sidebar_button url: entities_path, label: "consultar personas",
@@ -14,7 +14,7 @@
     icon: "paste"
   = sidebar_button url: inspection_orders_path,
     label: "seguimiento orden de inspeccion", icon: "eye-open"
-  - if current_user.can? "new", "inspection_order"
+  - if current_user.can? :create, :inspection_order
     = sidebar_button url: new_inspection_order_path,
       label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
