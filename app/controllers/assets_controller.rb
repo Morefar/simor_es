@@ -3,7 +3,6 @@ class AssetsController < ApplicationController
 
   def index
     @assets = Asset.search(params).includes(:contract, :make, :model).page params[:page]
-    add_breadcrumb 'Assets', :assets_path
     respond_to do |format|
       format.html
       format.json do
@@ -19,8 +18,7 @@ class AssetsController < ApplicationController
   end
 
   def show
-    add_breadcrumb "Contract: #{@asset.contract_number}", @asset.contract
-    add_breadcrumb "Asset: #{@asset.inventory_number}", @asset
+    authorize(@asset)
     @asset = @asset.decorate
     respond_to do |format|
       format.html
@@ -31,6 +29,7 @@ class AssetsController < ApplicationController
 
   def new
     @asset = Asset.new
+    authorize(@asset)
     @asset.contract_number = params[:contract] if params.has_key? :contract
     respond_to do |format|
       format.html
@@ -39,10 +38,12 @@ class AssetsController < ApplicationController
   end
 
   def edit
+    authorize(@asset)
   end
 
   def create
     @asset = Asset.new(asset_params)
+    authorize(@asset)
     respond_to do |format|
       if @asset.save
         format.html { redirect_to @asset, notice: 'Activo creado exitosamente.' }
@@ -53,6 +54,7 @@ class AssetsController < ApplicationController
   end
 
   def update
+    authorize(@asset)
     respond_to do |format|
       if @asset.update_attributes(asset_params)
         format.html { redirect_to @asset, notice: 'Activo actualizado correctamente' }
@@ -63,6 +65,7 @@ class AssetsController < ApplicationController
   end
 
   def destroy
+    authorize(@asset)
     if @asset.destroy
       redirect_to assets_url, notice: "Activo eliminado exitosamente"
     else

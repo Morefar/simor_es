@@ -134,6 +134,10 @@ class Asset < ActiveRecord::Base
     end
   end
 
+  def self.policy_class
+    AssetPolicy
+  end
+
   #-- Instance Methods -----------------
   def contract_number=(contract_number)
     if contract_number.present?
