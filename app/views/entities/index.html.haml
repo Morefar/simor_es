@@ -6,7 +6,7 @@
   - if current_user.can?(:create, :entity)
     = sidebar_button url: new_entity_url, label: "crear nueva persona",
       icon: "user"
-  - if current_user.can?(:create, :entity)
+  - if current_user.can?(:create, :contract)
     = sidebar_button url: new_contract_url, label: "crear nuevo contrato",
       icon: "file-text"
   = sidebar_button url: contracts_path, label: "consultar contratos",
@@ -17,7 +17,7 @@
     icon: "paste"
   = sidebar_button url: inspection_orders_path,
     label: "seguimiento orden de inspeccion", icon: "eye-open"
-  - if current_user.can?(:create, :entity)
+  - if current_user.can?(:create, :inspection_order)
     = sidebar_button url: new_inspection_order_path,
       label: "crear orden de inspección", icon: "pencil"
 .search-box-container.row
