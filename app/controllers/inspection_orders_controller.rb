@@ -14,20 +14,24 @@ class InspectionOrdersController < ApplicationController
   end
 
   def show
+    authorize(@inspection_order)
     respond_with @inspection_order
   end
 
   def new
     @inspection_order_form = InspectionOrderForm.new(params.slice(:number, :number_from))
+    authorize(@inspection_order_form)
     respond_with @inspection_order_form
   end
 
   def edit
+    authorize(@inspection_order)
     respond_with @inspection_order
   end
 
   def create
     @inspection_order_form = InspectionOrderForm.new(params[:inspection_order_form])
+    authorize(@inspection_order_form)
     if @inspection_order_form.submit
       redirect_to inspection_orders_url, notice: "Ordenes de Inspección Generadas"
     else
@@ -36,11 +40,13 @@ class InspectionOrdersController < ApplicationController
   end
 
   def update
+    authorize(@inspection_order)
     @inspection_order.change_state(inspection_order_params)
     respond_with @inspection_order
   end
 
   def destroy
+    authorize(@inspection_order)
     @inspection_order.destroy
     respond_with @inspection_order
   end

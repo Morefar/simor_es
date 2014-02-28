@@ -14,6 +14,10 @@ class InspectionOrderForm < FormObject::Base
   validate :model_must_exist
   validate :assets_present?
 
+  def self.policy_class
+    InspectionOrderPolicy
+  end
+
   def submit
     if valid?
       generated_orders = Array.new

@@ -3,15 +3,18 @@
 - content_for :sidebar do
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "list"
-  = sidebar_button url: edit_inspection_order_url(@inspection_order),
-    label: "cambiar estado orden de inspección", icon: "edit"
-  = sidebar_button url: new_inspection_url(inspection_order: @inspection_order.id,
-    asset_license_plate: @inspection_order.asset_license_plate),
-    label: "registrar inspección", icon: "paste"
+  - if current_user.can?(:edit, :inspection_order)
+    = sidebar_button url: edit_inspection_order_url(@inspection_order),
+      label: "cambiar estado orden de inspección", icon: "edit"
+  - if current_user.can?(:create, :inspection)
+    = sidebar_button url: new_inspection_url(inspection_order: @inspection_order.id,
+      asset_license_plate: @inspection_order.asset_license_plate),
+      label: "registrar inspección", icon: "paste"
   = sidebar_button url: inspection_orders_url,
     label: "consultar ordenes de inspección", icon: "eye-open"
-  = sidebar_button url: new_inspection_order_url,
-    label: "crear nueva orden de inspección", icon: "pencil"
+  - if current_user.can?(:create, :inspection_order)
+    = sidebar_button url: new_inspection_order_url,
+      label: "crear nueva orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= "#{ @inspection_order.id }"
   %span#model_title

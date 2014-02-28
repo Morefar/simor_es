@@ -3,8 +3,9 @@
 - content_for :content_header do
   = render 'shared/header_title', title: "CAMBIAR ESTADO ORDEN DE INSPECCIÓN"
 - content_for :sidebar do
-  = sidebar_button url: new_contract_url, label: "crear contrato",
-    icon: "file-text"
+  - if current_user.can?(:create, :contract)
+    = sidebar_button url: new_contract_url, label: "crear contrato",
+      icon: "file-text"
   = sidebar_button url: contracts_url, label: "consultar contratos",
     icon: "search"
   = sidebar_button url: assets_url, label: "consultar activos",

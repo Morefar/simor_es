@@ -11,8 +11,9 @@
     label: "ordenes agendadas", icon: "calendar"
   = sidebar_button url: inspection_orders_url(status: :inspected),
     label: "ordenes inspeccionadas", icon: "check"
-  = sidebar_button url: new_inspection_order_url,
-    label: 'crear nueva orden de inspección', icon: 'pencil'
+  - if current_user.can?(:create, :inspection_order)
+    = sidebar_button url: new_inspection_order_url,
+      label: 'crear nueva orden de inspección', icon: 'pencil'
   = sidebar_button url: contracts_url, label: 'consultar contratos',
     icon: 'search'
   = sidebar_button url: assets_url, label: 'consultar activos', icon: 'truck'
@@ -50,7 +51,7 @@
     %tbody
       - @inspection_orders.each do |inspection_order|
         %tr
-          %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection_order.id, inspection_order
+          %td.identifier.center{"data-label" => "#{t('.number')}"}= link_to inspection_order.id, inspection_order_url(inspection_order)
           %td{"data-label" => "#{t('.date')}"}= inspection_order.created_at.strftime('%d-%m-%y %r %Z')
           %td{"data-label" => "#{t('.asset')}"}= inspection_order.asset.license_plate
           %td{"data-label" => "#{t('.contract')}"}= inspection_order.asset.contract_number
