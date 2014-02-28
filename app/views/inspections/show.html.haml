@@ -3,14 +3,17 @@
 - content_for :sidebar do
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "list"
-  = sidebar_button url: edit_inspection_url(@inspection.model),
-    label: "editar inspección", icon: "edit"
-  = sidebar_button url: inspection_url(@inspection.model),
-    label: "eliminar inspección", icon: "trash", method: :delete
+  - if current_user.can?(:edit, :inspection)
+    = sidebar_button url: edit_inspection_url(@inspection.model),
+      label: "editar inspección", icon: "edit"
+  - if current_user.can?(:delete, :inspection)
+    = sidebar_button url: inspection_url(@inspection.model),
+      label: "eliminar inspección", icon: "trash", method: :delete
   = sidebar_button url: inspection_orders_url,
     label: "consultar ordenes de inspección", icon: "eye-open"
-  = sidebar_button url: new_inspection_order_url,
-    label: "crear nueva orden de inspección", icon: "pencil"
+  - if current_user.can?(:create, :inspection_order)
+    = sidebar_button url: new_inspection_order_url,
+      label: "crear nueva orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= "#{ @inspection.inspection_number }"
   %span#model_title

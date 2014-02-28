@@ -12,12 +12,14 @@ class InspectionsController < ApplicationController
     add_breadcrumb "Contract: #{@inspection.contract.number}", @inspection.contract
     add_breadcrumb "Asset: #{@inspection.asset.inventory_number}", @inspection.asset
     add_breadcrumb "Inspection: #{@inspection.inspection_number}" , @inspection
+    authorize(@inspection)
     @inspection = @inspection.decorate
     respond_with @inspection
   end
 
   def new
     @inspection = Inspection.new
+    authorize(@inspection)
     @inspection.asset_license_plate = params[:asset_license_plate] if params.has_key? :asset_license_plate
     @inspection.inspection_order_id = params[:inspection_order] if params.has_key? :inspection_order
     respond_with @inspection
@@ -28,6 +30,7 @@ class InspectionsController < ApplicationController
 
   def create
     @inspection = Inspection.new(inspection_params)
+    authorize(@inspection)
     flash[:notice] = "La inspección fue guardada exitosamente" if @inspection.save
     respond_with @inspection
     rescue AASM::InvalidTransition
@@ -36,11 +39,13 @@ class InspectionsController < ApplicationController
   end
 
   def update
+    authorize(@inspection)
     flash[:notice] = "Los datos de la inspección fueron actializados" if @inspection.update_attributes(inspection_params)
     respond_with @inspection
   end
 
   def destroy
+    authorize(@inspection)
     if @inspection.destroy
       redirect_to inspections_url, notice: "Inspección eliminada exitosamente"
     else
