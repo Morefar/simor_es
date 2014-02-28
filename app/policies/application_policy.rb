@@ -25,6 +25,7 @@ class ApplicationPolicy
     name.to_s.gsub('?', '')
   end
   def infer_resource_from(record)
-    record.class.name.downcase
+    resource = record.class.name.underscore
+    resource.gsub('_form', '')
   end
 end
