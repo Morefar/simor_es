@@ -2,53 +2,59 @@ class EntitiesController < ApplicationController
   respond_to :html
   before_action :find_entity, except: [:index, :new, :create]
 
-def index
-  @entities = Entity.search(params).includes(:identification_type).page params[:page]
-  respond_to do |format|
-    format.html
-    format.json do
-      render json: Entity.search(query: params[:term], options: :by_name).
-        limit(10).pluck(:name)
+  def index
+    @entities = Entity.search(params).includes(:identification_type).page params[:page]
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: Entity.search(query: params[:term], options: :by_name).
+          limit(10).pluck(:name)
+      end
+
     end
-
   end
-end
 
-def show
-  @entity = @entity.decorate
-  respond_with @entity
-end
+  def show
+    authorize(@entity)
+    @entity = @entity.decorate
+    respond_with @entity
+  end
 
-def new
-  @entity = Entity.new
-  respond_with @entity
-end
+  def new
+    @entity = Entity.new
+    authorize(@entity)
+    respond_with @entity
+  end
 
-def edit
-end
+  def edit
+    authorize(@entity)
+  end
 
-def create
-  @entity = Entity.new(entity_params)
-  flash[:notice] = "Persona creada satisfactoriamente" if @entity.save
-  respond_with @entity
-end
+  def create
+    @entity = Entity.new(entity_params)
+    authorize(@entity)
+    flash[:notice] = "Persona creada satisfactoriamente" if @entity.save
+    respond_with @entity
+  end
 
-def update
-  flash[:notice] = "Datos de persona actualizados" if @entity.update_attributes(entity_params)
-  respond_with @entity
-end
+  def update
+    authorize(@entity)
+    flash[:notice] = "Datos de persona actualizados" if @entity.update_attributes(entity_params)
+    respond_with @entity
+  end
 
-def destroy
+  def destroy
+    authorize(@entity)
     if @entity.destroy
       redirect_to entities_url, notice: "Datos de Persona eliminados exitosamente"
     else
-        flash.now[:alert] = %{ Datos de persona no fueron eliminados porque aún tiene
-                               contratos asociados }
-        render action: "show", status: :forbidden
+      flash.now[:alert] = %{ Datos de persona no fueron eliminados porque aún tiene
+                              contratos asociados }
+      render action: "show", status: :forbidden
     end
-end
+  end
 
-private
+  private
   def find_entity
     @entity = Entity.find(params[:id]) if params[:id]
   end

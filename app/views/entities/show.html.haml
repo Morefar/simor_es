@@ -3,12 +3,15 @@
 - content_for :sidebar do
   = sidebar_button url: entities_url, label: "consultar personas",
     icon: "group"
-  = sidebar_button url: edit_entity_path(@entity), label: "editar persona",
-    icon: "edit"
-  = sidebar_button url: @entity, label: "eliminar persona", icon: "trash",
-    method: :delete
-  = sidebar_button url: new_entity_url, label: "crear nueva persona",
-    icon: "user"
+  - if current_user.can?(:edit, :entity)
+    = sidebar_button url: edit_entity_path(@entity), label: "editar persona",
+      icon: "edit"
+  - if current_user.can?(:destroy, :entity)
+    = sidebar_button url: @entity, label: "eliminar persona", icon: "trash",
+      method: :delete
+  - if current_user.can?(:create, :entity)
+    = sidebar_button url: new_entity_url, label: "crear nueva persona",
+      icon: "user"
 
 .detail-title
   %span#model_number= @entity.name
