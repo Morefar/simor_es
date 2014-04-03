@@ -25,7 +25,8 @@ class ApplicationPolicy
     name.to_s.gsub('?', '')
   end
   def infer_resource_from(record)
-    resource = record.class.name.underscore
+    record_class = record.is_a?(Class) ? record.name : record.class.name
+    resource = record_class.underscore
     resource.gsub('_form', '')
   end
 end
