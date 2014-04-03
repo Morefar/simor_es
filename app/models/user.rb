@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   def can?(action, resource)
-    roles.joins(:rights).for(action.to_s, resource.to_s).any?
+    roles.includes(:rights).references(:rights).
+      for(action.to_s, resource.to_s).any?
   end
 end
