@@ -2,33 +2,12 @@
 require 'rubygems'
 require 'factory_girl_rails'
 
- category_names = [
-    "Financiero",
-    "Importación",
-    "Inmobiliario",
-    "Infraestructura",
-    "Operacional",
-    "Multileasing",
-    "Municipal",
-    "Leaseback",
-  ]
-
-Category.destroy_all
-category_names.each do |cat|
-  FactoryGirl.create(:category, name: cat)
-end
 puts "#{Category.count} categories in the system"
 puts "#{Color.count} colors in the system"
 puts "#{Kind.count} vehicle kinds in the system"
 puts "#{Body.count} body types in the system"
 puts "#{Make.count} makes in the system"
 puts "#{Model.count} models in the system"
-
-IdentificationType.destroy_all
-id_type_array = %w(CC NIT CE PASAPORTE OTRO)
-id_type_array.each do |type_name|
-  FactoryGirl.create(:identification_type, name: type_name)
-end
 puts "#{IdentificationType.count} Identification types created"
 
 Entity.destroy_all
