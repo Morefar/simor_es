@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :find_comment, except:  [:create]
 
   def edit
+    authorize(@comment)
     respond_to do |format|
       format.js
     end
@@ -9,6 +10,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    authorize(@comment)
     respond_to do |format|
       if @comment.save
         format.js
@@ -21,6 +23,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize(@comment)
     respond_to do |format|
       if @comment.update_attributes(comment_params)
         format.js

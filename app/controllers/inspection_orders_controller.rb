@@ -14,8 +14,8 @@ class InspectionOrdersController < ApplicationController
   end
 
   def show
-    authorize(@inspection_order)
-    respond_with @inspection_order
+      authorize(@inspection_order)
+      respond_with @inspection_order
   end
 
   def new

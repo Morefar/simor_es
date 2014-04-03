@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
+    authorize(@document)
   end
 
   def show
@@ -11,6 +12,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
+    authorize(@document)
     if @document.save
       redirect_to @document.documentable,
         notice: "El documento fue agregado exitósamente"
@@ -21,12 +23,14 @@ class DocumentsController < ApplicationController
   end
 
   def edit
+    authorize(@document)
     respond_to do |format|
       format.js
     end
   end
 
   def update
+    authorize(@document)
     if @document.update_attributes(document_params)
       format.js
       format.html { redirect_to @document.documentable,
@@ -38,6 +42,7 @@ class DocumentsController < ApplicationController
 
   def destroy
     documentable = @document.documentable
+    authorize(@document)
     @document.destroy
     respond_to do |format|
      format.html { redirect_to documentable}
