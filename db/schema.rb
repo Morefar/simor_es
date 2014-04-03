@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216234858) do
+ActiveRecord::Schema.define(version: 20140401154359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.float    "book_value"
     t.integer  "inspection_count",     default: 0
     t.date     "last_inspection_date"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "assets", ["body_id"], name: "index_assets_on_body_id", using: :btree
@@ -75,22 +75,22 @@ ActiveRecord::Schema.define(version: 20140216234858) do
 
   create_table "assignments", force: true do |t|
     t.integer  "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
   end
 
   create_table "bodies", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "builds", force: true do |t|
     t.integer  "kind_id"
     t.integer  "body_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "builds", ["body_id"], name: "index_builds_on_body_id", using: :btree
@@ -102,8 +102,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
 
   create_table "colors", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: true do |t|
@@ -111,8 +111,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
@@ -133,18 +133,18 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.text     "location_of_assets"
     t.boolean  "option_to_buy"
     t.date     "last_date_to_option"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "contracts", ["category_id"], name: "index_contracts_on_category_id", using: :btree
-  add_index "contracts", ["number"], name: "index_contracts_on_number", using: :btree
+  add_index "contracts", ["number"], name: "index_contracts_on_number", unique: true, using: :btree
 
   create_table "cosigners", force: true do |t|
     t.integer  "entity_id"
     t.integer  "contract_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "cosigners", ["contract_id"], name: "index_cosigners_on_contract_id", using: :btree
@@ -159,8 +159,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.string   "category"
     t.integer  "documentable_id"
     t.string   "documentable_type"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "content_processing"
   end
 
@@ -176,8 +176,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.string   "phone"
     t.string   "state"
     t.integer  "identification_type_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "entities", ["identification_type_id"], name: "index_entities_on_identification_type_id", using: :btree
@@ -185,16 +185,16 @@ ActiveRecord::Schema.define(version: 20140216234858) do
   create_table "grants", force: true do |t|
     t.integer  "role_id"
     t.integer  "right_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "grants", ["role_id", "right_id"], name: "index_grants_on_role_id_and_right_id", using: :btree
 
   create_table "identification_types", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "inspection_orders", force: true do |t|
@@ -202,14 +202,16 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.integer  "renew_period"
     t.string   "status"
     t.integer  "asset_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "scheduled_date"
     t.integer  "user_id"
     t.string   "priority",       default: "normal"
+    t.string   "token"
   end
 
   add_index "inspection_orders", ["priority"], name: "index_inspection_orders_on_priority", using: :btree
+  add_index "inspection_orders", ["token"], name: "by_uniq_token", unique: true, using: :btree
   add_index "inspection_orders", ["user_id"], name: "index_inspection_orders_on_user_id", using: :btree
 
   create_table "inspections", force: true do |t|
@@ -242,8 +244,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.string   "person_in_charge"
     t.string   "pic_id"
     t.string   "pic_job"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "observations"
     t.boolean  "modifications",         default: false
     t.string   "odometer",              default: "0"
@@ -260,8 +262,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
   create_table "insurance_companies", force: true do |t|
     t.string   "name"
     t.string   "nit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "inventories", force: true do |t|
@@ -348,22 +350,22 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.boolean  "electric_antena"
     t.boolean  "antena"
     t.text     "observations"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "inventories", ["inspection_id"], name: "index_inventories_on_inspection_id", using: :btree
 
   create_table "kinds", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "makes", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "runt_code"
   end
 
@@ -372,8 +374,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
   create_table "models", force: true do |t|
     t.integer  "make_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "models", ["make_id"], name: "index_models_on_make_id", using: :btree
@@ -419,8 +421,8 @@ ActiveRecord::Schema.define(version: 20140216234858) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
