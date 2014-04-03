@@ -1,25 +1,25 @@
-%header#page_header{ role: "banner" }
-  .row
-    #ah-logo.columns.medium-2.small-2= link_to(image_tag("logo.png", size: "122x74", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
-    %span#tagline.columns.medium-2.push-2.hide-for-small assethound
-    .columns.medium-8.push-1
-      %nav#utility.row
-        - if user_signed_in?
-          .columns.medium-2= link_to "ayuda", ""
-          .columns.medium-2= link_to "actividad reciente", ""
-          .columns.medium-3
-            = form_tag do
-              =search_field_tag :search_query, nil, placeholder: "Busqueda"
-          %a#user_settings_button.columns.medium-3{ href: "#", data: { dropdown: "drop" } }
-            %i.icon-user
-            %strong= "#{current_user.first_name} #{current_user.last_name}"
-          %br
-          %ul#drop.f-dropdown{ "data-dropdown-content" => "" }
-            %li
-              = link_to edit_user_registration_path, title: t("layouts.application.settings") do
-                %i.icon-cog.icon-large
-                %small= t("layouts.application.settings")
-            %li
-              = link_to destroy_user_session_path, title: t("layouts.application.sign_out"), method: :delete do
-                %i.icon-signout.icon-large
-                %small= t("layouts.application.sign_out")
+%header#page_header.row{ role: "banner" }
+  %span.with-fold
+  %nav#utility{ role: "navigation" }
+    .ah-logo= link_to(image_tag("logo.png", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
+    - if user_signed_in?
+      %ul
+        -# %li
+        -#   = link_to "Actividad reciente", ""
+        -# %li
+        -#   = link_to "Ayuda", ""
+        %li
+          = form_tag role: "search" do
+            =search_field_tag :search_query, nil, placeholder: "Busqueda"
+        %li
+          %a#user_settings_button{ href: "#", data: { dropdown: "drop" } }
+            = "#{current_user.first_name} #{current_user.last_name} &nbsp; &#10095;".html_safe
+      %ul#drop.tiny.f-dropdown{ "data-dropdown-content" => "" }
+        %li
+          = link_to edit_user_registration_path, title: t("layouts.application.settings") do
+            %i.icon-cog.icon-large
+            %small= t("layouts.application.settings")
+        %li
+          = link_to destroy_user_session_path, title: t("layouts.application.sign_out"), method: :delete do
+            %i.icon-signout.icon-large
+            %small= t("layouts.application.sign_out")

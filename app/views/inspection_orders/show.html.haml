@@ -3,7 +3,7 @@
 - content_for :sidebar do
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "list"
-  - if current_user.can?(:edit, :inspection_order)
+  - if policy(@inspection_order).edit?
     = sidebar_button url: edit_inspection_order_url(@inspection_order),
       label: "cambiar estado orden de inspección", icon: "edit"
   - if current_user.can?(:create, :inspection)
@@ -13,7 +13,7 @@
   = sidebar_button url: inspection_orders_url,
     label: "consultar ordenes de inspección", icon: "eye-open"
   - if current_user.can?(:create, :inspection_order)
-    = sidebar_button url: new_inspection_order_url,
+    = sidebar_button url: new_inspection_order_url, class: "call-to-action",
       label: "crear nueva orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= "#{ @inspection_order.id }"
@@ -81,7 +81,7 @@
   %section.row
     %h4.section-label= "Solicitante"
     .medium-6.columns
-      %b= @inspection_order.requested_by_full_name
+      %b= @inspection_order.requester_full_name
   %section.row
     - unless @inspection_order.notes.empty?
       %h4.section-label= "Notas"

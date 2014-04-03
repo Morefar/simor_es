@@ -12,26 +12,21 @@
     / <meta http-equiv="X-UA-Compatible" content="IE=7" />
     / Set the viewport width to device width for mobile
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+    = favicon_link_tag "favicon.ico"
     %title= content_for?(:title) ? yield(:title) : t('.title')
     = stylesheet_link_tag    "application"
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css", rel: "stylesheet"}/
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   %body
-    .row
-      = render "layouts/header"
-    .row
-      .small-12.medium-10.large-10.small-centered.columns
-        = render "layouts/main_navigation"
-        = yield(:main_navigation)
+    = render "layouts/header"
+    = render "layouts/main_navigation"
     .container.row
       = render "layouts/notifications"
-      .columns.large-3
-        = render "layouts/sidebar"
-      %section#content.columns.large-9
+      = render "layouts/sidebar"
+      %section#content
         - if content_for?(:content_header)
           = yield(:content_header)
         = yield
-    .row
-      = render 'layouts/footer'
+    = render 'layouts/footer'
     = javascript_include_tag "application"

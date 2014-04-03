@@ -21,68 +21,68 @@
     label: "seguimiento ordenes de inspección", icon: "eye-open"
   - if current_user.can?(:create, :inspection_order)
     = sidebar_button url: new_inspection_order_url(number: @contract.number, number_from: "contract"),
-      label: "generar orden de inspección", icon: "pencil"
+      class: "call-to-action", label: "Crear orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"
 .content-container.row
   .row
-    %section#basic_info.large-6.columns
+    %section#basic_info.medium-6.columns
       %h4.section-label= t('.fieldset.information')
       .row
-        %b.large-6.columns= "#{t('activerecord.attributes.contract.category_id')}:"
-        %span.large-6.columns
+        %b.medium-6.columns= "#{t('activerecord.attributes.contract.category_id')}:"
+        %span.medium-6.columns
           = @contract.category_name
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t('activerecord.attributes.contract.start_date')
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.start_date.strftime "%d/%m/%Y"
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t 'activerecord.attributes.contract.duration'
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = "#{@contract.duration} #{contract_periodicity(@contract.periodicity)}"
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t 'activerecord.attributes.contract.asset_count'
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.asset_count
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = "#{ t('activerecord.attributes.contract.first_canon_date') }:"
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.first_canon_date.strftime "%d/%m/%Y"
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t 'activerecord.attributes.contract.expiration_date'
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.expiration_date.strftime "%d/%m/%Y"
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t 'activerecord.attributes.contract.total_value'
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.currency
           = number_to_currency @contract.total_value
       .row
-        %b.large-6.columns
+        %b.medium-6.columns
           = t 'activerecord.attributes.contract.location_of_assets'
           \:
-        %span.large-6.columns
+        %span.medium-6.columns
           = @contract.location_of_assets
       - if @contract.option_to_buy?
         .row
-          %b.large-6.columns
+          %b.medium-6.columns
             = t 'activerecord.attributes.contract.last_date_to_option'
             \:
-          %span.large-6.columns
+          %span.medium-6.columns
             = @contract.last_date_to_option.strftime "%d/%m/%Y"
-    %section#lessee_info.large-6.columns
+    %section#lessee_info.medium-6.columns
       %h4.section-label= t('.fieldset.lessee')
       = render @contract.lessee
       - unless @contract.cosigners.empty?

@@ -12,6 +12,7 @@
     / <meta http-equiv="X-UA-Compatible" content="IE=7" />
     / Set the viewport width to device width for mobile
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    = favicon_link_tag "favicon.ico"
     %title= content_for?(:title) ? yield(:title) : t('layouts.application.title')
     = stylesheet_link_tag    "application"
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css", rel: "stylesheet"}/
@@ -19,10 +20,9 @@
     = csrf_meta_tags
   %body
     %header#page_header.row{role: "banner"}
-      #ah-logo.columns.medium-2.small-2
-        = link_to(image_tag("logo.png", size:"122x74", alt: "AssetHound", |
-          id: "logo"), root_url, title: "Inicio")                         |
-      %span#tagline.columns.medium-2.pull-8 assethound
+      %span.with-fold
+      %nav#utility{ role: "navigation" }
+        .ah-logo= link_to(image_tag("logo.png", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
     .container.row
       .row
         - flash.each do |k,v|

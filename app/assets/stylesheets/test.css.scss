@@ -1,4 +1,14 @@
 @import 'foundation_and_overrides';
+@import 'ah-defaults';
+@import 'with-fold';
+
+body {
+  font-family: "Muli", sans-serif;
+}
+
+b {
+  margin-bottom: 6px;
+}
 
 fieldset {
   -webkit-border-radius: 10px;
@@ -8,21 +18,18 @@ fieldset {
 
 .row {
   padding-bottom: 15px;
-  // border: dashed thin black;
 }
 
 .section-label {
   font-weight: bold;
   color: #515151;
+  font-family: "Monstserrat", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .icons-ul.comments {
   margin-left: 4em;
-  // & > li {
-    // &:not(:first-child), &:not(:last-child) {
-      // list-style-image: url(http://image.spreadshirt.com/image-server/v1/designs/3647769,width%3D190,height%3D190.png/vertical-line_design.png)
-    // }
-  // }
 }
 
 .comment {
@@ -56,6 +63,10 @@ table {
   thead tr th {
     text-align: center;
     text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem;
+    background: #727A81;
+    color: #fff;
   }
   td {
     text-align: left;
@@ -65,14 +76,12 @@ table {
     border-collapse: collapse;
   }
   &.display {
-    margin: 0 0.5em 0.5em;
-    table-layout: fixed;
     th, td {
       border: 1px solid #B3BFAA;
       padding: .5em 1em;
     }
     th {
-      background: #D5E0CC;
+      // background: #;
     }
   }
   &.responsive-table {
@@ -82,6 +91,7 @@ table {
     margin: 0px;
     padding: 0px;
     border: 0px none;
+    a, a:visited { color: #3CC8DE; }
     &.display {
       margin: auto;
     }
@@ -95,6 +105,7 @@ table {
         position: absolute;
         left: 1em;
         font-weight: bold;
+        font-family: "Montserrat", sans-serif;
       }
       tr, td {
         display: block;
@@ -111,7 +122,9 @@ table {
         border: none;
         text-align: right;
         &.identifier{
-          background: #D5E0CC;
+          font-family: "Montserrat", sans-serif;
+          background: #727A81;
+          color: #fff;
           border-top: 1px solid #B3BFAA;
           border-bottom:center 1px solid #B3BFAA;
           text-align: center;
@@ -304,12 +317,13 @@ ul.ui-autocomplete {
 }
 .field {
   input, textarea, select {
-    @include radius;
+    border-radius: 5px;
+    background: #f6f6f6;
     &:focus ~ .form_hint {
       display: inline;
     }
     &:required {
-      background: #fff image-url("red_asterisk.png") no-repeat scroll 95% center;
+      background: #f6f6f6 image-url("red_asterisk.png") no-repeat scroll 95% center;
       background-size: 0.3em;
     }
     &:required:valid ~ .form_hint {
@@ -318,7 +332,11 @@ ul.ui-autocomplete {
         color: #28921f;
       }
     }
+    input[type="checkbox"], input[type="radio"] {
+      background: red;
+    }
   }
+  label { margin-bottom: 5px; }
 }
 .required_notification {
   color: #d45252;
@@ -347,73 +365,89 @@ ul.ui-autocomplete {
 }
 
 #content_nav {
+  @include with-fold($fold-color: $fold-grey, $bottom: 0px);
+  font-family: $heading-font;
   a, a:link, a:visited {
     color: #fff;
     font-size: 1rem;
   }
-}
-
-.nav-button-group {
-  @include button-group-container($styles: true);
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+    }
+    span {
+      font-size: 0.8em;
+      display: inline-block;
+    }
+    i {
+      color: $main-blue;
+    }
+  }
   .btn {
-    @include button();
+    @include button($bg: $main-grey, $radius: 5px);
     height: 100%;
     text-align: left;
     vertical-align: middle;
-    padding-left: 15px;
     min-height: 77px;
-    font-size: 18px;
+    font-size: 1rem;
     border-right: 1px solid white;
-  }
-  & > li {
-    @include button-group-style($even: 3);
-    text-align: left;
-    font-size: 1.3rem;
+    text-transform: uppercase;
   }
 }
 
 .task-icon {
   color: black;
-  float: right;
-  position: relative;
+  // position: relative;
 }
 
 .detail-title {
   margin-bottom: 10px;
+  border: 1px solid lightgray;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 5px 30px;
+  font-family: "Montserrat", sans-serif;
+  background: #54636B;
   #model_number {
     margin-left: 15px;
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    color:white;
   }
   #model_title {
     margin-left: 5px;
-    color: gray;
+    color: lightgray;
+    font-size: 0.8rem;
   }
 }
 
 .content-title {
   border: 1px solid lightgray;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  padding: 0px 5px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 5px 30px;
+  font-family: "Montserrat", sans-serif;
+  background: #54636B;
   &.row { margin-bottom: 10px; }
   & > h5 {
+    color: #fff;
     margin: 0;
     padding: 0;
-    font-weight: 400;
+    font-family: inherit;
+    font-size: 1rem;
   }
 }
 
 .content-container {
-  border: 1px solid lightgray;
+  font-size: 0.9rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 10px 10px 10px 10px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .search-box-container {
-  border: 1px solid lightgray;
   padding: 10px;
   &.row { margin-bottom: 10px; }
 }
@@ -433,4 +467,6 @@ section.row {
 
 .field-title {
   font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
 }

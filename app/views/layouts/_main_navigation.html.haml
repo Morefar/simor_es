@@ -1,38 +1,32 @@
-%nav#main_nav{ role: "navigation" }
-  %ul
+%nav#main_nav.row{ role: "navigation" }
+  %ul.columns.small-12
     %li
-      .text-center
+      = link_to root_url do
         %i.icon-laptop
-      = link_to_unless_current "Centro de control", root_url
+        %span Centro de control
     %li
-    %li
-      .text-center
+      = link_to contracts_url do
         %i.icon-file-text
-      = link_to_unless_current t('.nav.contracts'), contracts_url
+        %span= t('.nav.contracts')
     %li
-    %li
-      .text-center
+      = link_to assets_url do
         %i.icon-bar-chart
-      = link_to_unless_current t('.nav.assets'), assets_url
+        %span= t('.nav.assets')
     %li
-    %li
-      .text-center
+      = link_to inspections_url do
         %i.icon-search
-      = link_to_unless_current t('.nav.inspections'), inspections_url
+        %span= t('.nav.inspections')
     %li
-    %li
-      .text-center
+      = link_to "#" do
         %i.icon-comments-alt
-      = link_to_unless_current "FAQ", "#"
+        %span= "FAQ"
     %li
-    %li
-      .text-center
+      = link_to "#" do
         %i.icon-building
-      = link_to_unless_current "Escuela assethound", "#"
+        %span= "Escuela assethound"
     %li
-    %li
-      .text-center
+      = link_to "#" do
         %i.icon-envelope
-      = link_to_unless_current "Contacto", "#"
+        %span= "Contacto"
     - if content_for? :main_navigation
       = yield :main_navigation

@@ -41,10 +41,10 @@
     .field.medium-9.columns
       = f.label :note_content do
         Notas
-      = f.text_area :note_content
+      = f.text_area :note_content, required: true
   .row
     .actions
-      = f.submit
+      = f.submit "Generar Orden de Inspección"
   .row
     .medium-9.columns
       .contract_info

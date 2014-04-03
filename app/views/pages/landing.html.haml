@@ -1,22 +1,10 @@
 .slideshow-wrapper
-  %ul.landing-slider{data: { orbit: "", options: "pause_on_hover:true;bullets:false" } }
-    %li{data: { "orbit-slide"=> "headline-1" } }
-      = image_tag("logo.png", class: "centered")
-      %div
-        %h2 Headline 1
-        %h3 Subheadline
+  %ul.landing-slider{data: { orbit: "", |
+    options: "pause_on_hover:true;bullets:false;slide_number:false;" }, |
+    style:"width:100%;margin:0;padding:0" }
     %li{data: { "orbit-slide"=> "headline-2" } }
-      = image_tag("hero-shot1.jpg", class: "centered")
-      %div
-        %h2 Headline 2
-        %h3 Subheadline
+      = image_tag("hero-shot1.jpg", style:"width:100%")
     %li{data: { "orbit-slide"=> "headline-3" } }
-      = image_tag("hero-shot2.jpg", class: "centered")
-      %div
-        %h2 Headline 3
-        %h3 Subheadline
+      = image_tag("hero-shot2.jpg", style:"width:100%")
     %li{data: { "orbit-slide"=> "headline-4" } }
-      = image_tag("hero-shot3.jpg", class: "centered")
-      %div
-        %h2 Headline 4
-        %h3 Subheadline
+      = image_tag("hero-shot3.jpg", style:"width:100%")

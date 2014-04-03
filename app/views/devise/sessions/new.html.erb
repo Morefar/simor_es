@@ -1,14 +1,14 @@
-<h2><%= t(".title") %></h2>
+<h3 style="font-family:Montserrat,sans-serif;" ><%= t(".title") %></h3>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div class="row">
     <div class="medium-4 columns">
-      <%= f.label :email %><br />
+      <%= f.label :email, style:"font-family:Montserrat,sans-serif;" %><br />
       <%= f.email_field :email, :autofocus => true %>
     </div>
 
     <div class="medium-4 columns pull-4">
-      <%= f.label :password %><br />
+      <%= f.label :password, style:"font-family:Montserrat,sans-serif;"  %><br />
       <%= f.password_field :password %>
     </div>
   </div>

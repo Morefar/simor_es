@@ -12,7 +12,7 @@
 
  <!-- Set the viewport width to device width for mobile -->
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+ <%= favicon_link_tag "favicon32.ico" %>
  <title><%= content_for?(:title) ? yield(:title) : t('.title') %></title>
 
  <%= stylesheet_link_tag    "application" %>
@@ -24,21 +24,21 @@
 <body>
 
 <header id="page_header" class="row" role="banner">
-  <div class="columns medium-2 " id="ah-logo">
-    <%= link_to(image_tag("logo.png", size:"122x74", alt: "AssetHound",
-                         id: "logo"), root_url, title: "Inicio") %>
-  </div>
-  <span id="tagline" class="columns medium-2 push-2 hide-for-small">assethound</span>
-  <span class="show-for-small small-12 columns"><br/><br/><br/></span>
-  <div class="columns medium-7 push-1">
-    <nav id="utility" class="row">
-      <%= form_for(User.new, as: "user", url: session_path("user")) do |f|  %>
-        <div class="columns medium-4"><%= f.email_field :email, placeholder: "correo electrónico" %></div>
-        <div class="columns medium-4"><%= f.password_field :password, placeholder: "contraseña" %></div>
-        <div class="columns medium-4"><%= f.submit t("shared.sign_in"), class: "icon-signin button tiny" %></div>
-      <% end %>
-    </nav>
-  </div>
+  <span class="with-fold"></span>
+  <nav id="utility" class="row">
+    <div class="ah-logo" id="logo">
+      <%= link_to(image_tag("logo.png", alt: "AssetHound",
+                          id: "logo"), root_url, title: "Inicio") %>
+    </div>
+    <%= form_for(User.new, as: "user", url: session_path("user")) do |f|  %>
+      <ul class="static">
+        <%# <li> <a href="#">Qué es asset<strong>hound</strong>?</a></li> %>
+        <li ><%= f.email_field :email, placeholder: "correo electrónico" %></li>
+        <li ><%= f.password_field :password, placeholder: "contraseña" %></li>
+        <li ><%= f.submit "&#10095;".html_safe, id:"login-btn" %></li>
+      </ul>
+    <% end %>
+  </nav>
 </header>
     <div class="container row">
       <div class="row">

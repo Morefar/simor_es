@@ -14,10 +14,10 @@
     = sidebar_button url: @asset, label: "eliminar activo", icon: "trash",
       method: :delete
   = sidebar_button url: inspection_orders_url,
-    label: "seguimiento ordenes de inspección", icon: "eye-open"
+    label: "Ordenes de inspección", icon: "eye-open"
   - if current_user.can?(:create, :inspection_order)
     = sidebar_button url: new_inspection_order_url(number: @asset.license_plate, number_from: "asset"),
-      label: "generar orden de inspección", icon: "pencil"
+      class: "call-to-action", label: "Crear orden de inspección", icon: "pencil"
 .detail-title
   %span#model_number= @asset.inventory_number
   %span#model_title= "#{@asset.kind_name} #{@asset.make_name} #{@asset.model_name} #{@asset.year}"

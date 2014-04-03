@@ -6,11 +6,13 @@ module ApplicationHelper
     attribute.localize("#{ I18n.locale }_co")
   end
   def sidebar_button(options = {})
-    method = options[:method] ? options[:method] : :get
+    method = options[:method] || :get
+    style = options[:class] || "btn-tny"
     content_tag :li do
-      link_to options[:url], method: method, class: "btn-tny inactive" do
-        %{ #{ options[:label] }
-        <i class="icon-#{options[:icon]} task-icon icon-large"></i> }.html_safe
+      link_to options[:url], method: method, class: style do
+        %{ <span class="cue">&#10095;</span>
+        <i class="icon-#{options[:icon]} task-icon icon-large"></i>
+        <span class="btn-label">#{ options[:label] }</span> }.html_safe
       end
     end
   end

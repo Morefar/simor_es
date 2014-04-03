@@ -1,42 +1,37 @@
 - content_for :title do
-  ah - centro de control
+  Centro de Control
 
 - content_for :content_header do
   %nav#content_nav.show-for-medium-up
-    %ul.nav-button-group
-      %li.btn
+    %ul
+      %li.btn.with-fold
         - if current_user.can?("new", "contract")
           = link_to new_contract_url do
-            crear
-            %br
-            contrato &nbsp;
-            %i.icon-file-text.icon-3x.task-icon
+            %i.icon-file-text.icon-2x.task-icon
+            %span crear contrato
         - else
           = link_to contracts_url do
-            consultar
-            %br
-            contrato &nbsp;
-            %i.icon-search.icon-3x.task-icon
-      %li.btn
+            %i.icon-search.icon-2x.task-icon
+            %span consultar contrato
+      %li.btn.with-fold
         - if current_user.can? "new", "inspection_order"
           = link_to new_inspection_order_url do
-            crear orden
-            %br
-            de inspección &nbsp;
-            %i.icon-pencil.icon-3x.task-icon
+            %i.icon-pencil.icon-2x.task-icon
+            %span
+              crear orden
+              %br
+              de inspección
         - else
           = link_to new_asset_url do
-            crear
-            %br
-            activo &nbsp;
-            %i.icon-truck.icon-3x.task-icon
-
-      %li.btn
+            %i.icon-truck.icon-2x.task-icon
+            %span crear activo
+      %li.btn.with-fold
         = link_to inspection_orders_url do
-          seguimiento orden
-          %br
-          de inspección &nbsp;
-          %i.icon-eye-open.icon-3x.task-icon
+          %i.icon-eye-open.icon-2x.task-icon
+          %span
+            seguimiento orden
+            %br
+            de inspección
 - content_for :sidebar do
   = sidebar_button url: contracts_url, label: "consultar contratos",
     icon: "search"
@@ -45,10 +40,10 @@
   = sidebar_button url: inspections_url, label: "consultar inspecciones",
     icon: "paste"
   = sidebar_button url: inspection_orders_url,
-    label: "seguimiento orden de inspección", icon: "eye-open"
+    label: "ordenes de inspección", icon: "eye-open"
   - if current_user.can?("new", "inspection_order")
-    = sidebar_button url: new_inspection_order_url,
-      label: "crear orden de inspección", icon: "pencil"
+    = sidebar_button url: new_inspection_order_url, class: "call-to-action", |
+      label: "Crear orden de inspección", icon: "pencil"                     |
 = field_set_tag do
   %h6 LISTADO ÚLTIMAS CONSULTAS / ACCIONES
   %article

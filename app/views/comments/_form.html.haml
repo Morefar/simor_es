@@ -4,7 +4,12 @@
     = f.hidden_field :commentable_id, value: commentable.id
     = f.hidden_field :commentable_type, value: commentable.class
   = f.hidden_field :user_id, value: current_user.id if user_signed_in?
-  .field.columns.large-8
+  .field.columns.medium-8
     = f.text_field :content, placeholder: t('.placeholder')
-  .actions.columns.large-4
+  .actions.columns.medium-4
     = f.submit "Agregar"
+  - if current_user.can?(:create, :contract) || current_user.can?(:create, :asset)
+    .field.columns.medium-2.end
+      = label_tag :alert? do
+        Generar Alerta
+      = check_box_tag :alert?

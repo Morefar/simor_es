@@ -1,28 +1,67 @@
 @import 'foundation/components/buttons';
-section#sidebar {
-  line-height: 1.3em;
-  padding: 0 10px 10px;
-  a,
-  a:link,
-  a:visited {
-    text-decoration: none;
+@import 'ah-defaults';
+@import 'with-fold';
+
+.nav-list {
+  width: 100%;
+  li {
+    margin-bottom: 0px;
+    border-top: solid 1px #54636B;
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      font-size: 0.9rem;
+      font-family: $heading-font;
+      padding: 1.5em;
+      background: $main-grey;
+      color: white;
+    }
+    &:last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding-bottom: 6px;
+      background-color: $main-grey;
+    }
   }
 }
+
+.call-to-action {
+  @include button($full-width: true, $bg: $main-orange);
+  padding: 25px 5px;
+  text-align: left;
+  font-size: 1rem;
+  font-family: $body-font;
+  i { margin-right: 5px; }
+}
+
 .btn-tny {
-  @include button($full-width: true);
-  padding: 15px;
-  margin-bottom: .25rem;
+  @include button($full-width: true, $bg: $secondary-grey);
+  padding: 25px 5px;
   text-align: left;
   font-size: 0.8rem;
-}
-.inactive {
+  font-family: $body-font;
   a, a:link, a:visited {
-    color: #fff;
+    color: #333;
   }
-  background-color: #aaa;
+  span {
+    color: #666;
+  }
+  i {
+    margin-right: 5px;
+  }
 }
+
 .nav-list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.cue {
+  float: right;
+}
+
+.btn-label {
+  display: inline-block;
+  word-break: keep-all;
 }
