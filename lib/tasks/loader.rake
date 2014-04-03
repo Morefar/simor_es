@@ -56,4 +56,56 @@ namespace :parametric_data do
       end
     end
   end
+
+  desc "Creates contract categories"
+  task load_categories: :environment do
+    %w(Financiero Importación Inmobiliario Infraestructura Operacional Multileasing Municipal Leaseback).each do |cat|
+      unless Category.find_by_name(cat)
+        Category.create(name: cat)
+      end
+    end
+  end
+
+  desc "Create rights for all models"
+  task load_rights: :environment do
+    %w( contract
+        asset
+        inspection
+        inspection_order
+        document
+        comment
+        entity
+        right
+        grant
+        assignment
+        role
+        user
+        category
+        make
+        model
+        build
+        kind
+        body
+        insurance_company
+        color
+        identification_type
+        cosigner).each do |model|
+      %w(CREATE READ UPDATE DELETE).each do |action|
+        Right.create(resource: model, operation: action)
+      end
+    end
+  end
+
+  desc "Create admin role"
+  task load_admin_role: :environment do
+    role = Role.create(name: "Administrador")
+    role.rights << Right.all
+  end
+
+  desc "Create identification types"
+  task load_identification_types: :environment do
+    %w(CC NIT CE PASAPORTE OTRO).each do |type_name|
+      IdentificationType.create(name: type_name)
+    end
+  end
 end
