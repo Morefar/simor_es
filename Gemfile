@@ -34,6 +34,7 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 2.40.0'
 end
 
+gem 'skylight', '~> 0.3.7'
 gem 'sass-rails',   '~> 4.0.2'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
