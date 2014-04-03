@@ -1,0 +1,32 @@
+================================================================================
+|                          Notificación AssetHound                             |
+================================================================================
+
+Hola <%= @inspection.requester_full_name %>
+
+El activo <%= @inspection.asset_license_plate %> ha sido inspeccionado de acuerdo con la orden de inspección
+número <%= @inspection.inspection_order_id %>.
+
+El resultado de la inspección ha sido el siguiente:
+
+Estado General: ** <%= @inspection.overall_condition %> **
+--------------
+
+Observaciones:
+-------------
+
+“<%= @inspection.observations %>”
+
+El acta completa la puede encontrar siguiendo el enlace o copiando la
+dirección que aparece a continuación, en la barra de direcciones de su
+navegador preferido:
+
+<%= "#{ inspection_orders_url }/#{ @inspection.token }" %>
+
+Gracias por preferir nuestros servicios!
+
+AssetHound, su aliado en la gestión de activos entregados en leasing.
+
+=============================================================================
+| Gracias por utilizar AssetHound, http://www.assethound.co                 |
+=============================================================================

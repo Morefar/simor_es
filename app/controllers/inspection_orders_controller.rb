@@ -41,7 +41,9 @@ class InspectionOrdersController < ApplicationController
 
   def update
     authorize(@inspection_order)
-    @inspection_order.change_state(inspection_order_params)
+    if @inspection_order.change_state(inspection_order_params)
+      AlertsMailer.delay.notify_status_change(@inspection_order)
+    end
     respond_with @inspection_order
   end
 
@@ -53,7 +55,11 @@ class InspectionOrdersController < ApplicationController
 
   private
     def set_inspection_order
-      @inspection_order = InspectionOrder.find(params[:id])
+      begin
+        @inspection_order = InspectionOrder.find_by_token!(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        @inspection_order = InspectionOrder.find_by_id(params[:id])
+      end
     end
 
     def inspection_order_params

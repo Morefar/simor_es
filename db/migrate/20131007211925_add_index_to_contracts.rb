@@ -1,5 +1,5 @@
 class AddIndexToContracts < ActiveRecord::Migration
   def change
-    add_index :contracts, :number, uniqueness: true
+    add_index :contracts, :number, unique: true
   end
 end

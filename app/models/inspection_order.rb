@@ -20,6 +20,7 @@
 
 class InspectionOrder < ActiveRecord::Base
   include AASM
+  include Tokenable
 
   #-- Relationships --------------------
   belongs_to :requested_by, class_name: 'User', foreign_key: "user_id"
@@ -31,7 +32,7 @@ class InspectionOrder < ActiveRecord::Base
   #-- Delegations ----------------------
   delegate :license_plate, :make_name, :model_name, :year, :service_type,
   :chassis_number, :kind_name, to: :asset, prefix:  true
-  delegate :full_name, to: :requested_by, prefix: true
+  delegate :full_name, :email, to: :requested_by, prefix: :requester
 
   #-- Validations ----------------------
   validates :renew_period, numericality: { only_integer: true,

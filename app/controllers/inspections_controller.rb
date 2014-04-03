@@ -31,7 +31,10 @@ class InspectionsController < ApplicationController
   def create
     @inspection = Inspection.new(inspection_params)
     authorize(@inspection)
-    flash[:notice] = "La inspección fue guardada exitosamente" if @inspection.save
+    if @inspection.save
+      flash[:notice] = "La inspección fue guardada exitosamente"
+      AlertsMailer.delay.notify_asset_inspected(@inspection)
+    end
     respond_with @inspection
     rescue AASM::InvalidTransition
       flash[:alert] = "No se pudo guardar la inspección. Si el estado de la orden es Pendiente o Generada, primero debe Agendarla."

@@ -1,0 +1,32 @@
+<h1>Notificaci&oacute;n AssetHound</h1>
+<p>Hola <%= @inspection.requester_full_name %></p>
+<p>
+  El activo <%= @inspection.asset_license_plate %> ha sido inspeccionado de
+  acuerdo con la orden de inspecci&oacute;n n&uacute;mero
+  <%= @inspection.inspection_order_id %>.
+</p>
+<p>
+  El resultado de la inspecci&oacute;n ha sido el siguiente:
+</p>
+<p>
+  <h4>Estado General: <%= @inspection.overall_condition %></h4>
+  <h4>Observaciones:</h4>
+  <blockquote>
+    &ldquo;<%= @inspection.observations %>&rdquo;
+  </blockquote>
+</p>
+<p>
+  El acta completa la puede encontrar siguiendo el enlace o copiando la
+  direcci&oacute;n que aparece a continuaci&oacute;n, en la barra de
+  direcciones de su navegador preferido:
+</p>
+<p>
+  <a href='<%= "#{inspection_orders_url}/#{@inspection.token}" %>'>
+    <%= "#{inspection_orders_url}/#{@inspection.token}" %>
+  </a>
+</p>
+<p>Gracias por preferir nuestros servicios.</p>
+<p>asset<b>hound</b>, su aliado en la gesti&oacute;n efectiva de activos
+entregados en leasing.</p>
+
+<h5>Gracias por utilizar AssetHound, <a href="http://www.assethound.co">http://www.assethound.co</a></h5>

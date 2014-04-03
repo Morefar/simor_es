@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.js
         format.html { redirect_to @comment.commentable, notice: 'Comment was successfully created.' }
+        AlertsMailer.delay.alert_requestor(@comment.user) if params[:alert?]
       else
         format.html { render action: "new" }
         format.js { render action: "new"}

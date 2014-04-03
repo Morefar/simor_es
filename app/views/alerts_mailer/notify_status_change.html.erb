@@ -1,0 +1,28 @@
+<h1>Notificaci&oacute;n AssetHound</h1>
+
+<p>Hola <%= @inspection_order.requester_full_name %></p>
+
+<p>
+  El inspector <%= @content.user_full_name %> ha efectuado un
+  cambio en la orden de inspecci&oacute;n n&uacute;mero
+  <%= @inspection_order.id %>.
+</p>
+<p>
+  La informaci&oacute;n reportada es la siguiente:
+  <blockquote>&ldquo;<%= @content.content %>&rdquo;</blockquote>
+</p>
+<p>
+  Para consultar esta order o los activos asociados a ella por favor siga el
+  siguiente enlace, o copielo en la barra de direcci&oacute;n de su navegador.
+</p>
+<p>
+  <a href='<%= "#{ inspection_orders_url }/#{ @inspection_order.token }" %>'>
+    <%= "#{ inspection_orders_url }/#{ @inspection_order.token }" %>
+  </a>
+</p>
+
+<p>Gracias por preferir nuestros servicios.</p>
+<p>asset<b>hound</b>, su aliado en la gesti&oacute;n efectiva de activos
+entregados en leasing.</p>
+
+<h5>Gracias por utilizar AssetHound, <a href="http://www.assethound.co">http://www.assethound.co</a></h5>

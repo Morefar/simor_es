@@ -16,9 +16,14 @@
 #
 
 class Comment < ActiveRecord::Base
+  # -- Relationships -------------------
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
+  # -- Delegations ---------------------
+  delegate :full_name, to: :user, prefix: true, allow_nil: true
+
+  # -- Validations ---------------------
   validates :content, :commentable_id, :commentable_type, presence: true, on: :update
   validates :content, presence: true, on: :create
   default_scope { order("created_at DESC") }

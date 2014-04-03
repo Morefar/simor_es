@@ -65,6 +65,8 @@ class Inspection < ActiveRecord::Base
           :vin, to: :asset, prefix: true, allow_nil: true
   delegate :name, to: :insurance_company, prefix: true, allow_nil: true
   delegate :id, to: :inspection_order, prefix: true, allow_nil: true
+  delegate :requester_email, :requester_full_name, :token,
+    to: :inspection_order, allow_nil: true
 
   #-- Validations ----------------------
   validates :inspection_number, :person_in_charge, :pic_id, :pic_job,
@@ -87,7 +89,7 @@ class Inspection < ActiveRecord::Base
   before_save :clean_unwanted_dates
   after_create :increase_inspection_count_on_asset
   after_create :link_to_order
-  before_destroy :reverse_order_state
+  before_destroy :revert_order_state
   around_destroy :decrease_inspection_count_on_asset
 
   #-- Scopes ---------------------------

@@ -1,0 +1,27 @@
+================================================================================
+|                          Notificación AssetHound                             |
+================================================================================
+
+Hola <%= @inspection_order.requester_full_name %>
+
+El inspector <%= @content.user_full_name %> ha efectuado un cambio en la orden de inspección
+número <%= @inspection_order.id %>.
+
+La información reportada es la siguiente:
+
+“<%= @content.content %>”
+
+Para consultar esta orden o los activos asociados a ella por favor siga el
+siguiente enlace, o copielo en la barra de direcciones de su navegador:
+
+  <%= "#{inspection_orders_url}/#{@inspection_order.token}" %>
+
+
+
+Gracias por preferir nuestros servicios!
+
+AssetHound, su aliado en la gestión de activos entregados en leasing.
+
+=============================================================================
+| Gracias por utilizar AssetHound, http://www.assethound.co                 |
+=============================================================================
