@@ -27,7 +27,7 @@
 
 .call-to-action {
   @include button($full-width: true, $bg: $main-orange);
-  padding: 25px 5px;
+  padding: 25px 15px;
   text-align: left;
   font-size: 1rem;
   font-family: $body-font;
@@ -36,7 +36,7 @@
 
 .btn-tny {
   @include button($full-width: true, $bg: $secondary-grey);
-  padding: 25px 5px;
+  padding: 25px 15px;
   text-align: left;
   font-size: 0.8rem;
   font-family: $body-font;
