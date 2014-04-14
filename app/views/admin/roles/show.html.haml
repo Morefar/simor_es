@@ -5,7 +5,7 @@
   = sidebar_button url: edit_role_url(@role), label: "editar rol"
   = sidebar_button url: role_url(@role), label: "eliminar rol", method: :delete
 
-.detail-title
+%header.detail-title.row
   %span#model_number= @role.name
   %span#model_title= "Rol"
 .content-container.row

@@ -15,7 +15,7 @@
   - if current_user.can?(:create, :inspection_order)
     = sidebar_button url: new_inspection_order_url, class: "call-to-action",
       label: "crear nueva orden de inspección", icon: "pencil"
-.detail-title
+%header.detail-title.row
   %span#model_number= "#{ @inspection_order.id }"
   %span#model_title
     = "Orden de Inspección"

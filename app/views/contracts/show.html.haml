@@ -22,7 +22,7 @@
   - if current_user.can?(:create, :inspection_order)
     = sidebar_button url: new_inspection_order_url(number: @contract.number, number_from: "contract"),
       class: "call-to-action", label: "Crear orden de inspección", icon: "pencil"
-.detail-title
+%header.detail-title.row
   %span#model_number= @contract.number
   %span#model_title= "#{t('activerecord.attributes.contract.number')}"
 .content-container.row
@@ -89,12 +89,12 @@
         %h4.section-label= t('.fieldset.cosigners')
         = render @contract.cosigners.map(&:entity)
   - if @contract.asset_count > 0
-    %section#assets_info.row
+    %section#assets_info.row.separator
       %h4.section-label= t('.fieldset.assets')
       = render 'assets/asset_index', assets: @contract.assets.includes(:make, :model)
-  %section#documents.row
+  %section#documents.row.separator
     = render 'documents/index', documentable: @contract
-  %section#comments.row
+  %section#comments.row.separator
     = render 'comments/index', commentable: @contract
   -if current_user.can?(:create, :document)
     %section#document-upload.row
