@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.1'
 gem 'rails', '4.0.4'
 
 group :production do
@@ -34,6 +34,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'launchy', '~> 2.4.2'
   gem 'selenium-webdriver', '~> 2.41.0'
+  gem 'railroady', '~> 1.1.1'
 end
 
 gem 'skylight', '~> 0.3.7'
@@ -41,7 +42,7 @@ gem 'sass-rails',   '~> 4.0.2'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
 gem 'compass-rails', '~> 1.1.7'
-gem 'foundation-rails', '~> 5.2.1'
+gem 'foundation-rails', '~> 5.2.2'
 gem 'pg', '~> 0.17.1'
 gem 'pg_search', '~> 0.7.3'
 gem 'breadcrumbs_on_rails', '~> 2.3.0'
@@ -55,7 +56,7 @@ gem 'carrierwave_backgrounder', '~> 0.3.0'
 gem 'unf','~> 0.1.3'
 gem 'sidekiq', '~> 3.0.0'
 gem 'fog', '~> 1.21.0'
-gem 'twitter_cldr', '~> 2.4.2'
+gem 'twitter_cldr', '~> 3.0.0'
 gem 'kaminari', '~> 0.15.1'
 gem 'devise', '~> 3.2.4'
 gem 'newrelic_rpm', "~> 3.7.3"
@@ -65,4 +66,5 @@ gem 'jbuilder', '~> 2.0.5'
 gem 'virtus', '~> 1.0.2'
 gem 'draper', '~> 1.3.0'
 gem 'pundit', '~> 0.2.2'
+gem 'public_activity', '~> 1.4.1'
 # Deploy with Capistrano
