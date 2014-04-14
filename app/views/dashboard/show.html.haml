@@ -12,7 +12,10 @@
         - else
           = link_to contracts_url do
             %i.icon-search.icon-2x.task-icon
-            %span consultar contrato
+            %span
+              consultar
+              %br
+              contrato
       %li.btn.with-fold
         - if current_user.can? "new", "inspection_order"
           = link_to new_inspection_order_url do
@@ -44,16 +47,26 @@
   - if current_user.can?("new", "inspection_order")
     = sidebar_button url: new_inspection_order_url, class: "call-to-action", |
       label: "Crear orden de inspección", icon: "pencil"                     |
-= field_set_tag do
-  %h6 LISTADO ÚLTIMAS CONSULTAS / ACCIONES
-  %article
-    %strong= "Centro de control de #{current_user.full_name}"
-    %p Pronto llegará
-= field_set_tag do
-  %h6 AYUDA
-  %article
-    %strong Cómo comenzar
-    %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
-  %article
-    %strong Hacer una consulta
-    %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
+%section#recent-activity
+  %h4.section-label.highlight LISTADO ÚLTIMAS ACCIONES
+  %ul.icons-ul.comments.infinite-scroll
+    - @activities.each do |activity|
+      %li.comment
+        %i.icon-li.icon-time.icon-2x.icon-flip-horizontal
+        .comment-time
+          = activity.created_at.strftime("%d.%m.%Y")
+        .comment-label
+          = activity.owner.full_name if activity.owner
+          = localize_time_ago_in_words activity.created_at
+        .comment-content
+          = render_activity(activity)
+%section#help
+  = field_set_tag do
+    %i.icon-help
+    %h4.section-label.highlight AYUDA
+    %article
+      %h5.section-label Cómo comenzar
+      %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
+    %article
+      %h5.section-label Hacer una consulta
+      %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.

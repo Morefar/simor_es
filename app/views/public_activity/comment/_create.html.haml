@@ -1,0 +1,7 @@
+ha agregado un nuevo
+%strong comentario
+a un
+- comment = Comment.find(activity.trackable_id)
+%strong= link_to t("#{ comment.commentable_type.underscore }",                 |
+  scope: [:activerecord, :models]).downcase,                                   |
+  send("#{ comment.commentable_type.underscore }_url", comment.commentable_id) |
