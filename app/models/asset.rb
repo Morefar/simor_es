@@ -50,6 +50,9 @@
 #
 
 class Asset < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+
   #-- Relationships --------------------
   belongs_to :contract, inverse_of: :assets
   belongs_to :make

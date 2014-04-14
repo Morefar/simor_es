@@ -21,6 +21,9 @@
 #
 
 class Entity < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+
   #-- Relationships --------------------
   belongs_to :identification_type
   has_many :leases_on, class_name: "Contract", foreign_key: "lessee_id",

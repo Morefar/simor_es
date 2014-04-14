@@ -21,6 +21,8 @@
 class InspectionOrder < ActiveRecord::Base
   include AASM
   include Tokenable
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
 
   #-- Relationships --------------------
   belongs_to :requested_by, class_name: 'User', foreign_key: "user_id"

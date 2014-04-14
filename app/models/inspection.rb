@@ -50,6 +50,9 @@
 #
 
 class Inspection < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+
   #-- Relationships --------------------
   belongs_to :asset
   belongs_to :inspection_order, inverse_of: :inspection

@@ -28,6 +28,8 @@
 
 class Contract < ActiveRecord::Base
   include PgSearch
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
 
   # -- Relationships -------------------
   belongs_to :category

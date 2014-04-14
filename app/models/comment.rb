@@ -16,6 +16,9 @@
 #
 
 class Comment < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+
   # -- Relationships -------------------
   belongs_to :user
   belongs_to :commentable, polymorphic: true
