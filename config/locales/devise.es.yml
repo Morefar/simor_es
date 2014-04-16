@@ -16,6 +16,8 @@ es:
       timeout: "Tu sesión expiró, por favor inicia sesión nuevamente para continuar."
       unauthenticated: "Tienes que iniciar sesión o registrarte para poder continuar."
       unconfirmed: "Tienes que confirmar tu cuenta para poder continuar."
+      user:
+        last_attempt: "Última oportunidad antes que la cuenta sea bloqueada."
     mailer:
       confirmation_instructions:
         subject: "Instrucciones de confirmación"

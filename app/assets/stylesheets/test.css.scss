@@ -44,6 +44,9 @@ fieldset {
   font-family: $heading-font;
   color: #333333;
 }
+.highlight-icon {
+  color: $highlight-grey;
+}
 .comment-time {
   font-family: $heading-font;
   background: $highlight-grey;
@@ -418,6 +421,7 @@ ul.ui-autocomplete {
 }
 
 .infinite-scroll {
+  max-height: 350px;
   overflow-y: auto;
 }
 

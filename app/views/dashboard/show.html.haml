@@ -49,17 +49,18 @@
       label: "Crear orden de inspección", icon: "pencil"                     |
 %section#recent-activity
   %h4.section-label.highlight LISTADO ÚLTIMAS ACCIONES
-  %ul.icons-ul.comments.infinite-scroll
-    - @activities.each do |activity|
-      %li.comment
-        %i.icon-li.icon-time.icon-2x.icon-flip-horizontal
-        .comment-time
-          = activity.created_at.strftime("%d.%m.%Y")
-        .comment-label
-          = activity.owner.full_name if activity.owner
-          = localize_time_ago_in_words activity.created_at
-        .comment-content
-          = render_activity(activity)
+  .infinite-scroll
+    %ul.icons-ul.comments
+      - @activities.each do |activity|
+        %li.comment
+          %i.icon-li.icon-time.icon-2x.icon-flip-horizontal.highlight-icon
+          .comment-time
+            = activity.created_at.strftime("%d.%m.%Y")
+          .comment-label
+            = activity.owner.full_name if activity.owner
+            = localize_time_ago_in_words activity.created_at
+          .comment-content
+            = render_activity(activity)
 %section#help
   = field_set_tag do
     %i.icon-help
