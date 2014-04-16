@@ -1,0 +1,4 @@
+ha creado la
+%strong persona / entidad
+= link_to "#{ Entity.find(activity.trackable_id).name }",
+  send("#{ activity.trackable_type.underscore }_url", activity.trackable_id)
