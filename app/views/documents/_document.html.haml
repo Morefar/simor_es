@@ -12,6 +12,7 @@
           %b= document.category
           %br
           = document.slug
-    .actions
-      = link_to '', edit_document_path(document), class: 'icon-edit', remote: true
-      = link_to '', document, class: 'icon-remove-circle', method: :delete, remote: true
+    - if current_user.can?(:edit, :document)
+      .actions
+        = link_to '', edit_document_path(document), class: 'icon-edit', remote: true
+        = link_to '', document, class: 'icon-remove-circle', method: :delete, remote: true
