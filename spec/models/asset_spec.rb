@@ -1,6 +1,6 @@
 #encoding: UTF-8
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Asset do
 
@@ -134,9 +134,9 @@ describe Asset do
     it "is invalid when created with a model that doesn't belong to the same make assigned" do
       make_with_model    = create(:make, name: "make_with_model")
       make_without_model = create(:make, name: "make_without_a_model")
-      model = create(:model, make: make_with_model, name: "model_belongs_to_make")
-      attributes = { make: make_without_model, model: model }
-      expect(build(:asset, attributes)).to have(1).errors_on(:model)
+      vehicle_model = create(:model, make: make_with_model, name: "model_belongs_to_make")
+      attributes = { make: make_without_model, model: vehicle_model }
+      expect(build(:asset, attributes)).to have(1).errors_on(:model_name)
     end
   end
 end

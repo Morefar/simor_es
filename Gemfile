@@ -13,10 +13,10 @@ group :development, :test do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'meta_request', '~> 0.2.8'
   gem 'debugger', '~> 1.6.1'
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 2.99.0'
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'guard-rspec', '~> 4.2.8'
-  gem 'guard-livereload', '~> 2.1.2', require: false
+  gem 'guard-rspec', '~> 4.3.1', require: false
+  gem 'guard-livereload', '~> 2.3.0', require: false
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'

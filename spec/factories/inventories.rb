@@ -180,6 +180,6 @@ FactoryGirl.define do
     celular_phone true
     electric_antena true
     antena true
-    observations 'Car in perfect conditions'
+    observations "Esta bien el vehiculo"
   end
 end

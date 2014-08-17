@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ContractPolicy do
   subject { ContractPolicy.new(current_user, contract) }

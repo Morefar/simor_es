@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Contract do
   it 'has a valid factory' do
@@ -111,11 +111,9 @@ describe Contract do
   describe '#asset_count' do
     it 'should return the correct number of assets included in this contract' do
       contract = create(:contract, number: 'lo123')
-      kind = create(:kind, name: 'Camion')
-      body = create(:body, name: 'Estacas')
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM863', chassis_number: 'UHEB1287097SHM863', kind: kind, body: body)
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM864', chassis_number: 'UHEB1287097SHM864', serial_number: nil, motor_number: nil, kind: kind, body: body)
-      create(:asset, contract: contract, vin: 'UHEB1287097SHM865', chassis_number: 'UHEB1287097SHM865', serial_number: nil, motor_number: nil, kind: kind, body: body)
+      create(:asset, license_plate: 'ABC123', contract: contract, vin: 'UHEB1287097SHM863', chassis_number: 'UHEB1287097SHM863')
+      create(:asset, license_plate: 'ABC124', contract: contract, vin: 'UHEB1287097SHM864', chassis_number: 'UHEB1287097SHM864', serial_number: nil, motor_number: nil)
+      create(:asset, license_plate: 'ABC125', contract: contract, vin: 'UHEB1287097SHM865', chassis_number: 'UHEB1287097SHM865', serial_number: nil, motor_number: nil)
       expect(contract.asset_count).to eq(3)
     end
   end

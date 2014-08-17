@@ -22,11 +22,10 @@
 require 'faker'
 FactoryGirl.define do
   factory :inspection_order do
-    contract_url "https://www.example.com/contracts/"
-    asset_unique_identifier 'CDV130'
     recurring true
     renew_period 6
-    current_status %w(OPEN ASSIGNED PENDING CLOSED).sample
-    notes Faker::Lorem.paragraph 20
+    status "generated"
+    priority "normal"
+    user_id 1
   end
 end
