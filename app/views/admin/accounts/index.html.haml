@@ -1,0 +1,19 @@
+- content_for :title do
+  = "ADMIN - Cuentas"
+- content_for :content_header do
+  = render "shared/header_title", title: "CUENTAS"
+- content_for :sidebar do
+  = sidebar_button url: new_account_url, label: "Crear cuenta"
+
+%table
+  %thead
+    %tr
+      %th= "Organización"
+      %th= "Subdominio"
+      %th= "Administrador"
+  %tbody
+    - @accounts.each do |account|
+      %tr
+        %td= account.organization_name
+        %td= account.subdomain
+        %td= "Dueño de la cuenta"
