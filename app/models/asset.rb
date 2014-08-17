@@ -192,6 +192,7 @@ class Asset < ActiveRecord::Base
       "%#{args[:query]}%"
     end
   end
+
   def model_belongs_to_make
     if make.present? && model.present?
       unless make.id == model.make_id
