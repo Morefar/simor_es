@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe Contract do
+describe Contract, :type => :model do
   it 'has a valid factory' do
     expect(build(:contract)).to be_valid
   end
 
-  it { should belong_to(:category) }
-  it { should have_many(:assets) }
-  it { should have_many(:inspections).through(:assets) }
-  it { should belong_to(:lessee) }
-  it { should have_many(:cosigners) }
-  it { should have_many(:entities).through(:cosigners) }
+  it { is_expected.to belong_to(:category) }
+  it { is_expected.to have_many(:assets) }
+  it { is_expected.to have_many(:inspections).through(:assets) }
+  it { is_expected.to belong_to(:lessee) }
+  it { is_expected.to have_many(:cosigners) }
+  it { is_expected.to have_many(:entities).through(:cosigners) }
 
   it 'is valid with a unique contract number' do
     create(:contract, number: '10980984-9873')
@@ -43,7 +43,7 @@ describe Contract do
     :total_value => 275_878_878.90,
     :currency => 'COP$',
     :asset_count => 1,
-    :location_of_assets => 'Chicago')).to have(1).errors_on(:expiration_date)
+    :location_of_assets => 'Chicago').errors_on(:expiration_date).size).to eq(1)
   end
   it 'is invalid with a first canon date earlier than a starting date' do
     expect(Contract.create(number: '10980984-9873',
@@ -58,7 +58,7 @@ describe Contract do
     :total_value => 275_878_878.90,
     :currency => 'COP$',
     :asset_count => 1,
-    :location_of_assets => 'Chicago')).to have(1).errors_on(:first_canon_date)
+    :location_of_assets => 'Chicago').errors_on(:first_canon_date).size).to eq(1)
     expect(Contract.create(number: '10980984-9873',
     :category => Category.new(name: 'Operational'),
     :lessee => create(:entity, identification_type: create(:identification_type, name: 'NIT')),
@@ -77,8 +77,8 @@ describe Contract do
   it 'is invalid with a negative duration' do
     contract = build(:contract, duration: -2)
     expect(contract).to be_invalid
-    expect(contract).to have(1).errors_on(:duration)
-    expect(contract).to have(1).errors_on(:expiration_date)
+    expect(contract.errors_on(:duration).size).to eq(1)
+    expect(contract.errors_on(:expiration_date).size).to eq(1)
   end
 
   describe 'is invalid with a float duration' do
@@ -86,26 +86,26 @@ describe Contract do
     context 'negative duration' do
         it 'is invalid with a negative float duration' do
             expect(build(:contract,
-                duration: -1.5)).to have(1).errors_on(:duration)
+                duration: -1.5).errors_on(:duration).size).to eq(1)
         end
     end
 
     context 'positive duration' do
         it 'in invalid with a positive float duration' do
             expect(build(:contract,
-                duration: 1.5)).to have(1).errors_on(:duration)
+                duration: 1.5).errors_on(:duration).size).to eq(1)
         end
     end
   end
 
   it 'is invalid with a negative total value' do
     expect(build(:contract,
-        total_value: -12_000_000)).to have(1).errors_on(:total_value)
+        total_value: -12_000_000).errors_on(:total_value).size).to eq(1)
   end
 
   it 'is invalid without a date when there is an option to buy' do
     expect(build(:contract, option_to_buy: true,
-        last_date_to_option: nil)).to have(1).errors_on(:last_date_to_option)
+        last_date_to_option: nil).errors_on(:last_date_to_option).size).to eq(1)
   end
 
   describe '#asset_count' do

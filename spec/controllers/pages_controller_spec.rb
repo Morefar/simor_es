@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe PagesController do
+describe PagesController, :type => :controller do
 
   describe "GET 'landing'" do
     it "returns http success" do
       get 'landing'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 

@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe Admin::RightsController do
+describe Admin::RightsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Admin::Right. As you add validations to Right, be sure to
@@ -34,7 +34,7 @@ describe Admin::RightsController do
     it "assigns all admin_rights as @admin_rights" do
       right = Right.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:admin_rights).should eq([right])
+      expect(assigns(:admin_rights)).to eq([right])
     end
   end
 
@@ -42,14 +42,14 @@ describe Admin::RightsController do
     it "assigns the requested admin_right as @admin_right" do
       right = Right.create! valid_attributes
       get :show, {:id => right.to_param}, valid_session
-      assigns(:admin_right).should eq(right)
+      expect(assigns(:admin_right)).to eq(right)
     end
   end
 
   describe "GET new" do
     it "assigns a new admin_right as @admin_right" do
       get :new, {}, valid_session
-      assigns(:admin_right).should be_a_new(Right)
+      expect(assigns(:admin_right)).to be_a_new(Right)
     end
   end
 
@@ -57,7 +57,7 @@ describe Admin::RightsController do
     it "assigns the requested admin_right as @admin_right" do
       right = Right.create! valid_attributes
       get :edit, {:id => right.to_param}, valid_session
-      assigns(:admin_right).should eq(right)
+      expect(assigns(:admin_right)).to eq(right)
     end
   end
 
@@ -71,29 +71,29 @@ describe Admin::RightsController do
 
       it "assigns a newly created admin_right as @admin_right" do
         post :create, {:admin_right => valid_attributes}, valid_session
-        assigns(:admin_right).should be_a(Right)
-        assigns(:admin_right).should be_persisted
+        expect(assigns(:admin_right)).to be_a(Right)
+        expect(assigns(:admin_right)).to be_persisted
       end
 
       it "redirects to the created admin_right" do
         post :create, {:admin_right => valid_attributes}, valid_session
-        response.should redirect_to(Right.last)
+        expect(response).to redirect_to(Right.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved admin_right as @admin_right" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Right.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Right).to receive(:save).and_return(false)
         post :create, {:admin_right => {  }}, valid_session
-        assigns(:admin_right).should be_a_new(Right)
+        expect(assigns(:admin_right)).to be_a_new(Right)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Right.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Right).to receive(:save).and_return(false)
         post :create, {:admin_right => {  }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -106,20 +106,20 @@ describe Admin::RightsController do
         # specifies that the Right created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Right.any_instance.should_receive(:update).with({ "these" => "params" })
+        expect_any_instance_of(Right).to receive(:update).with({ "these" => "params" })
         put :update, {:id => right.to_param, :admin_right => { "these" => "params" }}, valid_session
       end
 
       it "assigns the requested admin_right as @admin_right" do
         right = Right.create! valid_attributes
         put :update, {:id => right.to_param, :admin_right => valid_attributes}, valid_session
-        assigns(:admin_right).should eq(right)
+        expect(assigns(:admin_right)).to eq(right)
       end
 
       it "redirects to the admin_right" do
         right = Right.create! valid_attributes
         put :update, {:id => right.to_param, :admin_right => valid_attributes}, valid_session
-        response.should redirect_to(right)
+        expect(response).to redirect_to(right)
       end
     end
 
@@ -127,17 +127,17 @@ describe Admin::RightsController do
       it "assigns the admin_right as @admin_right" do
         right = Right.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Right.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Right).to receive(:save).and_return(false)
         put :update, {:id => right.to_param, :admin_right => {  }}, valid_session
-        assigns(:admin_right).should eq(right)
+        expect(assigns(:admin_right)).to eq(right)
       end
 
       it "re-renders the 'edit' template" do
         right = Right.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Right.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Right).to receive(:save).and_return(false)
         put :update, {:id => right.to_param, :admin_right => {  }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +153,7 @@ describe Admin::RightsController do
     it "redirects to the admin_rights list" do
       right = Right.create! valid_attributes
       delete :destroy, {:id => right.to_param}, valid_session
-      response.should redirect_to(admin_rights_url)
+      expect(response).to redirect_to(admin_rights_url)
     end
   end
 

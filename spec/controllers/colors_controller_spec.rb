@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ColorsController do
+describe ColorsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Color. As you add validations to Color, be sure to
@@ -34,7 +34,7 @@ describe ColorsController do
     it "assigns all colors as @colors" do
       color = Color.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:colors).should eq([color])
+      expect(assigns(:colors)).to eq([color])
     end
   end
 
@@ -42,14 +42,14 @@ describe ColorsController do
     it "assigns the requested color as @color" do
       color = Color.create! valid_attributes
       get :show, {:id => color.to_param}, valid_session
-      assigns(:color).should eq(color)
+      expect(assigns(:color)).to eq(color)
     end
   end
 
   describe "GET new" do
     it "assigns a new color as @color" do
       get :new, {}, valid_session
-      assigns(:color).should be_a_new(Color)
+      expect(assigns(:color)).to be_a_new(Color)
     end
   end
 
@@ -57,7 +57,7 @@ describe ColorsController do
     it "assigns the requested color as @color" do
       color = Color.create! valid_attributes
       get :edit, {:id => color.to_param}, valid_session
-      assigns(:color).should eq(color)
+      expect(assigns(:color)).to eq(color)
     end
   end
 
@@ -71,29 +71,29 @@ describe ColorsController do
 
       it "assigns a newly created color as @color" do
         post :create, {:color => valid_attributes}, valid_session
-        assigns(:color).should be_a(Color)
-        assigns(:color).should be_persisted
+        expect(assigns(:color)).to be_a(Color)
+        expect(assigns(:color)).to be_persisted
       end
 
       it "redirects to the created color" do
         post :create, {:color => valid_attributes}, valid_session
-        response.should redirect_to(Color.last)
+        expect(response).to redirect_to(Color.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved color as @color" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Color.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Color).to receive(:save).and_return(false)
         post :create, {:color => { "name" => "invalid value" }}, valid_session
-        assigns(:color).should be_a_new(Color)
+        expect(assigns(:color)).to be_a_new(Color)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Color.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Color).to receive(:save).and_return(false)
         post :create, {:color => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -106,20 +106,20 @@ describe ColorsController do
         # specifies that the Color created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Color.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+        expect_any_instance_of(Color).to receive(:update_attributes).with({ "name" => "MyString" })
         put :update, {:id => color.to_param, :color => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested color as @color" do
         color = Color.create! valid_attributes
         put :update, {:id => color.to_param, :color => valid_attributes}, valid_session
-        assigns(:color).should eq(color)
+        expect(assigns(:color)).to eq(color)
       end
 
       it "redirects to the color" do
         color = Color.create! valid_attributes
         put :update, {:id => color.to_param, :color => valid_attributes}, valid_session
-        response.should redirect_to(color)
+        expect(response).to redirect_to(color)
       end
     end
 
@@ -127,17 +127,17 @@ describe ColorsController do
       it "assigns the color as @color" do
         color = Color.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Color.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Color).to receive(:save).and_return(false)
         put :update, {:id => color.to_param, :color => { "name" => "invalid value" }}, valid_session
-        assigns(:color).should eq(color)
+        expect(assigns(:color)).to eq(color)
       end
 
       it "re-renders the 'edit' template" do
         color = Color.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Color.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Color).to receive(:save).and_return(false)
         put :update, {:id => color.to_param, :color => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +153,7 @@ describe ColorsController do
     it "redirects to the colors list" do
       color = Color.create! valid_attributes
       delete :destroy, {:id => color.to_param}, valid_session
-      response.should redirect_to(colors_url)
+      expect(response).to redirect_to(colors_url)
     end
   end
 

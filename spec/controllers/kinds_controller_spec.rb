@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe KindsController do
+describe KindsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Kind. As you add validations to Kind, be sure to
@@ -34,7 +34,7 @@ describe KindsController do
     it "assigns all kinds as @kinds" do
       kind = Kind.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:kinds).should eq([kind])
+      expect(assigns(:kinds)).to eq([kind])
     end
   end
 
@@ -42,14 +42,14 @@ describe KindsController do
     it "assigns the requested kind as @kind" do
       kind = Kind.create! valid_attributes
       get :show, {:id => kind.to_param}, valid_session
-      assigns(:kind).should eq(kind)
+      expect(assigns(:kind)).to eq(kind)
     end
   end
 
   describe "GET new" do
     it "assigns a new kind as @kind" do
       get :new, {}, valid_session
-      assigns(:kind).should be_a_new(Kind)
+      expect(assigns(:kind)).to be_a_new(Kind)
     end
   end
 
@@ -57,7 +57,7 @@ describe KindsController do
     it "assigns the requested kind as @kind" do
       kind = Kind.create! valid_attributes
       get :edit, {:id => kind.to_param}, valid_session
-      assigns(:kind).should eq(kind)
+      expect(assigns(:kind)).to eq(kind)
     end
   end
 
@@ -71,29 +71,29 @@ describe KindsController do
 
       it "assigns a newly created kind as @kind" do
         post :create, {:kind => valid_attributes}, valid_session
-        assigns(:kind).should be_a(Kind)
-        assigns(:kind).should be_persisted
+        expect(assigns(:kind)).to be_a(Kind)
+        expect(assigns(:kind)).to be_persisted
       end
 
       it "redirects to the created kind" do
         post :create, {:kind => valid_attributes}, valid_session
-        response.should redirect_to(Kind.last)
+        expect(response).to redirect_to(Kind.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved kind as @kind" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Kind.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Kind).to receive(:save).and_return(false)
         post :create, {:kind => { "name" => "invalid value" }}, valid_session
-        assigns(:kind).should be_a_new(Kind)
+        expect(assigns(:kind)).to be_a_new(Kind)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Kind.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Kind).to receive(:save).and_return(false)
         post :create, {:kind => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -106,20 +106,20 @@ describe KindsController do
         # specifies that the Kind created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Kind.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+        expect_any_instance_of(Kind).to receive(:update_attributes).with({ "name" => "MyString" })
         put :update, {:id => kind.to_param, :kind => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested kind as @kind" do
         kind = Kind.create! valid_attributes
         put :update, {:id => kind.to_param, :kind => valid_attributes}, valid_session
-        assigns(:kind).should eq(kind)
+        expect(assigns(:kind)).to eq(kind)
       end
 
       it "redirects to the kind" do
         kind = Kind.create! valid_attributes
         put :update, {:id => kind.to_param, :kind => valid_attributes}, valid_session
-        response.should redirect_to(kind)
+        expect(response).to redirect_to(kind)
       end
     end
 
@@ -127,17 +127,17 @@ describe KindsController do
       it "assigns the kind as @kind" do
         kind = Kind.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Kind.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Kind).to receive(:save).and_return(false)
         put :update, {:id => kind.to_param, :kind => { "name" => "invalid value" }}, valid_session
-        assigns(:kind).should eq(kind)
+        expect(assigns(:kind)).to eq(kind)
       end
 
       it "re-renders the 'edit' template" do
         kind = Kind.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Kind.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Kind).to receive(:save).and_return(false)
         put :update, {:id => kind.to_param, :kind => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +153,7 @@ describe KindsController do
     it "redirects to the kinds list" do
       kind = Kind.create! valid_attributes
       delete :destroy, {:id => kind.to_param}, valid_session
-      response.should redirect_to(kinds_url)
+      expect(response).to redirect_to(kinds_url)
     end
   end
 

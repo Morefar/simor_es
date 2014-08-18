@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe Inventory do
+describe Inventory, :type => :model do
 
-  it { should belong_to(:inspection) }
+  it { is_expected.to belong_to(:inspection) }
 
   it 'has a valid factory' do
     expect(build(:inventory)).to be_valid

@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ModelsController do
+describe ModelsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Model. As you add validations to Model, be sure to
@@ -34,7 +34,7 @@ describe ModelsController do
     it "assigns all models as @models" do
       model = Model.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:models).should eq([model])
+      expect(assigns(:models)).to eq([model])
     end
   end
 
@@ -42,14 +42,14 @@ describe ModelsController do
     it "assigns the requested model as @model" do
       model = Model.create! valid_attributes
       get :show, {:id => model.to_param}, valid_session
-      assigns(:model).should eq(model)
+      expect(assigns(:model)).to eq(model)
     end
   end
 
   describe "GET new" do
     it "assigns a new model as @model" do
       get :new, {}, valid_session
-      assigns(:model).should be_a_new(Model)
+      expect(assigns(:model)).to be_a_new(Model)
     end
   end
 
@@ -57,7 +57,7 @@ describe ModelsController do
     it "assigns the requested model as @model" do
       model = Model.create! valid_attributes
       get :edit, {:id => model.to_param}, valid_session
-      assigns(:model).should eq(model)
+      expect(assigns(:model)).to eq(model)
     end
   end
 
@@ -71,29 +71,29 @@ describe ModelsController do
 
       it "assigns a newly created model as @model" do
         post :create, {:model => valid_attributes}, valid_session
-        assigns(:model).should be_a(Model)
-        assigns(:model).should be_persisted
+        expect(assigns(:model)).to be_a(Model)
+        expect(assigns(:model)).to be_persisted
       end
 
       it "redirects to the created model" do
         post :create, {:model => valid_attributes}, valid_session
-        response.should redirect_to(Model.last)
+        expect(response).to redirect_to(Model.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved model as @model" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Model.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Model).to receive(:save).and_return(false)
         post :create, {:model => { "make_id" => "invalid value" }}, valid_session
-        assigns(:model).should be_a_new(Model)
+        expect(assigns(:model)).to be_a_new(Model)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Model.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Model).to receive(:save).and_return(false)
         post :create, {:model => { "make_id" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -106,20 +106,20 @@ describe ModelsController do
         # specifies that the Model created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Model.any_instance.should_receive(:update_attributes).with({ "make_id" => "1" })
+        expect_any_instance_of(Model).to receive(:update_attributes).with({ "make_id" => "1" })
         put :update, {:id => model.to_param, :model => { "make_id" => "1" }}, valid_session
       end
 
       it "assigns the requested model as @model" do
         model = Model.create! valid_attributes
         put :update, {:id => model.to_param, :model => valid_attributes}, valid_session
-        assigns(:model).should eq(model)
+        expect(assigns(:model)).to eq(model)
       end
 
       it "redirects to the model" do
         model = Model.create! valid_attributes
         put :update, {:id => model.to_param, :model => valid_attributes}, valid_session
-        response.should redirect_to(model)
+        expect(response).to redirect_to(model)
       end
     end
 
@@ -127,17 +127,17 @@ describe ModelsController do
       it "assigns the model as @model" do
         model = Model.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Model.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Model).to receive(:save).and_return(false)
         put :update, {:id => model.to_param, :model => { "make_id" => "invalid value" }}, valid_session
-        assigns(:model).should eq(model)
+        expect(assigns(:model)).to eq(model)
       end
 
       it "re-renders the 'edit' template" do
         model = Model.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Model.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Model).to receive(:save).and_return(false)
         put :update, {:id => model.to_param, :model => { "make_id" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +153,7 @@ describe ModelsController do
     it "redirects to the models list" do
       model = Model.create! valid_attributes
       delete :destroy, {:id => model.to_param}, valid_session
-      response.should redirect_to(models_url)
+      expect(response).to redirect_to(models_url)
     end
   end
 

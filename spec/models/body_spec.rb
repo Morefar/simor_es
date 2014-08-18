@@ -1,14 +1,14 @@
 #encoding: UTF-8
 require 'rails_helper'
 
-describe Body do
+describe Body, :type => :model do
 
-  it { should have_many(:builds) }
-  it { should have_many(:kinds).through(:builds) }
-  it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:name).case_insensitive }
-  it { should allow_value('Vehiculo').for(:name) }
-  it { should allow_value('Vehiculo de Carga').for(:name) }
+  it { is_expected.to have_many(:builds) }
+  it { is_expected.to have_many(:kinds).through(:builds) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+  it { is_expected.to allow_value('Vehiculo').for(:name) }
+  it { is_expected.to allow_value('Vehiculo de Carga').for(:name) }
 
   it 'has a valid factory' do
     expect(build(:body)).to be_valid

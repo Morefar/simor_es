@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Document do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Document, :type => :model do
+  skip "add some examples to (or delete) #{__FILE__}"
 end
 
 # ## Schema Information
