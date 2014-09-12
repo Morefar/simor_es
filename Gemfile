@@ -38,7 +38,6 @@ end
 
 gem 'skylight', '~> 0.3.20'
 gem 'sass-rails',   '~> 4.0.3'
-gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
 gem 'compass-rails', '~> 2.0.0'
 gem 'foundation-rails', '~> 5.4.3.0'
