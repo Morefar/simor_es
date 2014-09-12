@@ -7,6 +7,9 @@ Simor::Application.configure do
   # Eagedigests for assets URLs.
   config.assets.digest = true
 
+  # Eager load code on boot.
+  config.eager_load = true
+
   # Version of your assets, change this if you want to expire all your assets.
   # config.assets.version = '1.0' has moved to config/initializers/assets.rb
 

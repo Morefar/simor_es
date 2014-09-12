@@ -36,7 +36,6 @@ group :development, :test do
   gem 'railroady', '~> 1.1.2'
 end
 
-gem 'skylight', '~> 0.3.20'
 gem 'sass-rails',   '~> 4.0.3'
 gem 'uglifier', '>= 2.4.0'
 gem 'compass-rails', '~> 2.0.0'
