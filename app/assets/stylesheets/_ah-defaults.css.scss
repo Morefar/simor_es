@@ -1,15 +1,15 @@
-$heading-font: "Montserrat", sans-serif;
 $body-font: "Muli", sans-serif;
+$heading-font: join("Montserrat", $body-font);
 
 $body-font-size: rem-calc(13);
 
-$main-blue: #3CC8DE;
-$fold-blue: #66E5FA;
+$main-blue: rgba(60, 200, 222, 1);
+$fold-blue: rgba(102,229,250,1);
 
-$main-grey: #54636B;
-$fold-grey: #8E8E93;
+$main-grey: rgba(84, 99, 107, 1);
+$fold-grey: rgba(142,142,147,1);
 
-$secondary-grey: #F6F6F6;
-$highlight-grey: #8E8E93;
+$secondary-grey: rgba(246, 246, 246, 1);
+$highlight-grey: $fold-grey;
 
-$main-orange: #FF9500;
+$main-orange: rgba(255, 149, 0, 1);

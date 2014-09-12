@@ -18,15 +18,7 @@
         %span= t('.nav.inspections')
     %li
       = link_to "#" do
-        %i.icon-comments-alt
-        %span= "FAQ"
-    %li
-      = link_to "#" do
-        %i.icon-building
-        %span= "Escuela assethound"
-    %li
-      = link_to "#" do
         %i.icon-envelope
-        %span= "Contacto"
+        %span= t('.nav.support')
     - if content_for? :main_navigation
       = yield :main_navigation

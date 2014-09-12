@@ -404,11 +404,12 @@ ul.ui-autocomplete {
   .btn {
     @include button($bg: $main-grey, $radius: 5px);
     padding: rem-calc(20);
-    height: 50px;
-    width: 220px;
+    height: 100px;
+    width: 276;
     text-align: left;
     vertical-align: middle;
     min-height: 77px;
+    font-family: $heading-font;
     font-size: 1rem;
     border-right: 1px solid white;
     text-transform: uppercase;
@@ -471,7 +472,6 @@ ul.ui-autocomplete {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 10px 15px;
-  overflow: auto;
 }
 
 .search-box-container {

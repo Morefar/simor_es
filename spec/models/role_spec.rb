@@ -1,13 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Role do
+describe Role, :type => :model do
   it 'should have a valid factory' do
     expect(build(:role)).to be_valid
   end
-  it { should have_many :assignments }
-  it { should have_many(:users).through(:assignments) }
-  it { should have_many :grants }
-  it { should have_many(:rights).through(:grants) }
+  it { is_expected.to have_many :assignments }
+  it { is_expected.to have_many(:users).through(:assignments) }
+  it { is_expected.to have_many :grants }
+  it { is_expected.to have_many(:rights).through(:grants) }
 end
 
 # ## Schema Information

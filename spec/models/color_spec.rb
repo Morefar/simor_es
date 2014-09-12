@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Color do
+describe Color, :type => :model do
 
-  it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:name).case_insensitive }
-  it { should allow_value('WHITE' 'BLANCO PERLA METALIZADO').for(:name) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+  it { is_expected.to allow_value('WHITE' 'BLANCO PERLA METALIZADO').for(:name) }
   it 'has a valid factory' do
     expect(build(:color)).to be_valid
   end

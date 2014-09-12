@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Make do
-  it { should have_many(:models) }
-  it { should allow_value('MAZDA', 'CHEVROLET', 'CHENAI').for(:name) }
-  it { should_not allow_value('', '23', 'CHEVROLET2').for(:name) }
-  it { should validate_uniqueness_of(:name) }
+describe Make, :type => :model do
+  it { is_expected.to have_many(:models) }
+  it { is_expected.to allow_value('MAZDA', 'CHEVROLET', 'CHENAI').for(:name) }
+  it { is_expected.not_to allow_value('', '23', 'CHEVROLET2').for(:name) }
+  it { is_expected.to validate_uniqueness_of(:name) }
   it 'has a valid factory' do
     expect(build(:make)).to be_valid
   end

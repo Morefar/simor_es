@@ -1,22 +1,22 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Entity do
+describe Entity, :type => :model do
 
-  it { should belong_to(:identification_type) }
-  it { should have_many(:cosigners) }
-  it { should have_many(:contracts) }
-  it { should have_many(:contracts).through(:cosigners) }
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:identification_number) }
-  it { should validate_presence_of(:address) }
-  it { should validate_presence_of(:city) }
-  it { should validate_presence_of(:state) }
-  it { should validate_uniqueness_of(:identification_number).
+  it { is_expected.to belong_to(:identification_type) }
+  it { is_expected.to have_many(:cosigners) }
+  it { is_expected.to have_many(:contracts) }
+  it { is_expected.to have_many(:contracts).through(:cosigners) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:identification_number) }
+  it { is_expected.to validate_presence_of(:address) }
+  it { is_expected.to validate_presence_of(:city) }
+  it { is_expected.to validate_presence_of(:state) }
+  it { is_expected.to validate_uniqueness_of(:identification_number).
                               scoped_to(:identification_type_id) }
-  it {should validate_uniqueness_of(:email).
+  it {is_expected.to validate_uniqueness_of(:email).
                               scoped_to(:identification_type_id) }
-  it { should allow_value('kjs@example.com', 'tld@example.one.two', 'first_example@crazy-examples.com.co').for(:email) }
-  it { should_not allow_value('hkljh', 'aslkd lkjlk@123.com', 'kjjkh@kjhkjh').for(:email) }
+  it { is_expected.to allow_value('kjs@example.com', 'tld@example.one.two', 'first_example@crazy-examples.com.co').for(:email) }
+  it { is_expected.not_to allow_value('hkljh', 'aslkd lkjlk@123.com', 'kjjkh@kjhkjh').for(:email) }
 
   it 'has a valid factory' do
     expect(build(:entity)).to be_valid

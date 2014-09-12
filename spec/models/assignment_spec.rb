@@ -1,11 +1,11 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Assignment do
+describe Assignment, :type => :model do
   it 'has a valid factory' do
     expect(build(:assignment)).to be_valid
   end
-  it { should belong_to :user }
-  it { should belong_to :role }
+  it { is_expected.to belong_to :user }
+  it { is_expected.to belong_to :role }
 end
 
 # ## Schema Information

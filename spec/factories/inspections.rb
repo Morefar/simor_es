@@ -49,7 +49,7 @@
 # **`overall_condition`**      | `string(255)`      |
 #
 
-!require 'faker'
+require 'faker'
 FactoryGirl.define do
   factory :inspection do
     asset { create(:asset) }
@@ -87,5 +87,7 @@ FactoryGirl.define do
     person_in_charge Faker::Name.name
     pic_id '38.766.298'
     pic_job 'Security guard'
+    overall_condition "Good"
+    inspection_order
   end
 end

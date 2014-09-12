@@ -22,7 +22,8 @@
     = render "layouts/header"
     = render "layouts/main_navigation"
     .container.row
-      = render "layouts/notifications"
+      - unless flash.empty?
+        = render "layouts/notifications"
       = render "layouts/sidebar"
       %section#content
         - if content_for?(:content_header)

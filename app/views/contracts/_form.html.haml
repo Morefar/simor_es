@@ -16,13 +16,13 @@
     .field.medium-3.columns
       = form.label :start_date do
         %i.icon-calendar
-        Fecha de Inicio
+        = t('activerecord.attributes.contract.start_date')
       = form.text_field :start_date, placeholder: 'yyyy/mm/dd', |
         class: 'date-field', required: true                     |
     .field.medium-3.columns
       = form.label :first_canon_date do
         %i.icon-calendar
-        Fecha Pago Primer Canon
+        = t('activerecord.attributes.contract.first_canon_date')
       = form.text_field :first_canon_date, placeholder: 'yyyy/mm/dd', |
         class: 'date-field', required: true                           |
     .field.medium-1.columns
@@ -35,7 +35,7 @@
     .field.medium-3.columns
       = form.label :expiration_date do
         %i.icon-calendar
-        Fecha de Finalización
+        = t('activerecord.attributes.contract.expiration_date')
       = form.text_field :expiration_date, placeholder: 'yyyy/mm/dd', |
         class: 'date-field', required: true                          |
   .row
@@ -59,7 +59,7 @@
     .field.medium-4.columns
       = form.label :last_date_to_option do
         %i.icon-calendar
-        Fecha Opción de Compra
+        = t('activerecord.attributes.contract.last_date_to_option')
       = form.text_field :last_date_to_option, placeholder: 'yyyy/mm/dd', |
         class: 'date-field'                                              |
     .field.medium-6.columns

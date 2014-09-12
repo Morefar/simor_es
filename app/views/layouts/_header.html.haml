@@ -4,10 +4,6 @@
     .ah-logo= link_to(image_tag("logo.png", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
     - if user_signed_in?
       %ul
-        -# %li
-        -#   = link_to "Actividad reciente", ""
-        -# %li
-        -#   = link_to "Ayuda", ""
         %li
           = form_tag role: "search" do
             =search_field_tag :search_query, nil, placeholder: "Busqueda"

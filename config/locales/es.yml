@@ -215,6 +215,7 @@ es:
         contracts: 'Contratos'
         inspections: 'Inspecciones'
         inspection_orders: 'Ordenes de Inspección'
+        support: 'Soporte'
         entities: 'Directorio Personas'
         colors: 'Colores'
         contract_categories: 'Tipos de Contrato'
@@ -226,6 +227,9 @@ es:
         insurance_companies: 'Compañías de Seguros'
     static:
       <<: *layout
+  pages:
+    landing:
+      call_to_register: 'Contactenos'
   shared:
     name: 'Nombre'
     back: ' Regresar'
@@ -644,17 +648,17 @@ es:
         number: 'Número de Contrato'
         category: 'Tipo de Contrato'
         category_id: 'Tipo de Contrato'
-        start_date: ' Fecha de Inicio'
-        first_canon_date: ' Fecha de Pago Primer Cánon'
+        start_date: ' Inicio'
+        first_canon_date: ' Pago Primer Cánon'
         duration: 'Duración'
         periodicity: 'Periodicidad'
-        expiration_date: ' Fecha de Finalización'
+        expiration_date: ' Finalización'
         total_value: 'Valor Total del Contrato'
         currency: 'Moneda'
         asset_count: 'Número de Activos'
         location_of_assets: 'Localización de los Activos'
         option_to_buy: 'Opción de Compra'
-        last_date_to_option: ' Última Fecha para Ejercer Opción de Compra'
+        last_date_to_option: ' Fecha Opción de Compra'
       comment:
         content: 'Contenido'
         user: 'Usuario'

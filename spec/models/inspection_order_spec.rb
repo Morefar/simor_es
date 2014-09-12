@@ -1,32 +1,32 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe InspectionOrder do
+describe InspectionOrder, :type => :model do
 
-  it { should have_many :notes }
-  it { should have_many :documents }
-  it { should have_one :inspection }
-  it { should belong_to :asset }
-  it { should belong_to(:requested_by).class_name("User") }
+  it { is_expected.to have_many :notes }
+  it { is_expected.to have_many :documents }
+  it { is_expected.to have_one :inspection }
+  it { is_expected.to belong_to :asset }
+  it { is_expected.to belong_to(:requested_by).class_name("User") }
 
   context "if recurring is set to true" do
-    before { subject.stub(:recurring?) { true } }
-    it { should validate_presence_of(:renew_period) }
+    before { allow(subject).to receive(:recurring?) { true } }
+    it { is_expected.to validate_presence_of(:renew_period) }
     it do
-      should validate_numericality_of(:renew_period).
+      is_expected.to validate_numericality_of(:renew_period).
         only_integer.is_greater_than(0).
         is_less_than(13)
     end
   end
   context "if recurring is set to false" do
-    before { subject.stub(:recurring?) { false } }
-    it { should_not validate_presence_of (:renew_period) }
+    before { allow(subject).to receive(:recurring?) { false } }
+    it { is_expected.not_to validate_presence_of (:renew_period) }
     it do
-      should_not validate_numericality_of(:renew_period)
+      is_expected.not_to validate_numericality_of(:renew_period)
     end
   end
-  it { should ensure_inclusion_of(:status).
+  it { is_expected.to ensure_inclusion_of(:status).
        in_array(%w(generated pending scheduled inspected)) }
-  it { should ensure_inclusion_of(:priority).
+  it { is_expected.to ensure_inclusion_of(:priority).
        in_array(%w(normal high)) }
 
 end

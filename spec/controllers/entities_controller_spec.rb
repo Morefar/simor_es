@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe EntitiesController do
+describe EntitiesController, :type => :controller do
   let(:valid_attributes) { {} }
   let(:valid_session) { {} }
 

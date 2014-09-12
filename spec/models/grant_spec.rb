@@ -1,11 +1,11 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Grant do
+describe Grant, :type => :model do
   it 'has a valid factory' do
     expect(build(:grant)).to be_valid
   end
-  it { should belong_to :role }
-  it { should belong_to :right }
+  it { is_expected.to belong_to :role }
+  it { is_expected.to belong_to :right }
 end
 
 # ## Schema Information

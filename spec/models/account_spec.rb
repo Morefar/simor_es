@@ -1,13 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Account do
+describe Account, :type => :model do
   it "should have a valid factory" do
     expect(create(:account)).to be_valid
   end
-  it { should have_many(:users) }
-  it { should validate_presence_of(:organization_name) }
-  it { should validate_presence_of(:subdomain) }
-  it { should accept_nested_attributes_for(:user) }
+  it { is_expected.to have_many(:users) }
+  it { is_expected.to validate_presence_of(:organization_name) }
+  it { is_expected.to validate_presence_of(:subdomain) }
 end
 
 # ## Schema Information

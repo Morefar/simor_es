@@ -32,9 +32,11 @@
         = link_to inspection_orders_url do
           %i.icon-eye-open.icon-2x.task-icon
           %span
-            seguimiento orden
+            seguimiento
             %br
-            de inspección
+            orden de
+            %br
+            inspección
 - content_for :sidebar do
   = sidebar_button url: contracts_url, label: "consultar contratos",
     icon: "search"
@@ -67,7 +69,21 @@
     %h4.section-label.highlight AYUDA
     %article
       %h5.section-label Cómo comenzar
-      %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
+      %p
+        Utilizar el sistema es muy sencillo. Utilice los enlaces en la barra superior para
+        ir al área que desea. El menu de la barra lateral le indica que acciones puede
+        realizar en cada área.
+      %p
+        Para crear una nueva orden de inspección solo debe oprimir el botón de la barra lateral
+        y el sistema lo guiará por los pasos correspondientes. Recuerde que antes de crear una
+        nueva orden de inspección el contrato o el activo deben ser ingresados en el sistema.
+        En caso que no exista por favor comuníquese con nosotros para hacer el registro
+        correspondiente.
     %article
       %h5.section-label Hacer una consulta
-      %p Pariatur cliche reprehenderit, enim eiusmod high life accustumus terry richardson ad squid.
+      %p
+        Cada área cuenta con una barra de búsqueda en la que podrá ingresar
+        todo o parte del termino por el cual filtrar la información presentada.
+      %p
+        Una vez filtre la información, siga el enlace que se encuentra en la
+        columna que identifica el registro que desea revisar.

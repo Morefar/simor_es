@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe IdentificationType do
-  it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:name).case_insensitive }
-  it { should allow_value('Cedula', 'pasaporte', 'NUIP', 'NIT').for(:name) }
-  it { should_not allow_value('BLANCO2', 'BLANCO 2', 'Pasaporte extranjero', 'Cedula ').for(:name) }
+describe IdentificationType, :type => :model do
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+  it { is_expected.to allow_value('Cedula', 'pasaporte', 'NUIP', 'NIT').for(:name) }
+  it { is_expected.not_to allow_value('BLANCO2', 'BLANCO 2', 'Pasaporte extranjero', 'Cedula ').for(:name) }
   it 'has a valid factory' do
     expect(build(:identification_type)).to be_valid
   end

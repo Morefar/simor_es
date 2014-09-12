@@ -1,5 +1,5 @@
-require 'spec_helper'
-describe ContractsController do
+require 'rails_helper'
+describe ContractsController, :type => :controller do
 
   describe 'GET #index' do
     it 'populates an array of contracts' do

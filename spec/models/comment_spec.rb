@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Comment do
-  it { should belong_to(:user) }
-  it { should belong_to(:commentable) }
+describe Comment, :type => :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:commentable) }
 end
 
 # ## Schema Information
