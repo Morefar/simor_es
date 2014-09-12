@@ -1,0 +1,80 @@
+@import 'foundation/components/panels';
+@import 'foundation/components/buttons';
+@import 'foundation/components/type';
+@import 'ah-defaults';
+
+.static-content {
+  @extend .row;
+}
+
+.hero-panel {
+  @include panel($bg: $main-blue, $padding: 20px);
+  margin-bottom: 5px;
+}
+
+#hero, #summary {
+  padding: 180px;
+}
+
+h1.hero-title {
+  color: $main-grey;
+  font-family: join("Bevan", $heading-font);
+ }
+
+.panel-definition h4 small {
+  color: darken(white, 5%);
+}
+
+.panel-text h3{
+  color: lighten($main-grey, 2%);
+  margin-bottom: 10px;
+  font-family: join("Kameron", $body-font);
+  font-weight: normal;
+  margin-bottom: 20px;
+  @extend .text-justified;
+  & span { color: darken(white, 5%); }
+}
+
+.down-scroll {
+  @extend .text-center;
+  color: rgba(142, 142, 147, 0.5);
+  & span:hover {
+    color: rgba(84, 99, 107, 0.7);
+   }
+}
+
+.call-to-register {
+  @include button($padding: $button-sml, $bg: $main-orange, $radius: 10px);
+  @extend .right;
+  font-family: $heading-font;
+  font-size: 1.2em;
+}
+
+#track {
+  background-image: image-url("track_illustration.png");
+  background-repeat: no-repeat;
+  padding: 140px 180px 10px 280px;
+  background-size: contain;
+}
+
+#inspect {
+  background-image: image-url("inspect_illustration.png");
+  background-repeat: no-repeat;
+  background-size: 80% 40%;
+  background-position: center 90%;
+  padding: 140px 180px 0px 180px;
+  & .clearfix {
+    margin-bottom: 390px;
+  }
+}
+
+#report {
+  background-image: image-url("report_illustration.png");
+  background-repeat: no-repeat;
+  background-size: 60% 60%;
+  background-position: left 90%;
+  padding: 140px 180px 0px 180px;
+  & .clearfix {
+    margin-bottom: 390px;
+  }
+}

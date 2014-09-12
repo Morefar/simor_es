@@ -1,10 +1,100 @@
-.slideshow-wrapper
-  %ul.landing-slider{data: { orbit: "", |
-    options: "pause_on_hover:true;bullets:false;slide_number:false;" }, |
-    style:"width:100%;margin:0;padding:0" }
-    %li{data: { "orbit-slide"=> "headline-2" } }
-      = image_tag("hero-shot1.jpg", style:"width:100%")
-    %li{data: { "orbit-slide"=> "headline-3" } }
-      = image_tag("hero-shot2.jpg", style:"width:100%")
-    %li{data: { "orbit-slide"=> "headline-4" } }
-      = image_tag("hero-shot3.jpg", style:"width:100%")
+#hero.hero-panel
+  %article
+    %header
+      %h1.hero-title
+        Sistema de Alertas Tempranas
+    .panel-text
+      %h3
+        %span
+          ASSETHOUND
+          %sup &reg;
+        ayuda a las compañías de financiamiento comercial a reducir el
+        riesgo asociado con activos entregados en leasing a través de
+        nuestro sistema de inspecciones físicas.
+    .clearfix
+      %a.call-to-register{ href: "#" }
+        = t('.call_to_register')
+    .down-scroll
+      %span.fa-stack.fa-lg
+        %i.fa.fa-circle-thin.fa-stack-2x
+        %i.fa.fa-caret-down.fa-stack-1x
+%h1 Nuestros inspectores&hellip;
+#track.hero-panel
+  %header
+    %h1.hero-title
+      Rastrean
+    .panel-definition
+      %h4
+        %small
+          [/r̄aș’trean/]
+          %br
+          v. Seguir el curso o la pista de (algo o alguien),
+          típicamente con la intención de hallarlos o tomar nota de su
+          ubicación en varios puntos.
+  .panel-text
+    %h3
+      Saber dónde están sus activos minimiza el riesgo
+      de perderlos en caso que tenga que recuperarlos.
+  .clearfix
+    %a.call-to-register{ href: "#" }
+      = t('.call_to_register')
+  .down-scroll
+    %span.fa-stack.fa-lg
+      %i.fa.fa-circle-thin.fa-stack-2x
+      %i.fa.fa-caret-down.fa-stack-1x
+#inspect.hero-panel
+  %header
+    %h1.hero-title
+      Inspeccionan
+    .panel-definition
+      %h4
+        %small
+          [/ĩnspek'θjonãn/]
+          %br
+          v. Observar detenidamente (algo o a alguien),
+          típicamente con la intención de determinar su condición o para
+          descubrir sus defectos.
+  .panel-text
+    %h3
+      Recogemos evidencias para que usted pueda saber en todo momento la
+      condición real de sus activos.
+  .clearfix
+    %a.call-to-register{ href: "#" }
+      = t('.call_to_register')
+  .down-scroll
+    %span.fa-stack.fa-lg
+      %i.fa.fa-circle-thin.fa-stack-2x
+      %i.fa.fa-caret-down.fa-stack-1x
+#report.hero-panel
+  %header
+    %h1.hero-title
+      Reportan
+    .panel-definition
+      %h4
+        %small
+          [/r̄e’portan/]
+          %br
+          v. Dar cuenta hablada o escrita de algo que uno
+          ha observado, hecho, o investigado.
+    .panel-text
+      %h3
+        Tener toda la información en un solo lugar, le permite tomar
+        decisiones antes que sus activos (y su negocio) se vean afectados.
+  .clearfix
+    %a.call-to-register{ href: "#" }
+      = t('.call_to_register')
+  .down-scroll
+    %span.fa-stack.fa-lg
+      %i.fa.fa-circle-thin.fa-stack-2x
+      %i.fa.fa-caret-down.fa-stack-1x
+%h1 &hellip;todo en tiempo real
+#summary.hero-panel
+  .panel-text
+    %h3
+      %span
+        ASSETHOUND
+        %sup &reg;
+      minimiza el riesgo inherente en operaciones de leasing y recuperación de deuda.
+    .clearfix
+      %a.call-to-register{ href: "#" }
+        = t('.call_to_register')
