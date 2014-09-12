@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.1.1'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.6'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
@@ -9,11 +9,11 @@ end
 
 group :development, :test do
   gem 'dotenv-rails', '~> 0.11.1'
-  gem 'better_errors', '~> 1.1.0'
+  gem 'better_errors', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'meta_request', '~> 0.3.4'
   gem 'debugger', '~> 1.6.8'
-  gem 'rspec-rails', '~> 2.99.0'
+  gem 'rspec-rails', '~> 3.0.2'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'guard-rspec', '~> 4.3.1', require: false
   gem 'guard-livereload', '~> 2.3.0', require: false
@@ -27,7 +27,7 @@ group :development, :test do
   gem 'memory_profiler', '~> 0.0.4'
   gem 'spring-commands-rspec', '~> 1.0.2'
   gem 'spring-commands-cucumber', '~>1.0.1'
-  gem 'shoulda-matchers', '~> 2.6.2'
+  gem 'shoulda-matchers', '~> 2.7.0'
   gem 'faker', '~> 1.4.2'
   gem 'capybara', '~>2.4.1'
   gem 'database_cleaner', '~> 1.3.0'
@@ -36,33 +36,33 @@ group :development, :test do
   gem 'railroady', '~> 1.1.2'
 end
 
-gem 'skylight', '~> 0.3.19'
-gem 'sass-rails',   '~> 4.0.2'
+gem 'skylight', '~> 0.3.20'
+gem 'sass-rails',   '~> 4.0.3'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
 gem 'compass-rails', '~> 2.0.0'
-gem 'foundation-rails', '~> 5.3.3.0'
+gem 'foundation-rails', '~> 5.4.3.0'
 gem 'pg', '~> 0.17.1'
-gem 'pg_search', '~> 0.7.6'
+gem 'pg_search', '~> 0.7.8'
 gem 'breadcrumbs_on_rails', '~> 2.3.0'
-gem 'aasm', '~> 3.3.1'
+gem 'aasm', '~> 3.3.3'
 gem 'haml-rails', '~> 0.5.3'
-gem 'jquery-rails', '~> 3.1.1'
+gem 'jquery-rails', '~> 3.1.2'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'carrierwave', '~> 0.10.0'
-gem 'mini_magick', '~> 3.8.0'
+gem 'mini_magick', '~> 3.8.1'
 gem 'carrierwave_backgrounder', '~> 0.4.1'
 gem 'unf','~> 0.1.3'
-gem 'sidekiq', '~> 3.2.1'
+gem 'sidekiq', '~> 3.2.5'
 gem 'fog', '~> 1.23.0'
-gem 'twitter_cldr', '~> 3.0.6'
+gem 'twitter_cldr', '~> 3.0.8'
 gem 'kaminari', '~> 0.16.1'
-gem 'devise', '~> 3.2.4'
-gem 'newrelic_rpm', "~> 3.9.1"
-gem 'puma', '~> 2.9.0'
+gem 'devise', '~> 3.3.0'
+gem 'newrelic_rpm', "~> 3.9.3"
+gem 'puma', '~> 2.9.1'
 gem 'jbuilder', '~> 2.1.3'
 gem 'virtus', '~> 1.0.3'
 gem 'draper', '~> 1.3.1'
-gem 'pundit', '~> 0.2.2'
-gem 'public_activity', '~> 1.4.1'
+gem 'pundit', '~> 0.3.0'
+gem 'public_activity', '~> 1.4.2'
 # Deploy with Capistrano
