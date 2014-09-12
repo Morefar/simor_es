@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+require 'sidekiq'
 
 if Rails.env.production?
   Sidekiq.configure_server do |config|
