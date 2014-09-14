@@ -1,22 +1,19 @@
 # encoding: utf-8
 
 class DocumentUploader < CarrierWave::Uploader::Base
-
+  attr_reader :timestamp
   include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
-  process :set_content_type
 
-  # storage :file
   storage :fog
 
   def store_dir
     "documents/#{model.documentable_type.to_s.underscore}/#{model.documentable_id}/#{mounted_as}"
   end
 
-  # alternate temporary location for Heroku
-  def cache_dir
-    "#{Rails.root.to_s}/tmp/uploads"
+  def filename
+    @name ||= "#{file.basename}-#{timestamp}.#{file.extension}"
   end
 
   # Create different versions of your uploaded files:
@@ -41,5 +38,10 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   def md5
     @md5 ||= Digest::MD5.hexdigest(self.file.read)
+  end
+
+  private
+  def timestamp
+    @timestamp = SecureRandom.urlsafe_base64.concat(Time.now.to_i.to_s)
   end
 end
