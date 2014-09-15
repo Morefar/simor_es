@@ -12,8 +12,7 @@ Simor::Application.configure do
 
   # Asset compression
   config.assets.css_compressor = :sass
-  require 'closure-compiler'
-  config.assets.js_compressor = Closure::Compiler.new(compilation_level: 'ADVANCED_OPTIMIZATIONS')
+  config.assets.js_compressor = :uglifier
 
   # Eager load code on boot.
   config.eager_load = true
