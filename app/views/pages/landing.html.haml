@@ -18,76 +18,89 @@
       %span.fa-stack.fa-lg
         %i.fa.fa-circle-thin.fa-stack-2x
         %i.fa.fa-caret-down.fa-stack-1x
-%h1 Nuestros inspectores&hellip;
+.hero-panel.transition-panel.text-left
+  %h1 Nuestros inspectores&hellip;
 #track.hero-panel
-  %header
-    %h1.hero-title
-      Rastrean
-    .panel-definition
-      %h4
-        %small
-          [/r̄aș’trean/]
-          %br
-          v. Seguir el curso o la pista de (algo o alguien),
-          típicamente con la intención de hallarlos o tomar nota de su
-          ubicación en varios puntos.
-  .panel-text
-    %h3
-      Saber dónde están sus activos minimiza el riesgo
-      de perderlos en caso que tenga que recuperarlos.
-  .clearfix
-    %a.call-to-register{ href: "#" }
-      = t('.call_to_register')
+  .row
+    .medium-4.columns
+      = image_tag("track_illustration.png", height: '500', class: 'maximum')
+    .medium-7.columns.push-1
+      %header
+        %h1.hero-title
+          Rastrean
+        .panel-definition
+          %h4
+            %small
+              [/r̄aș’trean/]
+              %br
+              v. Seguir el curso o la pista de (algo o alguien),
+              típicamente con la intención de hallarlos o tomar nota de su
+              ubicación en varios puntos.
+      .panel-text
+        %h3
+          Saber dónde están sus activos minimiza el riesgo
+          de perderlos en caso que tenga que recuperarlos.
+      .clearfix
+        %a.call-to-register{ href: "#" }
+          = t('.call_to_register')
   .down-scroll
     %span.fa-stack.fa-lg
       %i.fa.fa-circle-thin.fa-stack-2x
       %i.fa.fa-caret-down.fa-stack-1x
 #inspect.hero-panel
-  %header
-    %h1.hero-title
-      Inspeccionan
-    .panel-definition
-      %h4
-        %small
-          [/ĩnspek'θjonãn/]
-          %br
-          v. Observar detenidamente (algo o a alguien),
-          típicamente con la intención de determinar su condición o para
-          descubrir sus defectos.
-  .panel-text
-    %h3
-      Recogemos evidencias para que usted pueda saber en todo momento la
-      condición real de sus activos.
-  .clearfix
-    %a.call-to-register{ href: "#" }
-      = t('.call_to_register')
+  .row
+    %header
+      %h1.hero-title
+        Inspeccionan
+      .panel-definition
+        %h4
+          %small
+            [/ĩnspek'θjonãn/]
+            %br
+            v. Observar detenidamente (algo o a alguien),
+            típicamente con la intención de determinar su condición o para
+            descubrir sus defectos.
+    .panel-text
+      %h3
+        Recogemos evidencias para que usted pueda saber en todo momento la
+        condición real de sus activos.
+    .clearfix
+      %a.call-to-register{ href: "#" }
+        = t('.call_to_register')
+  .row
+    = image_tag('inspect_illustration.png', width: '600', class: 'maximum');
   .down-scroll
     %span.fa-stack.fa-lg
       %i.fa.fa-circle-thin.fa-stack-2x
       %i.fa.fa-caret-down.fa-stack-1x
 #report.hero-panel
-  %header
-    %h1.hero-title
-      Reportan
-    .panel-definition
-      %h4
-        %small
-          [/r̄e’portan/]
-          %br
-          v. Dar cuenta hablada o escrita de algo que uno
-          ha observado, hecho, o investigado.
-    .panel-text
-      %h3
-        Tener toda la información en un solo lugar, le permite tomar
-        decisiones antes que sus activos (y su negocio) se vean afectados.
-  .clearfix
-    %a.call-to-register{ href: "#" }
-      = t('.call_to_register')
+  .row
+    .large-4.columns
+      =image_tag('report_illustration.png', width: '600', class: 'rep-illustration');
+    .large-7.columns
+      %header
+        %h1.hero-title
+          Reportan
+        .panel-definition
+          %h4
+            %small
+              [/r̄e’portan/]
+              %br
+              v. Dar cuenta hablada o escrita de algo que uno
+              ha observado, hecho, o investigado.
+        .panel-text
+          %h3
+            Tener toda la información en un solo lugar, le permite tomar
+            decisiones antes que sus activos (y su negocio) se vean afectados.
+      .clearfix
+        %a.call-to-register{ href: "#" }
+          = t('.call_to_register')
   .down-scroll
     %span.fa-stack.fa-lg
       %i.fa.fa-circle-thin.fa-stack-2x
       %i.fa.fa-caret-down.fa-stack-1x
-%h1 &hellip;todo en tiempo real
+.hero-panel.transition-panel.text-right
+  %h1 &hellip;todo en tiempo real
 #summary.hero-panel
   .panel-text
     %h3

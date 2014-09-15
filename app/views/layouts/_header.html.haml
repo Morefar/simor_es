@@ -1,6 +1,6 @@
 %header#page_header.row{ role: "banner" }
-  %span.with-fold
-  %nav#utility{ role: "navigation" }
+  %span#fold
+  %nav#utility.row{ role: "navigation" }
     .ah-logo= link_to(image_tag("logo.png", alt: "AssetHound", id: "logo"), root_url, title: "Inicio")
     - if user_signed_in?
       %ul
