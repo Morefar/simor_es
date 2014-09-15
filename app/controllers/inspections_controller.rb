@@ -26,6 +26,7 @@ class InspectionsController < ApplicationController
   end
 
   def edit
+    authorize(@inspection)
   end
 
   def create

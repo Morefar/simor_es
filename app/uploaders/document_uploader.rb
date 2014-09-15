@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class DocumentUploader < CarrierWave::Uploader::Base
+  attr_reader :thumbnable
   include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
@@ -23,11 +24,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   # Create different versions of the uploaded files:
-  version :slider do
+  version :slider, if: :is_image? do
     process resize_and_pad: [420, 420], convert: ['png']
   end
 
-  version :thumb, from_version: :slider do
+  version :thumb, from_version: :slider, if: :is_image? do
     process :resize_to_fill => [150, 150]
   end
 
@@ -45,5 +46,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   def timestamp
     var = :"@#{mounted_as}_timestamp"
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.urlsafe_base64.concat(Time.now.to_i.to_s))
+  end
+
+  def is_image?(new_file)
+    return false unless (new_file)
+    return self.thumbnable unless self.thumbnable.nil?
+    @thumbnable ||= new_file.content_type.start_with? ('image')
   end
 end

@@ -62,8 +62,11 @@ class InspectionDecorator < Draper::Decorator
           slider_items = ""
           model.documents.each do |document|
             if document.content_type.starts_with? "image"
+              document_url = document.content.version_exists?(:slider) ?
+                document.content_url(:slider) : document.content_url
               slider_items << h.content_tag(:li,
-                h.image_tag(document.content_url.to_s, class: 'th thmbnail'))
+                h.image_tag(document_url.to_s, class: 'th thmbnail',
+                            alt: "#{document.category}: #{document.slug}"))
             end
           end
           slider_items.html_safe
