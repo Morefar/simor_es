@@ -39,7 +39,7 @@ group :development, :test do
 end
 
 gem 'sass-rails',   '~> 4.0.3'
-gem 'uglifier', '>= 2.4.0'
+gem 'closure-compiler'         , '~> 1.1.11'
 gem 'compass-rails', '~> 2.0.0'
 gem 'foundation-rails', '~> 5.4.3.0'
 gem 'pg', '~> 0.17.1'
