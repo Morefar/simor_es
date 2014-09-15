@@ -37,7 +37,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def md5
-    @md5 ||= Digest::MD5.hexdigest(self.file.read)
+    @md5 ||= Digest::MD5.hexdigest(self.file.read.to_s)
   end
 
   private
