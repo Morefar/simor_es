@@ -1,4 +1,4 @@
-@mixin with-fold($fold-color: #66E5FA, $bottom: -4px) {
+@mixin with-fold($fold-color: #66E5FA, $bg: WHITE, $bottom: -4px) {
   .with-fold:before {
     content: "";
     position: absolute;
@@ -8,7 +8,7 @@
     height: 0px;
     border-width: 10px 10px 10px 10px;
     border-style: solid;
-    border-color: $fold-color WHITE WHITE $fold-color;
+    border-color: $fold-color $bg $bg $fold-color;
     border-top-left-radius: 5px;
     box-shadow: -5px -5px 15px -5px rgba(0, 0, 0, 0.3);
   }

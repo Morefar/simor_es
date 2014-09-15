@@ -7,6 +7,14 @@ Simor::Application.configure do
   # Eagedigests for assets URLs.
   config.assets.digest = true
 
+  # Asset Cache-Control
+  config.static_cache_control = "public, max-age=31536000"
+
+  # Asset compression
+  config.assets.css_compressor = :sass
+  require 'closure-compiler'
+  config.assets.js_compressor = Closure::Compiler.new(compilation_level: 'ADVANCED_OPTIMIZATIONS')
+
   # Eager load code on boot.
   config.eager_load = true
 
@@ -33,7 +41,7 @@ Simor::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "d2xjazwwy55x6m.cloudfront.net"
+  config.action_controller.asset_host = ENV["AWS_ASSETS_CDN"]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

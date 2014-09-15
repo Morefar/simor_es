@@ -1,12 +1,9 @@
 %li
   .document{id: "document-#{document.id}"}
     .panel.radius{ "data-equalizer-watch" => "" }
-      - if document.content_type.starts_with? "image"
-        - image = document.content_url.to_s
-      -else
-        - image = "pdf_placeholder.png"
-      = link_to image_tag(image, class: 'th thmbnail'),     |
-                document.content_url.to_s, target: '_blank' |
+      = link_to image_tag(document_thumbnail(document), class: 'th thmbnail', |
+        alt: "#{document.try(:category)}: #{document.try(:slug)}"),           |
+        document.content_url.to_s, target: '_blank'                           |
       %p
         %small
           %b= document.category

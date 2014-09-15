@@ -1,10 +1,18 @@
+@import 'foundation/components/grid';
 @import 'foundation/components/panels';
 @import 'foundation/components/buttons';
 @import 'foundation/components/type';
 @import 'ah-defaults';
+@import 'with-fold';
+
+.landing {
+  background: lighten($main-blue, 15%);
+  @include with-fold($fold-color: $fold-blue, $bg: lighten($main-blue, 15%));
+}
 
 .static-content {
   @extend .row;
+  box-shadow: 0px 5px 50px -10px $main-grey;
 }
 
 .hero-panel {
@@ -12,7 +20,20 @@
   margin-bottom: 5px;
 }
 
+.transition-panel{
+  background-color: $main-orange;
+  padding: 60px 100px;
+  & h1 {
+  color: darken(white, 5%);
+  font-family: join("Bevan", $heading-font);
+  }
+}
+
 #hero, #summary {
+  @media #{$small-only} {
+    padding: 80px;
+    padding-top: 150px;
+  }
   padding: 180px;
 }
 
@@ -25,14 +46,17 @@ h1.hero-title {
   color: darken(white, 5%);
 }
 
-.panel-text h3{
-  color: lighten($main-grey, 2%);
-  margin-bottom: 10px;
-  font-family: join("Kameron", $body-font);
-  font-weight: normal;
-  margin-bottom: 20px;
-  @extend .text-justified;
-  & span { color: darken(white, 5%); }
+.panel-text {
+  margin-bottom: 100px;
+  h3{
+    color: lighten($main-grey, 2%);
+    margin-bottom: 10px;
+    font-family: join("Kameron", $body-font);
+    font-weight: normal;
+    margin-bottom: 20px;
+    @extend .text-justified;
+    & span { color: darken(white, 5%); }
+  }
 }
 
 .down-scroll {
@@ -51,30 +75,43 @@ h1.hero-title {
 }
 
 #track {
-  background-image: image-url("track_illustration.png");
-  background-repeat: no-repeat;
-  padding: 140px 180px 10px 280px;
-  background-size: contain;
+  @media #{$small-only} {
+    padding: 140px 80px 20px 80px;
+  }
+  padding: 140px 180px 20px 80px;
 }
 
 #inspect {
-  background-image: image-url("inspect_illustration.png");
-  background-repeat: no-repeat;
-  background-size: 80% 40%;
-  background-position: center 90%;
-  padding: 140px 180px 0px 180px;
-  & .clearfix {
-    margin-bottom: 390px;
+  @media #{$small-only} {
+    padding: 140px 80px 20px 80px;
   }
+  padding: 140px 180px 20px 180px;
 }
 
 #report {
-  background-image: image-url("report_illustration.png");
-  background-repeat: no-repeat;
-  background-size: 60% 60%;
-  background-position: left 90%;
-  padding: 140px 180px 0px 180px;
-  & .clearfix {
-    margin-bottom: 390px;
+  @media #{$small-only} {
+    padding: 140px 80px 20px 80px;
+  }
+  padding: 140px 140px 20px 140px;
+}
+
+.rep-illustration {
+  margin-bottom: 20px;
+  @media #{$large-up}{
+    position: absolute;
+    left: -120px;
+    top: 330px;
+    max-width: 600px;
+  }
+  position: relative;
+}
+
+.maximum {
+  @media #{$medium-up} {
+    // max-width: 600px;
+  }
+  @media #{$small-only} {
+    max-width: 320px;
+    max-height: 320px;
   }
 }

@@ -2,7 +2,7 @@
 @import "ah-defaults";
 @import "with-fold";
 
-header#page_header {
+#page_header {
   position: relative;
   background-color: #3CC8DE;
   color: #FFF;
@@ -92,8 +92,19 @@ header#page_header {
     right: 100%;
     display: block;
   }
-
-  @include with-fold;
+  & span#fold:before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 0px;
+    height: 0px;
+    border-width: 10px 10px 10px 10px;
+    border-style: solid;
+    border-color: $fold-blue white white $fold-blue;
+    border-top-left-radius: 5px;
+    box-shadow: -5px -5px 15px -5px rgba(0, 0, 0, 0.3);
+  }
 }
 
 div.container {
@@ -101,7 +112,7 @@ div.container {
 }
 
 #sidebar {
-  @media(max-width: "#{upper-bound($small-range) }" ) {
+  @media only screen and(max-width: 765px) {
     @include grid-column($columns: 12);
   }
   @include grid-column($columns: 3, $collapse: true);
@@ -116,11 +127,12 @@ div.container {
 }
 
 #content {
-  @media(max-width: "#{upper-bound($small-range) }" ) {
+  @media only screen and(max-width: 765px) {
     @include grid-column($columns: 12);
   }
   @include grid-column($columns: 9);
 }
+
 .centered {
   margin-left: auto;
   margin-right: auto;
