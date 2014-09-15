@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue', '~> 1.4.1'
   gem 'pry-stack_explorer'
+  gem 'pry-byebug', '~> 2.0.0'
   gem 'rack-mini-profiler', '~> 0.9.2'
   gem 'spring', '~> 1.1.3'
   gem 'flamegraph', '~> 0.0.5'
@@ -34,6 +35,7 @@ group :development, :test do
   gem 'launchy', '~> 2.4.2'
   gem 'selenium-webdriver', '~> 2.42.0'
   gem 'railroady', '~> 1.1.2'
+  gem 'foreman', '~> 0.75.0'
 end
 
 gem 'sass-rails',   '~> 4.0.3'

@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class DocumentUploader < CarrierWave::Uploader::Base
-  attr_reader :timestamp
   include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
@@ -13,24 +12,26 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @name ||= "#{file.basename}-#{timestamp}.#{file.extension}"
-  end
-
-  # Create different versions of your uploaded files:
-    version :thumb do
-      process :thumbnail
-      process convert: :png
-    end
-
-    def thumbnail
-      manipulate! do |img|
-        img.format("png", 1)
-        img.auto_orient
-        img.resize("100x100")
-        img = yield(img) if block_given?
-        img
+    if original_filename.present?
+      if model.respond_to?("#{mounted_as}_processing") &&
+          model.send("#{mounted_as}_processing")
+        @name ||= model.send("#{mounted_as}_identifier")
+      else
+        @name ||= "#{file.basename}-#{timestamp}.#{file.extension}"
       end
     end
+  end
+
+  # Create different versions of the uploaded files:
+  version :slider do
+    process resize_and_pad: [420, 420], convert: ['png']
+  end
+
+  version :thumb, from_version: :slider do
+    process :resize_to_fill => [150, 150]
+  end
+
+
 
   def extension_white_list
     %w(jpg jpeg gif png pdf JPG JPEG GIF PNG PDF)
@@ -42,6 +43,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   private
   def timestamp
-    @timestamp = SecureRandom.urlsafe_base64.concat(Time.now.to_i.to_s)
+    var = :"@#{mounted_as}_timestamp"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.urlsafe_base64.concat(Time.now.to_i.to_s))
   end
 end
