@@ -23,7 +23,7 @@
 #track.hero-panel
   .row
     .medium-4.columns
-      = image_tag("track_illustration.png", height: '500', class: 'maximum')
+      = image_tag("track_illustration.png", class: 'maximum')
     .medium-7.columns.push-1
       %header
         %h1.hero-title
@@ -101,13 +101,17 @@
       %i.fa.fa-caret-down.fa-stack-1x
 .hero-panel.transition-panel.text-right
   %h1 &hellip;todo en tiempo real
-#summary.hero-panel
+#summary.hero-panel.last-panel
   .panel-text
     %h3
       %span
         ASSETHOUND
         %sup &reg;
       minimiza el riesgo inherente en operaciones de leasing y recuperación de deuda.
-    .clearfix
-      %a.call-to-register{ href: "#" }
-        = t('.call_to_register')
+  .clearfix
+    %a.call-to-register{ href: "#" }
+      = t('.call_to_register')
+  .back-to-top
+    %span.fa-stack.fa-lg
+      %i.fa.fa-circle-thin.fa-stack-2x
+      %i.fa.fa-caret-up.fa-stack-1x
