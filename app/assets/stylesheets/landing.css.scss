@@ -11,7 +11,6 @@
 }
 
 .static-content {
-  @extend .row;
   box-shadow: 0px 5px 50px -10px $main-grey;
 }
 
@@ -20,8 +19,15 @@
   margin-bottom: 5px;
 }
 
+.last-panel {
+  margin-bottom: 0px;
+}
+
 .transition-panel{
   background-color: $main-orange;
+  @media #{$small-only} {
+    padding: 20px 40px;
+  }
   padding: 60px 100px;
   & h1 {
   color: darken(white, 5%);
@@ -29,10 +35,17 @@
   }
 }
 
-#hero, #summary {
+#hero {
   @media #{$small-only} {
-    padding: 80px;
+    padding: 40px;
     padding-top: 150px;
+  }
+  padding: 180px;
+}
+
+#summary {
+  @media #{$small-only} {
+    padding: 40px;
   }
   padding: 180px;
 }
@@ -42,11 +55,17 @@ h1.hero-title {
   font-family: join("Bevan", $heading-font);
  }
 
-.panel-definition h4 small {
-  color: darken(white, 5%);
+.panel-definition {
+  margin-bottom: 15px;
+  h4 small {
+    color: darken(white, 5%);
+  }
 }
 
 .panel-text {
+  @media #{$small-only} {
+    margin-bottom: 0px;
+  }
   margin-bottom: 100px;
   h3{
     color: lighten($main-grey, 2%);
@@ -59,7 +78,7 @@ h1.hero-title {
   }
 }
 
-.down-scroll {
+.down-scroll, .back-to-top {
   @extend .text-center;
   color: rgba(142, 142, 147, 0.5);
   & span:hover {
@@ -76,23 +95,23 @@ h1.hero-title {
 
 #track {
   @media #{$small-only} {
-    padding: 140px 80px 20px 80px;
+    padding: 20px 80px 20px 80px;
   }
-  padding: 140px 180px 20px 80px;
+  padding: 80px 180px 20px 80px;
 }
 
 #inspect {
   @media #{$small-only} {
-    padding: 140px 80px 20px 80px;
+    padding: 20px 80px 20px 80px;
   }
-  padding: 140px 180px 20px 180px;
+  padding: 80px 180px 20px 180px;
 }
 
 #report {
   @media #{$small-only} {
-    padding: 140px 80px 20px 80px;
+    padding: 20px 80px 20px 80px;
   }
-  padding: 140px 140px 20px 140px;
+  padding: 80px 140px 20px 140px;
 }
 
 .rep-illustration {
@@ -106,9 +125,9 @@ h1.hero-title {
   position: relative;
 }
 
-.maximum {
+img.maximum {
   @media #{$medium-up} {
-    // max-width: 600px;
+    max-height: 560px;
   }
   @media #{$small-only} {
     max-width: 320px;

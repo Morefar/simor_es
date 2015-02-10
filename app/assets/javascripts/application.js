@@ -15,6 +15,7 @@
 //= require jquery-ui/autocomplete
 //= require jquery-ui-timepicker-addon
 //= require jquery_ujs
+//= require smooth_scroll
 //= require foundation
 //= require_tree .
 

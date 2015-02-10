@@ -251,7 +251,7 @@ es:
         information: 'Información del Vehículo'
         documents: 'Documentos del Vehículo'
         condition: 'Condición General'
-        insurance: 'Información del Seguro'
+        insurance: 'Información del Seguro RC'
         signature: 'Quién Atiende la Inspección'
       inspection_number_placeholder: 'i.e. V0001'
       inspection_number_hint: 'Número preimpreso en el acta física.'
