@@ -56,7 +56,7 @@ class InspectionDecorator < Draper::Decorator
       end
     else
       h.content_tag :section, id: "asset-slideshow", class: "slideshow-wrapper" do
-        slider_options = "timer:false;animiation:slide;pause_on_hover:true;"\
+        slider_options = "timer:false;animation:fade;pause_on_hover:true;"\
           "variable_height:false;bullets:false"
         h.content_tag :ul, data: { orbit: "", options: slider_options } do
           slider_items = ""

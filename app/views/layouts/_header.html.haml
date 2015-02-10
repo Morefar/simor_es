@@ -8,9 +8,9 @@
           = form_tag role: "search" do
             =search_field_tag :search_query, nil, placeholder: "Busqueda"
         %li
-          %a#user_settings_button{ href: "#", data: { dropdown: "drop" } }
+          %a#user_settings_button{ href: "#", data: { dropdown: "drop" }, aria: { expanded: "false" } }
             = "#{current_user.first_name} #{current_user.last_name} &nbsp; &#10095;".html_safe
-      %ul#drop.tiny.f-dropdown{ "data-dropdown-content" => "" }
+      %ul#drop.tiny.f-dropdown{ "data-dropdown-content" => "", "aria-hidden" => "true" }
         %li
           = link_to edit_user_registration_path, title: t("layouts.application.settings") do
             %i.icon-cog.icon-large

@@ -98,7 +98,7 @@ GEM
       http_parser.rb (~> 0.6.0)
     equalizer (0.0.9)
     erubis (2.7.0)
-    eventmachine (1.0.6)
+    eventmachine (1.0.7)
     excon (0.44.1)
     execjs (2.3.0)
     factory_girl (4.5.0)
