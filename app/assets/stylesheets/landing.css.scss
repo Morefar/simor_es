@@ -73,7 +73,7 @@ h1.hero-title {
     font-family: join("Kameron", $body-font);
     font-weight: normal;
     margin-bottom: 20px;
-    @extend .text-justified;
+    @extend .text-justify;
     & span { color: darken(white, 5%); }
   }
 }

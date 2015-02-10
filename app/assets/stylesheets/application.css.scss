@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require normalize
- *= require foundation_and_overrides
+ *= require foundation
  *= require jquery-ui/datepicker
  *= require layout
  *= require navigation
@@ -18,4 +18,4 @@
  *= require landing
  */
 
-@import url(http://fonts.googleapis.com/css?family=Muli|Montserrat|Kameron|Bevan);
+@import url(https://fonts.googleapis.com/css?family=Muli|Montserrat|Kameron|Bevan);

@@ -23,7 +23,6 @@ group :development               , :test do
   gem 'pry-byebug'               , '~> 2.0.0'
   gem 'rack-mini-profiler'       , '~> 0.9.2'
   gem 'spring'                   , '~> 1.1.3'
-  gem 'flamegraph'               , '~> 0.0.5'
   gem 'memory_profiler'          , '~> 0.0.4'
   gem 'spring-commands-rspec'    , '~> 1.0.2'
   gem 'spring-commands-cucumber' , '~>1.0.1'
@@ -36,10 +35,9 @@ group :development               , :test do
   gem 'railroady'                , '~> 1.2.0'
 end
 
-gem 'sass-rails'               , '~> 4.0.3'
+gem 'sass-rails'               , '~> 5.0.1'
 gem 'uglifier'                 , '~> 2.5.3'
-gem 'compass-rails'            , '~> 2.0.0'
-gem 'foundation-rails'         , '~> 5.4.5.0'
+gem 'foundation-rails'         , '~> 5.5.1.0'
 gem 'pg'                       , '~> 0.17.1'
 gem 'pg_search'                , '~> 0.7.8'
 gem 'breadcrumbs_on_rails'     , '~> 2.3.0'

@@ -14,6 +14,7 @@ Simor::Application.configure do
   config.assets.css_compressor = :sass
   config.assets.js_compressor = :uglifier
 
+  config.assets.precompile += %w( vendor/modernizr.js )
   # Eager load code on boot.
   config.eager_load = true
 
