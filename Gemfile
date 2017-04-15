@@ -33,6 +33,7 @@ group :development               , :test do
   gem 'launchy'                  , '~> 2.4.2'
   gem 'selenium-webdriver'       , '~> 2.43.0'
   gem 'railroady'                , '~> 1.2.0'
+  gem 'fivemat'                  , '~> 1.3.1'
 end
 
 gem 'sass-rails'               , '~> 5.0.1'

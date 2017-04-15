@@ -34,7 +34,7 @@ class AssetDecorator < Draper::Decorator
         h.content_tag :ul, data: { orbit: "", options: slider_options } do
           slider_items = ""
           model.documents.each do |document|
-            if document.content_type.starts_with? "image"
+            if is_image?(document)
               document_url = document.content.version_exists?(:slider) ?
                 document.content_url(:slider) : document.content_url
               slider_items << h.content_tag(:li,
@@ -81,5 +81,8 @@ class AssetDecorator < Draper::Decorator
         div_result << "#{ args[:field_value] }"
         div_result.html_safe
       end.html_safe
+  end
+  def is_image?(document)
+    document.content_type.starts_with? "image"
   end
 end
